@@ -85,7 +85,7 @@ private:// Private methods
 private:// Private variable
     PostProcess* postProcess_ = nullptr;
     Camera* camera = nullptr;
-    Object3d* HoleObject_;
+    Object3d* HoleObject_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
         TEXTURE_COUNT // テクスチャの総数
