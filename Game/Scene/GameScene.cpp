@@ -13,7 +13,6 @@
 GameScene::GameScene(){}
 
 GameScene::~GameScene() {
-	Release();
 }
 // 初期化関数
 void GameScene::Init() {
@@ -41,6 +40,7 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
+	camera->Update();
 	HoleObject_->Update();
 }
 
@@ -50,15 +50,12 @@ void GameScene::Draw() {
 }
 
 // ポストエフェクト描画関数
-void GameScene::PostDraw()
-{
-	//postProcess_->Draw();
+void GameScene::PostDraw(){
+	postProcess_->Draw();
 }
 
 // リソース解放関数
 void GameScene::Release() {
-	int a;
-	a = 10;
 }
 
 // ゲーム終了判定関数

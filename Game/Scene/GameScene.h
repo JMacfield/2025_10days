@@ -83,6 +83,7 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
+    PostProcess* postProcess_ = nullptr;
     Camera* camera = nullptr;
     Object3d* HoleObject_;
     enum TextureID {
