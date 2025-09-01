@@ -21,6 +21,10 @@ void GameScene::Init() {
 	//camera = new Camera;
 	//camera->Initialize();
 	//input = Input::GetInstance();
+	HoleObject_ = new Object3d();
+	HoleObject_->Init();
+	HoleObject_->SetModel("Demohole.obj");
+
 
 	// テクスチャのロード
 	LoadTextures();
@@ -37,12 +41,12 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
+	HoleObject_->Update();
 	
 }
 
 // 描画関数
 void GameScene::Draw() {
-
 }
 
 // ポストエフェクト描画関数
