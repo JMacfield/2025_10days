@@ -29,7 +29,7 @@ public:// Public methods
     // デストラクタ
     ~GameScene() override;
  
-#pragma region Override methods
+#pragma region Override
     // 初期化
     void Init() override;
     // 更新
@@ -44,7 +44,7 @@ public:// Public methods
     int GameClose() override;
 #pragma endregion
 
-private:// Private methods
+public:// Private methods
 #pragma region Initialization
     /// <summary>
     /// 全てのテクスチャの読み込み
