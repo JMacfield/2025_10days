@@ -15,7 +15,6 @@ GameScene::GameScene(){}
 GameScene::~GameScene() {
 	Release();
 }
-
 // 初期化関数
 void GameScene::Init() {
 	//// カメラの初期化
@@ -43,6 +42,7 @@ void GameScene::Update() {
 
 // 描画関数
 void GameScene::Draw() {
+
 }
 
 // ポストエフェクト描画関数
@@ -76,6 +76,8 @@ void GameScene::LoadTextures()
 void GameScene::LoadModels()
 {
 	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
+
 }
 
 // オーディオのロード
