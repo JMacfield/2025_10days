@@ -110,7 +110,18 @@ void Camera::HandleGamepadMovement(int menucount)
                 transform_.translate.x += move.x;
                 transform_.translate.z += move.z;
             }
-
+            if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
+            {
+                // デバッグ用：地面を上昇
+                transform_.translate.y += 1.0f;
+                jumpVelocity = 0.0f;
+            }
+            if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
+            {
+                // デバッグ用：地面を下降
+                transform_.translate.y -= 1.0f;
+                jumpVelocity = 0.0f;
+            }
             // 右スティックによる視点移動
             HandleRightStick(joyState, menucount);
         }

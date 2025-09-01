@@ -37,7 +37,8 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
-	camera->Update();
+	camera->Update();		
+	camera->Move(1);
 	HoleObject_->Update();
 	camera->CameraDebug();
 
