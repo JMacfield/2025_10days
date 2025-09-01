@@ -83,6 +83,8 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
+
+    std::vector<Object3d*> HoleObject_;
     enum TextureID {
         NORMAL_HOLE,
         TEXTURE_COUNT // テクスチャの総数
