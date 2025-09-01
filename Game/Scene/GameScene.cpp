@@ -21,13 +21,7 @@ void GameScene::Init() {
 	//// カメラの初期化
 	//camera = new Camera;
 	//camera->Initialize();
-	//input = Input::GetInstance();
-
-	// テクスチャのロード
-	LoadTextures();
-
-	// モデルのロード
-	LoadModels();
+	input_ = Input::GetInstance();
 
 	// オーディオのロード
 	LoadAudio();
@@ -43,18 +37,17 @@ void GameScene::Update() {
 
 // 描画関数
 void GameScene::Draw() {
+
 }
 
 // ポストエフェクト描画関数
-void GameScene::PostDraw()
-{
+void GameScene::PostDraw() {
 	//postProcess_->Draw();
 }
 
 // リソース解放関数
 void GameScene::Release() {
-	int a;
-	a = 10;
+
 }
 
 // ゲーム終了判定関数
@@ -75,7 +68,7 @@ void GameScene::LoadTextures()
 // モデルのロード
 void GameScene::LoadModels()
 {
-	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
 }
 
 // オーディオのロード
@@ -85,8 +78,7 @@ void GameScene::LoadAudio()
 }
 
 // 初期化データのセットアップ
-void GameScene::InitializeData()
-{
+void GameScene::InitializeData() {
 
 }
 
@@ -104,22 +96,6 @@ void GameScene::HandleGamePadInput() {
 // オブジェクトの描画
 void GameScene::DrawObjects()
 {
-	//for (auto& cone : ConeObject_) {
-	//	if (cone->isVisible) {
-	//		cone->Draw(textureHandles[CONE], camera);
-	//	}
-	//}
-	//for (auto& star : StarObject_) {
-	//	if (star->isVisible) {
-	//		star->Draw(textureHandles[STAR], camera);
-	//	}
-	//}
-	//for (auto& item : ItemObject_) {
-	//	if (item->isVisible) {
-	//		item->Draw(textureHandles[ITEM], camera);
-	//	}
-	//}
-	//flowEffect_.Draw(textureHandles[GRID], camera);
 }
 
 void GameScene::Remake() {

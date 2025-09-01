@@ -306,6 +306,11 @@
       <Filter>Engine\2d\PostEffect\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\Player\Systems\JumpSystem.cpp" />
+    <ClCompile Include="Game\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Game\TestPlane\TestWall.cpp" />
+    <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -574,6 +579,12 @@
       <Filter>Application\scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Player\Player.h" />
+    <ClInclude Include="Game\Player\PlayerConfig.h" />
+    <ClInclude Include="Game\Player\Systems\JumpSystem.h" />
+    <ClInclude Include="Game\Camera\FollowCamera.h" />
+    <ClInclude Include="Game\TestPlane\TestWall.h" />
+    <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

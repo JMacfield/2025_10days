@@ -83,5 +83,5 @@ public:// Private methods
 #pragma endregion
 
 private:// Private variable
-
+    Input* input_;
 };
