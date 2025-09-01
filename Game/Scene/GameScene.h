@@ -83,5 +83,8 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
-
+    enum TextureID {
+        NORMAL_HOLE,
+        TEXTURE_COUNT // テクスチャの総数
+    };
 };
