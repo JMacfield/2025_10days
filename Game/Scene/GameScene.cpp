@@ -18,8 +18,8 @@ GameScene::~GameScene() {
 // 初期化関数
 void GameScene::Init() {
 	//// カメラの初期化
-	//camera = new Camera;
-	//camera->Initialize();
+	camera = new Camera;
+	camera->Initialize();
 	//input = Input::GetInstance();
 	HoleObject_ = new Object3d();
 	HoleObject_->Init();
@@ -47,6 +47,7 @@ void GameScene::Update() {
 
 // 描画関数
 void GameScene::Draw() {
+	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera);
 }
 
 // ポストエフェクト描画関数
@@ -74,6 +75,7 @@ int GameScene::GameClose()
 void GameScene::LoadTextures()
 {
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
+	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 }
 
 // モデルのロード
