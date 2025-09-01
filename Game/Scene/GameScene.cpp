@@ -17,12 +17,11 @@ GameScene::~GameScene() {
 // 初期化関数
 void GameScene::Init() {
 	//// カメラの初期化
+	//input = Input::GetInstance();
 	camera = new Camera;
 	camera->Initialize();
-	//input = Input::GetInstance();
 	HoleObject_ = new Object3d();
 	HoleObject_->Init();
-	HoleObject_->SetModel("Demohole.obj");
 
 
 	// テクスチャのロード
@@ -36,6 +35,10 @@ void GameScene::Init() {
 
 	// 必要なデータの初期化
 	InitializeData();
+
+	postProcess_ = new PostProcess();
+	postProcess_->SetCamera(camera);
+	postProcess_->Init();
 }
 
 // シーン更新関数
@@ -71,14 +74,16 @@ int GameScene::GameClose()
 void GameScene::LoadTextures()
 {
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
-	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
+	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/cone.png");
+	HoleObject_->SetModel("cone.obj");
+
 }
 
 // モデルのロード
 void GameScene::LoadModels()
 {
 	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
-	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "cone.obj");
 
 }
 
