@@ -7,7 +7,9 @@
 * @brief ChromaticAberration
 */
 struct ChromaticAberrationInfo {
-
+	DirectX::XMFLOAT2 aberrationAmount; // (R/Bのずらし量)
+	float edgeThreshold;                // 発生し始める距離(0～1)
+	float _pad;                         // 16byteアライン用
 };
 class PostProcess;
 class ChromaticAberration : public IPostEffectState
@@ -71,5 +73,7 @@ private:
 	// 頂点バッファビューを作成する
 	D3D12_VERTEX_BUFFER_VIEW materialBufferView{};
 	// 頂点リソースにデータを書き込む
+	Microsoft::WRL::ComPtr<ID3D12Resource> chromaCB_;
+	ChromaticAberrationInfo* chromaData_ = nullptr;
 };
 

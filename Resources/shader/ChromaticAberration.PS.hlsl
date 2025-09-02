@@ -1,8 +1,8 @@
 // クロマティックアベレーションの強さを調整するためのパラメータ
 cbuffer ChromaticAberrationBuffer : register(b0)
 {
-    float2 aberrationAmount; // 各カラーのオフセット量
-    float edgeThreshold; // エフェクトが始まる距離の閾値
+    float2 aberrationAmount;
+    float edgeThreshold;
 };
 
 // 入力構造体
@@ -32,7 +32,7 @@ PS_OUTPUT main(PS_INPUT input)
     float distanceFromCenter = distance(input.Tex, screenCenter);
 
     // 距離に基づいてエフェクトの強度を計算
-    float effectStrength = saturate((distanceFromCenter - edgeThreshold) / (10.0 - edgeThreshold));
+    float effectStrength = saturate((distanceFromCenter - edgeThreshold) / (0.9 - edgeThreshold));
 
     // テクスチャ座標の範囲をクリッピング
     float2 texCoordR = clamp(input.Tex + aberrationAmount * effectStrength, 0.0, 1.0);
