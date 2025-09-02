@@ -301,7 +301,7 @@ private:
     /// <summary>
     /// プレイヤーの移動速度
     /// </summary>
-    const float baseSpeed = 0.3f;
+    float baseSpeed = 0.3f;
     const float boostedSpeed = 0.45f;
     // 追加：スピードブーストの管理用変数
     bool isSpeedBoostActive = false;

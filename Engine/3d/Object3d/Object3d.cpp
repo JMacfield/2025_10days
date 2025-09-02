@@ -43,6 +43,7 @@ void Object3d::StartLerpToOriginalVertices()
 	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
 	isLerping_ = true;
 	lerpT_ = 0.0f;
+	lerpToGlitch_ = false; // ランダム→元
 }
 
 void Object3d::Init()
@@ -74,7 +75,6 @@ void Object3d::Init()
 
 void Object3d::Update()
 {
-
 	worldTransform_.UpdateMatrix();
 	if (animationModel_) {
 		animationModel_->Update();
@@ -88,7 +88,12 @@ void Object3d::Update()
 			lerpT_ = 1.0f;
 			isLerping_ = false;
 		}
-		LerpToOriginalVertices(lerpT_);
+		if (lerpToGlitch_) {
+			LerpToGlitchedVertices(lerpT_);
+		}
+		else {
+			LerpToOriginalVertices(lerpT_);
+		}
 	}
 }
 
@@ -328,6 +333,28 @@ void Object3d::GlitchVertices(float intensity)
 	model_->UpdateVertexBuffer();
 }
 
+void Object3d::GlitchVerticesLerp(float intensity)
+{
+	if (!model_ || originalVertices_.empty()) return;
+
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dist(-intensity, intensity);
+
+	glitchedVertices_ = originalVertices_;
+	for (auto& vertex : glitchedVertices_) {
+		vertex.position.x += dist(gen);
+		vertex.position.y += dist(gen);
+		vertex.position.z += dist(gen);
+	}
+
+	isLerping_ = true;
+	lerpT_ = 0.0f;
+	lerpToGlitch_ = true; // 元→ランダム
+}
+
+
+
 void Object3d::LerpToOriginalVertices(float lerpT)
 {
 	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
@@ -340,6 +367,22 @@ void Object3d::LerpToOriginalVertices(float lerpT)
 		vertices[i].position.x = glitchedVertices_[i].position.x * (1.0f - easedT) + originalVertices_[i].position.x * easedT;
 		vertices[i].position.y = glitchedVertices_[i].position.y * (1.0f - easedT) + originalVertices_[i].position.y * easedT;
 		vertices[i].position.z = glitchedVertices_[i].position.z * (1.0f - easedT) + originalVertices_[i].position.z * easedT;
+	}
+	model_->UpdateVertexBuffer();
+}
+
+void Object3d::LerpToGlitchedVertices(float lerpT)
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+
+	float easedT = GetEasedT(lerpT);
+
+	auto& vertices = model_->GetModelData().vertices;
+	vertices.resize(originalVertices_.size());
+	for (size_t i = 0; i < vertices.size(); ++i) {
+		vertices[i].position.x = originalVertices_[i].position.x * (1.0f - easedT) + glitchedVertices_[i].position.x * easedT;
+		vertices[i].position.y = originalVertices_[i].position.y * (1.0f - easedT) + glitchedVertices_[i].position.y * easedT;
+		vertices[i].position.z = originalVertices_[i].position.z * (1.0f - easedT) + glitchedVertices_[i].position.z * easedT;
 	}
 	model_->UpdateVertexBuffer();
 }

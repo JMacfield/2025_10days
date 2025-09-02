@@ -54,13 +54,13 @@ void GameScene::Update() {
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
-	if (input->PushKey(DIK_SPACE)) {
-		TENQ->GlitchVertices(1.0f);
-		HoleObject_->GlitchVertices(5.0f);
-		HoleObject2_->GlitchVertices(5.0f);
-		HoleObject3_->GlitchVertices(5.0f);
+	if (input->TriggerKey(DIK_SPACE)) {
+		TENQ->GlitchVerticesLerp(0.08f);
+		HoleObject_->GlitchVerticesLerp(1.0f);
+		HoleObject2_->GlitchVerticesLerp(5.0f);
+		HoleObject3_->GlitchVerticesLerp(5.0f);
 	}
-	if (input->PushKey(DIK_V)) {
+	if (input->TriggerKey(DIK_V)) {
 		TENQ->StartLerpToOriginalVertices();
 		HoleObject_->StartLerpToOriginalVertices();
 		HoleObject2_->StartLerpToOriginalVertices();
@@ -76,8 +76,8 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera);
 	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera);
-	HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
-	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);
+	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
+	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
 }
 
 // ポストエフェクト描画関数
@@ -114,6 +114,7 @@ void GameScene::LoadModels()
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole2.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "world.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "start.obj");
 
 }
 
@@ -142,14 +143,13 @@ void GameScene::InitializeData(){
 	TENQ->SetModel("world.obj");
 	TENQ->SetisLight(false);
 	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
-	HoleObject_->SetModel("Demohole1.obj");
+	HoleObject_->SetModel("start.obj");
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
 	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
 	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
 	camera->transform_.rotate = { -0.26f,-0.060f,0.0f };
-
 }
 
 // ゲームパッド入力処理

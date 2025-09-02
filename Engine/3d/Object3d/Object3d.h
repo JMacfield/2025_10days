@@ -152,8 +152,10 @@ public:
 	void SetisLight(bool islight) { isLight = islight; }
 
     void GlitchVertices(float intensity);
+    void GlitchVerticesLerp(float intensity);
 
     void LerpToOriginalVertices(float lerpT);
+    void LerpToGlitchedVertices(float lerpT);
     void StartLerpToOriginalVertices();
 
 public: // Getter
@@ -212,6 +214,8 @@ private:
     bool isLerping_ = false;                  // ラープ中フラグ
     float lerpT_ = 0.0f;                      // ラープ係数
     float lerpSpeed_ = 0.002f;
+    private:
+        bool lerpToGlitch_ = false; // true: 元→ランダム, false: ランダム→元
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;

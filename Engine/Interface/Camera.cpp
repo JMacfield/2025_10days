@@ -37,7 +37,8 @@ void Camera::CameraDebug()
     ImGui::Begin("camera");
 
     // FOVの調整
-    ImGui::DragFloat("FOV", &fovY_, 0.01f);
+    ImGui::DragFloat("FOV", &fovY_, 0.01f);   
+    ImGui::DragFloat("BaseSpeed", &baseSpeed, 0.01f);
 
     // 位置・回転・スケールの調整
     float translate[3] = { transform_.translate.x,transform_.translate.y,transform_.translate.z };
