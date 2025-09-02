@@ -101,4 +101,9 @@ private:// Private variable
     std::unique_ptr<Player> player_;
 
     std::vector<TestWall*> testWall_;
+
+    // 床
+    std::unique_ptr<Object3d> floor_;
+
+    uint32_t floorTex_;
 };

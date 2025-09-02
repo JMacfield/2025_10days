@@ -28,6 +28,8 @@ GameScene::~GameScene() {
 void GameScene::Init() {
 	input_ = Input::GetInstance();
 
+	LoadTextures();
+
 	// 自機
 	player_ = std::make_unique<Player>();
 	// テスト壁
@@ -36,7 +38,7 @@ void GameScene::Init() {
 		wall->Init();
 		testWall_.push_back(wall);
 	}
-	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,4.0f });
+	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
 	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
 	testWall_[2]->SetTranslation(Vector3{ -4.5f,0.0f,8.0f });
 	testWall_[3]->SetTranslation(Vector3{ 4.5f,0.0f,12.0f });
@@ -48,6 +50,13 @@ void GameScene::Init() {
 	for (TestWall* wall : testWall_) {
 		wall->SetCamera(followCamera_->GetCamera());
 	}
+
+	// 床
+	floor_ = std::make_unique<Object3d>();
+	floor_->Init();
+	floor_->SetModel("box.obj");
+	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
+	floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
 
 	// ポストエフェクト
 	postProcess_ = new PostProcess();
@@ -67,6 +76,8 @@ void GameScene::Update() {
 	for (TestWall* wall : testWall_) {
 		wall->Update();
 	}
+	// 床
+	floor_->Update();
 	// 自機
 	player_->Update();
 	// 追従カメラ
@@ -94,6 +105,8 @@ void GameScene::Draw() {
 	for (TestWall* wall : testWall_) {
 		wall->Draw();
 	}
+	// 床
+	floor_->Draw(floorTex_, followCamera_->GetCamera());
 }
 
 // ポストエフェクト描画関数
@@ -118,7 +131,7 @@ int GameScene::GameClose()
 // テクスチャのロード
 void GameScene::LoadTextures()
 {
-	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
+	floorTex_ = TextureManager::StoreTexture("Resources/white.png");
 }
 
 // モデルのロード
