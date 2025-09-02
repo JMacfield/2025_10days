@@ -41,6 +41,7 @@ void GameScene::Update() {
 	camera->Move(1);
 	HoleObject_->Update();
 	camera->CameraDebug();
+	HoleObject_->LightDebug("light");
 
 }
 

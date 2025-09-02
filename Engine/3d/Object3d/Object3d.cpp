@@ -84,8 +84,9 @@ void Object3d::Draw(uint32_t texture, Camera* camera)
 	else if (model_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		model_->Draw(texture, { { 1.0f,1.0f,1.0f,1.0f },true
-			}, { { 1.0f,1.0,1.0,1.0f } ,{ 0.0f,-1.0f,0.0f },0.5f }, mapTexture_);
+		model_->Draw(texture, { {Materialquaternion_.x,Materialquaternion_.y,Materialquaternion_.z,Materialquaternion_.w},isLight},
+			{ { DirectionalLightquaternion_.x,DirectionalLightquaternion_.y,DirectionalLightquaternion_.z,DirectionalLightquaternion_.w },
+			{ lightDirection_.x,lightDirection_.y,lightDirection_.z},ambientLightIntensity_ }, mapTexture_);
 	}
 	else if (skybox_) {
 		wvpData->WVP = worldViewProjectionMatrix;
@@ -253,6 +254,47 @@ MaterialData Object3d::LoadMaterialTemplateFile(const std::string& directoryPath
 	}
 
 	return materialData;
+}
+
+void Object3d::LightDebug(const char* name)
+{
+#ifdef _DEBUG
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.2f, 0.7f, 0.8f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.1f, 0.3f, 0.5f));
+	ImGui::Begin("light");
+	if (ImGui::TreeNode(name))
+	{
+		// マテリアルのクォータニオン
+		float materialQ[4] = { Materialquaternion_.x, Materialquaternion_.y, Materialquaternion_.z, Materialquaternion_.w };
+		if (ImGui::DragFloat4("Material Quaternion", materialQ, 0.01f)) {
+			Materialquaternion_ = { materialQ[0], materialQ[1], materialQ[2], materialQ[3] };
+		}
+
+		// ディレクショナルライトのクォータニオン
+		float lightQ[4] = { DirectionalLightquaternion_.x, DirectionalLightquaternion_.y, DirectionalLightquaternion_.z, DirectionalLightquaternion_.w };
+		if (ImGui::DragFloat4("Directional Light Quaternion", lightQ, 0.01f)) {
+			DirectionalLightquaternion_ = { lightQ[0], lightQ[1], lightQ[2], lightQ[3] };
+		}
+
+		// ライト方向
+		float direction[3] = { lightDirection_.x, lightDirection_.y, lightDirection_.z };
+		if (ImGui::DragFloat3("Light Direction", direction, 0.01f)) {
+			lightDirection_ = { direction[0], direction[1], direction[2] };
+		}
+
+		// アンビエント強度
+		ImGui::DragFloat("Ambient Intensity", &ambientLightIntensity_, 0.01f, 0.0f, 5.0f);
+
+		// ライトのON/OFF
+		ImGui::Checkbox("Enable Light", &isLight);
+
+		ImGui::TreePop();
+	}
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+#endif // _DEBUG
+
 }
 
 void Object3d::ModelDebug(const char* name)

@@ -20,6 +20,7 @@
 #include "Object3dCommon.h"
 #include <PSOAnimationModel.h>
 #include "Skybox.h"
+#include <Quaternion.h>
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
@@ -58,6 +59,8 @@ public:
     /// </summary>
     /// <param name="name">デバッグ情報の名前</param>
     void ModelDebug(const char* name);
+
+    void LightDebug(const char* name);
 
     /// <summary>
     /// モデルを設定する
@@ -163,4 +166,13 @@ private:
     Vector3 position_;
     Vector3 rotation_;
     Vector3 scale_;
+
+	//Light用
+
+	bool isLight = true; // デフォルトでライト有効
+	float ambientLightIntensity_ = 0.5f; // 環境光の強さ
+	Vector3 lightDirection_ = { 0.0f,-1.0f,0.0f }; // 平行光源の向き
+    Quaternion Materialquaternion_ = { 1.0f,1.0f,1.0f,1.0f };
+    Quaternion DirectionalLightquaternion_ = { 1.0f,1.0,1.0,1.0f };
+    
 };
