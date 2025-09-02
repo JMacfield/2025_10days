@@ -311,6 +311,7 @@
     <ClCompile Include="Game\Camera\FollowCamera.cpp" />
     <ClCompile Include="Game\TestPlane\TestWall.cpp" />
     <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
+    <ClCompile Include="Game\Player\Math\MathFuns.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -585,6 +586,8 @@
     <ClInclude Include="Game\Camera\FollowCamera.h" />
     <ClInclude Include="Game\TestPlane\TestWall.h" />
     <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
+    <ClInclude Include="Game\Player\Systems\ISystem.h" />
+    <ClInclude Include="Game\Player\Math\MathFuns.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

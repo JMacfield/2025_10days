@@ -1,14 +1,22 @@
 #include "TestWall.h"
 #include "../Player/PlayerConfig.h"
+#include "ModelManager.h"
 
 using namespace PlayerConfig::FileNames;
 
-TestWall::TestWall(Camera* camera) {
-	pCamera_ = camera;
+TestWall::TestWall() {
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
+	texHandle_ = TextureManager::StoreTexture("Resources/plane/uvChecker.png");
 
-	// ‘Ì‚ÌÀ‘Ì¶¬
+	ModelManager::GetInstance()->LoadModel("Resources/plane/", "plane.gltf");
+
+	// ä½“ã®å®Ÿä½“ç”Ÿæˆ
 	body_ = std::make_unique<Object3d>();
-	body_->SetModel("");
+	body_->Init();
+	body_->SetModel("plane.gltf");
+	body_->worldTransform_.translation_ = { -2.0f,0.0f,4.0f };
+	body_->worldTransform_.rotation_.y = (float)std::numbers::pi / 2.0f;
+	body_->worldTransform_.scale_ = { 10,10,10 };
 }
 
 void TestWall::Init() {
@@ -16,16 +24,24 @@ void TestWall::Init() {
 }
 
 void TestWall::Update() {
-	// ‘Ì
+	// ä½“
 	body_->Update();
 }
 
 void TestWall::Draw() {
-	// ‘Ì
-	body_->Draw(Textures::body.num, pCamera_);
+	// ä½“
+	body_->Draw(texHandle_, pCamera_);
 }
 
 void TestWall::Release() {
-	// ‘Ì
+	// ä½“
 	body_.reset();
+}
+
+void TestWall::DebugGui() {
+	if (ImGui::TreeNode("TestPlane")) {
+		ImGui::DragFloat3("Translation", &body_->worldTransform_.translation_.x, 0.1f, -100.0f, 100.0f);
+		ImGui::DragFloat3("Rotation", &body_->worldTransform_.rotation_.x, 0.01f, -6.28f, 6.28f);
+		ImGui::TreePop();
+	}
 }

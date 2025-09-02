@@ -3,44 +3,60 @@
 #include "Input.h"
 #include "WorldTransform.h"
 
+class Player;
 /// <summary>
-/// ’Ç]ƒJƒƒ‰
+/// è¿½å¾“ã‚«ãƒ¡ãƒ©
 /// </summary>
 class FollowCamera {
 public:// Public variable
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	FollowCamera();
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	FollowCamera(Player* player);
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~FollowCamera() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 	/// <summary>
-	/// ‰ğ•úˆ—
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
 	void Release();
 
+	void DebugGui();
+
 private:// Private method
 	/// <summary>
-	/// “ü—Íˆ—
+	/// å…¥åŠ›å‡¦ç†
 	/// </summary>
 	void InputUpdate();
 
+public:// Accessor method
+	/// <summary>
+	/// ã‚«ãƒ¡ãƒ©ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
+	/// </summary>
+	/// <returns></returns>
+	Camera* GetCamera() { return camera_.get(); }
+
 private:// Engine system
-	// “ü—Í
+	// å…¥åŠ›
 	Input* input_;
 
+private:// å¤–éƒ¨ã‹ã‚‰ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å—ã‘å–ã‚‹å¤‰æ•°
+	// è‡ªæ©Ÿ
+	Player* player_;
+
 private:// Private variable
-	// ƒJƒƒ‰
-	Camera* pCamera_;
+	// ã‚«ãƒ¡ãƒ©
+	std::unique_ptr<Camera> camera_;
+
+	Vector3 targetOffset_ = { 0.0f,2.0f, -10.0f };
 };

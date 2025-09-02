@@ -1,29 +1,55 @@
 #pragma once
 #include <string>
+#include "Xinput.h"
 
 struct FileName {
-	std::string name;			// ƒtƒ@ƒCƒ‹–¼
-	std::string directoryPath;	// ƒtƒ@ƒCƒ‹–¼‚Ü‚Å‚ÌƒpƒX
+	std::string name;			// ãƒ•ã‚¡ã‚¤ãƒ«å
+	std::string directoryPath;	// ãƒ•ã‚¡ã‚¤ãƒ«åã¾ã§ã®ãƒ‘ã‚¹
 };
 struct TexData {
-	std::string name;	// Resources‚©‚çƒtƒ@ƒCƒ‹–¼‚Ü‚Å
-	uint32_t num;		// ¯•Ê”Ô†
+	std::string name;	// Resourcesã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«åã¾ã§
+	uint32_t num;		// è­˜åˆ¥ç•ªå·
 };
 
 /// <summary>
-/// ©‹@‚Ìİ’è
+/// è‡ªæ©Ÿã®è¨­å®š
 /// </summary>
 namespace PlayerConfig {
-	// ƒtƒ@ƒCƒ‹–¼
+	// ãƒ•ã‚¡ã‚¤ãƒ«å
 	namespace FileNames {
-		// ƒ‚ƒfƒ‹
+		// ãƒ¢ãƒ‡ãƒ«
 		namespace Models {
-			// ‘Ì
-			inline FileName body;
+			// ä½“
+			inline FileName body = {
+				"ball.obj", 
+				"Resources/ball/"
+			};
 		}
-		// ƒeƒNƒXƒ`ƒƒ
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£
 		namespace Textures {
-			inline TexData body;
+			// ä½“
+			inline TexData body = {
+				"Resources/ball/uvChecker.png",
+				0
+			};
+		}
+	}
+
+	// å…¥åŠ›
+	namespace Input {
+		// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
+		namespace Keyboard {
+			// åˆ‡ã‚Šæ›¿ãˆ
+			inline BYTE switching = DIK_RETURN;
+			// ã‚¸ãƒ£ãƒ³ãƒ—
+			inline BYTE jump = DIK_SPACE;
+		}
+		// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰
+		namespace GamePad {
+			// åˆ‡ã‚Šæ›¿ãˆ
+			inline BYTE switching;
+			// ã‚¸ãƒ£ãƒ³ãƒ—
+			inline BYTE jump;
 		}
 	}
 }

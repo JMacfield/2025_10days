@@ -19,6 +19,10 @@
 #include <vector>
 #include <string>
 
+#include "../TestPlane/TestWall.h"
+#include "../Player/Player.h"
+#include "../Camera/FollowCamera.h"
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -82,6 +86,15 @@ public:// Private methods
     void DrawObjects();
 #pragma endregion
 
+private:// Engine system
+    PostProcess* postProcess_ = nullptr;
+
 private:// Private variable
     Input* input_;
+
+    std::unique_ptr<FollowCamera> followCamera_;
+
+    std::unique_ptr<Player> player_;
+
+    std::unique_ptr<TestWall> testWall_;
 };

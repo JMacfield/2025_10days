@@ -1,9 +1,85 @@
 #include "JumpSystem.h"
+#include "../PlayerConfig.h"
+#include "../Player.h"
+#include "../Math/MathFuns.h"
 
-void JumpSystem::Init() {
+using namespace PlayerConfig::Input;
+
+JumpSystem::JumpSystem(Player* player) {
+	input_ = Input::GetInstance();
+	player_ = player;
+}
+
+JumpSystem::~JumpSystem() {
 
 }
 
-void JumpSystem::Update() {
+void JumpSystem::Init() {
+	vel_ = { 0.0f,0.0f,0.0f };
 
+	airJumpCount_ = 0;
+}
+
+void JumpSystem::Update() {
+	// 入力処理
+	InputUpdate();
+
+	// 落下処理
+	FallUpdate();
+
+
+	// 着地したら初期化
+	if (player_->GetIsLanding()) {
+		airJumpCount_ = 0;
+		player_->EndJump();
+		vel_ = { 0.0f,0.0f,0.0f };
+	}
+}
+
+void JumpSystem::DebugGui() {
+	ImGui::DragFloat3("FirstVel", &firstVel.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat3("CurrentVel", &vel_.x, 0.1f, -100.0f, 100.0f);
+	ImGui::DragFloat("Acceleration", &acceleration_, 0.01f, -100.0f, 100.0f);
+}
+
+void JumpSystem::InputUpdate() {
+	// 空中ジャンプのできる回数を超えている場合はジャンプさせない
+	if (airJumpCount_ >= maxAirJump) { return; }
+
+	// ジャンプ開始
+	if (input_->TriggerKey(Keyboard::jump)) {
+		airJumpCount_++;
+		player_->StartJump();
+		// どちらの方向にジャンプするかを決める
+		JumpSideUpdate();
+	}
+}
+
+void JumpSystem::FallUpdate() {
+	// 着地しているなら重力加速の計算を行わない
+	if (player_->GetIsLanding()) { return; }
+
+	// 重力加算
+	vel_.y -= acceleration_;
+
+	vel_.x = MathFuncs::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
+	vel_.z = MathFuncs::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
+}
+
+void JumpSystem::JumpSideUpdate() {
+	// 右に向かって飛ぶ
+	if (player_->GetCurrentWallSide() == Player::WallSide::kLeft) {
+		player_->SetIsAir(true);
+		jumpDirX_ = 1.0f;
+		Vector3 vel = firstVel;
+		vel_ += vel;
+	}
+	// 左に向かって飛ぶ
+	else if (player_->GetCurrentWallSide() == Player::WallSide::kRight) {
+		player_->SetIsAir(true);
+		jumpDirX_ = -1.0f;
+		Vector3 vel = firstVel;
+		vel.x *= jumpDirX_;
+		vel_ += vel;
+	}
 }

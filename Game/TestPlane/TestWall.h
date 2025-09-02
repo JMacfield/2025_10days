@@ -3,37 +3,61 @@
 
 class TestWall {
 public:// Public variable
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	TestWall(Camera* camera);
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	TestWall();
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~TestWall() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 	/// <summary>
-	/// ‰ğ•úˆ—
+	/// è§£æ”¾å‡¦ç†
 	/// </summary>
 	void Release();
 
+	/// <summary>
+	/// èª¿æ•´é …ç›®
+	/// </summary>
+	void DebugGui();
+
 private:// Private method
 
+public:// Accessor method
+	/// <summary>
+	/// ã‚«ãƒ¡ãƒ©ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨­å®š
+	/// </summary>
+	/// <param name="camera"></param>
+	void SetCamera(Camera* camera) { pCamera_ = camera; }
+	/// <summary>
+	/// åº§æ¨™ã®è¨­å®š
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetTranslation(const Vector3& pos) { body_->worldTransform_.translation_ = pos; }
+	/// <summary>
+	/// è§’åº¦ã®è¨­å®š
+	/// </summary>
+	/// <param name="rot"></param>
+	void SetRotation(const Vector3& rot) { body_->worldTransform_.rotation_ = rot; }
 
-private:// ŠO•”‚©‚çó‚¯æ‚éƒAƒhƒŒƒX
-	// ƒJƒƒ‰
+private:// å¤–éƒ¨ã‹ã‚‰å—ã‘å–ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
+	// ã‚«ãƒ¡ãƒ©
 	Camera* pCamera_;
 
 private:// Private variable
-	// ‘Ì‚ÌƒIƒuƒWƒFƒNƒg
+	// ä½“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	std::unique_ptr<Object3d> body_;
+
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	uint32_t texHandle_;
 };
 

@@ -201,6 +201,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\TestPlane\TestWall.cpp" />
     <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
+    <ClCompile Include="Game\Player\Math\MathFuns.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\2d\PostEffect\Effect\ChromaticAberration.h" />
@@ -231,6 +232,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
     <ClInclude Include="Game\Camera\FollowCamera.h" />
     <ClInclude Include="Game\Player\PlayerConfig.h" />
+    <ClInclude Include="Game\Player\Systems\ISystem.h" />
     <ClInclude Include="Game\Utilty\Loader.h" />
     <ClInclude Include="Engine\Interface\Mesh.h" />
     <ClInclude Include="Engine\Interface\PSO\PSOAnimationModel.h" />
@@ -297,6 +299,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Utilty\Menu.h" />
     <ClInclude Include="Game\Player\Player.h" />
     <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
+    <ClInclude Include="Game\Player\Math\MathFuns.h" />
     <ClInclude Include="test.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

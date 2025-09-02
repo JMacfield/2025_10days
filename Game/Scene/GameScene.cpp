@@ -18,10 +18,23 @@ GameScene::~GameScene() {
 
 // 初期化関数
 void GameScene::Init() {
-	//// カメラの初期化
-	//camera = new Camera;
-	//camera->Initialize();
 	input_ = Input::GetInstance();
+
+	// 自機
+	player_ = std::make_unique<Player>();
+	// テスト壁
+	testWall_ = std::make_unique<TestWall>();
+	testWall_->Init();
+
+	// 追従カメラ
+	followCamera_ = std::make_unique<FollowCamera>(player_.get());
+	player_->SetCamera(followCamera_->GetCamera());
+	testWall_->SetCamera(followCamera_->GetCamera());
+
+	// ポストエフェクト
+	postProcess_ = new PostProcess();
+	postProcess_->Init();
+	postProcess_->SetCamera(followCamera_->GetCamera());
 
 	// オーディオのロード
 	LoadAudio();
@@ -32,22 +45,41 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
-	
+	// テスト壁
+	testWall_->Update();
+	// 自機
+	player_->Update();
+	// 追従カメラ
+	followCamera_->Update();
+
+#ifdef _DEBUG
+	ImGui::Begin("GameWindow");
+	// 自機
+	player_->DebugGui();
+	// テスト壁
+	testWall_->DebugGui();
+	// 追従カメラ
+	followCamera_->DebugGui();
+	ImGui::End();
+#endif // DEBUG
 }
 
 // 描画関数
 void GameScene::Draw() {
-
+	// 自機
+	player_->Draw();
+	// テスト壁
+	testWall_->Draw();
 }
 
 // ポストエフェクト描画関数
 void GameScene::PostDraw() {
-	//postProcess_->Draw();
+	postProcess_->Draw();
 }
 
 // リソース解放関数
 void GameScene::Release() {
-
+	//delete camera_;
 }
 
 // ゲーム終了判定関数
@@ -68,7 +100,7 @@ void GameScene::LoadTextures()
 // モデルのロード
 void GameScene::LoadModels()
 {
-	ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
+	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
 }
 
 // オーディオのロード

@@ -1,27 +1,53 @@
 #pragma once
+#include "Vector3.h"
+
+/// <summary>
+/// ç§»å‹•å‡¦ç†
+/// </summary>
 class MoveSystem {
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	MoveSystem() = default;
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~MoveSystem() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// èª¿æ•´é …ç›®
+	/// </summary>
+	void DebugGui();
+
 private:// Private method
 	/// <summary>
-	/// “ü—Íˆ—
+	/// å…¥åŠ›å‡¦ç†
 	/// </summary>
 	void InputUpdate();
 
-private:
-	// ‰Ò“­’†‚©
-	bool isActive_;
+public:// Accessor method
+#pragma region Getter
+	/// <summary>
+	/// é€Ÿåº¦ã‚’å–å¾—
+	/// </summary>
+	/// <returns></returns>
+	Vector3 GetVel() { return vel_; }
+#pragma endregion
+
+#pragma region Setter
+
+#pragma endregion
+
+private:// èª¿æ•´é …ç›®
+	Vector3 maxMoveVel = { 0.0f,0.0f, 0.05f };
+
+private:// Private method
+	// é€Ÿåº¦
+	Vector3 vel_;
 };
