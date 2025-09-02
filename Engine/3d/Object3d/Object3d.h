@@ -21,6 +21,7 @@
 #include <PSOAnimationModel.h>
 #include "Skybox.h"
 #include <Quaternion.h>
+#include <Lerp.h>
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
@@ -55,95 +56,8 @@ enum class EasingType {
     EaseInOutExpo,
     Count // 最後に追加
 };
-EasingType easingType_ = EasingType::EaseInSine; // デフォルト
+extern EasingType easingType_;
 
-namespace Easings {
-    float EaseInSine(float t);
-    float EaseOutSine(float t);
-    float EaseInOutSine(float t);
-
-#pragma region Quint
-
-    // だんだん減速(ぎりぎりまで速度が速い)
-    float EaseOutQuint(float x);
-
-    // だんだん早くなる(一気に早くなる)
-    float EaseInQuint(float x);
-
-    float EaseInOutQuint(float x);
-
-#pragma endregion
-
-#pragma region Circ
-
-    float EaseInCirc(float x);
-
-    float EaseOutCirc(float x);
-
-    float EaseInOutCirc(float x);
-
-#pragma endregion
-
-#pragma region Cubic
-
-    float EaseInCubic(float x);
-
-    float EaseOutCubic(float x);
-
-    float EaseInOutCubic(float x);
-
-#pragma endregion
-
-#pragma region Back
-
-    float EaseInBack(float x);
-
-    float EaseOutBack(float x);
-
-    float EaseInOutBack(float x);
-
-#pragma endregion
-
-#pragma region Bounce
-
-    float EaseOutBounce(float x);
-
-    float EaseInBounce(float x);
-
-    float EaseInOutBounce(float x);
-
-#pragma endregion
-
-#pragma region Elastic
-
-    float EaseInElastic(float x);
-
-    float EaseOutElastic(float x);
-
-    float EaseInOutElastic(float x);
-
-#pragma endregion
-
-#pragma region Quart
-
-    float EaseInQuart(float x);
-
-    float EaseOutQuart(float x);
-
-    float EaseInOutQuart(float x);
-
-#pragma endregion
-
-#pragma region Expo
-
-    float EaseInExpo(float x);
-
-    float EaseOutExpo(float x);
-
-    float EaseInOutExpo(float x);
-
-#pragma endregion
-}
 
 /**
 * @file Object3d.h
@@ -184,8 +98,7 @@ public:
 
     void EasingDebugUI();
 
-	float GetEasedT(float t) const;
-
+    float GetEasedT(float t) const;
     /// <summary>
     /// モデルを設定する
     /// </summary>
