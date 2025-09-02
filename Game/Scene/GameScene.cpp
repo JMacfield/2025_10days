@@ -61,11 +61,15 @@ void GameScene::Update() {
 		HoleObject3_->GlitchVertices(5.0f);
 	}
 	if (input->PushKey(DIK_V)) {
-		TENQ->StartLerpToOriginalVertices(lerpSpeed);
-		HoleObject_->StartLerpToOriginalVertices(lerpSpeed);
-		HoleObject2_->StartLerpToOriginalVertices(lerpSpeed);
-		HoleObject3_->StartLerpToOriginalVertices(lerpSpeed);
+		TENQ->StartLerpToOriginalVertices();
+		HoleObject_->StartLerpToOriginalVertices();
+		HoleObject2_->StartLerpToOriginalVertices();
+		HoleObject3_->StartLerpToOriginalVertices();
 	}
+	if (TENQ) TENQ->EasingDebugUI("TENQ");
+	if (HoleObject_) HoleObject_->EasingDebugUI("HoleObject1");
+	if (HoleObject2_) HoleObject2_->EasingDebugUI("HoleObject2");
+	if (HoleObject3_) HoleObject3_->EasingDebugUI("HoleObject3");
 }
 
 // 描画関数
@@ -144,7 +148,7 @@ void GameScene::InitializeData(){
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
 	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
 	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
-	camera->transform_.rotate = { -0.26f,0.05f,0.0f };
+	camera->transform_.rotate = { -0.26f,-0.060f,0.0f };
 
 }
 

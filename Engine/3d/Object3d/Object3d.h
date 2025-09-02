@@ -21,7 +21,6 @@
 #include <PSOAnimationModel.h>
 #include "Skybox.h"
 #include <Quaternion.h>
-#include <Lerp.h>
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
@@ -96,7 +95,7 @@ public:
 
     void LightDebug(const char* name);
 
-    void EasingDebugUI();
+    void EasingDebugUI(const char* name);
 
     float GetEasedT(float t) const;
     /// <summary>
@@ -155,7 +154,7 @@ public:
     void GlitchVertices(float intensity);
 
     void LerpToOriginalVertices(float lerpT);
-    void StartLerpToOriginalVertices(float lerpSpeed);
+    void StartLerpToOriginalVertices();
 
 public: // Getter
     /// <summary>
@@ -183,7 +182,15 @@ public: // Getter
     WorldTransform worldTransform_;
     bool isVisible = true;  // デフォルトで描画する
 
+public: // Setter
+    /// <summary> 
+    /// ラープ速度を設定する 
+    /// </summary> 
+    /// <param name="lerpSpeed">ラープ速度</param> 
+    void SetLerpSpeed(float lerpSpeed) { lerpSpeed_ = lerpSpeed; }
+
 private:
+    EasingType easingType_ = EasingType::EaseInSine;
     Object3dCommon* objectCommon_ = nullptr;
     DirectionalLight* directionalLightData;
     HRESULT hr;
@@ -204,7 +211,7 @@ private:
     std::vector<VertexData> glitchedVertices_; // ランダム位置
     bool isLerping_ = false;                  // ラープ中フラグ
     float lerpT_ = 0.0f;                      // ラープ係数
-    float lerpSpeed_ = 0.02f;
+    float lerpSpeed_ = 0.0002f;
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;

@@ -306,6 +306,9 @@
       <Filter>Engine\2d\PostEffect\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Utilty\Lerp.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -574,6 +577,9 @@
       <Filter>Application\scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Utilty\Lerp.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

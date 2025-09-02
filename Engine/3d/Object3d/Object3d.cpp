@@ -2,9 +2,7 @@
 #include "Modelmanager.h"
 #include "Object3dCommon.h"
 #include <random>
-
-// ファイル先頭の適切な位置に追加
-EasingType easingType_ = EasingType::EaseInSine;
+#include <Lerp.h>
 
 float Object3d::GetEasedT(float t) const
 {
@@ -40,12 +38,11 @@ float Object3d::GetEasedT(float t) const
 	}
 }
 
-void Object3d::StartLerpToOriginalVertices(float lerpSpeed)
+void Object3d::StartLerpToOriginalVertices()
 {
 	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
 	isLerping_ = true;
 	lerpT_ = 0.0f;
-	lerpSpeed_ = lerpSpeed;
 }
 
 void Object3d::Init()
@@ -77,6 +74,7 @@ void Object3d::Init()
 
 void Object3d::Update()
 {
+
 	worldTransform_.UpdateMatrix();
 	if (animationModel_) {
 		animationModel_->Update();
@@ -387,14 +385,14 @@ void Object3d::LightDebug(const char* name)
 
 }
 
+
+
 void Object3d::ModelDebug(const char* name)
 {
 	//#ifdef _DEBUG
-
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.2f, 0.7f, 0.8f));
 	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.1f, 0.3f, 0.5f));
 	ImGui::Begin("model");
-	EasingDebugUI();
 	if (ImGui::TreeNode(name))
 	{
 		float translate[3] = { worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z };
@@ -419,7 +417,7 @@ void Object3d::ModelDebug(const char* name)
 
 }
 
-void Object3d::EasingDebugUI()
+void Object3d::EasingDebugUI(const char* name)
 {
 #ifdef _DEBUG
 	static const char* easingNames[] = {
@@ -434,7 +432,12 @@ void Object3d::EasingDebugUI()
 		"EaseInExpo", "EaseOutExpo", "EaseInOutExpo"
 	};
 	int current = static_cast<int>(easingType_);
-	ImGui::Combo("Easing Type", &current, easingNames, static_cast<int>(EasingType::Count));
+	ImGui::Begin("EasingDebug");
+	ImGui::Combo(name, &current, easingNames, static_cast<int>(EasingType::Count));
 	easingType_ = static_cast<EasingType>(current);
+	// nameをラベルに付加
+	std::string lerpLabel = std::string(name) + " Lerp Speed";
+	ImGui::DragFloat(lerpLabel.c_str(), &lerpSpeed_, 0.00001f, 0.000000f, 1.0f, "%.6f");
+	ImGui::End();
 #endif
 }
