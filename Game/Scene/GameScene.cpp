@@ -10,10 +10,18 @@
 #include <cmath>
 #include <DirectXMath.h>
 
-GameScene::GameScene(){}
+GameScene::GameScene() {
+	collisionManager_ = CollisionManager::GetInstance();
+}
 
 GameScene::~GameScene() {
 	Release();
+
+	collisionManager_->ClearColliderList();
+
+	for (TestWall* wall : testWall_) {
+		delete wall;
+	}
 }
 
 // 初期化関数
@@ -23,13 +31,23 @@ void GameScene::Init() {
 	// 自機
 	player_ = std::make_unique<Player>();
 	// テスト壁
-	testWall_ = std::make_unique<TestWall>();
-	testWall_->Init();
+	for (int i = 0; i < 5;i++) {
+		TestWall* wall = new TestWall();
+		wall->Init();
+		testWall_.push_back(wall);
+	}
+	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,4.0f });
+	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
+	testWall_[2]->SetTranslation(Vector3{ -4.5f,0.0f,8.0f });
+	testWall_[3]->SetTranslation(Vector3{ 4.5f,0.0f,12.0f });
+	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
 
 	// 追従カメラ
 	followCamera_ = std::make_unique<FollowCamera>(player_.get());
 	player_->SetCamera(followCamera_->GetCamera());
-	testWall_->SetCamera(followCamera_->GetCamera());
+	for (TestWall* wall : testWall_) {
+		wall->SetCamera(followCamera_->GetCamera());
+	}
 
 	// ポストエフェクト
 	postProcess_ = new PostProcess();
@@ -46,18 +64,22 @@ void GameScene::Init() {
 // シーン更新関数
 void GameScene::Update() {
 	// テスト壁
-	testWall_->Update();
+	for (TestWall* wall : testWall_) {
+		wall->Update();
+	}
 	// 自機
 	player_->Update();
 	// 追従カメラ
 	followCamera_->Update();
 
+	// 衝突判定
+	collisionManager_->CheckAllCollisions();
 #ifdef _DEBUG
 	ImGui::Begin("GameWindow");
 	// 自機
 	player_->DebugGui();
 	// テスト壁
-	testWall_->DebugGui();
+	//testWall_->DebugGui();
 	// 追従カメラ
 	followCamera_->DebugGui();
 	ImGui::End();
@@ -69,7 +91,9 @@ void GameScene::Draw() {
 	// 自機
 	player_->Draw();
 	// テスト壁
-	testWall_->Draw();
+	for (TestWall* wall : testWall_) {
+		wall->Draw();
+	}
 }
 
 // ポストエフェクト描画関数

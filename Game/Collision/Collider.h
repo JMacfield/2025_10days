@@ -1,91 +1,155 @@
 ﻿#pragma once
-#include "Vector3.h"
+#include "CollisionConfig.h"
+#include "mathFunction.h"
+#include "WorldTransform.h"
+#include <functional>
 #include <cstdint>
 
+class CollisionManager;
 /// <summary>
-/// @file Collider.h
-/// @brief 衝突判定を行うコライダーの基底クラスの宣言
-/// </summary>
-
-/// <summary>
-/// 衝突判定に必要な情報と機能を提供するコライダークラス。
+/// 当たり判定
 /// </summary>
 class Collider {
 public:
+	Collider();
+	~Collider();
 
-    /// <summary>
-    /// 衝突半径を取得する関数
-    /// </summary>
-    /// <returns>衝突半径の値</returns>
-    int GetRadius() { return radius_; }
+	// 当たった瞬間を取得
+	bool TriggerOnCollision();
+	// 離れた瞬間を取得
+	bool ReleaseOnCollision();
+	// 当たっているときを取得
+	bool PressOnCollision();
 
-    /// <summary>
-    /// 衝突半径を設定する関数
-    /// </summary>
-    /// <param name="radius">設定する衝突半径の値</param>
-    void SetRadius(int radius) { radius_ = radius; }
+#pragma region Getter
+	// ダメージを取得
+	float GetDamage() { return damage_; }
 
-    /// <summary>
-    /// 衝突時に呼ばれる仮想関数（純粋仮想関数）
-    /// </summary>
-    virtual void OnCollision() = 0;
+	// 力を取得
+	Vector3 GetPower() { return power_; }
 
-    /// <summary>
-    /// ワールド座標を取得する純粋仮想関数
-    /// </summary>
-    /// <returns>ワールド座標（Vector3）</returns>
-    virtual Vector3 GetWorldPosition() const = 0;
+	// 半径の取得
+	float GetRadius() { return radius_; }
 
-    /// <summary>
-    /// 衝突属性（自分）を取得する関数
-    /// </summary>
-    /// <returns>衝突属性の値（uint32_t）</returns>
-    uint32_t GetCollisonAttribute() { return collisionAttribute_; }
+	// OBBの取得
+	OBB GetOBB() { return obb_; }
 
-    /// <summary>
-    /// 衝突属性（自分）を設定する関数
-    /// </summary>
-    /// <param name="collisionAttribute">設定する衝突属性の値</param>
-    void SetCollisonAttribute(uint32_t collisionAttribute);
+	// 衝突属性(自分)を取得
+	const uint32_t& GetCollisionAttribute() { return collisionAttribute_; }
+	// 衝突マスク(相手)を取得
+	const uint32_t& GetCollisionMask() { return collisionMask_; }
+	// 当たり判定の形状を取得
+	const uint32_t& GetCollisionPrimitive() { return collisionPrimitive_; }
 
-    /// <summary>
-    /// 衝突マスク（相手）を取得する関数
-    /// </summary>
-    /// <returns>衝突マスクの値（uint32_t）</returns>
-    uint32_t GetCollisionMask() { return CollisionMask_; }
+	// ワールド座標を取得
+	Vector3 GetWorldPosition() {
+		worldTransform.UpdateMatrix();
+		Vector3 worldPos = {
+			worldTransform.matWorld_.m[3][0],
+			worldTransform.matWorld_.m[3][1],
+			worldTransform.matWorld_.m[3][2]
+		};
+		return worldPos;
+	}
+	// 角度を取得
+	Vector3 GetRotation() {
+		Vector3 rot = worldTransform.rotation_;
+		if (worldTransform.parent_) {
+			rot += worldTransform.parent_->rotation_;
+		}
+		return rot;
+	}
 
-    /// <summary>
-    /// 衝突マスク（相手）を設定する関数
-    /// </summary>
-    /// <param name="CollisionMask">設定する衝突マスクの値</param>
-    void SetCollisionMask(uint32_t CollisionMask);
+	// 今当たっているかを取得
+	bool GetIsOnCollision() { return isOnCollision_; }
+	// 今当たっているかを取得
+	bool GetIsPreOnCollision() { return isPreOnCollision_; }
+	// 当たり判定を使用するかを取得
+	bool GetIsActive() { return isActive_; }
+#pragma endregion
 
-    /// <summary>
-    /// 衝突判定を行う関数
-    /// </summary>
-    /// <param name="playerPos">プレイヤーの位置ベクトル</param>
-    /// <param name="objectPos">オブジェクトの位置ベクトル</param>
-    /// <param name="offsetX">X軸方向のオフセット値</param>
-    /// <param name="offsetY">Y軸方向のオフセット値</param>
-    /// <param name="offsetZ">Z軸方向のオフセット値</param>
-    /// <param name="collisionDistance">衝突と判定する距離の閾値</param>
-    /// <returns>衝突している場合はtrue、していない場合はfalseを返す</returns>
-    bool CheckCollision(const Vector3& playerPos, const Vector3& objectPos, float offsetX, float offsetY, float offsetZ, float collisionDistance);
+#pragma region Setter
+	// ダメージを設定
+	void SetDamage(const float& damage) { damage_ = damage; }
 
-private:
-    /// <summary>
-    /// 衝突半径
-    /// </summary>
-    int radius_ = 2;
+	// 力を設定
+	void SetPower(const Vector3& power) { power_ = power; }
 
-    /// <summary>
-    /// 衝突属性（自分）
-    /// </summary>
-    uint32_t collisionAttribute_ = 0xFFFFFFFF;
+	// 半径の設定
+	void SetRadius(const float& radius) { radius_ = radius; }
 
-    /// <summary>
-    /// 衝突マスク（相手）
-    /// </summary>
-    uint32_t CollisionMask_ = 0xffffffff;
+	// OBBの設定
+	void SetOBB(const OBB& obb) { obb_ = obb; }
+	void SetOBBCenterPos(const Vector3& centerPos) { obb_.m_Pos = centerPos; }
+	void SetOBBLength(const Vector3& length) { obb_.m_fLength = length; }
+	void SetOBBDirect(const int& index);
 
+	// 衝突属性(自分)を設定
+	void SetCollisionAttribute(const uint32_t& collisionAttribute) { collisionAttribute_ = collisionAttribute; }
+	// 衝突マスク(相手)を設定
+	void SetCollisionMask(const uint32_t& collisionMask) { collisionMask_ = collisionMask; }
+	// 当たり判定の形状を設定
+	void SetCollisionPrimitive(const uint32_t& collisionPrimitive) { collisionPrimitive_ = collisionPrimitive; }
+
+	// 今当たっているかを設定
+	void SetIsOnCollision(const bool& isOnCollision) { isOnCollision_ = isOnCollision; }
+	// 今当たっているかを設定
+	void SetIsPreOnCollision(const bool& isPreOnCollision) { isPreOnCollision_ = isPreOnCollision; }
+	// 当たり判定を使用するかを設定
+	void SetIsActive(const bool& isActive) { isActive_ = isActive; }
+
+	// 衝突応答を設定
+	void SetOnCollision(std::function<void(Collider*)> onCollision) { onCollision_ = onCollision; }
+#pragma endregion
+
+	// 衝突時に呼ばれる関数(ユーザーの使用禁止)
+	void OnCollision(Collider* collider) {
+		if (!onCollision_) { return; }
+		onCollision_(collider);
+	}
+
+public:// パブリックな変数
+	WorldTransform worldTransform;
+
+private:// エンジン機能
+	// 衝突マネージャー
+	CollisionManager* collisionManager_;
+
+private:// プライベートな変数
+	// 衝突応答
+	std::function<void(Collider*)> onCollision_;
+
+	// ダメージ
+	float damage_;
+
+	// 力
+	Vector3 power_;
+
+	// 衝突半径
+	float radius_ = 1.0f;
+	// OBB
+	OBB obb_ = {
+		{0,0,0},	// 位置
+		{1,1,1},	// 各軸方向の長さ		
+		// 方向ベクトル
+	   {{1,0,0},
+		{0,1,0},
+		{0,0,1}}
+	};
+
+	// 衝突属性(自分)
+	uint32_t collisionAttribute_ = 0xffffffff;
+	// 衝突マスク(相手)
+	uint32_t collisionMask_ = 0xffffffff;
+	// 当たり判定の形状
+	uint32_t collisionPrimitive_;
+
+	// コライダーリストから削除
+	bool isClear_ = false;
+	// 今当たっている
+	bool isOnCollision_ = false;
+	// 前に当たっている
+	bool isPreOnCollision_ = false;
+	// 当たり判定を使用
+	bool isActive_ = true;
 };

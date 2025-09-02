@@ -1,7 +1,7 @@
 #include "JumpSystem.h"
 #include "../PlayerConfig.h"
 #include "../Player.h"
-#include "../Math/MathFuns.h"
+#include "../Math/MathFuncs.h"
 
 using namespace PlayerConfig::Input;
 
@@ -26,7 +26,6 @@ void JumpSystem::Update() {
 
 	// 落下処理
 	FallUpdate();
-
 
 	// 着地したら初期化
 	if (player_->GetIsLanding()) {

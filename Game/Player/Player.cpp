@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "PlayerConfig.h"
 #include "ModelManager.h"
+#include "Math/MathFuncs.h"
 
 using namespace PlayerConfig::FileNames;
 
@@ -17,6 +18,16 @@ Player::Player() {
 	body_ = std::make_unique<Object3d>();
 	body_->Init();
 	body_->SetModel(Models::body.name);
+
+	// colliderの設定
+	collider_ = std::make_unique<Collider>();
+	collider_->worldTransform.parent_ = &body_->worldTransform_;
+	collider_->SetOBBLength(Vector3{ 0.5f, 0.5f,0.5f });
+	collider_->SetCollisionPrimitive(kCollisionOBB);
+	collider_->SetCollisionAttribute(kCollisionAttributePlayer);
+	collider_->SetCollisionMask(~kCollisionAttributePlayer);
+	collider_->SetOnCollision(std::bind(&Player::OnCollision, this, std::placeholders::_1));
+	collider_->SetIsActive(true);
 
 	// 全ての機能生成
 	CreateSystems();
@@ -37,6 +48,8 @@ void Player::Init() {
 	// 着地したか
 	isLanding_ = true;
 	currentWallSide_ = WallSide::kLeft;
+
+	vel_ = { 0.0f,0.0f,0.0f };
 }
 
 void Player::Update() {
@@ -46,14 +59,20 @@ void Player::Update() {
 	jumpSystem_->Update();
 
 	// 速度代入
-	body_->worldTransform_.translation_ += moveSystem_->GetVel() + jumpSystem_->GetVel();
+	Vector3 vel = moveSystem_->GetVel() + jumpSystem_->GetVel() + vel_;
+	body_->worldTransform_.translation_ += vel;
 
 	// 体
 	body_->Update();
 
+	// 何も接触していないときは落下する
+	if (!collider_->GetIsOnCollision() || isAir_) {
+		//vel_.y -= acceleration;
+	}
+
 	// 着地している
 	if (body_->worldTransform_.translation_.y <= -0.1f) {
-		EndJump();
+		//EndJump();
 	}
 }
 
@@ -106,4 +125,41 @@ void Player::CreateSystems() {
 	// ジャンプ処理
 	jumpSystem_ = std::make_unique<JumpSystem>(this);
 	jumpSystem_->Init();
+}
+
+void Player::OnCollision(Collider* collider) {
+	// 攻撃に当たったら死亡
+	if (collider->GetCollisionAttribute() == kCollisionAttributeEnemy) {
+
+	}
+	// 壁の場合
+	else if (collider->GetCollisionAttribute() == kCollisionAttributeObstacles) {
+		// 着地の判定
+		CheckLanding(collider);
+	}
+}
+
+void Player::CheckLanding(Collider* collider) {
+	// 空中に飛んでいなければ処理しない
+	if (!isAir_) { return; }
+
+	// 着地時の座標補間
+	Vector3 a = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_) - MathFuncs::GetWorldPosition(body_->worldTransform_.matWorld_);
+	a = a.Normalize();
+	// 壁が左側にある
+	if (currentWallSide_ == WallSide::kLeft) {
+		if (a.x >= 0.0f) {
+			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - landingOffsetX;
+			body_->worldTransform_.translation_.x = posX;
+		}
+	}
+	// 壁が右側にある
+	else if (currentWallSide_ == WallSide::kRight) {
+		if (a.x < 0.0f) {
+			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + landingOffsetX;
+			body_->worldTransform_.translation_.x = posX;
+		}
+	}
+
+	EndJump();
 }

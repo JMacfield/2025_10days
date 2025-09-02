@@ -1,5 +1,5 @@
 #include "FollowCamera.h"
-#include "../Player/Math/MathFuns.h"
+#include "../Player/Math/MathFuncs.h"
 #include "../Player/Player.h"
 
 FollowCamera::FollowCamera(Player* player) {

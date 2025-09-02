@@ -53,6 +53,16 @@ private:// Private method
 	/// </summary>
 	void CreateSystems();
 
+	/// <summary>
+	/// 衝突応答
+	/// </summary>
+	/// <param name="collider"></param>
+	void OnCollision(Collider* collider);
+	/// <summary>
+	/// 着地判定
+	/// </summary>
+	void CheckLanding(Collider* collider);
+
 public:// Accessor method
 	/// <summary>
 	/// ジャンプ開始
@@ -69,11 +79,11 @@ public:// Accessor method
 	void EndJump() {
 		if (!isAir_ && isLanding_) { return; }
 
-		// 右に向かって飛ぶ
+		// 壁が右側にある
 		if (currentWallSide_ == WallSide::kLeft) {
 			currentWallSide_ = WallSide::kRight;
 		}
-		// 左に向かって飛ぶ
+		// 壁が左側にある
 		else if (currentWallSide_ == WallSide::kRight) {
 			currentWallSide_ = WallSide::kLeft;
 		}
@@ -81,9 +91,15 @@ public:// Accessor method
 		isAir_ = false;
 		// 着地したか
 		isLanding_ = true;
+		vel_ = { 0.0f,0.0f,0.0f };
 	}
 
 #pragma region Getter
+	/// <summary>
+	/// 当たり判定取得
+	/// </summary>
+	/// <returns></returns>
+	Collider* GetCollider() { return collider_.get(); }
 	/// <summary>
 	/// 体のWorldTFのアドレスを取得
 	/// </summary>
@@ -119,6 +135,13 @@ public:// Accessor method
 	void SetIsAir(const bool& isAir) { isAir_ = isAir; }
 #pragma endregion
 
+private:// 定数
+	// 自機が壁に着地したときの座標の補間量
+	float landingOffsetX = 0.4f;
+
+	// 重力加速度
+	float acceleration = 0.05f;
+
 private:// Engine system
 	// 入力
 	Input* input_;
@@ -131,7 +154,7 @@ private:// Private variable
 	// 体のオブジェクト
 	std::unique_ptr<Object3d> body_;
 
-	Collider* collider_;
+	std::unique_ptr<Collider> collider_;
 
 	// 移動処理
 	std::unique_ptr<MoveSystem> moveSystem_;
@@ -140,6 +163,8 @@ private:// Private variable
 
 	// 現在壁の右側化左側にいるか
 	WallSide currentWallSide_;
+
+	Vector3 vel_;
 
 	// 空中にいるか
 	bool isAir_ = false;

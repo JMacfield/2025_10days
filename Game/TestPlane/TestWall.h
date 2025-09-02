@@ -1,5 +1,6 @@
 #pragma once
 #include "Object3D.h"
+#include "Collider.h"
 
 class TestWall {
 public:// Public variable
@@ -31,6 +32,11 @@ public:// Public variable
 	void DebugGui();
 
 private:// Private method
+	/// <summary>
+	/// 衝突応答
+	/// </summary>
+	/// <param name="collider"></param>
+	void OnCollision(Collider* collider);
 
 public:// Accessor method
 	/// <summary>
@@ -56,6 +62,9 @@ private:// 外部から受け取るアドレス
 private:// Private variable
 	// 体のオブジェクト
 	std::unique_ptr<Object3d> body_;
+
+	// 当たり判定
+	std::unique_ptr<Collider> collider_;
 
 	// テクスチャ
 	uint32_t texHandle_;

@@ -1,51 +1,63 @@
 ﻿#pragma once
+#include "CollisionConfig.h"
 #include "Collider.h"
 #include <list>
 
 /// <summary>
-/// @file CollisionManager.h
-/// @brief 衝突判定を管理するクラスの宣言
-/// </summary>
-
-class GameScene;
-
-/// <summary>
-/// 複数のコライダー間の衝突判定を管理するクラス
+/// 衝突を検知するクラス
 /// </summary>
 class CollisionManager {
 public:
-    /// <summary>
-    /// 2つのコライダー間の衝突判定を行う関数
-    /// </summary>
-    /// <param name="colliderA">コライダーA</param>
-    /// <param name="colliderB">コライダーB</param>
-    void CheckCollisionPair(Collider* colliderA, Collider* colliderB);
+	~CollisionManager();
 
-    /// <summary>
-    /// 登録されている全てのコライダー間で衝突判定を行う関数
-    /// </summary>
-    void CheckAllCollision();
+	/// <summary>
+	/// シングルトン
+	/// </summary>
+	/// <returns></returns>
+	static CollisionManager* GetInstance();
 
-    /// <summary>
-    /// コライダーをリストに追加する関数
-    /// </summary>
-    /// <param name="collider">追加するコライダーのポインタ</param>
-    void PushClider(Collider* collider);
+	/// <summary>
+	/// 当たっているなら衝突応答関数を呼ぶ
+	/// </summary>
+	void CheckCollisionPair(Collider* colliderA, Collider* colliderB);
 
-    /// <summary>
-    /// ゲームシーンを設定する関数
-    /// </summary>
-    /// <param name="gamescene">設定するゲームシーンのポインタ</param>
-    void SetGameScene(GameScene* gamescene) { gameScene_ = gamescene; }
+	/// <summary>
+	/// 当たっているかの確認
+	/// </summary>
+	void CheckAllCollisions();
+
+	/// <summary>
+	/// コライダーリストをすべてクリア
+	/// </summary>
+	void ClearColliderList() {
+		colliders_.clear();
+	}
+	/// <summary>
+	/// 特定のコライダーをクリア
+	/// </summary>
+	/// <param name="collider"></param>
+	void ClearColliderList(Collider* collider) {
+		colliders_.remove(collider);
+	}
+
+	bool ColOBBs(const OBB& obb1, const OBB& obb2);
+
+	// 分離軸に投影された軸成分から投影線分長を算出
+	float LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
+
+	///
+	/// Setter
+	/// 
+
+	/// <summary>
+	/// コライダーリストに登録
+	/// </summary>
+	/// <param name="collider">当たり判定をつけたいオブジェクト</param>
+	void SetColliderList(Collider* collider) {
+		colliders_.push_back(collider);
+	}
 
 private:
-    /// <summary>
-    /// ゲームシーンのポインタ
-    /// </summary>
-    GameScene* gameScene_ = nullptr;
-
-    /// <summary>
-    /// 登録されたコライダーのリスト
-    /// </summary>
-    std::list<Collider*> colliders_;
+	// コライダーリスト
+	std::list<Collider*> colliders_;
 };

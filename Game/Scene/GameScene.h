@@ -22,6 +22,7 @@
 #include "../TestPlane/TestWall.h"
 #include "../Player/Player.h"
 #include "../Camera/FollowCamera.h"
+#include "../Collision/CollisionManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -92,9 +93,12 @@ private:// Engine system
 private:// Private variable
     Input* input_;
 
+    // 当たり判定管理クラス
+    CollisionManager* collisionManager_;
+
     std::unique_ptr<FollowCamera> followCamera_;
 
     std::unique_ptr<Player> player_;
 
-    std::unique_ptr<TestWall> testWall_;
+    std::vector<TestWall*> testWall_;
 };

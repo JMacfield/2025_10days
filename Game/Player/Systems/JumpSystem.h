@@ -58,7 +58,7 @@ public:// Accessor method
 
 private:
 	// 初速
-	Vector3 firstVel = {0.6f,0.8f,0.0f};
+	Vector3 firstVel = {0.8f,0.4f,0.0f};
 
 	// 重力加速度
 	float acceleration_ = 0.05f;

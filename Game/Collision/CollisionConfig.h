@@ -1,22 +1,28 @@
 #pragma once
+#include "Vector3.h"
 #include <cstdint>
 
-/// <summary>
-/// ƒvƒŒƒCƒ„[‚ÌÕ“Ë‘®«‚ğ•\‚·’è”
-/// </summary>
-const uint32_t kCollisionAttributePlayer = 0b1;
+/// è¡çªå±æ€§
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é™£å–¶
+inline const uint32_t kCollisionAttributePlayer = 0b01;
+// æ•µé™£å–¶
+inline const uint32_t kCollisionAttributeEnemy = 0b01 << 1;
+// éšœå®³ç‰©
+inline const uint32_t kCollisionAttributeObstacles = 0b01 << 2;
 
-/// <summary>
-/// “G‚ÌÕ“Ë‘®«‚ğ•\‚·’è”
-/// </summary>
-const uint32_t kCollisionAttributeEnemy = 0b1 << 1;
+/// å½“ãŸã‚Šåˆ¤å®šã®å½¢çŠ¶
+// OBB
+inline const uint32_t kCollisionOBB = 0b01 << 4;
+inline const uint32_t kCollisionNone = 0b01 << 5;
 
-/// <summary>
-/// ƒAƒCƒeƒ€‚ÌÕ“Ë‘®«‚ğ•\‚·’è”
-/// </summary>
-const uint32_t kCollisionAttributeItem = 0b1 << 2;
-
-/// <summary>
-/// ƒvƒŒƒCƒ„[‚Ì’e‚ÌÕ“Ë‘®«‚ğ•\‚·’è”
-/// </summary>
-const uint32_t kCollisionAttributePlayerBullet = 0b1 << 3;
+// ç«‹æ–¹ä½“
+struct cAABB {
+	Vector3 max = { 1.0f,1.0f,1.0f };
+	Vector3 min = { -1.0f,-1.0f,-1.0f };
+};
+// OBB
+struct OBB {
+	Vector3 m_Pos;              // ä½ç½®
+	Vector3 m_fLength;          // å„è»¸æ–¹å‘ã®é•·ã•
+	Vector3 m_NormaDirect[3];   // æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+};
