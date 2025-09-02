@@ -113,6 +113,8 @@ public:
     void SetScale(const Vector3& scale);
     Vector3 GetScale() const;
 
+	void SetisLight(bool islight) { isLight = islight; }
+
 public: // Getter
     /// <summary>
     /// ワールド変換を取得する

@@ -85,9 +85,13 @@ private:// Private methods
 private:// Private variable
     PostProcess* postProcess_ = nullptr;
     Camera* camera = nullptr;
+	Object3d* TENQ = nullptr;
     Object3d* HoleObject_ = nullptr;
+    Object3d* HoleObject2_ = nullptr;
+    Object3d* HoleObject3_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
+		TENQ_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;

@@ -39,15 +39,29 @@ void GameScene::Init() {
 void GameScene::Update() {
 	camera->Update();		
 	camera->Move(1);
+	TENQ->Update();
 	HoleObject_->Update();
+	HoleObject2_->Update();
+	HoleObject3_->Update();
 	camera->CameraDebug();
+	TENQ->LightDebug("TENQlight");
 	HoleObject_->LightDebug("light");
+	HoleObject2_->LightDebug("light2");
+	HoleObject3_->LightDebug("light3");
+	TENQ->ModelDebug("TENQmodel");
+	HoleObject_->ModelDebug("model");
+	HoleObject2_->ModelDebug("model2");
+	HoleObject3_->ModelDebug("model3");
+	TENQ->worldTransform_.rotation_.y += 0.0005f;
 
 }
 
 // 描画関数
 void GameScene::Draw() {
+	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera);
 	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera);
+	HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
+	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);
 }
 
 // ポストエフェクト描画関数
@@ -72,6 +86,7 @@ int GameScene::GameClose()
 void GameScene::LoadTextures(){
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
+	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
 
 }
 
@@ -80,6 +95,9 @@ void GameScene::LoadModels()
 {
 	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole1.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole2.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/10days/", "world.obj");
 
 }
 
@@ -92,14 +110,27 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData(){
 	camera = new Camera;
+	TENQ = new Object3d();
 	HoleObject_ = new Object3d();
+	HoleObject2_ = new Object3d();
+	HoleObject3_ = new Object3d();
 	postProcess_ = new PostProcess();
 
 	camera->Initialize();
+	TENQ->Init();
 	HoleObject_->Init();
+	HoleObject2_->Init();
+	HoleObject3_->Init();
 	postProcess_->Init();
 	postProcess_->SetCamera(camera);
+	TENQ->SetModel("world.obj");
+	TENQ->SetisLight(false);
+	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
 	HoleObject_->SetModel("Demohole1.obj");
+	HoleObject2_->SetModel("Demohole2.obj");
+	HoleObject3_->SetModel("Demohole.obj");
+	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
+	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
 
 }
 
