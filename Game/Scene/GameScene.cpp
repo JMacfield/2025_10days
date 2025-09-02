@@ -17,7 +17,7 @@ GameScene::~GameScene() {
 // 初期化関数
 void GameScene::Init() {
 	//// カメラの初期化
-	//input = Input::GetInstance();
+	input = Input::GetInstance();
 	
 
 	// テクスチャのロード
@@ -37,6 +37,7 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
+	time++;
 	camera->Update();		
 	camera->Move(1);
 	TENQ->Update();
@@ -53,7 +54,18 @@ void GameScene::Update() {
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
-
+	if (input->PushKey(DIK_SPACE)) {
+		TENQ->GlitchVertices(1.0f);
+		HoleObject_->GlitchVertices(5.0f);
+		HoleObject2_->GlitchVertices(5.0f);
+		HoleObject3_->GlitchVertices(5.0f);
+	}
+	if (input->PushKey(DIK_V)) {
+		TENQ->StartLerpToOriginalVertices(lerpSpeed);
+		HoleObject_->StartLerpToOriginalVertices(lerpSpeed);
+		HoleObject2_->StartLerpToOriginalVertices(lerpSpeed);
+		HoleObject3_->StartLerpToOriginalVertices(lerpSpeed);
+	}
 }
 
 // 描画関数
@@ -130,7 +142,9 @@ void GameScene::InitializeData(){
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
-	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
+	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
+	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
+	camera->transform_.rotate = { -0.26f,0.05f,0.0f };
 
 }
 

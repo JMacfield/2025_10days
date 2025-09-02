@@ -1,17 +1,313 @@
 ﻿#include "Object3d.h"
 #include "Modelmanager.h"
 #include "Object3dCommon.h"
-/**
-* @file Object3d.cpp
-* @brief 3Dオブジェクトを管理するクラス
-*/
+#include <random>
+
+namespace Easings {
+	float EaseInSine(float t) {
+		return 1 - std::cos((t * (float)std::numbers::pi) / 2.0f);
+	}
+	float EaseOutSine(float t) {
+		return std::sin((t * (float)std::numbers::pi) / 2.0f);
+	}
+	float EaseInOutSine(float t) {
+		return -(std::cos((float)std::numbers::pi * t) - 1.0f) / 2.0f;
+	}
+
+#pragma region Cubic
+	float EaseInCubic(float x) {
+		return x * x * x;
+	}
+
+	float EaseOutCubic(float x) {
+		return 1 - (float)pow(1 - x, 3);
+	}
+
+	float EaseInOutCubic(float x) {
+		if (x < 0.5f) {
+			return 4 * x * x * x;
+		}
+		else {
+			return 1 - (float)pow(-2 * x + 2, 3) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Quint
+	// だんだん早くなる(一気に早くなる)
+	float EaseInQuint(float x) {
+		return x * x * x * x * x;
+	}
+
+	// だんだん減速(ぎりぎりまで速度が速い)
+	float EaseOutQuint(float x) {
+		return 1 - (float)pow(1 - x, 5);
+	}
+
+	// EaseInOut(一気に早くなって減速する)
+	float EaseInOutQuint(float x) {
+		if (x < 0.5) {
+			return 16 * x * x * x * x * x;
+		}
+		else {
+			return 1 - (float)pow(-2 * x + 2, 5) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Circ
+
+	float EaseInCirc(float x) {
+		return 1 - (float)sqrt(1 - (float)pow(x, 2));
+	}
+
+	float EaseOutCirc(float x) {
+		return (float)sqrt(1 - (float)pow(x - 1, 2));
+	}
+
+	float EaseInOutCirc(float x) {
+		if (x < 0.5f) {
+			return (1 - (float)sqrt(1 - (float)pow(2 * x, 2))) / 2;
+		}
+		else {
+			return ((float)sqrt(1 - (float)pow(-2 * x + 2, 2)) + 1) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Back
+
+	float EaseInBack(float x) {
+		const float c1 = 1.70158f;
+		const float c3 = c1 + 1;
+
+		return c3 * x * x * x - c1 * x * x;
+	}
+
+	float EaseOutBack(float x) {
+		const float c1 = 1.70158f;
+		const float c3 = c1 + 1;
+
+		return 1 + c3 * (float)pow(x - 1, 3) + c1 * (float)pow(x - 1, 2);
+	}
+
+	float EaseInOutBack(float x) {
+		const float c1 = 1.70158f;
+		const float c2 = c1 * 1.525f;
+
+		if (x < 0.5f) {
+			return ((float)pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2;
+		}
+		else {
+			return ((float)pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Bounce
+
+	float EaseOutBounce(float x) {
+		const float n1 = 7.5625f;
+		const float d1 = 2.75f;
+
+		if (x < 1 / d1) {
+			return n1 * x * x;
+		}
+		else if (x < 2 / d1) {
+			return n1 * (x -= 1.5f / d1) * x + 0.75f;
+		}
+		else if (x < 2.5 / d1) {
+			return n1 * (x -= 2.25f / d1) * x + 0.9375f;
+		}
+		else {
+			return n1 * (x -= 2.625f / d1) * x + 0.984375f;
+		}
+	}
+
+	float EaseInBounce(float x) {
+		return 1 - EaseOutBounce(1 - x);
+	}
+
+	float EaseInOutBounce(float x) {
+		if (x < 0.5f) {
+			return (1 - EaseOutBounce(1 - 2 * x)) / 2;
+		}
+		else {
+			return (1 + EaseOutBounce(2 * x - 1)) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Elastic
+
+	float EaseInElastic(float x) {
+		const float c4 = (2 * (float)std::numbers::pi) / 3;
+		if (x == 0) {
+			return x = 0;
+		}
+		else {
+			if (x == 1) {
+				return x = 1;
+			}
+			else {
+				return -(float)pow(2, 10 * x - 10) * (float)sin((x * 10 - 10.75) * c4);
+			}
+		}
+	}
+
+	float EaseOutElastic(float x) {
+		const float c4 = (2 * (float)std::numbers::pi) / 3;
+		if (x == 0) {
+			return x = 0;
+		}
+		else {
+			if (x == 1) {
+				return x = 1;
+			}
+			else {
+				return (float)pow(2, -10 * x) * (float)sin((x * 10 - 0.75f) * c4) + 1;
+			}
+		}
+	}
+
+	float EaseInOutElastic(float x) {
+		const float c5 = (2 * (float)std::numbers::pi) / 4.5f;
+		if (x == 0) {
+			return x = 0;
+		}
+		else {
+			if (x == 1) {
+				return x = 1;
+			}
+			else {
+				if (x < 0.5f) {
+					return -((float)pow(2, 20 * x - 10) * (float)sin((20 * x - 11.125f) * c5)) / 2;
+				}
+				else {
+					return ((float)pow(2, -20 * x + 10) * (float)sin((20 * x - 11.125f) * c5)) / 2 + 1;
+				}
+			}
+		}
+	}
+
+#pragma endregion
+
+#pragma region Quart
+
+	float EaseInQuart(float x) {
+		return x * x * x * x;
+	}
+
+	float EaseOutQuart(float x) {
+		return 1 - (float)pow(1 - x, 4);
+	}
+
+	float EaseInOutQuart(float x) {
+		if (x < 0.5f) {
+			return 8 * x * x * x * x;
+		}
+		else {
+			return 1 - (float)pow(-2 * x + 2, 4) / 2;
+		}
+	}
+
+#pragma endregion
+
+#pragma region Expo
+
+	float EaseInExpo(float x) {
+		if (x == 0) {
+			return x = 0;
+		}
+		else {
+			return (float)pow(2, 10 * x - 10);
+		}
+	}
+
+	float EaseOutExpo(float x) {
+		if (x == 1) {
+			return x = 1;
+		}
+		else {
+			return 1 - (float)pow(2, -10 * x);
+		}
+	}
+
+	float EaseInOutExpo(float x) {
+		if (x == 0) {
+			return x = 0;
+		}
+		else {
+			if (x == 1) {
+				return x = 1;
+			}
+			else {
+				if (x < 0.5f) {
+					return (float)pow(2, 20 * x - 10) / 2;
+				}
+				else {
+					return (2 - (float)pow(2, -20 * x + 10)) / 2;
+				}
+			}
+		}
+	}
+#pragma endregion
+}
+
+float Object3d::GetEasedT(float t) const
+{
+	switch (easingType_) {
+	case EasingType::EaseInSine:      return Easings::EaseInSine(t);
+	case EasingType::EaseOutSine:     return Easings::EaseOutSine(t);
+	case EasingType::EaseInOutSine:   return Easings::EaseInOutSine(t);
+	case EasingType::EaseInCubic:     return Easings::EaseInCubic(t);
+	case EasingType::EaseOutCubic:    return Easings::EaseOutCubic(t);
+	case EasingType::EaseInOutCubic:  return Easings::EaseInOutCubic(t);
+	case EasingType::EaseInQuint:     return Easings::EaseInQuint(t);
+	case EasingType::EaseOutQuint:    return Easings::EaseOutQuint(t);
+	case EasingType::EaseInOutQuint:  return Easings::EaseInOutQuint(t);
+	case EasingType::EaseInCirc:      return Easings::EaseInCirc(t);
+	case EasingType::EaseOutCirc:     return Easings::EaseOutCirc(t);
+	case EasingType::EaseInOutCirc:   return Easings::EaseInOutCirc(t);
+	case EasingType::EaseInBack:      return Easings::EaseInBack(t);
+	case EasingType::EaseOutBack:     return Easings::EaseOutBack(t);
+	case EasingType::EaseInOutBack:   return Easings::EaseInOutBack(t);
+	case EasingType::EaseOutBounce:   return Easings::EaseOutBounce(t);
+	case EasingType::EaseInBounce:    return Easings::EaseInBounce(t);
+	case EasingType::EaseInOutBounce: return Easings::EaseInOutBounce(t);
+	case EasingType::EaseInElastic:   return Easings::EaseInElastic(t);
+	case EasingType::EaseOutElastic:  return Easings::EaseOutElastic(t);
+	case EasingType::EaseInOutElastic:return Easings::EaseInOutElastic(t);
+	case EasingType::EaseInQuart:     return Easings::EaseInQuart(t);
+	case EasingType::EaseOutQuart:    return Easings::EaseOutQuart(t);
+	case EasingType::EaseInOutQuart:  return Easings::EaseInOutQuart(t);
+	case EasingType::EaseInExpo:      return Easings::EaseInExpo(t);
+	case EasingType::EaseOutExpo:     return Easings::EaseOutExpo(t);
+	case EasingType::EaseInOutExpo:   return Easings::EaseInOutExpo(t);
+	default: return t;
+	}
+}
+
+void Object3d::StartLerpToOriginalVertices(float lerpSpeed)
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+	isLerping_ = true;
+	lerpT_ = 0.0f;
+	lerpSpeed_ = lerpSpeed;
+}
+
 void Object3d::Init()
 {
 
 	WinAPI* sWinAPI = WinAPI::GetInstance();
 	DirectXCommon* directXCommon = DirectXCommon::GetInstance();
 	worldTransform_.Initialize();
-	
+
 	//バッファリソース
 	// データを書き込む
 	wvpData = nullptr;
@@ -41,8 +337,14 @@ void Object3d::Update()
 	else if (model_) {
 		model_->Update();
 	}
-
-
+	if (isLerping_) {
+		lerpT_ += lerpSpeed_;
+		if (lerpT_ >= 1.0f) {
+			lerpT_ = 1.0f;
+			isLerping_ = false;
+		}
+		LerpToOriginalVertices(lerpT_);
+	}
 }
 
 void Object3d::Draw(uint32_t texture, Camera* camera)
@@ -58,7 +360,7 @@ void Object3d::Draw(uint32_t texture, Camera* camera)
 
 		directXCommon->GetCommandList()->SetGraphicsRootSignature(pso->GetProperty().rootSignature.Get());
 		directXCommon->GetCommandList()->SetPipelineState(pso->GetProperty().graphicsPipelineState.Get());    //PSOを設定
-		
+
 	}
 	else if (skybox_) {
 		PSOSkybox* pso = PSOSkybox::GetInstance();
@@ -133,6 +435,10 @@ Vector3 Object3d::GetScale() const {
 void Object3d::SetModel(const std::string& filePath)
 {
 	model_ = ModelManager::GetInstance()->FindModel(filePath);
+	// 初期頂点を保存
+	if (model_) {
+		originalVertices_ = model_->GetModelData().vertices;
+	}
 }
 
 void Object3d::SetAnimationModel(const std::string& filePath)
@@ -145,7 +451,6 @@ void Object3d::SetTransform(Transform transform)
 	worldTransform_.translation_ = transform.translate;
 	worldTransform_.rotation_ = transform.rotate;
 	worldTransform_.scale_ = transform.scale;
-
 }
 
 ModelData Object3d::LoadObjFile(const std::string& directoryPath, const std::string& filename)
@@ -256,6 +561,44 @@ MaterialData Object3d::LoadMaterialTemplateFile(const std::string& directoryPath
 	return materialData;
 }
 
+void Object3d::GlitchVertices(float intensity)
+{
+	if (!model_ || originalVertices_.empty()) return;
+
+	// 乱数生成器
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dist(-intensity, intensity);
+
+	glitchedVertices_ = originalVertices_; // 初期位置から生成
+	for (auto& vertex : glitchedVertices_) {
+		vertex.position.x += dist(gen);
+		vertex.position.y += dist(gen);
+		vertex.position.z += dist(gen);
+	}
+
+	// ここで一度ランダム位置を表示したい場合は
+	auto& vertices = model_->GetModelData().vertices;
+	vertices = glitchedVertices_;
+	model_->UpdateVertexBuffer();
+}
+
+void Object3d::LerpToOriginalVertices(float lerpT)
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+
+	float easedT = GetEasedT(lerpT);
+
+	auto& vertices = model_->GetModelData().vertices;
+	vertices.resize(originalVertices_.size());
+	for (size_t i = 0; i < vertices.size(); ++i) {
+		vertices[i].position.x = glitchedVertices_[i].position.x * (1.0f - easedT) + originalVertices_[i].position.x * easedT;
+		vertices[i].position.y = glitchedVertices_[i].position.y * (1.0f - easedT) + originalVertices_[i].position.y * easedT;
+		vertices[i].position.z = glitchedVertices_[i].position.z * (1.0f - easedT) + originalVertices_[i].position.z * easedT;
+	}
+	model_->UpdateVertexBuffer();
+}
+
 void Object3d::LightDebug(const char* name)
 {
 #ifdef _DEBUG
@@ -304,7 +647,7 @@ void Object3d::ModelDebug(const char* name)
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.2f, 0.7f, 0.8f));
 	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.1f, 0.3f, 0.5f));
 	ImGui::Begin("model");
-
+	EasingDebugUI();
 	if (ImGui::TreeNode(name))
 	{
 		float translate[3] = { worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z };
@@ -327,4 +670,24 @@ void Object3d::ModelDebug(const char* name)
 	ImGui::PopStyleColor();
 	//#endif // _DEBUG
 
+}
+
+void Object3d::EasingDebugUI()
+{
+#ifdef _DEBUG
+	static const char* easingNames[] = {
+		"EaseInSine", "EaseOutSine", "EaseInOutSine",
+		"EaseInCubic", "EaseOutCubic", "EaseInOutCubic",
+		"EaseInQuint", "EaseOutQuint", "EaseInOutQuint",
+		"EaseInCirc", "EaseOutCirc", "EaseInOutCirc",
+		"EaseInBack", "EaseOutBack", "EaseInOutBack",
+		"EaseOutBounce", "EaseInBounce", "EaseInOutBounce",
+		"EaseInElastic", "EaseOutElastic", "EaseInOutElastic",
+		"EaseInQuart", "EaseOutQuart", "EaseInOutQuart",
+		"EaseInExpo", "EaseOutExpo", "EaseInOutExpo"
+	};
+	int current = static_cast<int>(easingType_);
+	ImGui::Combo("Easing Type", &current, easingNames, static_cast<int>(EasingType::Count));
+	easingType_ = static_cast<EasingType>(current);
+#endif
 }

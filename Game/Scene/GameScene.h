@@ -83,8 +83,13 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
+	int time = 0;
+    bool isLerping_ = false;
+    float lerpT = 0.0f; // 追加: ラープ係数
+    float lerpSpeed = 0.001f; // 追加: ラープ速度
     PostProcess* postProcess_ = nullptr;
     Camera* camera = nullptr;
+	Input* input = nullptr;
 	Object3d* TENQ = nullptr;
     Object3d* HoleObject_ = nullptr;
     Object3d* HoleObject2_ = nullptr;

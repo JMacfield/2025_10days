@@ -25,6 +25,126 @@
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
 
+enum class EasingType {
+    EaseInSine,
+    EaseOutSine,
+    EaseInOutSine,
+    EaseInCubic,
+    EaseOutCubic,
+    EaseInOutCubic,
+    EaseInQuint,
+    EaseOutQuint,
+    EaseInOutQuint,
+    EaseInCirc,
+    EaseOutCirc,
+    EaseInOutCirc,
+    EaseInBack,
+    EaseOutBack,
+    EaseInOutBack,
+    EaseOutBounce,
+    EaseInBounce,
+    EaseInOutBounce,
+    EaseInElastic,
+    EaseOutElastic,
+    EaseInOutElastic,
+    EaseInQuart,
+    EaseOutQuart,
+    EaseInOutQuart,
+    EaseInExpo,
+    EaseOutExpo,
+    EaseInOutExpo,
+    Count // 最後に追加
+};
+EasingType easingType_ = EasingType::EaseInSine; // デフォルト
+
+namespace Easings {
+    float EaseInSine(float t);
+    float EaseOutSine(float t);
+    float EaseInOutSine(float t);
+
+#pragma region Quint
+
+    // だんだん減速(ぎりぎりまで速度が速い)
+    float EaseOutQuint(float x);
+
+    // だんだん早くなる(一気に早くなる)
+    float EaseInQuint(float x);
+
+    float EaseInOutQuint(float x);
+
+#pragma endregion
+
+#pragma region Circ
+
+    float EaseInCirc(float x);
+
+    float EaseOutCirc(float x);
+
+    float EaseInOutCirc(float x);
+
+#pragma endregion
+
+#pragma region Cubic
+
+    float EaseInCubic(float x);
+
+    float EaseOutCubic(float x);
+
+    float EaseInOutCubic(float x);
+
+#pragma endregion
+
+#pragma region Back
+
+    float EaseInBack(float x);
+
+    float EaseOutBack(float x);
+
+    float EaseInOutBack(float x);
+
+#pragma endregion
+
+#pragma region Bounce
+
+    float EaseOutBounce(float x);
+
+    float EaseInBounce(float x);
+
+    float EaseInOutBounce(float x);
+
+#pragma endregion
+
+#pragma region Elastic
+
+    float EaseInElastic(float x);
+
+    float EaseOutElastic(float x);
+
+    float EaseInOutElastic(float x);
+
+#pragma endregion
+
+#pragma region Quart
+
+    float EaseInQuart(float x);
+
+    float EaseOutQuart(float x);
+
+    float EaseInOutQuart(float x);
+
+#pragma endregion
+
+#pragma region Expo
+
+    float EaseInExpo(float x);
+
+    float EaseOutExpo(float x);
+
+    float EaseInOutExpo(float x);
+
+#pragma endregion
+}
+
 /**
 * @file Object3d.h
 * @brief 3Dオブジェクトを管理するクラス
@@ -61,6 +181,10 @@ public:
     void ModelDebug(const char* name);
 
     void LightDebug(const char* name);
+
+    void EasingDebugUI();
+
+	float GetEasedT(float t) const;
 
     /// <summary>
     /// モデルを設定する
@@ -115,6 +239,11 @@ public:
 
 	void SetisLight(bool islight) { isLight = islight; }
 
+    void GlitchVertices(float intensity);
+
+    void LerpToOriginalVertices(float lerpT);
+    void StartLerpToOriginalVertices(float lerpSpeed);
+
 public: // Getter
     /// <summary>
     /// ワールド変換を取得する
@@ -158,6 +287,11 @@ private:
     D3D12_VERTEX_BUFFER_VIEW wvpBufferView{};
     Transform transformUv;
 
+    std::vector<VertexData> originalVertices_;
+    std::vector<VertexData> glitchedVertices_; // ランダム位置
+    bool isLerping_ = false;                  // ラープ中フラグ
+    float lerpT_ = 0.0f;                      // ラープ係数
+    float lerpSpeed_ = 0.02f;
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;

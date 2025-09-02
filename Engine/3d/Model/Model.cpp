@@ -438,3 +438,27 @@ void Model::Draw(uint32_t texture, const Material& material, const DirectionalLi
 	directXCommon_->GetCommandList()->DrawIndexedInstanced(static_cast<uint32_t>(modelData_.indices.size()), 1, 0, 0, 0);
 	//directXCommon_->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
 }
+
+void Model::UpdateVertexBuffer()
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	auto device = dxCommon->GetDevice();
+
+	// すでにバッファがあるなら解放（必須ではないけど安全）
+	vertexBuffer_.Reset();
+
+	// 新しい頂点バッファを作成
+	uint32_t sizeVB = static_cast<uint32_t>(sizeof(VertexData) * modelData_.vertices.size());
+	vertexBuffer_ = Mesh::CreateBufferResource(device, sizeVB);
+
+	// 書き込み用のアドレスを取得
+	VertexData* vertMap = nullptr;
+	vertexBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&vertMap));
+	std::copy(modelData_.vertices.begin(), modelData_.vertices.end(), vertMap);
+	vertexBuffer_->Unmap(0, nullptr);
+	// ビューを作成				   
+	vertexBufferView_.BufferLocation = vertexBuffer_->GetGPUVirtualAddress();
+	vertexBufferView_.SizeInBytes = sizeVB;
+	vertexBufferView_.StrideInBytes = sizeof(VertexData);
+}
+
