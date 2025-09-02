@@ -211,7 +211,7 @@ private:
     std::vector<VertexData> glitchedVertices_; // ランダム位置
     bool isLerping_ = false;                  // ラープ中フラグ
     float lerpT_ = 0.0f;                      // ラープ係数
-    float lerpSpeed_ = 0.0002f;
+    float lerpSpeed_ = 0.002f;
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;
