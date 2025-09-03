@@ -83,12 +83,7 @@ void ClearScene::PostDraw() {
 }
 void ClearScene::Release() {
 	// リソース解放
-	camera.reset();
-	TENQ.reset();
-	HoleObject_.reset();
-	HoleObject2_.reset();
-	HoleObject3_.reset();
-	postProcess_.reset();
+
 }
 int ClearScene::GameClose() {
 	return false;

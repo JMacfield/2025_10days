@@ -84,16 +84,15 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
-	int time = 0;
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
-    PostProcess* postProcess_ = nullptr;
-    Camera* camera = nullptr;
-	Input* input = nullptr;
-	Object3d* TENQ = nullptr;
-    Object3d* HoleObject_ = nullptr;
-    Object3d* HoleObject2_ = nullptr;
-    Object3d* HoleObject3_ = nullptr;
+    std::unique_ptr<PostProcess> postProcess_ = nullptr;
+    std::unique_ptr<Camera> camera = nullptr;
+    Input* input = nullptr;
+    std::unique_ptr<Object3d> TENQ = nullptr;
+    std::unique_ptr<Object3d> HoleObject_ = nullptr;
+    std::unique_ptr<Object3d> HoleObject2_ = nullptr;
+    std::unique_ptr<Object3d> HoleObject3_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
 		TENQ_TEXTURE,

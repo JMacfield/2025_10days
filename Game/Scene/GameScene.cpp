@@ -37,7 +37,6 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
-	time++;
 	camera->Update();		
 	camera->Move(1);
 	TENQ->Update();
@@ -80,8 +79,8 @@ void GameScene::Update() {
 
 // 描画関数
 void GameScene::Draw() {
-	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera);
-	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera);
+	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
+	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
 	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
 	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
 }
@@ -132,12 +131,12 @@ void GameScene::LoadAudio()
 
 // 初期化データのセットアップ
 void GameScene::InitializeData(){
-	camera = new Camera;
-	TENQ = new Object3d();
-	HoleObject_ = new Object3d();
-	HoleObject2_ = new Object3d();
-	HoleObject3_ = new Object3d();
-	postProcess_ = new PostProcess();
+	camera = std::make_unique<Camera>();
+	TENQ = std::make_unique<Object3d>();
+	HoleObject_ = std::make_unique<Object3d>();
+	HoleObject2_ = std::make_unique<Object3d>();
+	HoleObject3_ = std::make_unique<Object3d>();
+	postProcess_ = std::make_unique<PostProcess>();
 
 	camera->Initialize();
 	TENQ->Init();
@@ -145,7 +144,7 @@ void GameScene::InitializeData(){
 	HoleObject2_->Init();
 	HoleObject3_->Init();
 	postProcess_->Init();
-	postProcess_->SetCamera(camera);
+	postProcess_->SetCamera(camera.get());
 	TENQ->SetModel("world.obj");
 	TENQ->SetisLight(false);
 	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };

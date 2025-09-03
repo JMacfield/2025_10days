@@ -32,11 +32,11 @@
 #include "mathFunction.h"
 
 
-// コンストラクタ
 GameManager::GameManager() {
-	sceneArr_[GAMESCENE] = std::make_unique<GameScene>();
-	sceneArr_[CLEARSCENE] = std::make_unique<ClearScene>();
-	sceneArr_[STAGESELECTSCENE] = std::make_unique<StageSelectScene>();
+	// 各シーンの登録
+	sceneMap_[GAMESCENE] = []() { return  std::make_unique<GameScene>(); };
+	sceneMap_[CLEARSCENE] = []() { return std::make_unique<ClearScene>(); };
+	sceneMap_[STAGESELECTSCENE] = []() { return std::make_unique<StageSelectScene>(); };
 }
 
 GameManager::~GameManager() {}
@@ -82,7 +82,13 @@ int GameManager::Run() {
 	PSOPostEffect* pSOPostEffect = PSOPostEffect::GetInstance();
 	pSOPostEffect->Init();
 
-	sceneArr_[currentSceneNo_]->Init();
+	// シーンのチェック
+	prevSceneNo_ = currentSceneNo_;
+	currentSceneNo_ = IScene::GetSceneNo();
+	//post->Init();
+	sceneArr_ = sceneMap_[currentSceneNo_]();
+	sceneArr_->Init();
+
 
 	Input* sInput = Input::GetInstance();
 	sInput->Initialize();
@@ -190,17 +196,18 @@ int GameManager::Run() {
 
 		// シーンのチェック
 		prevSceneNo_ = currentSceneNo_;
-		currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
+		currentSceneNo_ = IScene::GetSceneNo();
 
 		// シーン変更チェック
 		if (prevSceneNo_ != currentSceneNo_) {
-			sceneArr_[currentSceneNo_]->Init();
+			sceneArr_ = sceneMap_[currentSceneNo_]();
+			sceneArr_->Init();
 		}
 
 		///
 		/// ↓更新処理ここから
 		///
-		sceneArr_[currentSceneNo_]->Update(); // シーンごとの更新処理
+		sceneArr_->Update(); // シーンごとの更新処理
 
 		///
 		/// ↑更新処理ここまで
@@ -210,7 +217,7 @@ int GameManager::Run() {
 		/// ↓描画処理ここから
 		///
 
-		sceneArr_[currentSceneNo_]->Draw();
+		sceneArr_->Draw();
 
 
 		///
@@ -218,15 +225,15 @@ int GameManager::Run() {
 		///
 		sDirctX->BeginFrame();
 		sDirctX->ChangeDepthStatetoRead();
-		sceneArr_[currentSceneNo_]->PostDraw();
+		sceneArr_->PostDraw();
 		// フレームの終了
 		//スワップチェーン
 		sDirctX->ChangeDepthStatetoRender();
 		sDirctX->ViewChange();
 		sAudio->GetIXAudio().Reset();
 		// ESCキーが押されたらループを抜ける
-		if (sceneArr_[currentSceneNo_]->GameClose()) {
-			sceneArr_[currentSceneNo_]->Release();
+		if (sceneArr_->GameClose()) {
+			sceneArr_->Release();
 			break;
 		}
 	}
