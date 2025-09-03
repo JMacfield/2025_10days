@@ -59,9 +59,16 @@ void Player::Update() {
 	// ジャンプ
 	jumpSystem_->Update();
 
-	// 速度代入
+	// 速度
 	Vector3 vel = moveSystem_->GetVel() + jumpSystem_->GetVel() + vel_;
 	body_->worldTransform_.translation_ += vel;
+
+	// 壁に着地時の角度
+	LandingRotate();
+
+	// 角度
+	Vector3 rot = moveSystem_->GetRot() + rot_;
+	body_->worldTransform_.rotation_ = rot;
 
 	// 体
 	body_->Update();
@@ -185,6 +192,24 @@ void Player::CheckLanding(Collider* collider) {
 
 	// ジャンプ状態を解除
 	jumpSystem_->Init();
+}
+
+void Player::LandingRotate() {
+	// 空中にいるとき
+	if (isAir_) {
+		rot_ = MathFuncs::ExponentialInterpolate(rot_, Vector3{ 0,0,0 }, 0.2f);
+	}
+	// 壁が右側にある
+	else if (currentWallSide_ == WallSide::kLeft) {
+		Vector3 goalRot = landingRot;
+		goalRot.z *= -1;
+		rot_ = MathFuncs::ExponentialInterpolate(rot_, goalRot, 0.4f);
+	}
+	// 壁が左側にある
+	else if (currentWallSide_ == WallSide::kRight) {
+		Vector3 goalRot = landingRot;
+		rot_ = MathFuncs::ExponentialInterpolate(rot_, goalRot, 0.4f);
+	}
 }
 
 void Player::StartJump() {

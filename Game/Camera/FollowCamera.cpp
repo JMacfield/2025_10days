@@ -4,6 +4,9 @@
 
 FollowCamera::FollowCamera(Player* player) {
 	player_ = player;
+
+	input_ = Input::GetInstance();
+
 	// カメラの初期化
 	camera_ = std::make_unique<Camera>();
 	camera_->Initialize();
@@ -25,9 +28,6 @@ void FollowCamera::Update() {
 
 	// カメラの更新
 	camera_->Update();
-	// カメラオブジェクトのワールド行列からビュー行列を計算する
-	//camera_->SetViewMatrix(Inverse(camera_->worldTransform_.matWorld_));
-
 #ifdef _DEBUG
 	// ImGui
 	ImGui::Begin("FollowCamera");
@@ -57,5 +57,18 @@ void FollowCamera::DebugGui() {
 }
 
 void FollowCamera::InputUpdate() {
+	if (input_->PushKey(DIK_LEFT)) {
+		camera_->transform_.rotate.y -= 0.05f;
+	}
+	if (input_->PushKey(DIK_RIGHT)) {
+		camera_->transform_.rotate.y += 0.05f;
+	}
+	if (input_->PushKey(DIK_DOWN)) {
+		camera_->transform_.rotate.x -= 0.05f;
+	}
+	if (input_->PushKey(DIK_UP)) {
+		camera_->transform_.rotate.x += 0.05f;
+	}
 
+	camera_->transform_.rotate.x = std::clamp<float>(camera_->transform_.rotate.x, -2.0f, 2.0f);
 }

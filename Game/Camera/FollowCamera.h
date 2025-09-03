@@ -31,6 +31,9 @@ public:// Public variable
 	/// </summary>
 	void Release();
 
+	/// <summary>
+	/// 調整項目
+	/// </summary>
 	void DebugGui();
 
 private:// Private method
@@ -58,5 +61,8 @@ private:// Private variable
 	// カメラ
 	std::unique_ptr<Camera> camera_;
 
-	Vector3 targetOffset_ = { 0.0f,2.0f, -10.0f };
+	Vector3 targetOffset_ = { 0.0f,0.0f, 0.0f };
+
+	// 角度
+	Vector3 rotate_;
 };

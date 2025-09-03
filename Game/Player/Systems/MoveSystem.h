@@ -38,6 +38,11 @@ public:// Accessor method
 	/// </summary>
 	/// <returns></returns>
 	Vector3 GetVel() { return vel_; }
+	/// <summary>
+	/// 角度を取得
+	/// </summary>
+	/// <returns></returns>
+	Vector3 GetRot() { return rot_; }
 #pragma endregion
 
 #pragma region Setter
@@ -50,4 +55,6 @@ private:// 調整項目
 private:// Private method
 	// 速度
 	Vector3 vel_;
+
+	Vector3 rot_;
 };

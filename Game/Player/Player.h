@@ -64,6 +64,8 @@ private:// Private method
 	/// </summary>
 	void CheckLanding(Collider* collider);
 
+	void LandingRotate();
+
 public:// Accessor method
 	/// <summary>
 	/// ジャンプ開始
@@ -116,6 +118,8 @@ public:// Accessor method
 #pragma endregion
 
 private:// 定数
+	// 着地時の体の角度
+	Vector3 landingRot = { 0.0f, 0.0f, 0.3f };
 	// 自機が壁に着地したときの座標の補間量
 	float landingOffsetX = 0.3f;
 
@@ -144,7 +148,10 @@ private:// Private variable
 	// 現在壁の右側化左側にいるか
 	WallSide currentWallSide_;
 
+	// 速度
 	Vector3 vel_;
+	// 角度
+	Vector3 rot_;
 
 	// 空中にいるか
 	bool isAir_ = false;
