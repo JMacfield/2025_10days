@@ -44,15 +44,7 @@ void GameScene::Update() {
 	HoleObject_->Update();
 	HoleObject2_->Update();
 	HoleObject3_->Update();
-	camera->CameraDebug();
-	TENQ->LightDebug("TENQlight");
-	HoleObject_->LightDebug("light");
-	HoleObject2_->LightDebug("light2");
-	HoleObject3_->LightDebug("light3");
-	TENQ->ModelDebug("TENQmodel");
-	HoleObject_->ModelDebug("model");
-	HoleObject2_->ModelDebug("model2");
-	HoleObject3_->ModelDebug("model3");
+	
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
 	if (input->TriggerKey(DIK_SPACE)) {
 		TENQ->GlitchVerticesLerp(0.08f);
@@ -66,11 +58,21 @@ void GameScene::Update() {
 		HoleObject2_->StartLerpToOriginalVertices();
 		HoleObject3_->StartLerpToOriginalVertices();
 	}
+	camera->CameraDebug();
 	if (TENQ) TENQ->EasingDebugUI("TENQ");
 	if (HoleObject_) HoleObject_->EasingDebugUI("HoleObject1");
 	if (HoleObject2_) HoleObject2_->EasingDebugUI("HoleObject2");
 	if (HoleObject3_) HoleObject3_->EasingDebugUI("HoleObject3");
+	TENQ->LightDebug("TENQlight");
+	HoleObject_->LightDebug("light");
+	HoleObject2_->LightDebug("light2");
+	HoleObject3_->LightDebug("light3");
+	TENQ->ModelDebug("TENQmodel");
+	HoleObject_->ModelDebug("model");
+	HoleObject2_->ModelDebug("model2");
+	HoleObject3_->ModelDebug("model3");
 }
+
 
 // 描画関数
 void GameScene::Draw() {
