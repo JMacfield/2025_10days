@@ -13,6 +13,28 @@ CollisionManager* CollisionManager::GetInstance() {
 	return &instance;
 }
 
+void CollisionManager::CheckAllCollisions() {
+	// 当たっているかの状態を初期化
+	ResetIsOnCollision();
+
+	// リスト内のペアを総当たり
+	std::list<Collider*>::iterator itrA = colliders_.begin();
+	for (; itrA != colliders_.end(); ++itrA) {
+		Collider* colliderA = *itrA;
+		if (!colliderA->GetIsActive()) { continue; }
+		// イテレータBはイテレータAの次の要素から回す(重複判定を回避)
+		std::list<Collider*>::iterator itrB = itrA;
+		itrB++;
+
+		for (; itrB != colliders_.end(); ++itrB) {
+			Collider* colliderB = *itrB;
+			if (!colliderB->GetIsActive()) { continue; }
+			// 当たり判定と応答(フレンドリーファイアしないように設定)
+			CheckCollisionPair(colliderA, colliderB);
+		}
+	}
+}
+
 void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
 	// 衝突フィルタリング
 	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 ||
@@ -42,9 +64,9 @@ void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* collide
 			colliderB->worldTransform.UpdateMatrix();
 		}
 		else {
-			// 今は当たっていない
-			colliderA->SetIsOnCollision(false);
-			colliderB->SetIsOnCollision(false);
+			//// 今は当たっていない
+			//colliderA->SetIsOnCollision(false);
+			//colliderB->SetIsOnCollision(false);
 		}
 	}
 
@@ -53,22 +75,11 @@ void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* collide
 	colliderB->SetIsPreOnCollision(colliderB->GetIsOnCollision());
 }
 
-void CollisionManager::CheckAllCollisions() {
-	// リスト内のペアを総当たり
+void CollisionManager::ResetIsOnCollision() {
 	std::list<Collider*>::iterator itrA = colliders_.begin();
 	for (; itrA != colliders_.end(); ++itrA) {
 		Collider* colliderA = *itrA;
-		if (!colliderA->GetIsActive()) { continue; }
-		// イテレータBはイテレータAの次の要素から回す(重複判定を回避)
-		std::list<Collider*>::iterator itrB = itrA;
-		itrB++;
-
-		for (; itrB != colliders_.end(); ++itrB) {
-			Collider* colliderB = *itrB;
-			if (!colliderB->GetIsActive()) { continue; }
-			// 当たり判定と応答(フレンドリーファイアしないように設定)
-			CheckCollisionPair(colliderA, colliderB);
-		}
+		colliderA->SetIsOnCollision(false);
 	}
 }
 

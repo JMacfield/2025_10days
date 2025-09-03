@@ -18,6 +18,7 @@ Player::Player() {
 	body_ = std::make_unique<Object3d>();
 	body_->Init();
 	body_->SetModel(Models::body.name);
+	body_->worldTransform_.translation_ = { -4.1f, 0.0f, 0.0f };
 
 	// colliderの設定
 	collider_ = std::make_unique<Collider>();
@@ -32,11 +33,11 @@ Player::Player() {
 	// 全ての機能生成
 	CreateSystems();
 
-	currentWallSide_ = WallSide::kLeft;
+	currentWallSide_ = WallSide::kNone;
 }
 
 void Player::Init() {
-	body_->worldTransform_.translation_ = { 0,0,0 };
+	body_->worldTransform_.translation_ = { -4.1f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
 
@@ -47,7 +48,7 @@ void Player::Init() {
 	isAir_ = false;
 	// 着地したか
 	isLanding_ = true;
-	currentWallSide_ = WallSide::kLeft;
+	currentWallSide_ = WallSide::kNone;
 
 	vel_ = { 0.0f,0.0f,0.0f };
 }
@@ -66,13 +67,15 @@ void Player::Update() {
 	body_->Update();
 
 	// 何も接触していないときは落下する
-	if (!collider_->GetIsOnCollision() || isAir_) {
-		//vel_.y -= acceleration;
+	if (!collider_->GetIsOnCollision()) {
+		// 空中にいるか
+		isAir_ = true;
+		// 着地したか
+		isLanding_ = false;
 	}
 
-	// 着地している
-	if (body_->worldTransform_.translation_.y <= -0.1f) {
-		//EndJump();
+	if (isAir_ && !isLanding_) {
+		vel_.y -= acceleration;
 	}
 }
 
@@ -105,6 +108,9 @@ void Player::DebugGui() {
 			moveSystem_->DebugGui();
 			ImGui::TreePop();
 		}
+		ImGui::Checkbox("IsAir", &isAir_);
+		ImGui::Checkbox("IsLanding", &isLanding_);
+
 		if (ImGui::Button("Reset")) {
 			Init();
 		}
@@ -147,19 +153,63 @@ void Player::CheckLanding(Collider* collider) {
 	Vector3 a = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_) - MathFuncs::GetWorldPosition(body_->worldTransform_.matWorld_);
 	a = a.Normalize();
 	// 壁が左側にある
-	if (currentWallSide_ == WallSide::kLeft) {
-		if (a.x >= 0.0f) {
+	if (a.x >= 0.0f) {
+		if (currentWallSide_ == WallSide::kLeft || currentWallSide_ == WallSide::kNone) {
+			currentWallSide_ = WallSide::kRight;
+			// 空中にいるか
+			isAir_ = false;
+			// 着地したか
+			isLanding_ = true;
+			vel_ = { 0.0f,0.0f,0.0f };
+
+			// 座標の補間
 			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
 		}
 	}
 	// 壁が右側にある
-	else if (currentWallSide_ == WallSide::kRight) {
-		if (a.x < 0.0f) {
+	else if (a.x < 0.0f) {
+		if (currentWallSide_ == WallSide::kRight || currentWallSide_ == WallSide::kNone) {
+			currentWallSide_ = WallSide::kLeft;
+			// 空中にいるか
+			isAir_ = false;
+			// 着地したか
+			isLanding_ = true;
+			vel_ = { 0.0f,0.0f,0.0f };
+
+			// 座標の補間
 			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
 		}
 	}
 
-	EndJump();
+	// ジャンプ状態を解除
+	jumpSystem_->Init();
+}
+
+void Player::StartJump() {
+	// 空中にいるか
+	isAir_ = true;
+	// 着地したか
+	isLanding_ = false;
+	vel_ = { 0.0f,0.0f,0.0f };
+}
+
+void Player::EndJump() {
+	// 壁を走っている状態なら処理しない
+	if (!isAir_ && isLanding_) { return; }
+
+	// 壁が右側にある
+	if (currentWallSide_ == WallSide::kLeft) {
+		currentWallSide_ = WallSide::kRight;
+	}
+	// 壁が左側にある
+	else if (currentWallSide_ == WallSide::kRight) {
+		currentWallSide_ = WallSide::kLeft;
+	}
+	// 空中にいるか
+	isAir_ = false;
+	// 着地したか
+	isLanding_ = true;
+	vel_ = { 0.0f,0.0f,0.0f };
 }

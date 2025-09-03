@@ -17,15 +17,33 @@ public:
 	static CollisionManager* GetInstance();
 
 	/// <summary>
+	/// 当たっているかの確認
+	/// </summary>
+	void CheckAllCollisions();
+
+private:// Private mathod
+	/// <summary>
 	/// 当たっているなら衝突応答関数を呼ぶ
 	/// </summary>
 	void CheckCollisionPair(Collider* colliderA, Collider* colliderB);
 
 	/// <summary>
-	/// 当たっているかの確認
+	/// 当たっているかの状態を初期化
 	/// </summary>
-	void CheckAllCollisions();
+	void ResetIsOnCollision();
 
+	/// <summary>
+	/// OBB同士の衝突判定
+	/// </summary>
+	/// <param name="obb1"></param>
+	/// <param name="obb2"></param>
+	/// <returns></returns>
+	bool ColOBBs(const OBB& obb1, const OBB& obb2);
+
+	// 分離軸に投影された軸成分から投影線分長を算出
+	float LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
+
+public:// Accessor method
 	/// <summary>
 	/// コライダーリストをすべてクリア
 	/// </summary>
@@ -39,11 +57,6 @@ public:
 	void ClearColliderList(Collider* collider) {
 		colliders_.remove(collider);
 	}
-
-	bool ColOBBs(const OBB& obb1, const OBB& obb2);
-
-	// 分離軸に投影された軸成分から投影線分長を算出
-	float LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
 
 	///
 	/// Setter

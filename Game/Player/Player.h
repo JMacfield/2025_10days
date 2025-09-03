@@ -9,6 +9,7 @@ class Player {
 public:
 	// どちらの壁にいるか
 	enum class WallSide {
+		kNone,
 		kRight,
 		kLeft,
 		kCount
@@ -67,32 +68,11 @@ public:// Accessor method
 	/// <summary>
 	/// ジャンプ開始
 	/// </summary>
-	void StartJump() {
-		// 空中にいるか
-		isAir_ = true;
-		// 着地したか
-		isLanding_ = false;
-	}
+	void StartJump();
 	/// <summary>
 	/// ジャンプ終了
 	/// </summary>
-	void EndJump() {
-		if (!isAir_ && isLanding_) { return; }
-
-		// 壁が右側にある
-		if (currentWallSide_ == WallSide::kLeft) {
-			currentWallSide_ = WallSide::kRight;
-		}
-		// 壁が左側にある
-		else if (currentWallSide_ == WallSide::kRight) {
-			currentWallSide_ = WallSide::kLeft;
-		}
-		// 空中にいるか
-		isAir_ = false;
-		// 着地したか
-		isLanding_ = true;
-		vel_ = { 0.0f,0.0f,0.0f };
-	}
+	void EndJump();
 
 #pragma region Getter
 	/// <summary>
@@ -137,7 +117,7 @@ public:// Accessor method
 
 private:// 定数
 	// 自機が壁に着地したときの座標の補間量
-	float landingOffsetX = 0.4f;
+	float landingOffsetX = 0.3f;
 
 	// 重力加速度
 	float acceleration = 0.05f;
