@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "IScene.h"
 #include <functional>
+#include <memory>
 
 class StageSelectScene : public IScene {
 public:

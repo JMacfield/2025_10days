@@ -18,6 +18,7 @@
 #include "random"
 #include <vector>
 #include <string>
+#include <memory>
 
 /// <summary>
 /// ゲームシーン

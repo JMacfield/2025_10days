@@ -18,6 +18,7 @@
 #include <vector>
 #include <string>
 #include <functional>
+#include <memory>
 
 class ClearScene : public IScene {
 public:
