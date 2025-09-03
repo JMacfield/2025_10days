@@ -26,8 +26,11 @@ void JumpSystem::Update() {
 	// 入力処理
 	InputUpdate();
 
-	// 落下処理
-	FallUpdate();
+	// ジャンプ時の速度減衰
+	if (isActive_) {
+		vel_.x = MathFuncs::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
+		vel_.z = MathFuncs::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
+	}
 
 	// 着地したら初期化
 	if (player_->GetIsLanding()) {
@@ -40,7 +43,7 @@ void JumpSystem::Update() {
 void JumpSystem::DebugGui() {
 	ImGui::DragFloat3("FirstVel", &firstVel.x, 0.1f, -100.0f, 100.0f);
 	ImGui::DragFloat3("CurrentVel", &vel_.x, 0.1f, -100.0f, 100.0f);
-	ImGui::DragFloat("Acceleration", &acceleration_, 0.01f, -100.0f, 100.0f);
+	//ImGui::DragFloat("Acceleration", &acceleration_, 0.01f, -100.0f, 100.0f);
 }
 
 void JumpSystem::InputUpdate() {
@@ -57,14 +60,6 @@ void JumpSystem::InputUpdate() {
 		// どちらの方向にジャンプするかを決める
 		JumpSideUpdate();
 	}
-}
-
-void JumpSystem::FallUpdate() {
-	// 着地しているなら重力加速の計算を行わない
-	if (!isActive_) { return; }
-
-	vel_.x = MathFuncs::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
-	vel_.z = MathFuncs::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
 }
 
 void JumpSystem::JumpSideUpdate() {

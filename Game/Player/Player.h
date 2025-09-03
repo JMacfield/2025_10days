@@ -63,7 +63,9 @@ private:// Private method
 	/// 着地判定
 	/// </summary>
 	void CheckLanding(Collider* collider);
-
+	/// <summary>
+	/// 着地時の体の角度(カメラの角度にもなる)
+	/// </summary>
 	void LandingRotate();
 
 public:// Accessor method
@@ -78,7 +80,7 @@ public:// Accessor method
 
 #pragma region Getter
 	/// <summary>
-	/// 当たり判定取得
+	/// 当たり判定を取得
 	/// </summary>
 	/// <returns></returns>
 	Collider* GetCollider() { return collider_.get(); }
@@ -92,6 +94,11 @@ public:// Accessor method
 	/// </summary>
 	/// <returns></returns>
 	WallSide GetCurrentWallSide() { return currentWallSide_; }
+	/// <summary>
+	/// 重力加速度を取得
+	/// </summary>
+	/// <returns></returns>
+	float GetAcceleration() { return acceleration; }
 	/// <summary>
 	/// 空中にいるかを取得
 	/// </summary>

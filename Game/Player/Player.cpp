@@ -115,6 +115,13 @@ void Player::DebugGui() {
 			moveSystem_->DebugGui();
 			ImGui::TreePop();
 		}
+		if (ImGui::TreeNode("Landing")) {
+			ImGui::DragFloat3("Rotate", &landingRot.x, 0.01f, -6.28f, 6.28f);
+			ImGui::DragFloat("OffsetX", &landingOffsetX, 0.1f, -100.0f, 100.0f);
+			ImGui::TreePop();
+		}
+
+		ImGui::DragFloat("Acceleration", &acceleration, 0.0001f, -100.0f, 100.0f);
 		ImGui::Checkbox("IsAir", &isAir_);
 		ImGui::Checkbox("IsLanding", &isLanding_);
 

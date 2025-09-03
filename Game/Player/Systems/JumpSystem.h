@@ -35,10 +35,6 @@ private:// Private method
 	void InputUpdate();
 
 	/// <summary>
-	/// 落下処理
-	/// </summary>
-	void FallUpdate();
-	/// <summary>
 	/// どちらにジャンプするかを決める
 	/// </summary>
 	void JumpSideUpdate();
@@ -61,7 +57,7 @@ private:
 	Vector3 firstVel = {0.8f,0.5f,0.0f};
 
 	// 重力加速度
-	float acceleration_ = 0.05f;
+	//float acceleration_ = 0.05f;
 
 	// 空中でジャンプできる回数
 	int maxAirJump = 1;
