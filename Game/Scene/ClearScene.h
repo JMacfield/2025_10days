@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "IScene.h"
 #include "Triangle.h"
 #include "WorldTransform.h"
@@ -24,61 +24,61 @@ public:
     ClearScene();
     ~ClearScene() override;
 #pragma region Override methods
-    // ‰Šú‰»
+    // åˆæœŸåŒ–
     void Init() override;
-    // XV
+    // æ›´æ–°
     void Update() override;
-    // •`‰æ
+    // æç”»
     void Draw() override;
-    // ƒ|ƒXƒgƒGƒtƒFƒNƒg‚Ì•`‰æ
+    // ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æç”»
     void PostDraw() override;
-    // ‰ğ•úˆ—
+    // è§£æ”¾å‡¦ç†
     void Release() override;
-    // ƒQ[ƒ€I—¹”»’èŠÖ
+    // ã‚²ãƒ¼ãƒ çµ‚äº†åˆ¤å®šé–¢
     int GameClose() override;
 #pragma endregion
 
 private:// Private methods
 #pragma region Initialization
     /// <summary>
-    /// ‘S‚Ä‚ÌƒeƒNƒXƒ`ƒƒ‚Ì“Ç‚İ‚İ
+    /// å…¨ã¦ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®èª­ã¿è¾¼ã¿
     /// </summary>
     void LoadTextures();
     /// <summary>
-    /// ‘S‚Ä‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+    /// å…¨ã¦ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
     /// </summary>
     void LoadModels();
     /// <summary>
-    /// ‘S‚Ä‚Ì‰¹Œ¹‚Ì“Ç‚İ‚İ
+    /// å…¨ã¦ã®éŸ³æºã®èª­ã¿è¾¼ã¿
     /// </summary>
     void LoadAudio();
     /// <summary>
-    /// ‘S‚Ä‚Ìƒf[ƒ^‚Ì‰Šú‰»
+    /// å…¨ã¦ã®ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
     /// </summary>
     void InitializeData();
 #pragma endregion
 
 #pragma region Update
     /// <summary>
-    /// ƒQ[ƒ€ƒpƒbƒh“ü—Íˆ—
+    /// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å…¥åŠ›å‡¦ç†
     /// </summary>
     void HandleGamePadInput();
     /// <summary>
-    /// ‰ğ•úˆ—
+    /// è§£æ”¾å‡¦ç†
     /// </summary>
     void Remake();
 #pragma endregion
 
 #pragma region Draw
     /// <summary>
-    /// ‘S‚Ä‚ÌƒIƒuƒWƒFƒNƒg
+    /// å…¨ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     void DrawObjects();
 #pragma endregion
 
 private:// Private variable
     bool isLerping_ = false;
-    float lerpT = 0.0f; // ’Ç‰Á: ƒ‰[ƒvŒW”
+    float lerpT = 0.0f; // è¿½åŠ : ãƒ©ãƒ¼ãƒ—ä¿‚æ•°
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
     std::unique_ptr<Camera> camera = nullptr;
     Input* input = nullptr;
@@ -89,7 +89,7 @@ private:// Private variable
     enum TextureID {
         NORMAL_HOLE,
         TENQ_TEXTURE,
-        TEXTURE_COUNT // ƒeƒNƒXƒ`ƒƒ‚Ì‘”
+        TEXTURE_COUNT // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç·æ•°
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
 };

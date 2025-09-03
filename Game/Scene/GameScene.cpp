@@ -71,6 +71,10 @@ void GameScene::Update() {
 	HoleObject_->ModelDebug("model");
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
+	if (input->TriggerKey(DIK_R)) {
+		IScene::SetSceneNo(CLEARSCENE);
+		return;
+	}
 }
 
 
