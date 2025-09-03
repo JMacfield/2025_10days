@@ -1,4 +1,4 @@
-﻿#include "GameScene.h"
+﻿#include "ClearScene.h"
 #include "ImGuiCommon.h"
 #include "TextureManager.h"
 #include "ModelManager.h"
@@ -10,33 +10,28 @@
 #include <cmath>
 #include <DirectXMath.h>
 
-GameScene::GameScene(){}
+ClearScene::ClearScene() {}
+ClearScene::~ClearScene() {}
 
-GameScene::~GameScene() {
-}
-// 初期化関数
-void GameScene::Init() {
-	//// カメラの初期化
-	input = Input::GetInstance();
+void ClearScene::Init() {
+    // 初期化処理
+    input = Input::GetInstance();
 
+    // テクスチャのロード
+    LoadTextures();
 
-	// テクスチャのロード
-	LoadTextures();
+    // モデルのロード
+    LoadModels();
 
-	// モデルのロード
-	LoadModels();
+    // オーディオのロード
+    LoadAudio();
 
-	// オーディオのロード
-	LoadAudio();
-
-	// 必要なデータの初期化
-	InitializeData();
-
+    // 必要なデータの初期化
+    InitializeData();
 
 }
-
-// シーン更新関数
-void GameScene::Update() {
+void ClearScene::Update() {
+    // 更新処理
 	camera->Update();
 	camera->Move(1);
 	TENQ->Update();
@@ -57,7 +52,6 @@ void GameScene::Update() {
 		HoleObject2_->StartLerpToOriginalVertices();
 		HoleObject3_->StartLerpToOriginalVertices();
 	}
-	
 	camera->CameraDebug();
 	if (TENQ) TENQ->EasingDebugUI("TENQ");
 	if (HoleObject_) HoleObject_->EasingDebugUI("HoleObject1");
@@ -71,36 +65,27 @@ void GameScene::Update() {
 	HoleObject_->ModelDebug("model");
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
-
 	if (input->TriggerKey(DIK_R)) {
 		if (onRequestChangeScene) {
-			//onRequestChangeScene(CLEARSCENE);
-			IScene::SetSceneNo(CLEARSCENE);
-
+			//onRequestChangeScene(GAMESCENE);
+			IScene::SetSceneNo(GAMESCENE);
 			return;
 		}
 	}
 }
-
-// 描画関数
-void GameScene::Draw() {
+void ClearScene::Draw() {
+    // 描画処理
 	if (TENQ) {
 		TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
 	}
-	if (HoleObject_) {
-		HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
-	}
-	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
-	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
 }
-
-// ポストエフェクト描画関数
-void GameScene::PostDraw(){
+void ClearScene::PostDraw() {
+    // ポストエフェクト描画
 	postProcess_->Draw();
-}
 
-// リソース解放関数
-void GameScene::Release() {
+}
+void ClearScene::Release() {
+    // リソース解放
 	camera.reset();
 	TENQ.reset();
 	HoleObject_.reset();
@@ -108,18 +93,13 @@ void GameScene::Release() {
 	HoleObject3_.reset();
 	postProcess_.reset();
 }
-	  				  
-// ゲーム終了判定関数
-int GameScene::GameClose()
-{
-	return false;
+int ClearScene::GameClose() {
+    return false;
 }
-
-///Refactoring///
 
 ///Init///
 // テクスチャのロード
-void GameScene::LoadTextures(){
+void ClearScene::LoadTextures() {
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
@@ -127,7 +107,7 @@ void GameScene::LoadTextures(){
 }
 
 // モデルのロード
-void GameScene::LoadModels()
+void ClearScene::LoadModels()
 {
 	//ModelManager::GetInstance()->LoadModel("Resources/game", "world.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole1.obj");
@@ -139,13 +119,13 @@ void GameScene::LoadModels()
 }
 
 // オーディオのロード
-void GameScene::LoadAudio()
+void ClearScene::LoadAudio()
 {
 	//audioHandle[BGM] = Audio::SoundLoadWave("Resources/game/Audio/BGM.wav");
 }
 
 // 初期化データのセットアップ
-void GameScene::InitializeData(){
+void ClearScene::InitializeData() {
 	camera = std::make_unique<Camera>();
 	TENQ = std::make_unique<Object3d>();
 	HoleObject_ = std::make_unique<Object3d>();
@@ -167,13 +147,13 @@ void GameScene::InitializeData(){
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
-	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
+	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
 	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
 	camera->transform_.rotate = { -0.26f,-0.060f,0.0f };
 }
 
 // ゲームパッド入力処理
-void GameScene::HandleGamePadInput() {
+void ClearScene::HandleGamePadInput() {
 	//XINPUT_STATE joyState;
 	//if (Input::GetInstance()->GetJoystickState(joyState)) {
 	//	HandleStartButton(joyState);
@@ -184,7 +164,7 @@ void GameScene::HandleGamePadInput() {
 
 ///Draw///
 // オブジェクトの描画
-void GameScene::DrawObjects()
+void ClearScene::DrawObjects()
 {
 	//for (auto& cone : ConeObject_) {
 	//	if (cone->isVisible) {
@@ -204,6 +184,6 @@ void GameScene::DrawObjects()
 	//flowEffect_.Draw(textureHandles[GRID], camera);
 }
 
-void GameScene::Remake() {
+void ClearScene::Remake() {
 
 }

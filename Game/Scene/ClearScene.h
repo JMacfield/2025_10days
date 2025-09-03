@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "IScene.h"
 #include "Triangle.h"
 #include "WorldTransform.h"
@@ -19,17 +18,11 @@
 #include <vector>
 #include <string>
 #include <functional>
-#include <memory>
-/// <summary>
-/// ゲームシーン
-/// </summary>
-class GameScene : public IScene {
-public:// Public methods
-    // コンストラクタ
-    GameScene();
-    // デストラクタ
-    ~GameScene() override;
 
+class ClearScene : public IScene {
+public:
+    ClearScene();
+    ~ClearScene() override;
 #pragma region Override methods
     // 初期化
     void Init() override;
@@ -62,7 +55,7 @@ private:// Private methods
     /// <summary>
     /// 全てのデータの初期化
     /// </summary>
-    void InitializeData();   
+    void InitializeData();
 #pragma endregion
 
 #pragma region Update
@@ -82,7 +75,7 @@ private:// Private methods
     /// </summary>
     void DrawObjects();
 #pragma endregion
-  
+
 private:// Private variable
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数

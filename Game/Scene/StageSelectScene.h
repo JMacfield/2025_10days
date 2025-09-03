@@ -1,35 +1,11 @@
 ﻿#pragma once
-
 #include "IScene.h"
-#include "Triangle.h"
-#include "WorldTransform.h"
-#include "Input.h"
-#include "Xinput.h"
-#include "Particle.h"
-#include "Sprite.h"
-#include "Object3d.h"
-#include "Model.h"
-#include "PostProcess.h"
-#include "Fade.h"
-#include "DirectXMath.h"
-#include "Timer.h"
-#include "Collider.h"
-#include "Menu.h"
-#include "random"
-#include <vector>
-#include <string>
 #include <functional>
-#include <memory>
-/// <summary>
-/// ゲームシーン
-/// </summary>
-class GameScene : public IScene {
-public:// Public methods
-    // コンストラクタ
-    GameScene();
-    // デストラクタ
-    ~GameScene() override;
 
+class StageSelectScene : public IScene {
+public:
+    StageSelectScene();
+    ~StageSelectScene() override;
 #pragma region Override methods
     // 初期化
     void Init() override;
@@ -44,7 +20,6 @@ public:// Public methods
     // ゲーム終了判定関
     int GameClose() override;
 #pragma endregion
-
 private:// Private methods
 #pragma region Initialization
     /// <summary>
@@ -62,7 +37,7 @@ private:// Private methods
     /// <summary>
     /// 全てのデータの初期化
     /// </summary>
-    void InitializeData();   
+    void InitializeData();
 #pragma endregion
 
 #pragma region Update
@@ -82,21 +57,7 @@ private:// Private methods
     /// </summary>
     void DrawObjects();
 #pragma endregion
-  
+
 private:// Private variable
-    bool isLerping_ = false;
-    float lerpT = 0.0f; // 追加: ラープ係数
-    std::unique_ptr<PostProcess> postProcess_ = nullptr;
-    std::unique_ptr<Camera> camera = nullptr;
-    Input* input = nullptr;
-    std::unique_ptr<Object3d> TENQ = nullptr;
-    std::unique_ptr<Object3d> HoleObject_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject2_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject3_ = nullptr;
-    enum TextureID {
-        NORMAL_HOLE,
-        TENQ_TEXTURE,
-        TEXTURE_COUNT // テクスチャの総数
-    };
-    std::array<uint32_t, TEXTURE_COUNT> textureHandles;
+  
 };

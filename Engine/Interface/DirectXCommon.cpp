@@ -232,7 +232,27 @@ void DirectXCommon::ViewChange() {
 /// リソースを解放する関数
 /// </summary>
 void DirectXCommon::Release() {
+    // 1. すべてのリソースを解放
+    renderTextureResource_ = nullptr;
+    depthStencilResource_ = nullptr;
+    for (auto& res : swapChainResources_) {
+        res = nullptr;
+    }
+    rtvDescriptorHeap_ = nullptr;
+    dsvDescriptorHeap_ = nullptr;
+    fence_ = nullptr;
+    swapChain_ = nullptr;
+    commandList_ = nullptr;
+    commandAllocator_ = nullptr;
+    commandQueue_ = nullptr;
+
+    // 2. 外部リソースの解放
     ImGuiCommon::GetInstance()->Release();
+
+    // 3. デバイスの解放
+    device_ = nullptr;
+
+    // 4. その他の後処理
     CloseHandle(fenceEvent_);
     CloseWindow(sWinAPI_->GetHwnd());
 }

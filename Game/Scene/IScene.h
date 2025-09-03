@@ -2,6 +2,8 @@
 //シーン名を列挙型(Enum)で定義
 enum SCENE { GAMESCENE, CLEARSCENE, STAGESELECTSCENE };
 
+#include <functional>
+
 // シーン内での処理を行う基底クラス
 class IScene {
 protected:
@@ -28,5 +30,6 @@ public:
 	static int GetSceneNo();
 	static void SetSceneNo(int sceneno);
 
-
+	// シーン切り替え要求用コールバック
+	std::function<void(int)> onRequestChangeScene;
 };

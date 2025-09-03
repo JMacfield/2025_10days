@@ -192,6 +192,10 @@ int GameManager::Run() {
 		prevSceneNo_ = currentSceneNo_;
 		currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
 
+		sceneArr_[currentSceneNo_]->onRequestChangeScene = [this](int nextSceneNo) {
+			IScene::SetSceneNo(nextSceneNo);
+			};
+
 		// シーン変更チェック
 		if (prevSceneNo_ != currentSceneNo_) {
 			sceneArr_[currentSceneNo_]->Init();
@@ -201,7 +205,6 @@ int GameManager::Run() {
 		/// ↓更新処理ここから
 		///
 		sceneArr_[currentSceneNo_]->Update(); // シーンごとの更新処理
-
 		///
 		/// ↑更新処理ここまで
 		///

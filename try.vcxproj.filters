@@ -309,10 +309,10 @@
     <ClCompile Include="Game\Utilty\Lerp.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
+    <ClCompile Include="Game\Scene\ClearScene.cpp">
       <Filter>Application\scene</Filter>
     </ClCompile>
-    <ClCompile Include="StageSelectScene.cpp">
+    <ClCompile Include="Game\Scene\StageSelectScene.cpp">
       <Filter>Application\scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -586,10 +586,10 @@
     <ClInclude Include="Game\Utilty\Lerp.h">
       <Filter>Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="ClearScene.h">
+    <ClInclude Include="Game\Scene\ClearScene.h">
       <Filter>Application\scene</Filter>
     </ClInclude>
-    <ClInclude Include="StageSelectScene.h">
+    <ClInclude Include="Game\Scene\StageSelectScene.h">
       <Filter>Application\scene</Filter>
     </ClInclude>
   </ItemGroup>
