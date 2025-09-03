@@ -475,7 +475,7 @@ void Object3d::EasingDebugUI(const char* name)
 		"EaseInExpo", "EaseOutExpo", "EaseInOutExpo"
 	};
 	int current = static_cast<int>(easingType_);
-	ImGui::Begin("EasingDebug");
+	ImGui::Begin("EasingDebug Space : Easing , V : Re-Easing");
 	ImGui::Combo(name, &current, easingNames, static_cast<int>(EasingType::Count));
 	easingType_ = static_cast<EasingType>(current);
 	// nameをラベルに付加
