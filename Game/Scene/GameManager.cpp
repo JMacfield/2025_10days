@@ -31,10 +31,12 @@
 #include "Transform.h"
 #include "mathFunction.h"
 
+
 // コンストラクタ
 GameManager::GameManager() {
-	// 各シーンの排列
 	sceneArr_[GAMESCENE] = std::make_unique<GameScene>();
+	sceneArr_[CLEARSCENE] = std::make_unique<ClearScene>();
+	sceneArr_[STAGESELECTSCENE] = std::make_unique<StageSelectScene>();
 }
 
 GameManager::~GameManager() {}

@@ -2,6 +2,9 @@
 #include <memory>
 #include "IScene.h"
 #include "GameScene.h"
+#include "ClearScene.h"
+#include "StageSelectScene.h"
+
 #include "Input.h"
 //#include "Input.h"
 class GameManager

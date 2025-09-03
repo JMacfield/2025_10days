@@ -309,6 +309,12 @@
     <ClCompile Include="Game\Utilty\Lerp.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>Application\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Application\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -579,6 +585,12 @@
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
     <ClInclude Include="Game\Utilty\Lerp.h">
       <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>Application\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Application\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

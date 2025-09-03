@@ -124,6 +124,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\ChromaticAberration.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\DepthOutline.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Dissolve.cpp" />
@@ -197,8 +198,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\2d\PostEffect\Effect\TVEffect.cpp" />
     <ClCompile Include="Game\Utilty\Timer.cpp" />
     <ClCompile Include="Game\Utilty\Menu.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\ChromaticAberration.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\DepthOutline.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Dissolve.h" />
@@ -289,6 +292,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\2d\PostEffect\Effect\TVEffect.h" />
     <ClInclude Include="Game\Utilty\Timer.h" />
     <ClInclude Include="Game\Utilty\Menu.h" />
+    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="test.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
