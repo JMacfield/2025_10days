@@ -109,13 +109,11 @@ void GameScene::PostDraw() {
 
 // リソース解放関数
 void GameScene::Release() {
-	//delete camera_;
-
-	collisionManager_->ClearColliderList();
-
 	for (TestWall* wall : testWall_) {
 		delete wall;
 	}
+
+	collisionManager_->ClearColliderList();
 }
 
 // ゲーム終了判定関数
