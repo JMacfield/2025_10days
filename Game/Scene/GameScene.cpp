@@ -92,6 +92,18 @@ void GameScene::PostDraw(){
 
 // リソース解放関数
 void GameScene::Release() {
+	postProcess_.reset();
+	postProcess_ = nullptr;
+	camera.reset();
+	camera = nullptr;
+	TENQ.reset();
+	TENQ = nullptr;
+	HoleObject_.reset();
+	HoleObject_ = nullptr;
+	HoleObject2_.reset();
+	HoleObject2_ = nullptr;
+	HoleObject3_.reset();
+	HoleObject3_ = nullptr;
 }
 
 // ゲーム終了判定関数

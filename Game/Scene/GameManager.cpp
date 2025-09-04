@@ -34,12 +34,16 @@
 
 GameManager::GameManager() {
 	// 各シーンの登録
-	sceneMap_[GAMESCENE] = []() { return  std::make_unique<GameScene>(); };
-	sceneMap_[CLEARSCENE] = []() { return std::make_unique<ClearScene>(); };
-	sceneMap_[STAGESELECTSCENE] = []() { return std::make_unique<StageSelectScene>(); };
+	sceneMap_[GAMESCENE] = []() { return std::make_shared<GameScene>(); };
+	sceneMap_[CLEARSCENE] = []() { return std::make_shared<ClearScene>(); };
+	sceneMap_[STAGESELECTSCENE] = []() { return std::make_shared<StageSelectScene>(); };
 }
-
-GameManager::~GameManager() {}
+GameManager::~GameManager() {
+	if (sceneArr_) {
+		sceneArr_->Release();
+		sceneArr_.reset();
+	}
+}
 
 const char kWindowTitle[] = "LE3A";
 
