@@ -4,8 +4,6 @@
 * @file Audio.cpp
 * @brief オーディオ管理クラス
 */
-Audio::ComPtr<IXAudio2> Audio::xAudio2_;
-
 IXAudio2SourceVoice* Audio::pSourceVoice[soundDataMaxSize];
 
 SoundData Audio::soundData[soundDataMaxSize];
@@ -31,7 +29,6 @@ void Audio::Initialize()
 
 void Audio::Release()
 {
-	xAudio2_.Reset();
 }
 
 uint32_t Audio::SoundLoadWave(const char* filename)
@@ -106,13 +103,13 @@ void Audio::SoundUnload(uint32_t audioHandle) {
 	soundData[audioHandle].wfek = {};
 }
 
-void Audio::SoundPlayWave(IXAudio2* xAudio2, uint32_t audioHandle, bool loopFlag, float volume)
+void Audio::SoundPlayWave(uint32_t audioHandle, bool loopFlag, float volume)
 {
 	HRESULT result;
 
 	// 波形フォーマットを元にSourceVoiceの生成
 	pSourceVoice[audioHandle] = nullptr;
-	result = xAudio2->CreateSourceVoice(&pSourceVoice[audioHandle], &soundData[audioHandle].wfek);
+	result = xAudio2_->CreateSourceVoice(&pSourceVoice[audioHandle], &soundData[audioHandle].wfek);
 	assert(SUCCEEDED(result));
 
 	// ボリュームを設定 (ここで初期ボリュームを設定する)
@@ -136,7 +133,7 @@ void Audio::SoundPlayWave(IXAudio2* xAudio2, uint32_t audioHandle, bool loopFlag
 	assert(SUCCEEDED(result));
 }
 
-void Audio::SoundStopWave(IXAudio2* xAudio2, uint32_t audioHandle)
+void Audio::SoundStopWave(uint32_t audioHandle)
 {
 	HRESULT result;
 
@@ -149,7 +146,7 @@ void Audio::SoundStopWave(IXAudio2* xAudio2, uint32_t audioHandle)
 
 }
 
-void Audio::SoundLoopWave(IXAudio2* xAudio2, const SoundData& soundData)
+void Audio::SoundLoopWave(const SoundData& soundData)
 {
 	//HRESULT result;
 

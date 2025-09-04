@@ -88,9 +88,6 @@ public:// Private methods
     void DrawObjects();
 #pragma endregion
 
-private:// Engine system
-    PostProcess* postProcess_ = nullptr;
-
 private:// Private variable
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数

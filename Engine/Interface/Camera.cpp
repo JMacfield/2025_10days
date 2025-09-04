@@ -182,7 +182,7 @@ void Camera::Jump(bool isOnFloor)
 
     if (isDie) {
         if (easingProgress == 0.0f) {
-            Audio::SoundPlayWave(Audio::GetInstance()->GetIXAudio().Get(), AudioPortalhandle_, false, 0.30f);
+            Audio::GetInstance()->SoundPlayWave(AudioPortalhandle_, false, 0.30f);
             // バイブレーションを有効にする
             XINPUT_VIBRATION vibration = {};
             vibration.wLeftMotorSpeed = 6553; // 最大速度
@@ -275,7 +275,7 @@ void Camera::HandleGamepadJump(bool isOnFloor)
         {
             isJumping = true;
             jumpVelocity = JumpSpeed;
-            Audio::SoundPlayWave(Audio::GetInstance()->GetIXAudio().Get(), AudioJumphandle_, false, 0.30f);
+            Audio::GetInstance()->SoundPlayWave(AudioJumphandle_, false, 0.30f);
         }
 
 #ifdef _DEBUG

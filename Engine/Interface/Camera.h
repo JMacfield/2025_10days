@@ -339,12 +339,12 @@ private:
     /// <summary>
     /// ジャンプ音のハンドル
     /// </summary>
-    uint32_t AudioJumphandle_ = Audio::SoundLoadWave("Resources/game/Audio/Jump.wav");
+    uint32_t AudioJumphandle_ = Audio::GetInstance()->SoundLoadWave("Resources/game/Audio/Jump.wav");
 
     /// <summary>
     /// ポータル音のハンドル
     /// </summary>
-    uint32_t AudioPortalhandle_ = Audio::SoundLoadWave("Resources/game/Audio/portal.wav");
+    uint32_t AudioPortalhandle_ = Audio::GetInstance()->SoundLoadWave("Resources/game/Audio/portal.wav");
 
     /// <summary>
     /// サウンドエフェクトの識別子

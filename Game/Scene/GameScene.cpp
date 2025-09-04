@@ -55,7 +55,7 @@ void GameScene::Init() {
 	floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
 
 	// ポストエフェクト
-	postProcess_ = new PostProcess();
+	postProcess_ = std::make_unique <PostProcess>();
 	postProcess_->Init();
 	postProcess_->SetCamera(followCamera_->GetCamera());
 
@@ -107,7 +107,6 @@ void GameScene::Update() {
 		IScene::SetSceneNo(CLEARSCENE);
 		return;
 	}
-}
 	// テスト壁
 	for (TestWall* wall : testWall_) {
 		wall->Update();
@@ -144,8 +143,8 @@ void GameScene::Draw() {
 	}
 	// 床
 	floor_->Draw(floorTex_, followCamera_->GetCamera());
-	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
-	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
+	TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
+	HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());
 	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
 	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
 }
@@ -158,12 +157,11 @@ void GameScene::PostDraw() {
 // リソース解放関数
 void GameScene::Release() {
 	//delete camera_;
-
-	collisionManager_->ClearColliderList();
-
 	for (TestWall* wall : testWall_) {
 		delete wall;
 	}
+	collisionManager_->ClearColliderList();
+
 }
 
 // ゲーム終了判定関数

@@ -381,7 +381,7 @@ namespace Engine {
 					}).detach();
 
 					// 音量をそのまま使用
-					Audio::SoundPlayWave(Audio::GetInstance()->GetIXAudio().Get(), explosionSound, false, volume);
+					Audio::GetInstance()->SoundPlayWave(explosionSound, false, volume);
 			}
 
 

@@ -146,7 +146,7 @@ void ClearScene::InitializeData() {
 	postProcess_->SetCamera(camera.get());
 	TENQ->SetModel("world.obj");
 	TENQ->SetisLight(false);
-	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
+	TENQ->worldTransform_.scale_ = { -200.0f, 200.0f, 300.0f };
 	HoleObject_->SetModel("start.obj");
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");

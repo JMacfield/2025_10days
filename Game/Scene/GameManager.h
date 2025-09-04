@@ -11,8 +11,8 @@ class GameManager
 {
 private:
 	// シーンを保持するメンバ変数
-	std::shared_ptr<IScene> sceneArr_;
-	std::unordered_map<int, std::function<std::shared_ptr<IScene>()>> sceneMap_;
+	std::unique_ptr<IScene> sceneArr_[3];
+
 	// どのステージを呼び出すかを管理する変数
 	int currentSceneNo_ = 0;
 	int prevSceneNo_ = 0;
