@@ -68,7 +68,7 @@ void ClearScene::Update() {
 	HoleObject_->ModelDebug("model");
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
-	if (input->PushKey(DIK_R)) {
+	if (input->TriggerKey(DIK_R)) {
 		this->SetSceneNo(GAMESCENE);
 		return;
 	}
@@ -78,6 +78,10 @@ void ClearScene::Draw() {
 	if (TENQ) {
 		TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
 	}
+	if (HoleObject_) {
+		HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
+	}
+
 }
 void ClearScene::PostDraw() {
 	// ポストエフェクト描画
@@ -149,7 +153,7 @@ void ClearScene::InitializeData() {
 	postProcess_->SetCamera(camera.get());
 	TENQ->SetModel("world.obj");
 	TENQ->SetisLight(false);
-	TENQ->worldTransform_.scale_ = { -200.0f, 200.0f, 300.0f };
+	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
 	HoleObject_->SetModel("start.obj");
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
