@@ -24,6 +24,8 @@ public:
     /// </summary>
     void Init();
 
+    void Release() { descriptorHeap_.ReleaseAndGetAddressOf(); }
+
     /// <summary>
     /// SRVのインデックスを割り当てる関数
     /// </summary>

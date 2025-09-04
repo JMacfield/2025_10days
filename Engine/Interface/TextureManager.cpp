@@ -88,6 +88,15 @@ int TextureManager::PlusIndex() {
 /// </summary>
 void TextureManager::Release() {
     // 必要に応じてリソース解放処理を実装
+    for (auto& pair : textureDatas_) {
+        const std::string& key = pair.first;     // キー（string）
+        TextureData& data = pair.second;         // 値（TextureData）
+        // ここで処理を書く
+        data.resource.ReleaseAndGetAddressOf();
+    }
+    for (int i = 0; i < kNumDescriptors; i++) {
+        intermediateResource_[i].ReleaseAndGetAddressOf();
+    }
 }
 
 /// <summary>

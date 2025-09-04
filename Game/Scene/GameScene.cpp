@@ -14,15 +14,7 @@ GameScene::GameScene() {
 	collisionManager_ = CollisionManager::GetInstance();
 }
 
-GameScene::~GameScene() {
-	Release();
-
-	collisionManager_->ClearColliderList();
-
-	for (TestWall* wall : testWall_) {
-		delete wall;
-	}
-}
+GameScene::~GameScene() {}
 
 // 初期化関数
 void GameScene::Init() {
@@ -40,12 +32,13 @@ void GameScene::Init() {
 	}
 	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
 	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
-	testWall_[2]->SetTranslation(Vector3{ -4.5f,0.0f,8.0f });
-	testWall_[3]->SetTranslation(Vector3{ 4.5f,0.0f,12.0f });
+	testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
+	testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
 	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
 
 	// 追従カメラ
 	followCamera_ = std::make_unique<FollowCamera>(player_.get());
+	followCamera_->Init();
 	player_->SetCamera(followCamera_->GetCamera());
 	for (TestWall* wall : testWall_) {
 		wall->SetCamera(followCamera_->GetCamera());
@@ -76,12 +69,12 @@ void GameScene::Update() {
 	for (TestWall* wall : testWall_) {
 		wall->Update();
 	}
+	// 追従カメラ
+	followCamera_->Update();
 	// 床
 	floor_->Update();
 	// 自機
 	player_->Update();
-	// 追従カメラ
-	followCamera_->Update();
 
 	// 衝突判定
 	collisionManager_->CheckAllCollisions();
@@ -117,6 +110,12 @@ void GameScene::PostDraw() {
 // リソース解放関数
 void GameScene::Release() {
 	//delete camera_;
+
+	collisionManager_->ClearColliderList();
+
+	for (TestWall* wall : testWall_) {
+		delete wall;
+	}
 }
 
 // ゲーム終了判定関数
@@ -163,8 +162,8 @@ void GameScene::HandleGamePadInput() {
 
 ///Draw///
 // オブジェクトの描画
-void GameScene::DrawObjects()
-{
+void GameScene::DrawObjects() {
+
 }
 
 void GameScene::Remake() {

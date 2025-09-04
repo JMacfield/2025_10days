@@ -1,6 +1,6 @@
 ﻿#include "Collider.h"
 #include "CollisionManager.h"
-#include "../Player/Math/MathFuncs.h"
+#include "../Player/Components/Math/MathFuncs.h"
 #include <cmath>
 
 Collider::Collider() {

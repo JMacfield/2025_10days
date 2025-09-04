@@ -1,8 +1,9 @@
 #include "Player.h"
 #include "PlayerConfig.h"
 #include "ModelManager.h"
-#include "Math/MathFuncs.h"
+#include "Components/Math/MathFuncs.h"
 
+using namespace MathFuncs;
 using namespace PlayerConfig::FileNames;
 
 Player::Player() {
@@ -48,12 +49,17 @@ void Player::Init() {
 	isAir_ = false;
 	// 着地したか
 	isLanding_ = true;
+	isAlive_ = true;
 	currentWallSide_ = WallSide::kNone;
 
 	vel_ = { 0.0f,0.0f,0.0f };
 }
 
 void Player::Update() {
+	if (!isAlive_) { return; }
+
+	isPreAir_ = isAir_;
+
 	// 移動処理
 	moveSystem_->Update();
 	// ジャンプ
@@ -150,7 +156,7 @@ void Player::CreateSystems() {
 void Player::OnCollision(Collider* collider) {
 	// 攻撃に当たったら死亡
 	if (collider->GetCollisionAttribute() == kCollisionAttributeEnemy) {
-
+		isAlive_ = false;
 	}
 	// 壁の場合
 	else if (collider->GetCollisionAttribute() == kCollisionAttributeObstacles) {
@@ -204,18 +210,18 @@ void Player::CheckLanding(Collider* collider) {
 void Player::LandingRotate() {
 	// 空中にいるとき
 	if (isAir_) {
-		rot_ = MathFuncs::ExponentialInterpolate(rot_, Vector3{ 0,0,0 }, 0.2f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, Vector3{ 0,0,0 }, 0.05f);
 	}
 	// 壁が右側にある
 	else if (currentWallSide_ == WallSide::kLeft) {
 		Vector3 goalRot = landingRot;
 		goalRot.z *= -1;
-		rot_ = MathFuncs::ExponentialInterpolate(rot_, goalRot, 0.4f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f);
 	}
 	// 壁が左側にある
 	else if (currentWallSide_ == WallSide::kRight) {
 		Vector3 goalRot = landingRot;
-		rot_ = MathFuncs::ExponentialInterpolate(rot_, goalRot, 0.4f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f);
 	}
 }
 

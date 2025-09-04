@@ -59,8 +59,8 @@ ImGuiCommon* ImGuiCommon::GetInstance() {
 void ImGuiCommon::UICreate() {
 	//ImGui::Render();
 	//描画用のDescriptorの設定
-	ID3D12DescriptorHeap* descriptorHeaps[] = { SRVManager::GetInstance()->GetDescriptorHeap().Get() };
-	sDirectXCommon_->GetCommandList()->SetDescriptorHeaps(1, descriptorHeaps);
+	//ID3D12DescriptorHeap* descriptorHeaps[] = { SRVManager::GetInstance()->GetDescriptorHeap().Get() };
+	//sDirectXCommon_->GetCommandList()->SetDescriptorHeaps(1, descriptorHeaps);
 }
 
 

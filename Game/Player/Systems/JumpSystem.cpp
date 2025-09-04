@@ -1,8 +1,9 @@
 #include "JumpSystem.h"
 #include "../PlayerConfig.h"
 #include "../Player.h"
-#include "../Math/MathFuncs.h"
+#include "../Components/Math/MathFuncs.h"
 
+using namespace MathFuncs;
 using namespace PlayerConfig::Input;
 
 JumpSystem::JumpSystem(Player* player) {
@@ -28,8 +29,8 @@ void JumpSystem::Update() {
 
 	// ジャンプ時の速度減衰
 	if (isActive_) {
-		vel_.x = MathFuncs::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
-		vel_.z = MathFuncs::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
+		vel_.x = Lerps::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
+		vel_.z = Lerps::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
 	}
 
 	// 着地したら初期化

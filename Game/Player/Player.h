@@ -105,10 +105,35 @@ public:// Accessor method
 	/// <returns></returns>
 	bool GetIsAir() { return isAir_; }
 	/// <summary>
+	/// 空中に浮いた瞬間を取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetTriggerAir() {
+		if (!isPreAir_ && isAir_) {
+			return true;
+		}
+		return false;
+	}
+	/// <summary>
+	/// 着地した瞬間を取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetTriggerLanding() {
+		if (isPreAir_ && !isAir_) {
+			return true;
+		}
+		return false;
+	}
+	/// <summary>
 	/// 着地しているかを取得
 	/// </summary>
 	/// <returns></returns>
 	bool GetIsLanding() { return isLanding_; }
+	/// <summary>
+	/// 線蔵しているかを取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsAlive() { return isAlive_; }
 #pragma endregion
 
 #pragma region Setter
@@ -162,7 +187,10 @@ private:// Private variable
 
 	// 空中にいるか
 	bool isAir_ = false;
+	bool isPreAir_ = false;
 	// 着地したか
 	bool isLanding_ = true;
+
+	bool isAlive_ = true;
 };
 
