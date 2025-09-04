@@ -31,13 +31,15 @@
 #include "Transform.h"
 #include "mathFunction.h"
 
-// コンストラクタ
-GameManager::GameManager() {
-	// 各シーンの排列
-	sceneArr_[GAMESCENE] = std::make_unique<GameScene>();
-}
 
-GameManager::~GameManager() {}
+GameManager::GameManager() {
+	// 各シーンの登録
+	sceneArr_[GAMESCENE] = new GameScene();
+	sceneArr_[CLEARSCENE] = new ClearScene();
+	sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+}
+GameManager::~GameManager() {
+}
 
 const char kWindowTitle[] = "LE3A";
 
@@ -45,7 +47,7 @@ int GameManager::Run() {
 	//DirectXCommon::D3DResourceLeakChecker leakCheck;
 
 	WinAPI* sWinAPI = WinAPI::GetInstance();
-	sWinAPI->Initialize(L"NeonDash");
+	sWinAPI->Initialize(L"NeonShift");
 
 	DirectXCommon* sDirctX = DirectXCommon::GetInstance();
 	sDirctX->Initialize();
@@ -80,6 +82,10 @@ int GameManager::Run() {
 	PSOPostEffect* pSOPostEffect = PSOPostEffect::GetInstance();
 	pSOPostEffect->Init();
 
+	// シーンのチェック
+	prevSceneNo_ = currentSceneNo_;
+	currentSceneNo_ = IScene::GetSceneNo();
+	//post->Init();
 	sceneArr_[currentSceneNo_]->Init();
 
 	Input* sInput = Input::GetInstance();
@@ -92,6 +98,7 @@ int GameManager::Run() {
 			// ゲームループを抜ける
 			break;
 		}
+
 		// ゲームの処理の開始
 		sDirctX->tempRender();
 		// ImGui
@@ -189,9 +196,24 @@ int GameManager::Run() {
 		// シーンのチェック
 		prevSceneNo_ = currentSceneNo_;
 		currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
-
 		// シーン変更チェック
 		if (prevSceneNo_ != currentSceneNo_) {
+			sceneArr_[prevSceneNo_]->Release();
+			delete sceneArr_[prevSceneNo_];
+			sceneArr_[prevSceneNo_] = nullptr;
+
+			switch (prevSceneNo_) {
+			case GAMESCENE:
+				sceneArr_[GAMESCENE] = new GameScene();
+				break;
+			case CLEARSCENE:
+				sceneArr_[CLEARSCENE] = new ClearScene();
+				break;
+			case STAGESELECTSCENE:
+				sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+				break;
+			}
+
 			sceneArr_[currentSceneNo_]->Init();
 		}
 
@@ -210,18 +232,19 @@ int GameManager::Run() {
 
 		sceneArr_[currentSceneNo_]->Draw();
 
-
 		///
 		/// ↑描画処理ここまで
 		///
 		sDirctX->BeginFrame();
 		sDirctX->ChangeDepthStatetoRead();
 		sceneArr_[currentSceneNo_]->PostDraw();
+
 		// フレームの終了
 		//スワップチェーン
 		sDirctX->ChangeDepthStatetoRender();
 		sDirctX->ViewChange();
-		sAudio->GetIXAudio().Reset();
+		sAudio->Release();
+		//sAudio->GetIXAudio().Reset();
 		// ESCキーが押されたらループを抜ける
 		if (sceneArr_[currentSceneNo_]->GameClose()) {
 			sceneArr_[currentSceneNo_]->Release();
@@ -237,7 +260,12 @@ int GameManager::Run() {
 
 	-------------------------------------------------------------*/
 
-	sceneArr_[currentSceneNo_]->Release();
+	for (auto& pair : sceneArr_) {
+		if (pair) {
+			pair->Release();
+			delete pair;
+		}
+	}
 	sModelManager->Finalize();
 	TextureManager::GetInstance()->Release();
 	SRVManager::GetInstance()->Release();

@@ -93,7 +93,7 @@ public:
     /// マテリアルテンプレートファイルを読み込む関数
     /// </summary>
     MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
-
+    // Model.h
     /// <summary>
     /// アニメーション行列を取得する関数
     /// </summary>
@@ -126,11 +126,13 @@ public:
     /// <param name="animationTime">アニメーションの再生時間</param>
     void ApplyAnimation(SkeletonData& skeleton, const AnimationData& animation, float animationTime);
 
+
+    void UpdateVertexBuffer();
     /// <summary>
     /// モデルデータを取得する
     /// </summary>
     /// <returns>モデルデータ</returns>
-    ModelData GetModelData() { return modelData_; }
+    ModelData& GetModelData() { return modelData_; }
 
 private:
     HRESULT hr;  ///< 処理結果確認用変数
@@ -168,4 +170,6 @@ private:
     Matrix4x4 aniMatrix_;  ///< アニメーション行列
     Matrix4x4 skeMatrix_;  ///< スケルトン行列
     float animationTime = 0.0f;  ///< アニメーション時間
+
+    Microsoft::WRL::ComPtr<ID3D12Resource> vertexBuffer_;  // 頂点バッファ
 };

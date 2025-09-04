@@ -17,6 +17,9 @@
 class Camera
 {
 public:
+    Camera();
+    ~Camera() = default;
+
     /// <summary>
     /// カメラを初期化する関数
     /// </summary>
@@ -66,7 +69,7 @@ public:
     /// ジャンプ処理を行う関数
     /// </summary>
     /// <param name="isOnFloor">地面に接地しているかどうかのフラグ</param>
-    void Jump(bool isOnFloor);
+    //void Jump(bool isOnFloor);
 
     /// <summary>
     /// 2つの座標間の角度を計算する関数
@@ -301,7 +304,7 @@ private:
     /// <summary>
     /// プレイヤーの移動速度
     /// </summary>
-    const float baseSpeed = 0.3f;
+    float baseSpeed = 0.3f;
     const float boostedSpeed = 0.45f;
     // 追加：スピードブーストの管理用変数
     bool isSpeedBoostActive = false;
@@ -339,12 +342,12 @@ private:
     /// <summary>
     /// ジャンプ音のハンドル
     /// </summary>
-    uint32_t AudioJumphandle_ = Audio::SoundLoadWave("Resources/game/Audio/Jump.wav");
+    uint32_t AudioJumphandle_;
 
     /// <summary>
     /// ポータル音のハンドル
     /// </summary>
-    uint32_t AudioPortalhandle_ = Audio::SoundLoadWave("Resources/game/Audio/portal.wav");
+    uint32_t AudioPortalhandle_;
 
     /// <summary>
     /// サウンドエフェクトの識別子

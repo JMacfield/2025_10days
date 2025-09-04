@@ -9,7 +9,7 @@
  /// <summary>
  /// SRVの最大数を定義する定数
  /// </summary>
-const uint32_t SRVManager::kMaXSRVCount = 512;
+const uint32_t SRVManager::kMaXSRVCount = 10240;
 
 /// <summary>
 /// 現在使用中のインデックス

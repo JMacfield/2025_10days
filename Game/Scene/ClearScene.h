@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "IScene.h"
 #include "Triangle.h"
 #include "WorldTransform.h"
@@ -18,24 +17,14 @@
 #include "random"
 #include <vector>
 #include <string>
+#include <functional>
 #include <memory>
 
-#include "../TestPlane/TestWall.h"
-#include "../Player/Player.h"
-#include "../Camera/FollowCamera.h"
-#include "../Collision/CollisionManager.h"
-
-/// <summary>
-/// ゲームシーン
-/// </summary>
-class GameScene : public IScene {
-public:// Public methods
-    // コンストラクタ
-    GameScene();
-    // デストラクタ
-    ~GameScene() override;
- 
-#pragma region Override
+class ClearScene : public IScene {
+public:
+    ClearScene();
+    ~ClearScene() override;
+#pragma region Override methods
     // 初期化
     void Init() override;
     // 更新
@@ -50,7 +39,7 @@ public:// Public methods
     int GameClose() override;
 #pragma endregion
 
-public:// Private methods
+private:// Private methods
 #pragma region Initialization
     /// <summary>
     /// 全てのテクスチャの読み込み
@@ -67,7 +56,7 @@ public:// Private methods
     /// <summary>
     /// 全てのデータの初期化
     /// </summary>
-    void InitializeData();   
+    void InitializeData();
 #pragma endregion
 
 #pragma region Update
@@ -100,23 +89,8 @@ private:// Private variable
     std::unique_ptr<Object3d> HoleObject3_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
-		TENQ_TEXTURE,
+        TENQ_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
-    Input* input_;
-
-    // 当たり判定管理クラス
-    CollisionManager* collisionManager_;
-
-    std::unique_ptr<FollowCamera> followCamera_;
-
-    std::unique_ptr<Player> player_;
-
-    std::vector<TestWall*> testWall_;
-
-    // 床
-    std::unique_ptr<Object3d> floor_;
-
-    uint32_t floorTex_;
 };

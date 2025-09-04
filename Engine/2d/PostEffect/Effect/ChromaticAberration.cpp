@@ -12,7 +12,16 @@ void ChromaticAberration::Init()
 {
 	// 実際に頂点リソースを作る
 	depthOutlineResource_ = Mesh::CreateBufferResource(DirectXCommon::GetInstance()->GetDevice(), sizeof(BloomInfo));
+		auto dev = DirectXCommon::GetInstance()->GetDevice();
 
+		// 256byte アライン
+		const UINT cbSize = (sizeof(ChromaticAberrationInfo) + 255) & ~255u;
+		chromaCB_ = Mesh::CreateBufferResource(dev, cbSize);
+
+		// Map して初期値を書く
+		chromaCB_->Map(0, nullptr, reinterpret_cast<void**>(&chromaData_));
+		chromaData_->aberrationAmount = { 0.009f, 0.0f }; // 画面の約0.3% ずらす
+		chromaData_->edgeThreshold = 0.1f;
 }
 
 PSOProperty ChromaticAberration::CreatePipelineStateObject()
@@ -84,20 +93,17 @@ PSOProperty ChromaticAberration::CreatePipelineStateObject()
 }
 
 
-void ChromaticAberration::CommandRootParameter(PostProcess* postProcess)
-{
-	DirectXCommon* sDirectXCommon = DirectXCommon::GetInstance();
-	Camera* camera = postProcess->GetCamera();
-	// マテリアルCBufferの場所を設定
-	// SRV のDescriptorTableの先頭を設定。2はrootParameter[2]である。
-	sDirectXCommon->GetCommandList()->SetGraphicsRootDescriptorTable(0, SRVManager::GetInstance()->GetGPUDescriptorHandle(sDirectXCommon->GetRenderIndex()));
+void ChromaticAberration::CommandRootParameter(PostProcess* postProcess) {
+	auto cl = DirectXCommon::GetInstance()->GetCommandList();
+	// t0(カラー), t1(深度), t2(ノイズ) の SRV テーブルはそのままでOK
+	cl->SetGraphicsRootDescriptorTable(0, SRVManager::GetInstance()->GetGPUDescriptorHandle(DirectXCommon::GetInstance()->GetRenderIndex()));
+	cl->SetGraphicsRootDescriptorTable(1, SRVManager::GetInstance()->GetGPUDescriptorHandle(DirectXCommon::GetInstance()->GetDepthIndex()));
+	cl->SetGraphicsRootDescriptorTable(2, SRVManager::GetInstance()->GetGPUDescriptorHandle(postProcess->GetNoisetex()));
 
-	sDirectXCommon->GetCommandList()->SetGraphicsRootDescriptorTable(1, SRVManager::GetInstance()->GetGPUDescriptorHandle(sDirectXCommon->GetDepthIndex()));
-
-	sDirectXCommon->GetCommandList()->SetGraphicsRootDescriptorTable(2, SRVManager::GetInstance()->GetGPUDescriptorHandle(postProcess->GetNoisetex()));
-	// マテリアルCBufferの場所を設定
-	sDirectXCommon->GetCommandList()->SetGraphicsRootConstantBufferView(3, depthOutlineResource_->GetGPUVirtualAddress());
+	// ★ ここを修正
+	cl->SetGraphicsRootConstantBufferView(3, chromaCB_->GetGPUVirtualAddress());
 }
+
 
 std::vector<D3D12_DESCRIPTOR_RANGE> ChromaticAberration::CreateDescriptorRange()
 {

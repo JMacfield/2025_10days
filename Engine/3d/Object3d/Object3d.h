@@ -20,9 +20,43 @@
 #include "Object3dCommon.h"
 #include <PSOAnimationModel.h>
 #include "Skybox.h"
+#include <Quaternion.h>
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
+
+enum class EasingType {
+    EaseInSine,
+    EaseOutSine,
+    EaseInOutSine,
+    EaseInCubic,
+    EaseOutCubic,
+    EaseInOutCubic,
+    EaseInQuint,
+    EaseOutQuint,
+    EaseInOutQuint,
+    EaseInCirc,
+    EaseOutCirc,
+    EaseInOutCirc,
+    EaseInBack,
+    EaseOutBack,
+    EaseInOutBack,
+    EaseOutBounce,
+    EaseInBounce,
+    EaseInOutBounce,
+    EaseInElastic,
+    EaseOutElastic,
+    EaseInOutElastic,
+    EaseInQuart,
+    EaseOutQuart,
+    EaseInOutQuart,
+    EaseInExpo,
+    EaseOutExpo,
+    EaseInOutExpo,
+    Count // 最後に追加
+};
+extern EasingType easingType_;
+
 
 /**
 * @file Object3d.h
@@ -59,6 +93,11 @@ public:
     /// <param name="name">デバッグ情報の名前</param>
     void ModelDebug(const char* name);
 
+    void LightDebug(const char* name);
+
+    void EasingDebugUI(const char* name);
+
+    float GetEasedT(float t) const;
     /// <summary>
     /// モデルを設定する
     /// </summary>
@@ -110,6 +149,15 @@ public:
     void SetScale(const Vector3& scale);
     Vector3 GetScale() const;
 
+	void SetisLight(bool islight) { isLight = islight; }
+
+    void GlitchVertices(float intensity);
+    void GlitchVerticesLerp(float intensity);
+
+    void LerpToOriginalVertices(float lerpT);
+    void LerpToGlitchedVertices(float lerpT);
+    void StartLerpToOriginalVertices();
+
 public: // Getter
     /// <summary>
     /// ワールド変換を取得する
@@ -136,7 +184,15 @@ public: // Getter
     WorldTransform worldTransform_;
     bool isVisible = true;  // デフォルトで描画する
 
+public: // Setter
+    /// <summary> 
+    /// ラープ速度を設定する 
+    /// </summary> 
+    /// <param name="lerpSpeed">ラープ速度</param> 
+    void SetLerpSpeed(float lerpSpeed) { lerpSpeed_ = lerpSpeed; }
+
 private:
+    EasingType easingType_ = EasingType::EaseInSine;
     Object3dCommon* objectCommon_ = nullptr;
     DirectionalLight* directionalLightData;
     HRESULT hr;
@@ -153,6 +209,13 @@ private:
     D3D12_VERTEX_BUFFER_VIEW wvpBufferView{};
     Transform transformUv;
 
+    std::vector<VertexData> originalVertices_;
+    std::vector<VertexData> glitchedVertices_; // ランダム位置
+    bool isLerping_ = false;                  // ラープ中フラグ
+    float lerpT_ = 0.0f;                      // ラープ係数
+    float lerpSpeed_ = 0.002f;
+    private:
+        bool lerpToGlitch_ = false; // true: 元→ランダム, false: ランダム→元
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;
@@ -163,4 +226,13 @@ private:
     Vector3 position_;
     Vector3 rotation_;
     Vector3 scale_;
+
+	//Light用
+
+	bool isLight = true; // デフォルトでライト有効
+	float ambientLightIntensity_ = 0.5f; // 環境光の強さ
+	Vector3 lightDirection_ = { 0.0f,-1.0f,0.0f }; // 平行光源の向き
+    Quaternion Materialquaternion_ = { 1.0f,1.0f,1.0f,1.0f };
+    Quaternion DirectionalLightquaternion_ = { 1.0f,1.0,1.0,1.0f };
+    
 };

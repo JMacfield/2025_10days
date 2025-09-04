@@ -125,6 +125,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\ChromaticAberration.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\DepthOutline.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Dissolve.cpp" />
@@ -146,6 +147,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\2d\PostEffect\Effect\Fog.cpp" />
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
     <ClCompile Include="Game\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Game\Utilty\Lerp.cpp" />
     <ClCompile Include="Game\Utilty\Loader.cpp" />
     <ClCompile Include="Engine\Interface\Mesh.cpp" />
     <ClCompile Include="Engine\Interface\PSO\PSOAnimationModel.cpp" />
@@ -204,9 +206,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
     <ClCompile Include="Game\Player\Components\Math\MathFuncs.cpp" />
     <ClCompile Include="Game\Player\Components\Shake.cpp" />
+    <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player\Components\Anim.h" />
+    <ClInclude Include="Game\Scene\ClearScene.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\ChromaticAberration.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\DepthOutline.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Dissolve.h" />
@@ -236,6 +240,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Camera\FollowCamera.h" />
     <ClInclude Include="Game\Player\PlayerConfig.h" />
     <ClInclude Include="Game\Player\Systems\ISystem.h" />
+    <ClInclude Include="Game\Utilty\Lerp.h" />
     <ClInclude Include="Game\Utilty\Loader.h" />
     <ClInclude Include="Engine\Interface\Mesh.h" />
     <ClInclude Include="Engine\Interface\PSO\PSOAnimationModel.h" />
@@ -304,6 +309,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
     <ClInclude Include="Game\Player\Components\Math\MathFuncs.h" />
     <ClInclude Include="Game\Player\Components\Shake.h" />
+    <ClInclude Include="Game\Scene\StageSelectScene.h" />
     <ClInclude Include="test.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

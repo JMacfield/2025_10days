@@ -8,7 +8,7 @@
 void Menu::Init(uint32_t Texture)
 {
     // メニュー選択音のサウンドハンドルをロード
-    Audiomenuhandle_ = Audio::SoundLoadWave("Resources/game/Audio/menu.wav");
+    Audiomenuhandle_ = Audio::GetInstance()->SoundLoadWave("Resources/game/Audio/menu.wav");
     // メニューポジションのテクスチャハンドルを取得
     MENUPOSITIONtextureHandle = TextureManager::StoreTexture("Resources/game/menuposition.png");
     // メニューメディアのテクスチャハンドルを設定
@@ -50,5 +50,5 @@ void Menu::Draw() {
 /// </summary>
 void Menu::SE() {
     // メニュー選択音を再生
-    Audio::SoundPlayWave(Audio::GetInstance()->GetIXAudio().Get(), Audiomenuhandle_, false, 0.4f);
+    Audio::GetInstance()->SoundPlayWave(Audiomenuhandle_, false, 0.4f);
 }

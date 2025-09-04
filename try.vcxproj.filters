@@ -314,6 +314,11 @@
     <ClCompile Include="Game\Player\Components\Math\MathFuncs.cpp" />
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
     <ClCompile Include="Game\Player\Components\Shake.cpp" />
+    <ClCompile Include="Game\Utilty\Lerp.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\ClearScene.cpp" />
+    <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -592,6 +597,11 @@
     <ClInclude Include="Game\Player\Components\Math\MathFuncs.h" />
     <ClInclude Include="Game\Player\Components\Anim.h" />
     <ClInclude Include="Game\Player\Components\Shake.h" />
+    <ClInclude Include="Game\Utilty\Lerp.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\ClearScene.h" />
+    <ClInclude Include="Game\Scene\StageSelectScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

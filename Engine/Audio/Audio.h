@@ -119,13 +119,13 @@ public:
     /// </summary>
     /// <param name="filename">読み込むファイル名</param>
     /// <returns>サウンドデータのハンドル</returns>
-    static uint32_t SoundLoadWave(const char* filename);
+    uint32_t SoundLoadWave(const char* filename);
 
     /// <summary>
     /// サウンドデータを解放する
     /// </summary>
     /// <param name="audioHandle">解放するサウンドデータのハンドル</param>
-    static void SoundUnload(uint32_t audioHandle);
+    void SoundUnload(uint32_t audioHandle);
 
     /// <summary>
     /// 音声を再生する
@@ -134,34 +134,34 @@ public:
     /// <param name="audioHandle">再生するサウンドデータのハンドル</param>
     /// <param name="loopFlag">ループ再生するかどうかのフラグ</param>
     /// <param name="volume">音量（0.0f～1.0f）</param>
-    static void SoundPlayWave(IXAudio2* xAudio2, uint32_t audioHandle, bool loopFlag, float volume);
+    void SoundPlayWave(uint32_t audioHandle, bool loopFlag, float volume);
 
     /// <summary>
     /// 音声の再生を停止する
     /// </summary>
     /// <param name="xAudio2">IXAudio2のインスタンス</param>
     /// <param name="audioHandle">停止するサウンドデータのハンドル</param>
-    static void SoundStopWave(IXAudio2* xAudio2, uint32_t audioHandle);
+    void SoundStopWave( uint32_t audioHandle);
 
     /// <summary>
     /// 音声をループ再生する
     /// </summary>
     /// <param name="xAudio2">IXAudio2のインスタンス</param>
     /// <param name="soundData">再生するサウンドデータ</param>
-    static void SoundLoopWave(IXAudio2* xAudio2, const SoundData& soundData);
+    void SoundLoopWave(const SoundData& soundData);
 
     /// <summary>
     /// 音量を設定する
     /// </summary>
     /// <param name="audioHandle">設定するサウンドデータのハンドル</param>
     /// <param name="volume">音量（0.0f～1.0f）</param>
-    static void SetVolume(uint32_t audioHandle, float volume);
+    void SetVolume(uint32_t audioHandle, float volume);
 
     /// <summary>
     /// IXAudio2のインスタンスを取得する
     /// </summary>
     /// <returns>IXAudio2のComPtr</returns>
-    static Microsoft::WRL::ComPtr<IXAudio2> GetIXAudio() { return xAudio2_; };
+    Microsoft::WRL::ComPtr<IXAudio2> GetIXAudio() { return xAudio2_; };
 
 private:
     /// <summary>
@@ -180,7 +180,7 @@ private:
     /// <summary>
     /// IXAudio2のインスタンス
     /// </summary>
-    static ComPtr<IXAudio2> xAudio2_;
+    ComPtr<IXAudio2> xAudio2_;
 
     /// <summary>
     /// マスターボイス

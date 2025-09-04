@@ -1,17 +1,58 @@
 ﻿#include "Object3d.h"
 #include "Modelmanager.h"
 #include "Object3dCommon.h"
-/**
-* @file Object3d.cpp
-* @brief 3Dオブジェクトを管理するクラス
-*/
+#include <random>
+#include <Lerp.h>
+
+float Object3d::GetEasedT(float t) const
+{
+	switch (easingType_) {
+	case EasingType::EaseInSine:      return Easings::EaseInSine(t);
+	case EasingType::EaseOutSine:     return Easings::EaseOutSine(t);
+	case EasingType::EaseInOutSine:   return Easings::EaseInOutSine(t);
+	case EasingType::EaseInCubic:     return Easings::EaseInCubic(t);
+	case EasingType::EaseOutCubic:    return Easings::EaseOutCubic(t);
+	case EasingType::EaseInOutCubic:  return Easings::EaseInOutCubic(t);
+	case EasingType::EaseInQuint:     return Easings::EaseInQuint(t);
+	case EasingType::EaseOutQuint:    return Easings::EaseOutQuint(t);
+	case EasingType::EaseInOutQuint:  return Easings::EaseInOutQuint(t);
+	case EasingType::EaseInCirc:      return Easings::EaseInCirc(t);
+	case EasingType::EaseOutCirc:     return Easings::EaseOutCirc(t);
+	case EasingType::EaseInOutCirc:   return Easings::EaseInOutCirc(t);
+	case EasingType::EaseInBack:      return Easings::EaseInBack(t);
+	case EasingType::EaseOutBack:     return Easings::EaseOutBack(t);
+	case EasingType::EaseInOutBack:   return Easings::EaseInOutBack(t);
+	case EasingType::EaseOutBounce:   return Easings::EaseOutBounce(t);
+	case EasingType::EaseInBounce:    return Easings::EaseInBounce(t);
+	case EasingType::EaseInOutBounce: return Easings::EaseInOutBounce(t);
+	case EasingType::EaseInElastic:   return Easings::EaseInElastic(t);
+	case EasingType::EaseOutElastic:  return Easings::EaseOutElastic(t);
+	case EasingType::EaseInOutElastic:return Easings::EaseInOutElastic(t);
+	case EasingType::EaseInQuart:     return Easings::EaseInQuart(t);
+	case EasingType::EaseOutQuart:    return Easings::EaseOutQuart(t);
+	case EasingType::EaseInOutQuart:  return Easings::EaseInOutQuart(t);
+	case EasingType::EaseInExpo:      return Easings::EaseInExpo(t);
+	case EasingType::EaseOutExpo:     return Easings::EaseOutExpo(t);
+	case EasingType::EaseInOutExpo:   return Easings::EaseInOutExpo(t);
+	default: return t;
+	}
+}
+
+void Object3d::StartLerpToOriginalVertices()
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+	isLerping_ = true;
+	lerpT_ = 0.0f;
+	lerpToGlitch_ = false; // ランダム→元
+}
+
 void Object3d::Init()
 {
 
 	WinAPI* sWinAPI = WinAPI::GetInstance();
 	DirectXCommon* directXCommon = DirectXCommon::GetInstance();
 	worldTransform_.Initialize();
-	
+
 	//バッファリソース
 	// データを書き込む
 	wvpData = nullptr;
@@ -41,8 +82,19 @@ void Object3d::Update()
 	else if (model_) {
 		model_->Update();
 	}
-
-
+	if (isLerping_) {
+		lerpT_ += lerpSpeed_;
+		if (lerpT_ >= 1.0f) {
+			lerpT_ = 1.0f;
+			isLerping_ = false;
+		}
+		if (lerpToGlitch_) {
+			LerpToGlitchedVertices(lerpT_);
+		}
+		else {
+			LerpToOriginalVertices(lerpT_);
+		}
+	}
 }
 
 void Object3d::Draw(uint32_t texture, Camera* camera)
@@ -58,7 +110,7 @@ void Object3d::Draw(uint32_t texture, Camera* camera)
 
 		directXCommon->GetCommandList()->SetGraphicsRootSignature(pso->GetProperty().rootSignature.Get());
 		directXCommon->GetCommandList()->SetPipelineState(pso->GetProperty().graphicsPipelineState.Get());    //PSOを設定
-		
+
 	}
 	else if (skybox_) {
 		PSOSkybox* pso = PSOSkybox::GetInstance();
@@ -84,8 +136,9 @@ void Object3d::Draw(uint32_t texture, Camera* camera)
 	else if (model_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		model_->Draw(texture, { { 1.0f,1.0f,1.0f,1.0f },false
-			}, { { 1.0f,1.0,1.0,1.0f } ,{ 0.0f,-1.0f,0.0f },0.5f }, mapTexture_);
+		model_->Draw(texture, { {Materialquaternion_.x,Materialquaternion_.y,Materialquaternion_.z,Materialquaternion_.w},isLight },
+			{ { DirectionalLightquaternion_.x,DirectionalLightquaternion_.y,DirectionalLightquaternion_.z,DirectionalLightquaternion_.w },
+			{ lightDirection_.x,lightDirection_.y,lightDirection_.z},ambientLightIntensity_ }, mapTexture_);
 	}
 	else if (skybox_) {
 		wvpData->WVP = worldViewProjectionMatrix;
@@ -132,6 +185,10 @@ Vector3 Object3d::GetScale() const {
 void Object3d::SetModel(const std::string& filePath)
 {
 	model_ = ModelManager::GetInstance()->FindModel(filePath);
+	// 初期頂点を保存
+	if (model_) {
+		originalVertices_ = model_->GetModelData().vertices;
+	}
 }
 
 void Object3d::SetAnimationModel(const std::string& filePath)
@@ -144,7 +201,6 @@ void Object3d::SetTransform(Transform transform)
 	worldTransform_.translation_ = transform.translate;
 	worldTransform_.rotation_ = transform.rotate;
 	worldTransform_.scale_ = transform.scale;
-
 }
 
 ModelData Object3d::LoadObjFile(const std::string& directoryPath, const std::string& filename)
@@ -255,14 +311,131 @@ MaterialData Object3d::LoadMaterialTemplateFile(const std::string& directoryPath
 	return materialData;
 }
 
+void Object3d::GlitchVertices(float intensity)
+{
+	if (!model_ || originalVertices_.empty()) return;
+
+	// 乱数生成器
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dist(-intensity, intensity);
+
+	glitchedVertices_ = originalVertices_; // 初期位置から生成
+	for (auto& vertex : glitchedVertices_) {
+		vertex.position.x += dist(gen);
+		vertex.position.y += dist(gen);
+		vertex.position.z += dist(gen);
+	}
+
+	// ここで一度ランダム位置を表示したい場合は
+	auto& vertices = model_->GetModelData().vertices;
+	vertices = glitchedVertices_;
+	model_->UpdateVertexBuffer();
+}
+
+void Object3d::GlitchVerticesLerp(float intensity)
+{
+	if (!model_ || originalVertices_.empty()) return;
+
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dist(-intensity, intensity);
+
+	glitchedVertices_ = originalVertices_;
+	for (auto& vertex : glitchedVertices_) {
+		vertex.position.x += dist(gen);
+		vertex.position.y += dist(gen);
+		vertex.position.z += dist(gen);
+	}
+
+	isLerping_ = true;
+	lerpT_ = 0.0f;
+	lerpToGlitch_ = true; // 元→ランダム
+}
+
+
+
+void Object3d::LerpToOriginalVertices(float lerpT)
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+
+	float easedT = GetEasedT(lerpT);
+
+	auto& vertices = model_->GetModelData().vertices;
+	vertices.resize(originalVertices_.size());
+	for (size_t i = 0; i < vertices.size(); ++i) {
+		vertices[i].position.x = glitchedVertices_[i].position.x * (1.0f - easedT) + originalVertices_[i].position.x * easedT;
+		vertices[i].position.y = glitchedVertices_[i].position.y * (1.0f - easedT) + originalVertices_[i].position.y * easedT;
+		vertices[i].position.z = glitchedVertices_[i].position.z * (1.0f - easedT) + originalVertices_[i].position.z * easedT;
+	}
+	model_->UpdateVertexBuffer();
+}
+
+void Object3d::LerpToGlitchedVertices(float lerpT)
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+
+	float easedT = GetEasedT(lerpT);
+
+	auto& vertices = model_->GetModelData().vertices;
+	vertices.resize(originalVertices_.size());
+	for (size_t i = 0; i < vertices.size(); ++i) {
+		vertices[i].position.x = originalVertices_[i].position.x * (1.0f - easedT) + glitchedVertices_[i].position.x * easedT;
+		vertices[i].position.y = originalVertices_[i].position.y * (1.0f - easedT) + glitchedVertices_[i].position.y * easedT;
+		vertices[i].position.z = originalVertices_[i].position.z * (1.0f - easedT) + glitchedVertices_[i].position.z * easedT;
+	}
+	model_->UpdateVertexBuffer();
+}
+
+void Object3d::LightDebug(const char* name)
+{
+#ifdef _DEBUG
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.2f, 0.7f, 0.8f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.1f, 0.3f, 0.5f));
+	ImGui::Begin("light");
+	if (ImGui::TreeNode(name))
+	{
+		// マテリアルのクォータニオン
+		float materialQ[4] = { Materialquaternion_.x, Materialquaternion_.y, Materialquaternion_.z, Materialquaternion_.w };
+		if (ImGui::DragFloat4("Material Quaternion", materialQ, 0.01f)) {
+			Materialquaternion_ = { materialQ[0], materialQ[1], materialQ[2], materialQ[3] };
+		}
+
+		// ディレクショナルライトのクォータニオン
+		float lightQ[4] = { DirectionalLightquaternion_.x, DirectionalLightquaternion_.y, DirectionalLightquaternion_.z, DirectionalLightquaternion_.w };
+		if (ImGui::DragFloat4("Directional Light Quaternion", lightQ, 0.01f)) {
+			DirectionalLightquaternion_ = { lightQ[0], lightQ[1], lightQ[2], lightQ[3] };
+		}
+
+		// ライト方向
+		float direction[3] = { lightDirection_.x, lightDirection_.y, lightDirection_.z };
+		if (ImGui::DragFloat3("Light Direction", direction, 0.01f)) {
+			lightDirection_ = { direction[0], direction[1], direction[2] };
+		}
+
+		// アンビエント強度
+		ImGui::DragFloat("Ambient Intensity", &ambientLightIntensity_, 0.01f, 0.0f, 5.0f);
+
+		// ライトのON/OFF
+		ImGui::Checkbox("Enable Light", &isLight);
+
+		ImGui::TreePop();
+	}
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+#endif // _DEBUG
+
+}
+
+
+
 void Object3d::ModelDebug(const char* name)
 {
 	//#ifdef _DEBUG
-
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.2f, 0.7f, 0.8f));
 	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.1f, 0.3f, 0.5f));
 	ImGui::Begin("model");
-
 	if (ImGui::TreeNode(name))
 	{
 		float translate[3] = { worldTransform_.translation_.x, worldTransform_.translation_.y, worldTransform_.translation_.z };
@@ -285,4 +458,29 @@ void Object3d::ModelDebug(const char* name)
 	ImGui::PopStyleColor();
 	//#endif // _DEBUG
 
+}
+
+void Object3d::EasingDebugUI(const char* name)
+{
+#ifdef _DEBUG
+	static const char* easingNames[] = {
+		"EaseInSine", "EaseOutSine", "EaseInOutSine",
+		"EaseInCubic", "EaseOutCubic", "EaseInOutCubic",
+		"EaseInQuint", "EaseOutQuint", "EaseInOutQuint",
+		"EaseInCirc", "EaseOutCirc", "EaseInOutCirc",
+		"EaseInBack", "EaseOutBack", "EaseInOutBack",
+		"EaseOutBounce", "EaseInBounce", "EaseInOutBounce",
+		"EaseInElastic", "EaseOutElastic", "EaseInOutElastic",
+		"EaseInQuart", "EaseOutQuart", "EaseInOutQuart",
+		"EaseInExpo", "EaseOutExpo", "EaseInOutExpo"
+	};
+	int current = static_cast<int>(easingType_);
+	ImGui::Begin("EasingDebug Space : Easing , V : Re-Easing");
+	ImGui::Combo(name, &current, easingNames, static_cast<int>(EasingType::Count));
+	easingType_ = static_cast<EasingType>(current);
+	// nameをラベルに付加
+	std::string lerpLabel = std::string(name) + " Lerp Speed";
+	ImGui::DragFloat(lerpLabel.c_str(), &lerpSpeed_, 0.00001f, 0.000000f, 1.0f, "%.6f");
+	ImGui::End();
+#endif
 }
