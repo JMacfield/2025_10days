@@ -10,10 +10,12 @@
 #include <cmath>
 #include <DirectXMath.h>
 
-GameScene::GameScene(){}
-
-GameScene::~GameScene() {
+GameScene::GameScene() {
+	collisionManager_ = CollisionManager::GetInstance();
 }
+
+GameScene::~GameScene() {}
+
 // 初期化関数
 void GameScene::Init() {
 	//// カメラの初期化
@@ -23,8 +25,39 @@ void GameScene::Init() {
 	// テクスチャのロード
 	LoadTextures();
 
-	// モデルのロード
-	LoadModels();
+	// 自機
+	player_ = std::make_unique<Player>();
+	// テスト壁
+	for (int i = 0; i < 5;i++) {
+		TestWall* wall = new TestWall();
+		wall->Init();
+		testWall_.push_back(wall);
+	}
+	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
+	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
+	testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
+	testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
+	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
+
+	// 追従カメラ
+	followCamera_ = std::make_unique<FollowCamera>(player_.get());
+	followCamera_->Init();
+	player_->SetCamera(followCamera_->GetCamera());
+	for (TestWall* wall : testWall_) {
+		wall->SetCamera(followCamera_->GetCamera());
+	}
+
+	// 床
+	floor_ = std::make_unique<Object3d>();
+	floor_->Init();
+	floor_->SetModel("box.obj");
+	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
+	floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
+
+	// ポストエフェクト
+	postProcess_ = new PostProcess();
+	postProcess_->Init();
+	postProcess_->SetCamera(followCamera_->GetCamera());
 
 	// オーディオのロード
 	LoadAudio();
@@ -75,10 +108,42 @@ void GameScene::Update() {
 		return;
 	}
 }
+	// テスト壁
+	for (TestWall* wall : testWall_) {
+		wall->Update();
+	}
+	// 追従カメラ
+	followCamera_->Update();
+	// 床
+	floor_->Update();
+	// 自機
+	player_->Update();
+
+	// 衝突判定
+	collisionManager_->CheckAllCollisions();
+#ifdef _DEBUG
+	ImGui::Begin("GameWindow");
+	// 自機
+	player_->DebugGui();
+	// テスト壁
+	//testWall_->DebugGui();
+	// 追従カメラ
+	followCamera_->DebugGui();
+	ImGui::End();
+#endif // DEBUG
+}
 
 
 // 描画関数
 void GameScene::Draw() {
+	// 自機
+	player_->Draw();
+	// テスト壁
+	for (TestWall* wall : testWall_) {
+		wall->Draw();
+	}
+	// 床
+	floor_->Draw(floorTex_, followCamera_->GetCamera());
 	TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
 	HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
 	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
@@ -86,24 +151,19 @@ void GameScene::Draw() {
 }
 
 // ポストエフェクト描画関数
-void GameScene::PostDraw(){
+void GameScene::PostDraw() {
 	postProcess_->Draw();
 }
 
 // リソース解放関数
 void GameScene::Release() {
-	postProcess_.reset();
-	postProcess_ = nullptr;
-	camera.reset();
-	camera = nullptr;
-	TENQ.reset();
-	TENQ = nullptr;
-	HoleObject_.reset();
-	HoleObject_ = nullptr;
-	HoleObject2_.reset();
-	HoleObject2_ = nullptr;
-	HoleObject3_.reset();
-	HoleObject3_ = nullptr;
+	//delete camera_;
+
+	collisionManager_->ClearColliderList();
+
+	for (TestWall* wall : testWall_) {
+		delete wall;
+	}
 }
 
 // ゲーム終了判定関数
@@ -116,7 +176,9 @@ int GameScene::GameClose()
 
 ///Init///
 // テクスチャのロード
-void GameScene::LoadTextures(){
+void GameScene::LoadTextures()
+{
+	floorTex_ = TextureManager::StoreTexture("Resources/white.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
@@ -181,24 +243,8 @@ void GameScene::HandleGamePadInput() {
 
 ///Draw///
 // オブジェクトの描画
-void GameScene::DrawObjects()
-{
-	//for (auto& cone : ConeObject_) {
-	//	if (cone->isVisible) {
-	//		cone->Draw(textureHandles[CONE], camera);
-	//	}
-	//}
-	//for (auto& star : StarObject_) {
-	//	if (star->isVisible) {
-	//		star->Draw(textureHandles[STAR], camera);
-	//	}
-	//}
-	//for (auto& item : ItemObject_) {
-	//	if (item->isVisible) {
-	//		item->Draw(textureHandles[ITEM], camera);
-	//	}
-	//}
-	//flowEffect_.Draw(textureHandles[GRID], camera);
+void GameScene::DrawObjects() {
+
 }
 
 void GameScene::Remake() {

@@ -20,6 +20,11 @@
 #include <string>
 #include <memory>
 
+#include "../TestPlane/TestWall.h"
+#include "../Player/Player.h"
+#include "../Camera/FollowCamera.h"
+#include "../Collision/CollisionManager.h"
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -30,7 +35,7 @@ public:// Public methods
     // デストラクタ
     ~GameScene() override;
  
-#pragma region Override methods
+#pragma region Override
     // 初期化
     void Init() override;
     // 更新
@@ -45,7 +50,7 @@ public:// Public methods
     int GameClose() override;
 #pragma endregion
 
-private:// Private methods
+public:// Private methods
 #pragma region Initialization
     /// <summary>
     /// 全てのテクスチャの読み込み
@@ -83,6 +88,9 @@ private:// Private methods
     void DrawObjects();
 #pragma endregion
 
+private:// Engine system
+    PostProcess* postProcess_ = nullptr;
+
 private:// Private variable
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
@@ -99,4 +107,19 @@ private:// Private variable
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
+    Input* input_;
+
+    // 当たり判定管理クラス
+    CollisionManager* collisionManager_;
+
+    std::unique_ptr<FollowCamera> followCamera_;
+
+    std::unique_ptr<Player> player_;
+
+    std::vector<TestWall*> testWall_;
+
+    // 床
+    std::unique_ptr<Object3d> floor_;
+
+    uint32_t floorTex_;
 };

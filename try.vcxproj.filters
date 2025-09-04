@@ -306,6 +306,14 @@
       <Filter>Engine\2d\PostEffect\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\Player\Systems\JumpSystem.cpp" />
+    <ClCompile Include="Game\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Game\TestPlane\TestWall.cpp" />
+    <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
+    <ClCompile Include="Game\Player\Components\Math\MathFuncs.cpp" />
+    <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Player\Components\Shake.cpp" />
     <ClCompile Include="Game\Utilty\Lerp.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
@@ -579,6 +587,16 @@
       <Filter>Application\scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Player\Player.h" />
+    <ClInclude Include="Game\Player\PlayerConfig.h" />
+    <ClInclude Include="Game\Player\Systems\JumpSystem.h" />
+    <ClInclude Include="Game\Camera\FollowCamera.h" />
+    <ClInclude Include="Game\TestPlane\TestWall.h" />
+    <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
+    <ClInclude Include="Game\Player\Systems\ISystem.h" />
+    <ClInclude Include="Game\Player\Components\Math\MathFuncs.h" />
+    <ClInclude Include="Game\Player\Components\Anim.h" />
+    <ClInclude Include="Game\Player\Components\Shake.h" />
     <ClInclude Include="Game\Utilty\Lerp.h">
       <Filter>Engine\Math</Filter>
     </ClInclude>

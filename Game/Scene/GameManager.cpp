@@ -250,10 +250,12 @@ int GameManager::Run() {
 
 	-------------------------------------------------------------*/
 
+	sceneArr_[currentSceneNo_]->Release();
 	sModelManager->Finalize();
-	sWinAPI->Finalize();
-	//delete sWinAPI;
+	TextureManager::GetInstance()->Release();
+	SRVManager::GetInstance()->Release();
 	sDirctX->Release();
+	sWinAPI->Finalize();
 
 	return 0;
 }

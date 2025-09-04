@@ -1,90 +1,238 @@
 ﻿#include "CollisionManager.h"
+#include "../Player/Components/Math/MathFuncs.h"
+#include <assert.h>
 
-/// <summary>
-/// 全てのコリジョンをチェックする関数
-/// </summary>
-void CollisionManager::CheckAllCollision() {
+using namespace MathFuncs;
 
-    //// 自弾リストの取得（コメントアウト）
-    //const std::list<PlayerBullet*>& playerBullets = player_->Getbullet();
-
-    //// 敵弾リストの取得（コメントアウト）
-    //const std::list<EnemyBullet*>& enemyBullets = enemy_->Getbullet();
-
-    //// コライダーをリストに登録（コメントアウト）
-    //std::list<Collider*> colliders_;
-    //colliders_.push_back(player_);
-    //colliders_.push_back(enemy_);
-
-    //for (PlayerBullet* bullet : playerBullets) {
-    //    colliders_.push_back(bullet);
-    //}
-    //for (EnemyBullet* bullet : enemyBullets) {
-    //    colliders_.push_back(bullet);
-    //}
-
-    // コライダーのペアを総当たりでチェック
-    std::list<Collider*>::iterator itrA = colliders_.begin();
-    for (; itrA != colliders_.end(); ++itrA) {
-
-        // イテレータBはイテレータAの次の要素から開始（重複判定を回避）
-        std::list<Collider*>::iterator itrB = itrA;
-        itrB++;
-        for (; itrB != colliders_.end(); ++itrB) {
-
-            // ペアの当たり判定を行う
-            CheckCollisionPair(*itrA, *itrB);
-        }
-    }
+CollisionManager::~CollisionManager() {
+	ClearColliderList();
 }
 
-/// <summary>
-/// コライダーをリストに追加する関数
-/// </summary>
-/// <param name="collider">追加するコライダーのポインタ</param>
-void CollisionManager::PushClider(Collider* collider)
-{
-    colliders_.push_back(collider);
+CollisionManager* CollisionManager::GetInstance() {
+	static CollisionManager instance;
+	return &instance;
 }
 
-/// <summary>
-/// 2つのコライダー間の衝突判定を行う関数
-/// </summary>
-/// <param name="colliderA">コライダーA</param>
-/// <param name="colliderB">コライダーB</param>
+void CollisionManager::CheckAllCollisions() {
+	// 当たっているかの状態を初期化
+	ResetIsOnCollision();
+
+	// リスト内のペアを総当たり
+	std::list<Collider*>::iterator itrA = colliders_.begin();
+	for (; itrA != colliders_.end(); ++itrA) {
+		Collider* colliderA = *itrA;
+		if (!colliderA->GetIsActive()) { continue; }
+		// イテレータBはイテレータAの次の要素から回す(重複判定を回避)
+		std::list<Collider*>::iterator itrB = itrA;
+		itrB++;
+
+		for (; itrB != colliders_.end(); ++itrB) {
+			Collider* colliderB = *itrB;
+			if (!colliderB->GetIsActive()) { continue; }
+			// 当たり判定と応答(フレンドリーファイアしないように設定)
+			CheckCollisionPair(colliderA, colliderB);
+		}
+	}
+}
+
 void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
-    // 判定対象AとBの座標と半径を取得
-    Vector3 posA = colliderA->GetWorldPosition();
-    int radiusA = colliderA->GetRadius();
+	// 衝突フィルタリング
+	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 ||
+		(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()) == 0) {
+		return;
+	}
+	colliderA->worldTransform.UpdateMatrix();
+	colliderB->worldTransform.UpdateMatrix();
 
-    Vector3 posB = colliderB->GetWorldPosition();
-    int radiusB = colliderB->GetRadius();
+	/// OBB同士の判定
+	if (colliderA->GetCollisionPrimitive() == kCollisionOBB && colliderB->GetCollisionPrimitive() == kCollisionOBB) {
+		colliderA->SetOBBCenterPos(colliderA->GetWorldPosition());
+		colliderB->SetOBBCenterPos(colliderB->GetWorldPosition());
+		for (int i = 0; i < 3; i++) {
+			colliderA->SetOBBDirect(i);
+			colliderB->SetOBBDirect(i);
+		}
+		if (ColOBBs(colliderA->GetOBB(), colliderB->GetOBB())) {
+			// 今当たっている
+			colliderA->SetIsOnCollision(true);
+			colliderB->SetIsOnCollision(true);
+			// コライダーAの衝突時コールバックを呼び出す
+			colliderA->OnCollision(colliderB);
+			colliderA->worldTransform.UpdateMatrix();
+			// コライダーBの衝突時コールバックを呼び出す
+			colliderB->OnCollision(colliderA);
+			colliderB->worldTransform.UpdateMatrix();
+		}
+		else {
+			//// 今は当たっていない
+			//colliderA->SetIsOnCollision(false);
+			//colliderB->SetIsOnCollision(false);
+		}
+	}
 
-    // 2点間の距離の二乗を計算
-    float p2b = (posB.x - posA.x) * (posB.x - posA.x) +
-        (posB.y - posA.y) * (posB.y - posA.y) +
-        (posB.z - posA.z) * (posB.z - posA.z);
+	// 前のフレームで当たっていたかを更新
+	colliderA->SetIsPreOnCollision(colliderA->GetIsOnCollision());
+	colliderB->SetIsPreOnCollision(colliderB->GetIsOnCollision());
+}
 
-    // 半径の和の二乗を計算
-    int r2r = (radiusA + radiusB) * (radiusA + radiusB);
+void CollisionManager::ResetIsOnCollision() {
+	std::list<Collider*>::iterator itrA = colliders_.begin();
+	for (; itrA != colliders_.end(); ++itrA) {
+		Collider* colliderA = *itrA;
+		colliderA->SetIsOnCollision(false);
+	}
+}
 
-    /* 衝突フィルタリング（コメントアウト）
-    if (((colliderA->GetCollisonAttribute() & colliderB->GetCollisionMask()) != 0) ||
-        ((colliderB->GetCollisonAttribute() & colliderA->GetCollisionMask()) != 0)) {
-        return;
-    };
-    */
+bool CollisionManager::ColOBBs(const OBB& obb1, const OBB& obb2) {
+	// 各方向ベクトルの確保
+	// N***:標準化方向ベクトル
+	Vector3 NAe1 = obb1.m_NormaDirect[0], Ae1 = Multiply(obb1.m_fLength.x, NAe1);
+	Vector3 NAe2 = obb1.m_NormaDirect[1], Ae2 = Multiply(obb1.m_fLength.y, NAe2);
+	Vector3 NAe3 = obb1.m_NormaDirect[2], Ae3 = Multiply(obb1.m_fLength.z, NAe3);
+	Vector3 NBe1 = obb2.m_NormaDirect[0], Be1 = Multiply(obb2.m_fLength.x, NBe1);
+	Vector3 NBe2 = obb2.m_NormaDirect[1], Be2 = Multiply(obb2.m_fLength.y, NBe2);
+	Vector3 NBe3 = obb2.m_NormaDirect[2], Be3 = Multiply(obb2.m_fLength.z, NBe3);
+	Vector3 Interval = obb1.m_Pos - obb2.m_Pos;
 
-    // 衝突判定
-    if (p2b <= r2r) {
-        // 衝突フィルタリング
-        if (colliderA->GetCollisonAttribute() != colliderB->GetCollisionMask() ||
-            colliderB->GetCollisonAttribute() != colliderA->GetCollisionMask()) {
-            return;
-        };
-        // コライダーAの衝突時コールバックを呼び出す
-        colliderA->OnCollision();
-        // コライダーBの衝突時コールバックを呼び出す
-        colliderB->OnCollision();
-    }
-};
+	// 分離軸 : Ae1
+	float rA = Ae1.Length();
+	float rB = LenSegOnSeparateAxis(&NAe1, &Be1, &Be2, &Be3);
+	float L = fabsf(Dot(Interval, NAe1));
+	if (L > rA + rB) {
+		return false; // 衝突していない
+	}
+
+	// 分離軸 : Ae2
+	rA = Ae2.Length();
+	rB = LenSegOnSeparateAxis(&NAe2, &Be1, &Be2, &Be3);
+	L = fabsf(Dot(Interval, NAe2));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : Ae3
+	rA = Ae3.Length();
+	rB = LenSegOnSeparateAxis(&NAe3, &Be1, &Be2, &Be3);
+	L = fabsf(Dot(Interval, NAe3));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : Be1
+	rA = LenSegOnSeparateAxis(&NBe1, &Ae1, &Ae2, &Ae3);
+	rB = Be1.Length();
+	L = fabsf(Dot(Interval, NBe1));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : Be2
+	rA = LenSegOnSeparateAxis(&NBe2, &Ae1, &Ae2, &Ae3);
+	rB = Be2.Length();
+	L = fabsf(Dot(Interval, NBe2));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : Be3
+	rA = LenSegOnSeparateAxis(&NBe3, &Ae1, &Ae2, &Ae3);
+	rB = Be3.Length();
+	L = fabsf(Dot(Interval, NBe3));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C11
+	Vector3 cross;
+	cross = Cross(NAe1, NBe1);
+	rA = LenSegOnSeparateAxis(&cross, &Ae2, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be2, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C12
+	cross = Cross(NAe1, NBe2);
+	rA = LenSegOnSeparateAxis(&cross, &Ae2, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C13
+	cross = Cross(NAe1, NBe3);
+	rA = LenSegOnSeparateAxis(&cross, &Ae2, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be2);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C21
+	cross = Cross(NAe2, NBe1);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be2, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C22
+	cross = Cross(NAe2, NBe2);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C23
+	cross = Cross(NAe2, NBe3);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae3);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be2);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C31
+	cross = Cross(NAe3, NBe1);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae2);
+	rB = LenSegOnSeparateAxis(&cross, &Be2, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C32
+	cross = Cross(NAe3, NBe2);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae2);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be3);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離軸 : C33
+	cross = Cross(NAe3, NBe3);
+	rA = LenSegOnSeparateAxis(&cross, &Ae1, &Ae2);
+	rB = LenSegOnSeparateAxis(&cross, &Be1, &Be2);
+	L = fabsf(Dot(Interval, cross));
+	if (L > rA + rB) {
+		return false;
+	}
+
+	// 分離平面が存在しないので「衝突している」
+	return true;
+}
+
+float CollisionManager::LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3* e2, Vector3* e3) {
+	// 3つの内積の絶対値の和で投影線分長を計算
+	// 分離軸Sepは標準化されていること
+	float r1 = fabsf(Dot(*Sep, *e1));
+	float r2 = fabsf(Dot(*Sep, *e2));
+	float r3 = e3 ? (fabsf(Dot(*Sep, *e3))) : 0;
+	return r1 + r2 + r3;
+}
