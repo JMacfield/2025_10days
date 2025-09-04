@@ -22,11 +22,11 @@ public:
 	virtual int GameClose() = 0;
 
 	// 仮想デストラクタを用意しないと警告される
-	virtual ~IScene();
+	virtual ~IScene() = default;
 
 	// シーン番号のゲッター
 	static int GetSceneNo();
-	static void SetSceneNo(int sceneno);
+	void SetSceneNo(int sceneno);
 
 
 };

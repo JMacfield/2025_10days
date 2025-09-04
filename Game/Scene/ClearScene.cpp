@@ -11,7 +11,10 @@
 #include <DirectXMath.h>
 
 ClearScene::ClearScene() {}
-ClearScene::~ClearScene() {}
+ClearScene::~ClearScene() {
+	int a;
+	a = 1;
+}
 
 void ClearScene::Init() {
 	// 初期化処理
@@ -65,8 +68,8 @@ void ClearScene::Update() {
 	HoleObject_->ModelDebug("model");
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
-	if (input->TriggerKey(DIK_R)) {
-		IScene::SetSceneNo(GAMESCENE);
+	if (input->PushKey(DIK_R)) {
+		this->SetSceneNo(GAMESCENE);
 		return;
 	}
 }

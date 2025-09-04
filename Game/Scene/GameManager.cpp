@@ -34,9 +34,9 @@
 
 GameManager::GameManager() {
 	// 各シーンの登録
-	sceneArr_[GAMESCENE] = std::make_unique<GameScene>();
-	sceneArr_[CLEARSCENE] = std::make_unique<ClearScene>();
-	sceneArr_[STAGESELECTSCENE] = std::make_unique<StageSelectScene>();
+	sceneArr_[GAMESCENE] = new GameScene();
+	sceneArr_[CLEARSCENE] = new ClearScene();
+	sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
 }
 GameManager::~GameManager() {
 }
@@ -99,7 +99,6 @@ int GameManager::Run() {
 			break;
 		}
 
-		sInput->Update();
 		// ゲームの処理の開始
 		sDirctX->tempRender();
 		// ImGui
@@ -107,6 +106,7 @@ int GameManager::Run() {
 		//ImGuiの更新
 		ImGuiCommon::GetInstance()->Update();
 
+		sInput->Update();
 
 		// 追跡するための変数
 #ifdef _DEBUG
@@ -199,16 +199,18 @@ int GameManager::Run() {
 		// シーン変更チェック
 		if (prevSceneNo_ != currentSceneNo_) {
 			sceneArr_[prevSceneNo_]->Release();
-			sceneArr_[prevSceneNo_].reset();
+			delete sceneArr_[prevSceneNo_];
+			sceneArr_[prevSceneNo_] = nullptr;
+
 			switch (prevSceneNo_) {
 			case GAMESCENE:
-				sceneArr_[GAMESCENE] = std::make_unique<GameScene>();
+				sceneArr_[GAMESCENE] = new GameScene();
 				break;
 			case CLEARSCENE:
-				sceneArr_[CLEARSCENE] = std::make_unique<ClearScene>();
+				sceneArr_[CLEARSCENE] = new ClearScene();
 				break;
 			case STAGESELECTSCENE:
-				sceneArr_[STAGESELECTSCENE] = std::make_unique<StageSelectScene>();
+				sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
 				break;
 			}
 
@@ -261,6 +263,7 @@ int GameManager::Run() {
         for (auto& pair : sceneArr_) {  
             if (pair) {  
                 pair->Release();  
+				delete pair;
             }  
         }
 	sModelManager->Finalize();

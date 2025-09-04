@@ -11,7 +11,7 @@ class GameManager
 {
 private:
 	// シーンを保持するメンバ変数
-	std::unique_ptr<IScene> sceneArr_[3];
+	std::array<IScene*, 3> sceneArr_;
 
 	// どのステージを呼び出すかを管理する変数
 	int currentSceneNo_ = 0;
