@@ -259,13 +259,13 @@ int GameManager::Run() {
 	/*------------------------------------------------------------
 
 	-------------------------------------------------------------*/
-	
-        for (auto& pair : sceneArr_) {  
-            if (pair) {  
-                pair->Release();  
-				delete pair;
-            }  
-        }
+
+	for (auto& pair : sceneArr_) {
+		if (pair) {
+			pair->Release();
+			delete pair;
+		}
+	}
 	sModelManager->Finalize();
 	TextureManager::GetInstance()->Release();
 	SRVManager::GetInstance()->Release();
