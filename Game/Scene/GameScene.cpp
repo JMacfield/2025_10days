@@ -66,10 +66,16 @@ void GameScene::Init() {
 	InitializeData();
 
 
+	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
+	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage", objects_, colliders_);
 }
 
 // シーン更新関数
 void GameScene::Update() {
+	for (Object3d* obj : objects_) {
+		obj->Update();
+	}
+
 	camera->Update();		
 	camera->Move(1);
 	TENQ->Update();
@@ -118,8 +124,6 @@ void GameScene::Update() {
 	// 自機
 	player_->Update();
 
-	// 衝突判定
-	collisionManager_->CheckAllCollisions();
 #ifdef _DEBUG
 	ImGui::Begin("GameWindow");
 	// 自機
@@ -130,6 +134,9 @@ void GameScene::Update() {
 	followCamera_->DebugGui();
 	ImGui::End();
 #endif // DEBUG
+
+	// 衝突判定
+	collisionManager_->CheckAllCollisions();
 }
 
 
@@ -137,6 +144,11 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	// 自機
 	player_->Draw();
+
+	for (Object3d* obj : objects_) {
+		obj->Draw(floorTex_, followCamera_->GetCamera());
+	}
+
 	// テスト壁
 	for (TestWall* wall : testWall_) {
 		wall->Draw();
@@ -156,6 +168,12 @@ void GameScene::PostDraw() {
 
 // リソース解放関数
 void GameScene::Release() {
+	for (Object3d* obj : objects_) {
+		delete obj;
+	}
+	for (Collider* collider : colliders_) {
+		delete collider;
+	}
 	for (TestWall* wall : testWall_) {
 		delete wall;
 	}

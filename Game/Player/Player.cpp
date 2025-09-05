@@ -38,21 +38,26 @@ Player::Player() {
 }
 
 void Player::Init() {
-	body_->worldTransform_.translation_ = { -4.1f, 0.0f, 0.0f };
+ 	body_->worldTransform_.translation_ = { -4.0f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
+	body_->Update();
 
 	moveSystem_->Init();
 	jumpSystem_->Init();
 
 	// 空中にいるか
-	isAir_ = false;
+	isAir_ = true;
 	// 着地したか
-	isLanding_ = true;
+	isLanding_ = false;
 	isAlive_ = true;
-	currentWallSide_ = WallSide::kNone;
 
 	vel_ = { 0.0f,0.0f,0.0f };
+	rot_ = { 0.0f,0.0f,0.0f };
+
+	currentWallSide_ = WallSide::kNone;
+
+	//EndJump();
 }
 
 void Player::Update() {
@@ -126,8 +131,9 @@ void Player::DebugGui() {
 			ImGui::DragFloat("OffsetX", &landingOffsetX, 0.1f, -100.0f, 100.0f);
 			ImGui::TreePop();
 		}
-
+		int a = (int)currentWallSide_;
 		ImGui::DragFloat("Acceleration", &acceleration, 0.0001f, -100.0f, 100.0f);
+		ImGui::DragInt("WallSide", &a);
 		ImGui::Checkbox("IsAir", &isAir_);
 		ImGui::Checkbox("IsLanding", &isLanding_);
 
@@ -183,7 +189,8 @@ void Player::CheckLanding(Collider* collider) {
 			vel_ = { 0.0f,0.0f,0.0f };
 
 			// 座標の補間
-			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - landingOffsetX;
+			//float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - landingOffsetX;
+			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - collider->GetOBB().m_fLength.x - landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
 		}
 	}
@@ -198,7 +205,8 @@ void Player::CheckLanding(Collider* collider) {
 			vel_ = { 0.0f,0.0f,0.0f };
 
 			// 座標の補間
-			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + landingOffsetX;
+			//float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + landingOffsetX;
+			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + collider->GetOBB().m_fLength.x + landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
 		}
 	}

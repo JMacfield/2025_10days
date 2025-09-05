@@ -43,6 +43,8 @@ private:// Private mathod
 	// 分離軸に投影された軸成分から投影線分長を算出
 	float LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3* e2, Vector3* e3 = 0);
 
+	float LenOBBToPoint(const OBB& obb, const Vector3& point);
+
 public:// Accessor method
 	/// <summary>
 	/// コライダーリストをすべてクリア

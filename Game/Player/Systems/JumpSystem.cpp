@@ -44,7 +44,9 @@ void JumpSystem::Update() {
 void JumpSystem::DebugGui() {
 	ImGui::DragFloat3("FirstVel", &firstVel.x, 0.1f, -100.0f, 100.0f);
 	ImGui::DragFloat3("CurrentVel", &vel_.x, 0.1f, -100.0f, 100.0f);
-	//ImGui::DragFloat("Acceleration", &acceleration_, 0.01f, -100.0f, 100.0f);
+	ImGui::DragInt("AirJumpCount", &airJumpCount_);
+	ImGui::DragFloat("JumpDirX", &jumpDirX_);
+	ImGui::Checkbox("IsActive", &isActive_);
 }
 
 void JumpSystem::InputUpdate() {

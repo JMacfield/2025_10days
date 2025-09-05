@@ -16,6 +16,7 @@
 #include "Collider.h"
 #include "Menu.h"
 #include "random"
+#include "Loader.h"
 #include <vector>
 #include <string>
 #include <memory>
@@ -104,19 +105,29 @@ private:// Private variable
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
+
+    // Blenderの配置情報を読み取るローダー
+    Loader* loader_;
+    std::vector<Object3d*> objects_;
+    std::vector<Collider*> colliders_;
+
+    // 入力
     Input* input_;
 
     // 当たり判定管理クラス
     CollisionManager* collisionManager_;
 
+    // 追従カメラ
     std::unique_ptr<FollowCamera> followCamera_;
 
+    // 自機
     std::unique_ptr<Player> player_;
 
+    // 当たり判定確認用の壁
     std::vector<TestWall*> testWall_;
 
-    // 床
+    // 床(仮)
     std::unique_ptr<Object3d> floor_;
-
+    // 床のテクスチャ
     uint32_t floorTex_;
 };

@@ -236,3 +236,32 @@ float CollisionManager::LenSegOnSeparateAxis(Vector3* Sep, Vector3* e1, Vector3*
 	float r3 = e3 ? (fabsf(Dot(*Sep, *e3))) : 0;
 	return r1 + r2 + r3;
 }
+
+float CollisionManager::LenOBBToPoint(const OBB& obb, const Vector3& point) {
+	Vector3 Vec(0, 0, 0);
+	// 最終的に長さを求めるベクトル 
+	// 各軸についてはみ出た部分のベクトルを算出 
+	for (int i = 0; i < 3; i++) {
+		float L;
+		if (i == 0) {
+			L = obb.m_fLength.x;
+		}
+		else if (i == 1) {
+			L = obb.m_fLength.y;
+		}
+		else {
+			L = obb.m_fLength.z;
+		}
+
+		if (L <= 0) { continue; }
+		// L=0は計算できない 
+		float s = Dot((point - obb.m_Pos), obb.m_NormaDirect[i]) / L;
+		// sの値から、はみ出した部分があればそのベクトルを加算 
+		s = fabs(s);
+		if (s > 1) {
+			// はみ出した部分のベクトル算出 
+			Vec += Multiply((1 - s), Multiply(L, obb.m_NormaDirect[i]));
+		}
+	}
+	return Length(Vec); // 長さを出力 
+}

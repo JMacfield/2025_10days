@@ -262,6 +262,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\2d\PostEffect\Effect\GaussianBlur.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\GrayScale.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\HSVFilter.h" />
+    <ClInclude Include="Game\Utilty\LoaderConfig.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />

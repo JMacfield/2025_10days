@@ -602,6 +602,7 @@
     </ClInclude>
     <ClInclude Include="Game\Scene\ClearScene.h" />
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
+    <ClInclude Include="Game\Utilty\LoaderConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

@@ -5,6 +5,7 @@
 
 void MoveSystem::Init() {
 	vel_ = { 0.0f, 0.0f, 0.0f };
+	rot_ = { 0.0f, 0.0f, 0.0f };
 }
 
 void MoveSystem::Update() {

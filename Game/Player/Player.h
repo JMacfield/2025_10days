@@ -153,7 +153,7 @@ private:// 定数
 	// 着地時の体の角度
 	Vector3 landingRot = { 0.0f, 0.0f, 0.3f };
 	// 自機が壁に着地したときの座標の補間量
-	float landingOffsetX = 0.3f;
+	float landingOffsetX = 0.01f;
 
 	// 重力加速度
 	float acceleration = 0.05f;
@@ -186,10 +186,10 @@ private:// Private variable
 	Vector3 rot_;
 
 	// 空中にいるか
-	bool isAir_ = false;
+	bool isAir_ = true;
 	bool isPreAir_ = false;
 	// 着地したか
-	bool isLanding_ = true;
+	bool isLanding_ = false;
 
 	bool isAlive_ = true;
 };
