@@ -17,15 +17,15 @@ TestWall::TestWall() {
 	body_->worldTransform_.translation_ = { -2.0f,0.0f,4.0f };
 	body_->worldTransform_.scale_ = { 0.1f,8.0f,3.0f };
 
-	// colliderの設定
-	collider_ = std::make_unique<Collider>();
-	collider_->worldTransform.parent_ = &body_->worldTransform_;
-	collider_->SetOBBLength(body_->worldTransform_.scale_);
-	collider_->SetCollisionPrimitive(kCollisionOBB);
-	collider_->SetCollisionAttribute(kCollisionAttributeObstacles);
-	collider_->SetCollisionMask(~kCollisionAttributeObstacles);
-	collider_->SetOnCollision(std::bind(&TestWall::OnCollision, this, std::placeholders::_1));
-	collider_->SetIsActive(true);
+	//// colliderの設定
+	//collider_ = std::make_unique<Collider>();
+	//collider_->worldTransform.parent_ = &body_->worldTransform_;
+	//collider_->SetOBBLength(body_->worldTransform_.scale_);
+	//collider_->SetCollisionPrimitive(kCollisionOBB);
+	//collider_->SetCollisionAttribute(kCollisionAttributeObstacles);
+	//collider_->SetCollisionMask(~kCollisionAttributeObstacles);
+	//collider_->SetOnCollision(std::bind(&TestWall::OnCollision, this, std::placeholders::_1));
+	//collider_->SetIsActive(true);
 }
 
 void TestWall::Init() {

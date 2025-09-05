@@ -1,0 +1,40 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "立方体",
+            "file_name": "cube",
+            "transform": {
+                "translation": [
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    1.57
+                ],
+                "scaling": [
+                    1.0,
+                    3.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    3.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}

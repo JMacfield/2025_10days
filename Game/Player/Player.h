@@ -4,17 +4,9 @@
 #include "Collider.h"
 #include "Systems/MoveSystem.h"
 #include "Systems/JumpSystem.h"
+#include "PlayerConfig.h"
 
 class Player {
-public:
-	// どちらの壁にいるか
-	enum class WallSide {
-		kNone,
-		kRight,
-		kLeft,
-		kCount
-	};
-
 public:// Public variable
 	// コンストラクタ
 	Player();
@@ -95,6 +87,11 @@ public:// Accessor method
 	/// <returns></returns>
 	WallSide GetCurrentWallSide() { return currentWallSide_; }
 	/// <summary>
+	/// 今の次元(過去か現在か)を取得
+	/// </summary>
+	/// <returns></returns>
+	DimensionType GetCurrentDimension() { return currentDimension_; }
+	/// <summary>
 	/// 重力加速度を取得
 	/// </summary>
 	/// <returns></returns>
@@ -153,7 +150,7 @@ private:// 定数
 	// 着地時の体の角度
 	Vector3 landingRot = { 0.0f, 0.0f, 0.3f };
 	// 自機が壁に着地したときの座標の補間量
-	float landingOffsetX = 0.3f;
+	float landingOffsetX = 0.01f;
 
 	// 重力加速度
 	float acceleration = 0.05f;
@@ -161,6 +158,8 @@ private:// 定数
 private:// Engine system
 	// 入力
 	Input* input_;
+	XINPUT_STATE joyState;
+	XINPUT_STATE preJoyState;
 
 private:// 外部から受け取るアドレス
 	// カメラ
@@ -185,11 +184,14 @@ private:// Private variable
 	// 角度
 	Vector3 rot_;
 
+	// 今の次元(過去か現在か)
+	DimensionType currentDimension_;
+
 	// 空中にいるか
-	bool isAir_ = false;
+	bool isAir_ = true;
 	bool isPreAir_ = false;
 	// 着地したか
-	bool isLanding_ = true;
+	bool isLanding_ = false;
 
 	bool isAlive_ = true;
 };
