@@ -25,6 +25,7 @@
 #include "../Camera/FollowCamera.h"
 #include "../Collision/CollisionManager.h"
 
+
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -89,23 +90,25 @@ public:// Private methods
 #pragma endregion
 
 private:// Private variable
+
+    std::vector<std::unique_ptr<Object3d>> objectList_;
+    enum ObjectIndex {
+        TENQ, 
+        HOLE1, 
+        HOLE2, 
+        HOLE3 
+    };
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
     std::unique_ptr<Camera> camera = nullptr;
     Input* input = nullptr;
-    std::vector<Object3d*> objectList_; // 追加
-    std::unique_ptr<Object3d> TENQ = nullptr;
-    std::unique_ptr<Object3d> HoleObject_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject2_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject3_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
 		TENQ_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
-    Input* input_;
 
     // 当たり判定管理クラス
     CollisionManager* collisionManager_;
@@ -115,7 +118,6 @@ private:// Private variable
     std::unique_ptr<Player> player_;
 
     std::vector<TestWall*> testWall_;
-
     // 床
     std::unique_ptr<Object3d> floor_;
 

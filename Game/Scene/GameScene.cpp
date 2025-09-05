@@ -38,22 +38,20 @@ void GameScene::Init() {
 void GameScene::Update() {
 	camera->Update();		
 	camera->Move(1);
-	TENQ->Update();
-	HoleObject_->Update();
-	HoleObject2_->Update();
-	HoleObject3_->Update();
-	TENQ->worldTransform_.rotation_.y += 0.0005f;
+	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
+	for (auto& obj : objectList_) {
+		obj->Update();
+	}
 	if (input->TriggerKey(DIK_C)) {
-		TENQ->GlitchVerticesLerp(0.08f);
-		HoleObject_->GlitchVerticesLerp(1.0f);
-		HoleObject2_->GlitchVerticesLerp(5.0f);
-		HoleObject3_->GlitchVerticesLerp(5.0f);
+		objectList_[TENQ]->GlitchVerticesLerp(0.08f);
+		objectList_[HOLE1]->GlitchVerticesLerp(1.0f);
+		objectList_[HOLE2]->GlitchVerticesLerp(5.0f);
+		objectList_[HOLE3]->GlitchVerticesLerp(5.0f);
 	}
 	if (input->TriggerKey(DIK_V)) {
-		TENQ->StartLerpToOriginalVertices();
-		HoleObject_->StartLerpToOriginalVertices();
-		HoleObject2_->StartLerpToOriginalVertices();
-		HoleObject3_->StartLerpToOriginalVertices();
+		for (auto& obj : objectList_) {
+			obj->StartLerpToOriginalVertices();
+		}
 	}
 	// テスト壁
 	for (TestWall* wall : testWall_) {
@@ -78,25 +76,24 @@ void GameScene::Update() {
 	followCamera_->DebugGui();
 	ImGui::End();
 	camera->CameraDebug();
-	if (TENQ) TENQ->EasingDebugUI("TENQ");
-	if (HoleObject_) HoleObject_->EasingDebugUI("HoleObject1");
-	if (HoleObject2_) HoleObject2_->EasingDebugUI("HoleObject2");
-	if (HoleObject3_) HoleObject3_->EasingDebugUI("HoleObject3");
-	TENQ->LightDebug("TENQlight");
-	HoleObject_->LightDebug("light");
-	HoleObject2_->LightDebug("light2");
-	HoleObject3_->LightDebug("light3");
-	TENQ->ModelDebug("TENQmodel");
-	HoleObject_->ModelDebug("model");
-	HoleObject2_->ModelDebug("model2");
-	HoleObject3_->ModelDebug("model3");
+	if (objectList_[TENQ]) objectList_[TENQ]->EasingDebugUI("TENQ");
+	if (objectList_[HOLE1]) objectList_[HOLE1]->EasingDebugUI("HoleObject1");
+	if (objectList_[HOLE2]) objectList_[HOLE2]->EasingDebugUI("HoleObject2");
+	if (objectList_[HOLE3]) objectList_[HOLE3]->EasingDebugUI("HoleObject3");
+	objectList_[TENQ]->LightDebug("TENQlight");
+	objectList_[HOLE1]->LightDebug("light");
+	objectList_[HOLE2]->LightDebug("light2");
+	objectList_[HOLE3]->LightDebug("light3");
+	objectList_[TENQ]->ModelDebug("TENQmodel");
+	objectList_[HOLE1]->ModelDebug("model");
+	objectList_[HOLE2]->ModelDebug("model2");
+	objectList_[HOLE3]->ModelDebug("model3");
 
 #endif // DEBUG
 	if (input->TriggerKey(DIK_R)) {
-		TENQ->ResetVerticesToOriginal();
-		HoleObject_->ResetVerticesToOriginal();
-		HoleObject2_->ResetVerticesToOriginal();
-		HoleObject3_->ResetVerticesToOriginal();
+		for (auto& obj : objectList_) {
+			obj->ResetVerticesToOriginal();
+		}
 		this->SetSceneNo(CLEARSCENE);
 		return;
 	}
@@ -113,7 +110,7 @@ void GameScene::Draw() {
 	}
 	// 床
 	floor_->Draw(floorTex_, followCamera_->GetCamera());
-	TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
+	objectList_[TENQ]->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
 	/*HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());
 	HoleObject2_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());
 	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());*/
@@ -150,7 +147,6 @@ void GameScene::LoadTextures()
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
-
 }
 
 // モデルのロード
@@ -162,7 +158,6 @@ void GameScene::LoadModels()
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "world.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "start.obj");
-
 }
 
 // オーディオのロード
@@ -174,12 +169,14 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData(){
 	camera = std::make_unique<Camera>();
-	TENQ = std::make_unique<Object3d>();
-	HoleObject_ = std::make_unique<Object3d>();
-	HoleObject2_ = std::make_unique<Object3d>();
-	HoleObject3_ = std::make_unique<Object3d>();
-	postProcess_ = std::make_unique<PostProcess>();
 
+	const std::array<const char*, 4> modelNames = { "world.obj", "start.obj", "Demohole2.obj", "Demohole.obj" };
+	objectList_.clear();
+	for (const auto& name : modelNames) {
+		auto obj = std::make_unique<Object3d>();
+		obj->SetModel(name);
+		objectList_.emplace_back(std::move(obj));
+	}
 	// 自機
 	player_ = std::make_unique<Player>();
 	// テスト壁
@@ -213,22 +210,13 @@ void GameScene::InitializeData(){
 	postProcess_->Init();
 	postProcess_->SetCamera(followCamera_->GetCamera());
 	camera->Initialize();
-	TENQ->Init();
-	HoleObject_->Init();
-	HoleObject2_->Init();
-	HoleObject3_->Init();
-	postProcess_->Init();
-	postProcess_->SetCamera(camera.get());
-	TENQ->SetModel("world.obj");
-	TENQ->SetisLight(false);
-	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
-	HoleObject_->SetModel("start.obj");
-	HoleObject2_->SetModel("Demohole2.obj");
-	HoleObject3_->SetModel("Demohole.obj");
-	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
-	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
-	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
-	camera->transform_.rotate = { -0.26f,-0.060f,0.0f };
+	for (auto& obj : objectList_) {
+		obj->Init();
+	}
+	objectList_[TENQ]->SetisLight(false);
+	objectList_[TENQ]->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
+	objectList_[HOLE1]->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
+	objectList_[HOLE3]->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
 }
 
 // ゲームパッド入力処理
