@@ -66,7 +66,7 @@ void GameScene::Init() {
 	InitializeData();
 
 
-	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
+	Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
 	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage", objects_, colliders_);
 }
 
@@ -151,7 +151,7 @@ void GameScene::Draw() {
 
 	// テスト壁
 	for (TestWall* wall : testWall_) {
-		wall->Draw();
+		//wall->Draw();
 	}
 	// 床
 	floor_->Draw(floorTex_, followCamera_->GetCamera());

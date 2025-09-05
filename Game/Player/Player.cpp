@@ -137,6 +137,11 @@ void Player::DebugGui() {
 		ImGui::Checkbox("IsAir", &isAir_);
 		ImGui::Checkbox("IsLanding", &isLanding_);
 
+		if (ImGui::Button("Stop")) {
+			vel_ = { 0.0f,0.0f,0.0f };
+			acceleration = 0.0f;
+			moveSystem_->maxMoveVel = { 0.0f,0.0f,0.0f };
+		}
 		if (ImGui::Button("Reset")) {
 			Init();
 		}

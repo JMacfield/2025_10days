@@ -81,8 +81,8 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// 当たり判定
 			if (object.contains("collider")) {
@@ -254,8 +254,8 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// 当たり判定
 			objectData.isCollision = false;
@@ -311,8 +311,8 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// カメラ設定は行わない
 		}
@@ -421,9 +421,10 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 			objectData.transform.rotate.x = -(float)transform["rotation"][0];
 			objectData.transform.rotate.y = -(float)transform["rotation"][2];
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
+			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// 当たり判定
 			if (object.contains("collider")) {
@@ -475,8 +476,8 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 			// スケーリング (必要であれば)
 			Vector3 scale;
 			scale.x = (float)transform["scaling"][0];
-			scale.y = (float)transform["scaling"][1];
-			scale.z = (float)transform["scaling"][2];
+			scale.y = (float)transform["scaling"][2];
+			scale.z = (float)transform["scaling"][1];
 
 			// カメラの位置と回転を設定
 			camera->SetTranslate(translate);
@@ -590,9 +591,10 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 			objectData.transform.rotate.x = -(float)transform["rotation"][0];
 			objectData.transform.rotate.y = -(float)transform["rotation"][2];
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
+			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// 当たり判定
 			if (object.contains("collider")) {
@@ -726,9 +728,10 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 			objectData.transform.rotate.x = -(float)transform["rotation"][0];
 			objectData.transform.rotate.y = -(float)transform["rotation"][2];
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
+			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			if (object.contains("collider")) {
 				auto& colliderData = object["collider"];
@@ -867,8 +870,8 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			if (object.contains("collider")) {
 				auto& colliderData = object["collider"];
@@ -920,8 +923,8 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 		}
 	}
 
@@ -1031,8 +1034,8 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 
 			// 当たり判定
 			if (object.contains("collider")) {
@@ -1088,8 +1091,8 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 			objectData.transform.rotate.z = -(float)transform["rotation"][1];
 			// スケーリング
 			objectData.transform.scale.x = (float)transform["scaling"][0];
-			objectData.transform.scale.y = (float)transform["scaling"][1];
-			objectData.transform.scale.z = (float)transform["scaling"][2];
+			objectData.transform.scale.y = (float)transform["scaling"][2];
+			objectData.transform.scale.z = (float)transform["scaling"][1];
 		}
 	}
 

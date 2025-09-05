@@ -49,7 +49,7 @@ public:// Accessor method
 
 #pragma endregion
 
-private:// 調整項目
+public:// 調整項目
 	Vector3 maxMoveVel = { 0.0f,0.0f, 0.05f };
 
 private:// Private method
