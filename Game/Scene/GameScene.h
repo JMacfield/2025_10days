@@ -94,6 +94,7 @@ private:// Private variable
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
     std::unique_ptr<Camera> camera = nullptr;
     Input* input = nullptr;
+    std::vector<Object3d*> objectList_; // 追加
     std::unique_ptr<Object3d> TENQ = nullptr;
     std::unique_ptr<Object3d> HoleObject_ = nullptr;
     std::unique_ptr<Object3d> HoleObject2_ = nullptr;

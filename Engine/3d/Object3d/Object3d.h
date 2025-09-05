@@ -157,7 +157,8 @@ public:
     void LerpToOriginalVertices(float lerpT);
     void LerpToGlitchedVertices(float lerpT);
     void StartLerpToOriginalVertices();
-
+    // 頂点をoriginalVertices_で初期化
+    void ResetVerticesToOriginal();
 public: // Getter
     /// <summary>
     /// ワールド変換を取得する

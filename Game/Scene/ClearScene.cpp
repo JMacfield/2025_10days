@@ -43,7 +43,7 @@ void ClearScene::Update() {
 	HoleObject3_->Update();
 
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
-	if (input->TriggerKey(DIK_SPACE)) {
+	if (input->TriggerKey(DIK_C)) {
 		TENQ->GlitchVerticesLerp(0.08f);
 		HoleObject_->GlitchVerticesLerp(1.0f);
 		HoleObject2_->GlitchVerticesLerp(5.0f);
@@ -69,6 +69,11 @@ void ClearScene::Update() {
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
 	if (input->TriggerKey(DIK_R)) {
+		TENQ->ResetVerticesToOriginal();
+		HoleObject_->ResetVerticesToOriginal();
+		HoleObject2_->ResetVerticesToOriginal();
+		HoleObject3_->ResetVerticesToOriginal();
+
 		this->SetSceneNo(GAMESCENE);
 		return;
 	}
