@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "PlayerConfig.h"
 #include "ModelManager.h"
 #include "Components/Math/MathFuncs.h"
 
@@ -35,9 +34,13 @@ Player::Player() {
 	CreateSystems();
 
 	currentWallSide_ = WallSide::kNone;
+	// 今の次元
+	currentDimension_ = DimensionType::kNow;
 }
 
 void Player::Init() {
+	currentDimension_ = DimensionType::kNow;
+
  	body_->worldTransform_.translation_ = { -4.0f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
@@ -65,6 +68,16 @@ void Player::Update() {
 
 	isPreAir_ = isAir_;
 
+	// 過去現在の切り替え
+	if (input_->TriggerKey(PlayerConfig::Input::Keyboard::switching)) {
+		if (currentDimension_ == DimensionType::kNow) {
+			currentDimension_ = DimensionType::kPast;
+		}
+		else if (currentDimension_ == DimensionType::kPast) {
+			currentDimension_ = DimensionType::kNow;
+		}
+	}
+
 	// 移動処理
 	moveSystem_->Update();
 	// ジャンプ
@@ -76,7 +89,6 @@ void Player::Update() {
 
 	// 壁に着地時の角度
 	LandingRotate();
-
 	// 角度
 	Vector3 rot = moveSystem_->GetRot() + rot_;
 	body_->worldTransform_.rotation_ = rot;

@@ -21,7 +21,6 @@ void GameScene::Init() {
 	//// カメラの初期化
 	input = Input::GetInstance();
 
-
 	// テクスチャのロード
 	LoadTextures();
 

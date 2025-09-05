@@ -10,6 +10,18 @@ struct TexData {
 	std::string name;	// Resourcesからファイル名まで
 	uint32_t num;		// 識別番号
 };
+// 自機が切り替えられる次元の種類
+enum class DimensionType {
+	kNow,	// 現在
+	kPast	// 過去
+};
+// 自機がどちらの壁にいるか
+enum class WallSide {
+	kNone,
+	kRight,
+	kLeft,
+	kCount
+};
 
 /// <summary>
 /// 自機の設定

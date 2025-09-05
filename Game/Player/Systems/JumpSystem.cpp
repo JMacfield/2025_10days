@@ -67,13 +67,13 @@ void JumpSystem::InputUpdate() {
 
 void JumpSystem::JumpSideUpdate() {
 	// 右に向かって飛ぶ
-	if (player_->GetCurrentWallSide() == Player::WallSide::kLeft) {
+	if (player_->GetCurrentWallSide() == WallSide::kLeft) {
 		jumpDirX_ = 1.0f;
 		Vector3 vel = firstVel;
 		vel_ += vel;
 	}
 	// 左に向かって飛ぶ
-	else if (player_->GetCurrentWallSide() == Player::WallSide::kRight) {
+	else if (player_->GetCurrentWallSide() == WallSide::kRight) {
 		jumpDirX_ = -1.0f;
 		Vector3 vel = firstVel;
 		vel.x *= jumpDirX_;

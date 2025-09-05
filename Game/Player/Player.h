@@ -4,17 +4,9 @@
 #include "Collider.h"
 #include "Systems/MoveSystem.h"
 #include "Systems/JumpSystem.h"
+#include "PlayerConfig.h"
 
 class Player {
-public:
-	// どちらの壁にいるか
-	enum class WallSide {
-		kNone,
-		kRight,
-		kLeft,
-		kCount
-	};
-
 public:// Public variable
 	// コンストラクタ
 	Player();
@@ -94,6 +86,11 @@ public:// Accessor method
 	/// </summary>
 	/// <returns></returns>
 	WallSide GetCurrentWallSide() { return currentWallSide_; }
+	/// <summary>
+	/// 今の次元(過去か現在か)を取得
+	/// </summary>
+	/// <returns></returns>
+	DimensionType GetCurrentDimension() { return currentDimension_; }
 	/// <summary>
 	/// 重力加速度を取得
 	/// </summary>
@@ -184,6 +181,9 @@ private:// Private variable
 	Vector3 vel_;
 	// 角度
 	Vector3 rot_;
+
+	// 今の次元(過去か現在か)
+	DimensionType currentDimension_;
 
 	// 空中にいるか
 	bool isAir_ = true;
