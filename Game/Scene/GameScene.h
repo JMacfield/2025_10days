@@ -107,7 +107,7 @@ private:// Private variable
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
 
     // Blenderの配置情報を読み取るローダー
-    Loader* loader_;
+    //Loader* loader_;
     std::vector<Object3d*> objects_;
     std::vector<Collider*> colliders_;
 

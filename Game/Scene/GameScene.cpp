@@ -139,7 +139,6 @@ void GameScene::Update() {
 	collisionManager_->CheckAllCollisions();
 }
 
-
 // 描画関数
 void GameScene::Draw() {
 	// 自機
