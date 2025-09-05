@@ -130,4 +130,5 @@ private:// Private variable
     std::unique_ptr<Object3d> floor_;
     // 床のテクスチャ
     uint32_t floorTex_;
+    uint32_t damageWallTex_;
 };

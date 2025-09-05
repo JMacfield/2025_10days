@@ -136,6 +136,7 @@ void Player::DebugGui() {
 		ImGui::DragInt("WallSide", &a);
 		ImGui::Checkbox("IsAir", &isAir_);
 		ImGui::Checkbox("IsLanding", &isLanding_);
+		ImGui::Checkbox("IsAlive", &isAlive_);
 
 		if (ImGui::Button("Stop")) {
 			vel_ = { 0.0f,0.0f,0.0f };

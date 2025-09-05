@@ -20,7 +20,7 @@ GameScene::~GameScene() {}
 void GameScene::Init() {
 	//// カメラの初期化
 	input = Input::GetInstance();
-	
+
 
 	// テクスチャのロード
 	LoadTextures();
@@ -28,7 +28,7 @@ void GameScene::Init() {
 	// 自機
 	player_ = std::make_unique<Player>();
 	// テスト壁
-	for (int i = 0; i < 5;i++) {
+	for (int i = 0; i < 5; i++) {
 		TestWall* wall = new TestWall();
 		wall->Init();
 		testWall_.push_back(wall);
@@ -66,8 +66,8 @@ void GameScene::Init() {
 	InitializeData();
 
 
-	Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
-	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage", objects_, colliders_);
+	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
+	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage", objects_, colliders_);
 }
 
 // シーン更新関数
@@ -76,13 +76,13 @@ void GameScene::Update() {
 		obj->Update();
 	}
 
-	camera->Update();		
+	camera->Update();
 	camera->Move(1);
 	TENQ->Update();
 	HoleObject_->Update();
 	HoleObject2_->Update();
 	HoleObject3_->Update();
-	
+
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
 	if (input->TriggerKey(DIK_SPACE)) {
 		TENQ->GlitchVerticesLerp(0.08f);
@@ -144,8 +144,13 @@ void GameScene::Draw() {
 	// 自機
 	player_->Draw();
 
-	for (Object3d* obj : objects_) {
-		obj->Draw(floorTex_, followCamera_->GetCamera());
+	for (int i = 0; i < objects_.size(); i++) {
+		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
+			objects_[i]->Draw(damageWallTex_, followCamera_->GetCamera());
+		}
+		else {
+			objects_[i]->Draw(floorTex_, followCamera_->GetCamera());
+		}
 	}
 
 	// テスト壁
@@ -193,6 +198,7 @@ int GameScene::GameClose()
 void GameScene::LoadTextures()
 {
 	floorTex_ = TextureManager::StoreTexture("Resources/white.png");
+	damageWallTex_ = TextureManager::StoreTexture("Resources/red.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
@@ -218,7 +224,7 @@ void GameScene::LoadAudio()
 }
 
 // 初期化データのセットアップ
-void GameScene::InitializeData(){
+void GameScene::InitializeData() {
 	camera = std::make_unique<Camera>();
 	TENQ = std::make_unique<Object3d>();
 	HoleObject_ = std::make_unique<Object3d>();
@@ -240,7 +246,7 @@ void GameScene::InitializeData(){
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
-	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };	 
+	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
 	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };
 	camera->transform_.rotate = { -0.26f,-0.060f,0.0f };
 }
