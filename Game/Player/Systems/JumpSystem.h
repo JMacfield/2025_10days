@@ -64,6 +64,8 @@ private:
 
 private:// Engine variable
 	Input* input_;
+	XINPUT_STATE joyState;
+	XINPUT_STATE preJoyState;
 
 private:// 外部から受け取る変数
 	// 自機

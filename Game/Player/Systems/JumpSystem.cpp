@@ -39,6 +39,8 @@ void JumpSystem::Update() {
 		player_->EndJump();
 		vel_ = { 0.0f,0.0f,0.0f };
 	}
+
+	preJoyState = joyState;
 }
 
 void JumpSystem::DebugGui() {
@@ -62,6 +64,17 @@ void JumpSystem::InputUpdate() {
 		player_->StartJump();
 		// どちらの方向にジャンプするかを決める
 		JumpSideUpdate();
+	}
+	else if (input_->GetJoystickState(joyState)) {
+		if (PlayerConfig::Input::GamePad::GamePadTrigger(joyState, preJoyState, XINPUT_GAMEPAD_RIGHT_SHOULDER)) {
+			if (player_->GetIsAir()) {
+				airJumpCount_++;
+			}
+			isActive_ = true;
+			player_->StartJump();
+			// どちらの方向にジャンプするかを決める
+			JumpSideUpdate();
+		}
 	}
 }
 

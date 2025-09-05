@@ -125,6 +125,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Player\PlayerConfig.cpp" />
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\ChromaticAberration.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\DepthOutline.cpp" />
