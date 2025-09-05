@@ -10,7 +10,7 @@ namespace LoaderConfig {
 	namespace Collider {
 		namespace Mask {
 			// 壁
-			inline std::string wall = "BOX";
+			inline std::string wall = "WALL";
 
 			// 攻撃
 			inline std::string attack = "ATTACK";

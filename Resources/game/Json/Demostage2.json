@@ -1,0 +1,390 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "WALL",
+            "transform": {
+                "translation": [
+                    5.0,
+                    70.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.001",
+            "transform": {
+                "translation": [
+                    -5.0,
+                    -30.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.002",
+            "transform": {
+                "translation": [
+                    5.0,
+                    -50.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "ATTACK",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "ATTACK",
+            "transform": {
+                "translation": [
+                    0.0,
+                    140.0,
+                    0.0
+                ],
+                "rotation": [
+                     0.0,
+                    -0.0,
+                    180.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "ATTACK",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.003",
+            "transform": {
+                "translation": [
+                    -5.0,
+                    10.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.004",
+            "transform": {
+                "translation": [
+                    -5.0,
+                    90.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.005",
+            "transform": {
+                "translation": [
+                    5.0,
+                    -10.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.006",
+            "transform": {
+                "translation": [
+                    5.0,
+                    30.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.007",
+            "transform": {
+                "translation": [
+                    -5.0,
+                    50.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.008",
+            "transform": {
+                "translation": [
+                    5.0,
+                    -90.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WALL.009",
+            "transform": {
+                "translation": [
+                    -5.0,
+                    -70.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    15.0,
+                    30.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                     0.5,
+                    15.0,
+                    30.0
+                ]
+            }
+        }
+    ]
+}

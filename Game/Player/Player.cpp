@@ -126,7 +126,7 @@ void Player::Release() {
 void Player::DebugGui() {
 	if (ImGui::TreeNode("Player")) {
 		if (ImGui::TreeNode("Object")) {
-			ImGui::DragFloat3("Translation", &body_->worldTransform_.translation_.x, 0.1f, -100.0f, 100.0f);
+			ImGui::DragFloat3("Translation", &body_->worldTransform_.translation_.x, 0.1f, -1000.0f, 1000.0f);
 			ImGui::DragFloat3("Rotation", &body_->worldTransform_.rotation_.x, 0.01f, -6.28f, 6.28f);
 			ImGui::TreePop();
 		}

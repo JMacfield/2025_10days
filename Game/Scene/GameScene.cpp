@@ -66,7 +66,7 @@ void GameScene::Init() {
 
 
 	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
-	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage", objects_, colliders_);
+	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage2", objects_, colliders_);
 }
 
 // シーン更新関数
@@ -158,8 +158,8 @@ void GameScene::Draw() {
 	}
 	// 床
 	floor_->Draw(floorTex_, followCamera_->GetCamera());
-	TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
-	HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());
+	/*TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
+	HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());*/
 	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
 	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
 }
