@@ -158,6 +158,8 @@ private:// 定数
 private:// Engine system
 	// 入力
 	Input* input_;
+	XINPUT_STATE joyState;
+	XINPUT_STATE preJoyState;
 
 private:// 外部から受け取るアドレス
 	// カメラ

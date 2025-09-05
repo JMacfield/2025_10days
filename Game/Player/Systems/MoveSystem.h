@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector3.h"
+#include "Vector2.h"
 
 /// <summary>
 /// 移動処理
@@ -51,6 +52,9 @@ public:// Accessor method
 
 public:// 調整項目
 	Vector3 maxMoveVel = { 0.0f,0.0f, 0.05f };
+
+	// ゲームパッドのカメラ感度
+	Vector2 sensitivity = { 0.1f, 0.1f };
 
 private:// Private method
 	// 速度

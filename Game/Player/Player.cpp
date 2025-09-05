@@ -41,7 +41,7 @@ Player::Player() {
 void Player::Init() {
 	currentDimension_ = DimensionType::kNow;
 
- 	body_->worldTransform_.translation_ = { -4.0f, 0.0f, 0.0f };
+	body_->worldTransform_.translation_ = { -4.0f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
 	body_->Update();
@@ -77,6 +77,16 @@ void Player::Update() {
 			currentDimension_ = DimensionType::kNow;
 		}
 	}
+	else if (input_->GetJoystickState(joyState)) {
+		if (PlayerConfig::Input::GamePad::GamePadTrigger(joyState, preJoyState, XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+			if (currentDimension_ == DimensionType::kNow) {
+				currentDimension_ = DimensionType::kPast;
+			}
+			else if (currentDimension_ == DimensionType::kPast) {
+				currentDimension_ = DimensionType::kNow;
+			}
+		}
+	}
 
 	// 移動処理
 	moveSystem_->Update();
@@ -107,6 +117,8 @@ void Player::Update() {
 	if (isAir_ && !isLanding_) {
 		vel_.y -= acceleration;
 	}
+
+	preJoyState = joyState;
 }
 
 void Player::Draw() {

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Xinput.h"
+#include "Input.h"
 
 struct FileName {
 	std::string name;			// ファイル名
@@ -33,7 +33,7 @@ namespace PlayerConfig {
 		namespace Models {
 			// 体
 			inline FileName body = {
-				"ball.obj", 
+				"ball.obj",
 				"Resources/ball/"
 			};
 		}
@@ -62,6 +62,25 @@ namespace PlayerConfig {
 			inline BYTE switching;
 			// ジャンプ
 			inline BYTE jump;
+
+			// デッドゾーンの閾値
+			inline int DEADZONE_THRESHOLD = 8000;
+
+			/// <summary>
+			/// ゲームパッドのボタンを押した瞬間を取得
+			/// </summary>
+			/// <param name="joyState"></param>
+			/// <param name="preJoyState"></param>
+			/// <param name="GAMEPAD_NUM"></param>
+			/// <returns></returns>
+			bool GamePadTrigger(XINPUT_STATE joyState, XINPUT_STATE preJoyState, int GAMEPAD_NUM);
+			/// <summary>
+			/// デッドゾーンを適用する関数
+			/// </summary>
+			/// <param name="inputValue"></param>
+			/// <returns></returns>
+			SHORT ApplyDeadzone(SHORT inputValue);
 		}
+
 	}
 }
