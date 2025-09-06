@@ -73,7 +73,7 @@ private:
 	// 頂点バッファビューを作成する
 	D3D12_VERTEX_BUFFER_VIEW materialBufferView{};
 	// 頂点リソースにデータを書き込む
-	HSVFilterInfo* HSVFilterData_;
+	HSVFilterInfo* HSVFilterData_ = nullptr;
 
 };
 

@@ -26,8 +26,9 @@ enum PostEffectMode {
 	kTVEffect,
 	kOutlinePurple,
 	kChromaticAberration,
+	kScanLine,
+	kGlitch,
 	kNumPostEffect
-
 };
 class PostProcess;
 // シーン内での処理を行う基底クラス

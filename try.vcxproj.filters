@@ -313,6 +313,8 @@
     <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
     <ClCompile Include="Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Game\Scene\OverScene.cpp" />
+    <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
+    <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -588,6 +590,8 @@
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Scene\OverScene.h" />
+    <ClInclude Include="Engine\2d\PostEffect\Effect\Scanline.h" />
+    <ClInclude Include="Engine\2d\PostEffect\Effect\Glitch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

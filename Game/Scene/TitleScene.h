@@ -1,5 +1,9 @@
 ﻿#pragma once
 #include "IScene.h"
+#include "Sprite.h"
+#include "Camera.h"
+#include "Object3d.h"
+#include "Model.h"
 #include <memory>
 
 // クラスの前方宣言

@@ -16,6 +16,8 @@
 #include "TVEffect.h"
 #include "OutlinePurple.h"
 #include "ChromaticAberration.h"
+#include "Scanline.h"
+#include "Glitch.h"
 #include <d3dx12.h>
 /**
 * @file PSOPostEffect.cpp
@@ -41,6 +43,8 @@ void PSOPostEffect::Init()
 	effectArr_[PostEffectMode::kTVEffect] = std::make_unique<TVEffect>();
 	effectArr_[PostEffectMode::kOutlinePurple] = std::make_unique<OutlinePurple>();
 	effectArr_[PostEffectMode::kChromaticAberration] = std::make_unique<ChromaticAberration>();
+	effectArr_[PostEffectMode::kScanLine] = std::make_unique<Scanline>();
+	effectArr_[PostEffectMode::kGlitch] = std::make_unique<Glitch>();
 	effectArr_[currentEffectNo_]->Init();
 	property = effectArr_[currentEffectNo_]->CreatePipelineStateObject();
 }

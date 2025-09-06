@@ -192,6 +192,14 @@ int GameManager::Run() {
 					IPostEffectState::SetEffectNo(kHSVFilter);
 					currentStatus = "HSV effect applied";
 				}
+				if (ImGui::MenuItem("Scanline")) {
+					IPostEffectState::SetEffectNo(kScanLine);
+					currentStatus = "scanline applied";
+				}
+				if (ImGui::MenuItem("Glitch")) {
+					IPostEffectState::SetEffectNo(kGlitch);
+					currentStatus = "glitch applied";
+				}
 
 				ImGui::EndMenu();
 			}

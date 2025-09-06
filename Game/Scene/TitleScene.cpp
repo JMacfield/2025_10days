@@ -3,6 +3,7 @@
 #include "IScene.h"
 #include "Camera.h"
 #include "PostProcess.h"
+#include "TextureManager.h"
 #include <dinput.h>
 
 TitleScene::TitleScene() {}
@@ -13,6 +14,8 @@ void TitleScene::Init() {
     LoadModels();
     LoadAudio();
     InitializeData();
+
+   
 }
 
 void TitleScene::Update() {
@@ -28,12 +31,15 @@ void TitleScene::Draw() {
 
 void TitleScene::PostDraw() {
     // ポストエフェクトの描画処理
+    postProcess_->Draw();
 }
 
 void TitleScene::Release() {
     // newしたインスタンスなどの解放処理
     camera_.reset();
+    camera_ = nullptr;
     postProcess_.reset();
+    postProcess_ = nullptr;
 }
 
 int TitleScene::GameClose() {
@@ -63,4 +69,5 @@ void TitleScene::InitializeData() {
 
     postProcess_ = std::make_unique<PostProcess>();
     postProcess_->Init();
+    postProcess_->SetCamera(camera_.get());
 }
