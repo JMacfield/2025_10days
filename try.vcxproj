@@ -145,6 +145,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Interface\Heap\SRVManager.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Fog.cpp" />
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Scene\OverScene.cpp" />
+    <ClCompile Include="Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Game\Utilty\Lerp.cpp" />
     <ClCompile Include="Game\Utilty\Loader.cpp" />
     <ClCompile Include="Engine\Interface\Mesh.cpp" />
@@ -228,6 +230,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Interface\Heap\SRVManager.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Fog.h" />
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Scene\OverScene.h" />
+    <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Utilty\Lerp.h" />
     <ClInclude Include="Game\Utilty\Loader.h" />
     <ClInclude Include="Engine\Interface\Mesh.h" />

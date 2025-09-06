@@ -34,9 +34,16 @@
 
 GameManager::GameManager() {
 	// 各シーンの登録
-	sceneMap_[GAMESCENE] = []() { return std::make_shared<GameScene>(); };
-	sceneMap_[CLEARSCENE] = []() { return std::make_shared<ClearScene>(); };
-	sceneMap_[STAGESELECTSCENE] = []() { return std::make_shared<StageSelectScene>(); };
+	sceneMap_[TITLESCENE] = []() { 
+		return std::make_shared<TitleScene>(); };
+	sceneMap_[GAMESCENE] = []() { 
+		return std::make_shared<GameScene>(); };
+	sceneMap_[CLEARSCENE] = []() { 
+		return std::make_shared<ClearScene>(); };
+	sceneMap_[STAGESELECTSCENE] = []() { 
+		return std::make_shared<StageSelectScene>(); };
+	sceneMap_[OVERSCENE] = []() {
+		return std::make_shared<OverScene>(); };
 }
 GameManager::~GameManager() {
 	if (sceneArr_) {

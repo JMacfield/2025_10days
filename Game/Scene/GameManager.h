@@ -4,6 +4,8 @@
 #include "GameScene.h"
 #include "ClearScene.h"
 #include "StageSelectScene.h"
+#include "OverScene.h"
+#include "TitleScene.h"
 
 #include "Input.h"
 //#include "Input.h"

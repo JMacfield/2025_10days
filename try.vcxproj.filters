@@ -311,6 +311,8 @@
     </ClCompile>
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
+    <ClCompile Include="Game\Scene\TitleScene.cpp" />
+    <ClCompile Include="Game\Scene\OverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -584,6 +586,8 @@
     </ClInclude>
     <ClInclude Include="Game\Scene\ClearScene.h" />
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
+    <ClInclude Include="Game\Scene\TitleScene.h" />
+    <ClInclude Include="Game\Scene\OverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">
