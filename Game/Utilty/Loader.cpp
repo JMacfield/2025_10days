@@ -277,6 +277,12 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 				};
 				objectData.colliderSize = size;
 
+				// いったん上書き
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
+
+
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
 

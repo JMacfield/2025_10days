@@ -68,7 +68,7 @@ void GameScene::Init() {
 
 
 	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
-	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage2", objects_, colliders_);
+	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage1", objects_, colliders_);
 }
 
 // シーン更新関数
@@ -85,6 +85,9 @@ void GameScene::Update() {
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 	
 	if (input->TriggerKey(DIK_C)) {
+		for (Object3d* obj : objects_) {
+			obj->GlitchVerticesLerp(0.8f);
+		}
 		objectList_[TENQ]->GlitchVerticesLerp(0.08f);
 		objectList_[HOLE1]->GlitchVerticesLerp(1.0f);
 		objectList_[HOLE2]->GlitchVerticesLerp(5.0f);
@@ -92,6 +95,9 @@ void GameScene::Update() {
 	}
 	if (input->TriggerKey(DIK_V)) {
 		for (auto& obj : objectList_) {
+			obj->StartLerpToOriginalVertices();
+		}
+		for (Object3d* obj : objects_) {
 			obj->StartLerpToOriginalVertices();
 		}
 	}
