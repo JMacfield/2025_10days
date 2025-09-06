@@ -67,6 +67,9 @@ private:// 調整項目
 	// 着地時の視野角
 	float landingFov = 0.75f;
 
+	// 回転の補間レート
+	float rotateRate = 0.3f;
+
 private:// Engine system
 	// 入力
 	Input* input_;

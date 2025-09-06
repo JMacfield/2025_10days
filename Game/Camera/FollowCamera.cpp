@@ -30,7 +30,11 @@ void FollowCamera::Update() {
 	FovUpdate();
 
 	// 自機のオイラー角を取得
-	camera_->transform_.rotate = player_->GetWorldTransform()->rotation_;
+	camera_->transform_.rotate = {
+		LerpShortAngle(camera_->transform_.rotate.x, player_->GetWorldTransform()->rotation_.x, rotateRate),
+		LerpShortAngle(camera_->transform_.rotate.y, player_->GetWorldTransform()->rotation_.y, rotateRate),
+		LerpShortAngle(camera_->transform_.rotate.z, player_->GetWorldTransform()->rotation_.z, rotateRate),
+	};
 
 	// 追従対象からカメラまでのオフセット
 	Vector3 offset = MathFuncs::TargetOffset(targetOffset_, camera_->GetRotate());
@@ -51,6 +55,7 @@ void FollowCamera::DebugGui() {
 		ImGui::DragFloat3("Translation", &camera_->transform_.translate.x, 0.1f);
 		ImGui::DragFloat3("Rotation", &camera_->transform_.rotate.x, 0.1f);
 		ImGui::DragFloat3("offset", &targetOffset_.x, 0.1f, 0, 200);
+		ImGui::DragFloat("RotateRate", &rotateRate, 0.01f);
 		if (ImGui::TreeNode("Fov")) {
 			ImGui::DragFloat("Value", &camera_->fovY_, 0.1f);
 			ImGui::DragFloat("Air", &airFov, 0.01f);
