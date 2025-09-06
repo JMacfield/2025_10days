@@ -32,6 +32,7 @@ void Shake::Update() {
 
 void Shake::Reset() {
 	currentFrame_ = endFrame_;
+	*target_ = originalValue_;
 	isActive_ = false;
 	isEnd_ = false;
 }

@@ -64,6 +64,7 @@ void Player::Init() {
 }
 
 void Player::Update() {
+	isPreAlive_ = isAlive_;
 	if (!isAlive_) { return; }
 
 	isPreAir_ = isAir_;

@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "WorldTransform.h"
 #include "../Player/Components/Anim.h"
+#include "../Player/Components/Shake.h"
 
 class Player;
 /// <summary>
@@ -13,6 +14,7 @@ public:
 	// 視野角の種類
 	enum class FovType {
 		kDefault,	// 通常
+		kDead,		// 死亡
 		kAir,		// 空中
 		kLanding	// 着地の瞬間
 	};
@@ -52,6 +54,11 @@ private:// Private method
 	/// </summary>
 	void FovUpdate();
 
+	/// <summary>
+	/// 死亡時のカメラ演出
+	/// </summary>
+	void DeadEffect();
+
 public:// Accessor method
 	/// <summary>
 	/// カメラのアドレスを取得
@@ -60,12 +67,18 @@ public:// Accessor method
 	Camera* GetCamera() { return camera_.get(); }
 
 private:// 調整項目
+	// 死亡時のカメラの揺れる範囲
+	Vector3 deadShakeRange = { 0.4f,0.4f, 0.4f };
+	float deadShakeFrame = 15.0f;
+
 	// 初期視野角
 	float defaultFov = 0.8f;
 	// 空中にいるときの視野角
 	float airFov = 0.9f;
 	// 着地時の視野角
 	float landingFov = 0.75f;
+	// 死亡時の視野角
+	float deadFov = 0.5f;
 
 	// 回転の補間レート
 	float rotateRate = 0.3f;
@@ -86,6 +99,10 @@ private:// Private variable
 	std::map<FovType, Anim> fovAnim_;
 	// 現在の視野角
 	float currentFov_;
+
+	// 死亡時の揺れ
+	std::unique_ptr<Shake> deadShake_;
+	Vector3 shakeOffset_;
 
 	// 追従対象との距離
 	Vector3 targetOffset_ = { 0.0f,0.0f, 0.0f };

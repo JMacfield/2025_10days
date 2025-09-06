@@ -97,11 +97,6 @@ public:// Accessor method
 	/// <returns></returns>
 	float GetAcceleration() { return acceleration; }
 	/// <summary>
-	/// 空中にいるかを取得
-	/// </summary>
-	/// <returns></returns>
-	bool GetIsAir() { return isAir_; }
-	/// <summary>
 	/// 空中に浮いた瞬間を取得
 	/// </summary>
 	/// <returns></returns>
@@ -111,6 +106,11 @@ public:// Accessor method
 		}
 		return false;
 	}
+	/// <summary>
+	/// 空中にいるかを取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsAir() { return isAir_; }
 	/// <summary>
 	/// 着地した瞬間を取得
 	/// </summary>
@@ -127,7 +127,17 @@ public:// Accessor method
 	/// <returns></returns>
 	bool GetIsLanding() { return isLanding_; }
 	/// <summary>
-	/// 線蔵しているかを取得
+	/// 死亡した瞬間を取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetTriggerDead() {
+		if (!isAlive_ && isPreAlive_) {
+			return true;
+		}
+		return false;
+	}
+	/// <summary>
+	/// 生存しているかを取得
 	/// </summary>
 	/// <returns></returns>
 	bool GetIsAlive() { return isAlive_; }
@@ -194,5 +204,6 @@ private:// Private variable
 	bool isLanding_ = false;
 
 	bool isAlive_ = true;
+	bool isPreAlive_;
 };
 
