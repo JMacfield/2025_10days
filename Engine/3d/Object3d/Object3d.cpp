@@ -185,10 +185,9 @@ Vector3 Object3d::GetScale() const {
 void Object3d::SetModel(const std::string& filePath)
 {
 	model_ = ModelManager::GetInstance()->FindModel(filePath);
-	// 初期頂点を保存
-	if (model_) {
-		originalVertices_ = model_->GetModelData().vertices;
-	}
+	// 頂点データを個別にコピー
+	originalVertices_ = model_->GetModelData().vertices;
+	glitchedVertices_ = originalVertices_;
 }
 
 void Object3d::SetAnimationModel(const std::string& filePath)

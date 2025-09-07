@@ -73,6 +73,7 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
+	time++;
 	for (Object3d* obj : objects_) {
 		obj->Update();
 	}
@@ -83,7 +84,16 @@ void GameScene::Update() {
 	camera->Move(1);
 	
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
-	
+
+	if (time == 50) {
+		objects_[0]->SetLerpSpeed(0.02f);
+		objects_[0]->GlitchVerticesLerp(0.8f);
+	}
+	if (time == 100) {
+		objects_[0]->StartLerpToOriginalVertices();
+		time = 0;
+	}
+
 	if (input->TriggerKey(DIK_C)) {
 		for (Object3d* obj : objects_) {
 			obj->GlitchVerticesLerp(0.8f);
