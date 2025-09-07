@@ -87,10 +87,9 @@ void GameScene::Update() {
 
 	if (time == 100) {
 		objects_[0]->SetLerpSpeed(0.01f);
-		objects_[0]->GlitchVerticesLerp(0.5f);
+		objects_[0]->GlitchVerticesLerp(0.3f);
 	}
-	if (time == 200) {
-		objects_[0]->StartLerpToOriginalVertices();
+	if (time == 150) {
 		time = 0;
 	}
 
