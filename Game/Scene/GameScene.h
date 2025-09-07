@@ -16,9 +16,16 @@
 #include "Collider.h"
 #include "Menu.h"
 #include "random"
+#include "Loader.h"
 #include <vector>
 #include <string>
 #include <memory>
+
+#include "../TestPlane/TestWall.h"
+#include "../Player/Player.h"
+#include "../Camera/FollowCamera.h"
+#include "../Collision/CollisionManager.h"
+
 
 /// <summary>
 /// ゲームシーン
@@ -30,7 +37,7 @@ public:// Public methods
     // デストラクタ
     ~GameScene() override;
  
-#pragma region Override methods
+#pragma region Override
     // 初期化
     void Init() override;
     // 更新
@@ -45,7 +52,7 @@ public:// Public methods
     int GameClose() override;
 #pragma endregion
 
-private:// Private methods
+public:// Private methods
 #pragma region Initialization
     /// <summary>
     /// 全てのテクスチャの読み込み
@@ -84,19 +91,49 @@ private:// Private methods
 #pragma endregion
 
 private:// Private variable
+
+    std::vector<std::unique_ptr<Object3d>> objectList_;
+    enum ObjectIndex {
+        TENQ, 
+        HOLE1, 
+        HOLE2, 
+        HOLE3 
+    };
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
     std::unique_ptr<Camera> camera = nullptr;
     Input* input = nullptr;
-    std::unique_ptr<Object3d> TENQ = nullptr;
-    std::unique_ptr<Object3d> HoleObject_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject2_ = nullptr;
-    std::unique_ptr<Object3d> HoleObject3_ = nullptr;
     enum TextureID {
         NORMAL_HOLE,
 		TENQ_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
+
+    // Blenderの配置情報を読み取るローダー
+    //Loader* loader_;
+    std::vector<Object3d*> objects_;
+    std::vector<Collider*> colliders_;
+
+    // 入力
+    Input* input_;
+
+    // 当たり判定管理クラス
+    CollisionManager* collisionManager_;
+
+    // 追従カメラ
+    std::unique_ptr<FollowCamera> followCamera_;
+
+    // 自機
+    std::unique_ptr<Player> player_;
+
+    // 当たり判定確認用の壁
+    std::vector<TestWall*> testWall_;
+
+    // 床(仮)
+    std::unique_ptr<Object3d> floor_;
+    // 床のテクスチャ
+    uint32_t floorTex_;
+    uint32_t damageWallTex_;
 };

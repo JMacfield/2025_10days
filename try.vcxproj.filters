@@ -306,11 +306,20 @@
       <Filter>Engine\2d\PostEffect\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\Player\Systems\JumpSystem.cpp" />
+    <ClCompile Include="Game\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Game\TestPlane\TestWall.cpp" />
+    <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
+    <ClCompile Include="Game\Player\Components\Math\MathFuncs.cpp" />
+    <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Player\Components\Shake.cpp" />
     <ClCompile Include="Game\Utilty\Lerp.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
+    <ClCompile Include="Game\Player\PlayerConfig.cpp" />
     <ClCompile Include="Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Game\Scene\OverScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
@@ -583,11 +592,22 @@
       <Filter>Application\scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Player\Player.h" />
+    <ClInclude Include="Game\Player\PlayerConfig.h" />
+    <ClInclude Include="Game\Player\Systems\JumpSystem.h" />
+    <ClInclude Include="Game\Camera\FollowCamera.h" />
+    <ClInclude Include="Game\TestPlane\TestWall.h" />
+    <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
+    <ClInclude Include="Game\Player\Systems\ISystem.h" />
+    <ClInclude Include="Game\Player\Components\Math\MathFuncs.h" />
+    <ClInclude Include="Game\Player\Components\Anim.h" />
+    <ClInclude Include="Game\Player\Components\Shake.h" />
     <ClInclude Include="Game\Utilty\Lerp.h">
       <Filter>Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="Game\Scene\ClearScene.h" />
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
+    <ClInclude Include="Game\Utilty\LoaderConfig.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Scene\OverScene.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Scanline.h" />

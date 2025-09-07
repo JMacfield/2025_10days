@@ -126,6 +126,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
+    <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Player\PlayerConfig.cpp" />
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\ChromaticAberration.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\DepthOutline.cpp" />
@@ -149,6 +151,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
     <ClCompile Include="Game\Scene\OverScene.cpp" />
     <ClCompile Include="Game\Scene\TitleScene.cpp" />
+    <ClCompile Include="Game\Camera\FollowCamera.cpp" />
     <ClCompile Include="Game\Utilty\Lerp.cpp" />
     <ClCompile Include="Game\Utilty\Loader.cpp" />
     <ClCompile Include="Engine\Interface\Mesh.cpp" />
@@ -183,6 +186,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\IPostEffectState.cpp" />
+    <ClCompile Include="Game\Player\Systems\JumpSystem.cpp" />
     <ClCompile Include="Lib\utility\function.cpp" />
     <ClCompile Include="Engine\2d\ImGuiCommon.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\LuminanceBasedOutline.cpp" />
@@ -202,11 +206,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\2d\PostEffect\Effect\TVEffect.cpp" />
     <ClCompile Include="Game\Utilty\Timer.cpp" />
     <ClCompile Include="Game\Utilty\Menu.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\TestPlane\TestWall.cpp" />
+    <ClCompile Include="Game\Player\Systems\MoveSystem.cpp" />
+    <ClCompile Include="Game\Player\Components\Math\MathFuncs.cpp" />
+    <ClCompile Include="Game\Player\Components\Shake.cpp" />
     <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\2d\PostEffect\Effect\Glitch.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Scanline.h" />
+    <ClInclude Include="Game\Player\Components\Anim.h" />
     <ClInclude Include="Game\Scene\ClearScene.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\ChromaticAberration.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\DepthOutline.h" />
@@ -234,6 +244,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Interface\Heap\SRVManager.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\Fog.h" />
     <ClInclude Include="Engine\3d\FlowEffectObject\FlowEffectObject.h" />
+    <ClInclude Include="Game\Camera\FollowCamera.h" />
+    <ClInclude Include="Game\Player\PlayerConfig.h" />
+    <ClInclude Include="Game\Player\Systems\ISystem.h" />
     <ClInclude Include="Game\Scene\OverScene.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Utilty\Lerp.h" />
@@ -258,6 +271,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\2d\PostEffect\Effect\GaussianBlur.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\GrayScale.h" />
     <ClInclude Include="Engine\2d\PostEffect\Effect\HSVFilter.h" />
+    <ClInclude Include="Game\Utilty\LoaderConfig.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -269,6 +283,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Engine\3d\Material.h" />
     <ClInclude Include="Engine\2d\PostEffect\IPostEffectState.h" />
+    <ClInclude Include="Game\Player\Systems\JumpSystem.h" />
     <ClInclude Include="Lib\math\Matrix3x3.h" />
     <ClInclude Include="Engine\3d\ResourceObject.h" />
     <ClInclude Include="Engine\2d\Sprite.h" />
@@ -300,11 +315,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\2d\PostEffect\Effect\TVEffect.h" />
     <ClInclude Include="Game\Utilty\Timer.h" />
     <ClInclude Include="Game\Utilty\Menu.h" />
+    <ClInclude Include="Game\Player\Player.h" />
+    <ClInclude Include="Game\Player\Systems\MoveSystem.h" />
+    <ClInclude Include="Game\Player\Components\Math\MathFuncs.h" />
+    <ClInclude Include="Game\Player\Components\Shake.h" />
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
     <ClInclude Include="test.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Game\TestPlane\TestWall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

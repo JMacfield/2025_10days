@@ -5,7 +5,6 @@
 * @brief 入力デバイスの管理を行うクラス
 */
 
-
 void Input::Initialize() {
 	WinAPI* sWinAPI = WinAPI::GetInstance();
 	// DirectInputの初期化
@@ -89,6 +88,8 @@ bool Input::TriggerKey(BYTE keyNumber)
 	return false;
 }
 Input* Input::GetInstance() {
-	static Input instance;
-	return &instance;
+	if (!instance_) {
+		instance_ = std::make_unique<Input>();
+	}
+	return instance_.get();
 }

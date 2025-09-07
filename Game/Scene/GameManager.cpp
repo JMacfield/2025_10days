@@ -34,22 +34,13 @@
 
 GameManager::GameManager() {
 	// 各シーンの登録
-	sceneMap_[TITLESCENE] = []() { 
-		return std::make_shared<TitleScene>(); };
-	sceneMap_[GAMESCENE] = []() { 
-		return std::make_shared<GameScene>(); };
-	sceneMap_[CLEARSCENE] = []() { 
-		return std::make_shared<ClearScene>(); };
-	sceneMap_[STAGESELECTSCENE] = []() { 
-		return std::make_shared<StageSelectScene>(); };
-	sceneMap_[OVERSCENE] = []() {
-		return std::make_shared<OverScene>(); };
+	sceneArr_[TITLESCENE] = new TitleScene();
+	sceneArr_[GAMESCENE] = new GameScene();
+	sceneArr_[CLEARSCENE] = new ClearScene();
+	sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+	sceneArr_[OVERSCENE] = new OverScene();
 }
 GameManager::~GameManager() {
-	if (sceneArr_) {
-		sceneArr_->Release();
-		sceneArr_.reset();
-	}
 }
 
 const char kWindowTitle[] = "LE3A";
@@ -97,9 +88,7 @@ int GameManager::Run() {
 	prevSceneNo_ = currentSceneNo_;
 	currentSceneNo_ = IScene::GetSceneNo();
 	//post->Init();
-	sceneArr_ = sceneMap_[currentSceneNo_]();
-	sceneArr_->Init();
-
+	sceneArr_[currentSceneNo_]->Init();
 
 	Input* sInput = Input::GetInstance();
 	sInput->Initialize();
@@ -111,6 +100,7 @@ int GameManager::Run() {
 			// ゲームループを抜ける
 			break;
 		}
+
 		// ゲームの処理の開始
 		sDirctX->tempRender();
 		// ImGui
@@ -215,18 +205,32 @@ int GameManager::Run() {
 
 		// シーンのチェック
 		prevSceneNo_ = currentSceneNo_;
-		currentSceneNo_ = IScene::GetSceneNo();
-
+		currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
 		// シーン変更チェック
 		if (prevSceneNo_ != currentSceneNo_) {
-			sceneArr_ = sceneMap_[currentSceneNo_]();
-			sceneArr_->Init();
+			sceneArr_[prevSceneNo_]->Release();
+			delete sceneArr_[prevSceneNo_];
+			sceneArr_[prevSceneNo_] = nullptr;
+
+			switch (prevSceneNo_) {
+			case GAMESCENE:
+				sceneArr_[GAMESCENE] = new GameScene();
+				break;
+			case CLEARSCENE:
+				sceneArr_[CLEARSCENE] = new ClearScene();
+				break;
+			case STAGESELECTSCENE:
+				sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+				break;
+			}
+
+			sceneArr_[currentSceneNo_]->Init();
 		}
 
 		///
 		/// ↓更新処理ここから
 		///
-		sceneArr_->Update(); // シーンごとの更新処理
+		sceneArr_[currentSceneNo_]->Update(); // シーンごとの更新処理
 
 		///
 		/// ↑更新処理ここまで
@@ -236,23 +240,24 @@ int GameManager::Run() {
 		/// ↓描画処理ここから
 		///
 
-		sceneArr_->Draw();
-
+		sceneArr_[currentSceneNo_]->Draw();
 
 		///
 		/// ↑描画処理ここまで
 		///
 		sDirctX->BeginFrame();
 		sDirctX->ChangeDepthStatetoRead();
-		sceneArr_->PostDraw();
+		sceneArr_[currentSceneNo_]->PostDraw();
+
 		// フレームの終了
 		//スワップチェーン
 		sDirctX->ChangeDepthStatetoRender();
 		sDirctX->ViewChange();
-		sAudio->GetIXAudio().Reset();
+		sAudio->Release();
+		//sAudio->GetIXAudio().Reset();
 		// ESCキーが押されたらループを抜ける
-		if (sceneArr_->GameClose()) {
-			sceneArr_->Release();
+		if (sceneArr_[currentSceneNo_]->GameClose()) {
+			sceneArr_[currentSceneNo_]->Release();
 			break;
 		}
 	}
@@ -265,10 +270,17 @@ int GameManager::Run() {
 
 	-------------------------------------------------------------*/
 
+	for (auto& pair : sceneArr_) {
+		if (pair) {
+			pair->Release();
+			delete pair;
+		}
+	}
 	sModelManager->Finalize();
-	sWinAPI->Finalize();
-	//delete sWinAPI;
+	TextureManager::GetInstance()->Release();
+	SRVManager::GetInstance()->Release();
 	sDirctX->Release();
+	sWinAPI->Finalize();
 
 	return 0;
 }

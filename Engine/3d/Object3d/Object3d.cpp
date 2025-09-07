@@ -387,6 +387,13 @@ void Object3d::LerpToGlitchedVertices(float lerpT)
 	model_->UpdateVertexBuffer();
 }
 
+void Object3d::ResetVerticesToOriginal() {
+	if (!model_ || originalVertices_.empty()) return;
+	auto& vertices = model_->GetModelData().vertices;
+	vertices = originalVertices_;
+	model_->UpdateVertexBuffer();
+}
+
 void Object3d::LightDebug(const char* name)
 {
 #ifdef _DEBUG
@@ -475,7 +482,7 @@ void Object3d::EasingDebugUI(const char* name)
 		"EaseInExpo", "EaseOutExpo", "EaseInOutExpo"
 	};
 	int current = static_cast<int>(easingType_);
-	ImGui::Begin("EasingDebug Space : Easing , V : Re-Easing");
+	ImGui::Begin("EasingDebug C : Easing , V : Re-Easing");
 	ImGui::Combo(name, &current, easingNames, static_cast<int>(EasingType::Count));
 	easingType_ = static_cast<EasingType>(current);
 	// nameをラベルに付加

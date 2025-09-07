@@ -11,7 +11,10 @@
 #include <DirectXMath.h>
 
 ClearScene::ClearScene() {}
-ClearScene::~ClearScene() {}
+ClearScene::~ClearScene() {
+	int a;
+	a = 1;
+}
 
 void ClearScene::Init() {
 	// 初期化処理
@@ -40,7 +43,7 @@ void ClearScene::Update() {
 	HoleObject3_->Update();
 
 	TENQ->worldTransform_.rotation_.y += 0.0005f;
-	if (input->TriggerKey(DIK_SPACE)) {
+	if (input->TriggerKey(DIK_C)) {
 		TENQ->GlitchVerticesLerp(0.08f);
 		HoleObject_->GlitchVerticesLerp(1.0f);
 		HoleObject2_->GlitchVerticesLerp(5.0f);
@@ -66,7 +69,12 @@ void ClearScene::Update() {
 	HoleObject2_->ModelDebug("model2");
 	HoleObject3_->ModelDebug("model3");
 	if (input->TriggerKey(DIK_R)) {
-		IScene::SetSceneNo(GAMESCENE);
+		TENQ->ResetVerticesToOriginal();
+		HoleObject_->ResetVerticesToOriginal();
+		HoleObject2_->ResetVerticesToOriginal();
+		HoleObject3_->ResetVerticesToOriginal();
+
+		this->SetSceneNo(GAMESCENE);
 		return;
 	}
 }
@@ -75,6 +83,10 @@ void ClearScene::Draw() {
 	if (TENQ) {
 		TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
 	}
+	if (HoleObject_) {
+		HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
+	}
+
 }
 void ClearScene::PostDraw() {
 	// ポストエフェクト描画

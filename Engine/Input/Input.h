@@ -4,6 +4,7 @@
 #include <cassert>
 #include <wrl.h>
 #include <Xinput.h>
+#include <memory>
 
 #pragma comment(lib, "Xinput.lib")
 #pragma comment(lib, "dinput8.lib")
@@ -103,4 +104,6 @@ private:
     /// 前フレームのキーの押下状態を格納する配列
     /// </summary>
     BYTE preKeys[256];
+
+    inline static std::unique_ptr<Input> instance_;
 };
