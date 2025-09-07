@@ -200,10 +200,6 @@ void Object3d::SetModel(const std::string& filePath)
 	model_->SetMaterialResource(materialResource);
 	model_->SetMaterialData(materialData);
 
-	// 初期頂点を保存
-	if (model_) {
-		originalVertices_ = model_->GetModelData().vertices;
-	}
 	// 頂点データを個別にコピー
 	originalVertices_ = model_->GetModelData().vertices;
 	glitchedVertices_ = originalVertices_;

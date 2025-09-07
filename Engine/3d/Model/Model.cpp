@@ -413,7 +413,7 @@ void Model::Draw(uint32_t texture, const Material& material, const DirectionalLi
 
 	textureManager_ = TextureManager::GetInstance();
 	// 色のデータを変数から読み込み
-	materialData->color = material.color;
+	//materialData->color = material.color;
 	materialData->enableLighting = material.enableLighting;
 	materialData->shininess = 0.5f;
 	directionalLightData->direction = dire.direction;

@@ -45,7 +45,7 @@ void GameScene::Update() {
 	}
 	camera->Update();
 	camera->Move(1);
-	
+
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 
 	if (time == 100) {
@@ -93,8 +93,6 @@ void GameScene::Update() {
 	ImGui::Begin("GameWindow");
 	// 自機
 	player_->DebugGui();
-	// テスト壁
-	//testWall_->DebugGui();
 	// 追従カメラ
 	followCamera_->DebugGui();
 	ImGui::End();
@@ -134,12 +132,7 @@ void GameScene::Draw() {
 	player_->Draw();
 
 	for (int i = 0; i < objects_.size(); i++) {
-		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
-			objects_[i]->Draw(followCamera_->GetCamera());
-		}
-		else {
-			objects_[i]->Draw(followCamera_->GetCamera());
-		}
+		objects_[i]->Draw(followCamera_->GetCamera());
 	}
 
 	// テスト壁
@@ -232,7 +225,7 @@ void GameScene::InitializeData() {
 			objects_[i]->SetTexture(floorTex_);
 		}
 	}
-	
+
 
 	// 自機
 	player_ = std::make_unique<Player>();
