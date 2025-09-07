@@ -7,7 +7,7 @@ using namespace LoaderConfig;
 using namespace PlayerConfig::FileNames;
 
 Obstacle::Obstacle(Object3d* obj) {
-	// ‘Ì‚ÌÀ‘Ì¶¬
+	// ä½“ã®å®Ÿä½“ç”Ÿæˆ
 	body_ = obj;
 }
 
@@ -16,17 +16,17 @@ void Obstacle::Init() {
 }
 
 void Obstacle::Update() {
-	// ‰ß‹Œ»İ‚ÌØ‚è‘Ö‚¦
+	// éå»ç¾åœ¨ã®åˆ‡ã‚Šæ›¿ãˆ
 	SwitchDimension();
 
-	// ‘Ì
+	// ä½“
 	body_->Update();
 
 	preDimension_ = currentDimension_;
 }
 
 void Obstacle::Draw() {
-	// ‘Ì
+	// ä½“
 	//body_->Draw(pCamera_);
 }
 
@@ -41,25 +41,25 @@ void Obstacle::DebugGui() {
 void Obstacle::SwitchDimension() {
 	if (ObstacleType::abs == currentDimension_) { return; }
 
-	// ‰ó‚·
+	// å£Šã™
 	if (ObstacleType::fix == currentDimension_) { 
 		currentDimension_ = ObstacleType::broken;
 	}
-	// ’¼‚é
+	// ç›´ã‚‹
 	else if(ObstacleType::broken == currentDimension_) {
 		currentDimension_ = ObstacleType::fix;
 	}
 
-	// ’¼‚é‰‰o
+	// ç›´ã‚‹æ¼”å‡º
 	FixEffect();
-	// ‰ó‚ê‚é‰‰o
+	// å£Šã‚Œã‚‹æ¼”å‡º
 	BrokenEffect();
 }
 
 void Obstacle::FixEffect() {
 	if (ObstacleType::fix != currentDimension_) { return; }
 
-	// Ø‚è‘Ö‚í‚Á‚½uŠÔ
+	// åˆ‡ã‚Šæ›¿ã‚ã£ãŸç¬é–“
 	if (ObstacleType::fix != preDimension_) {
 
 	}
@@ -68,7 +68,7 @@ void Obstacle::FixEffect() {
 void Obstacle::BrokenEffect() {
 	if (ObstacleType::broken != currentDimension_) { return; }
 
-	// Ø‚è‘Ö‚í‚Á‚½uŠÔ
+	// åˆ‡ã‚Šæ›¿ã‚ã£ãŸç¬é–“
 	if (ObstacleType::broken != preDimension_) {
 
 	}

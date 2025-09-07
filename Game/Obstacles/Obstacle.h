@@ -4,70 +4,70 @@
 
 class Obstacle {
 public:// Public variable
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Obstacle(Object3d* obj);
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Obstacle() = default;
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Init();
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 	/// <summary>
-	/// •`‰æˆ—
+	/// æç”»å‡¦ç†
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// ’²®€–Ú
+	/// èª¿æ•´é …ç›®
 	/// </summary>
 	void DebugGui();
 
 private:// Private method
 	/// <summary>
-	/// ‰ß‹Œ»İ‚ÌØ‚è‘Ö‚¦
+	/// éå»ç¾åœ¨ã®åˆ‡ã‚Šæ›¿ãˆ
 	/// </summary>
 	void SwitchDimension();
 
 	/// <summary>
-	/// ’¼‚é‰‰o
+	/// ç›´ã‚‹æ¼”å‡º
 	/// </summary>
 	void FixEffect();
 	/// <summary>
-	/// ‰ó‚ê‚é‰‰o
+	/// å£Šã‚Œã‚‹æ¼”å‡º
 	/// </summary>
 	void BrokenEffect();
 
 public:// Accessor method
 	/// <summary>
-	/// ƒJƒƒ‰‚ÌƒAƒhƒŒƒX‚ğİ’è
+	/// ã‚«ãƒ¡ãƒ©ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¨­å®š
 	/// </summary>
 	/// <param name="camera"></param>
 	void SetCamera(Camera* camera) { pCamera_ = camera; }
 	/// <summary>
-	/// ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
 	/// </summary>
 	/// <param name="texHandle"></param>
 	//void SetTexture(const uint32_t& texHandle){}
 	/// <summary>
-	/// ŸŒ³‚Ìİ’è
+	/// æ¬¡å…ƒã®è¨­å®š
 	/// </summary>
 	/// <param name="dimension"></param>
 	void SetDimension(const std::string& dimension) { currentDimension_ = dimension; }
 
-private:// ŠO•”‚©‚çó‚¯æ‚éƒAƒhƒŒƒX
-	// ƒJƒƒ‰
+private:// å¤–éƒ¨ã‹ã‚‰å—ã‘å–ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
+	// ã‚«ãƒ¡ãƒ©
 	Camera* pCamera_;
 
 private:// Private variable
-	// ‘Ì‚ÌƒIƒuƒWƒFƒNƒg
+	// ä½“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	Object3d* body_;
 
-	// áŠQ•¨‚Ìó‘Ô
+	// éšœå®³ç‰©ã®çŠ¶æ…‹
 	std::string currentDimension_;
 	std::string preDimension_;
 };
