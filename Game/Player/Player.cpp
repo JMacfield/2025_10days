@@ -56,6 +56,7 @@ void Player::Init() {
 	// 着地したか
 	isLanding_ = false;
 	isAlive_ = true;
+	isClear_ = false;
 
 	vel_ = { 0.0f,0.0f,0.0f };
 	rot_ = { 0.0f,0.0f,0.0f };
@@ -65,6 +66,7 @@ void Player::Init() {
 
 void Player::Update() {
 	isPreAlive_ = isAlive_;
+	preDimension_ = currentDimension_;
 	if (!isAlive_) { return; }
 
 	isPreAir_ = isAir_;
@@ -194,6 +196,9 @@ void Player::OnCollision(Collider* collider) {
 	// 攻撃に当たったら死亡
 	if (collider->GetCollisionAttribute() == kCollisionAttributeEnemy) {
 		isAlive_ = false;
+	}
+	else if (collider->GetCollisionAttribute() == kCollisionAttributeClear) {
+		isClear_ = true;
 	}
 	// 壁の場合
 	else if (collider->GetCollisionAttribute() == kCollisionAttributeObstacles) {

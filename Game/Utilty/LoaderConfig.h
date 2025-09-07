@@ -16,4 +16,13 @@ namespace LoaderConfig {
 			inline std::string attack = "ATTACK";
 		}
 	}
+	// オブジェクトのタイプ
+	namespace ObstacleType {
+		// 壊れている
+		inline std::string broken = "BROKEN";
+		// 直った
+		inline std::string fix = "FIX";
+		// 変わらない
+		inline std::string abs = "ABS";
+	}
 }

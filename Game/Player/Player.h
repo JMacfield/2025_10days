@@ -142,6 +142,11 @@ public:// Accessor method
 	/// </summary>
 	/// <returns></returns>
 	bool GetIsAlive() { return isAlive_; }
+	/// <summary>
+	/// クリアラインに到達したかを取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsClear(){return isClear_;}
 #pragma endregion
 
 #pragma region Setter
@@ -200,14 +205,17 @@ private:// Private variable
 
 	// 今の次元(過去か現在か)
 	DimensionType currentDimension_;
+	DimensionType preDimension_;
 
 	// 空中にいるか
 	bool isAir_ = true;
 	bool isPreAir_ = false;
 	// 着地したか
 	bool isLanding_ = false;
-
+	// 生きているか
 	bool isAlive_ = true;
 	bool isPreAlive_;
+	// クリアしたか
+	bool isClear_;
 };
 
