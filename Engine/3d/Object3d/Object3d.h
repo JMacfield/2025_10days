@@ -65,6 +65,8 @@ extern EasingType easingType_;
 class Object3d
 {
 public:
+    Object3d();
+    ~Object3d();
     /// <summary>
     /// 初期化処理を行う
     /// </summary>
@@ -82,7 +84,8 @@ public:
     /// <param name="camera">カメラオブジェクトへのポインタ</param>
     void Draw(Camera* camera);
     // RGBA色変更
-    void SetColor(const Vector4& color) { color_ = color; }
+    Model* GetModel() { return model_; }
+    void SetColor(const Vector4& color) { model_->SetColor(color); }
     Vector4 GetColor() const { return color_; }
     // テクスチャハンドルSetter
     void SetTexture(uint32_t texHandle) { texture_ = texHandle; }
@@ -238,7 +241,6 @@ private:
     Vector3 scale_;
 
 	//Light用
-
 	bool isLight = true; // デフォルトでライト有効
 	float ambientLightIntensity_ = 0.5f; // 環境光の強さ
 	Vector3 lightDirection_ = { 0.0f,-1.0f,0.0f }; // 平行光源の向き

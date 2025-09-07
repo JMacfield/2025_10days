@@ -38,12 +38,12 @@ float Object3d::GetEasedT(float t) const
 	}
 }
 
-void Object3d::StartLerpToOriginalVertices()
-{
-	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
-	isLerping_ = true;
-	lerpT_ = 0.0f;
-	lerpToGlitch_ = false; // ランダム→元
+Object3d::Object3d() {
+	model_ = new Model();
+}
+
+Object3d::~Object3d() {
+	delete model_;
 }
 
 void Object3d::Init()
@@ -135,7 +135,7 @@ void Object3d::Draw(Camera* camera)
 	else if (model_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		model_->Draw(texture_, { color_.x, color_.y, color_.z, color_.w, isLight },
+		model_->Draw(texture_, { {Materialquaternion_.x,Materialquaternion_.y,Materialquaternion_.z,Materialquaternion_.w},isLight },
 			{ { DirectionalLightquaternion_.x,DirectionalLightquaternion_.y,DirectionalLightquaternion_.z,DirectionalLightquaternion_.w },
 			{ lightDirection_.x,lightDirection_.y,lightDirection_.z},ambientLightIntensity_ }, mapTexture_);
 	}
@@ -182,7 +182,28 @@ Vector3 Object3d::GetScale() const {
 
 void Object3d::SetModel(const std::string& filePath)
 {
-	model_ = ModelManager::GetInstance()->FindModel(filePath);
+	*model_ = *ModelManager::GetInstance()->FindModel(filePath);
+
+	// 実際に頂点リソースを作る
+	Material* materialData;
+	Microsoft::WRL::ComPtr<ID3D12Resource> materialResource;
+	materialResource = Mesh::CreateBufferResource(DirectXCommon::GetInstance()->GetDevice(), sizeof(Material));
+	// 頂点リソースにデータを書き込む
+	materialData = nullptr;
+	// 書き込むためのアドレスを取得
+	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
+	// 色のデータを変数から読み込み
+	materialData->color = { 1,1,1,1 };
+	materialData->enableLighting = true;
+	materialData->uvTransform = MakeIdentity4x4();
+	materialData->shininess = 5.0f;
+	model_->SetMaterialResource(materialResource);
+	model_->SetMaterialData(materialData);
+
+	// 初期頂点を保存
+	if (model_) {
+		originalVertices_ = model_->GetModelData().vertices;
+	}
 	// 頂点データを個別にコピー
 	originalVertices_ = model_->GetModelData().vertices;
 	glitchedVertices_ = originalVertices_;
@@ -350,7 +371,13 @@ void Object3d::GlitchVerticesLerp(float intensity)
 	lerpToGlitch_ = true; // 元→ランダム
 }
 
-
+void Object3d::StartLerpToOriginalVertices()
+{
+	if (!model_ || originalVertices_.empty() || glitchedVertices_.empty()) return;
+	isLerping_ = true;
+	lerpT_ = 0.0f;
+	lerpToGlitch_ = false; // ランダム→元
+}
 
 void Object3d::LerpToOriginalVertices(float lerpT)
 {

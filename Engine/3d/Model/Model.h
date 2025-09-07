@@ -134,6 +134,14 @@ public:
     /// <returns>モデルデータ</returns>
     ModelData& GetModelData() { return modelData_; }
 
+    Material* GetMaterial() { return materialData; }
+    void SetColor(const Vector4& color) { materialData->color = color; }
+
+    // マテリアルのリソースを設定(ユーザーの使用禁止)
+    void SetMaterialResource(Microsoft::WRL::ComPtr<ID3D12Resource> resource) { materialResource = resource; }
+    // マテリアルの情報を設定(ユーザーの使用禁止)
+    void SetMaterialData(Material* data) { materialData = data; }
+
 private:
     HRESULT hr;  ///< 処理結果確認用変数
 

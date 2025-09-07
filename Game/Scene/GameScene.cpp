@@ -24,51 +24,14 @@ void GameScene::Init() {
 	// テクスチャのロード
 	LoadTextures();
 
-	// 自機
-	player_ = std::make_unique<Player>();
-	// テスト壁
-	for (int i = 0; i < 5; i++) {
-		TestWall* wall = new TestWall();
-		wall->Init();
-		testWall_.push_back(wall);
-	}
-	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
-	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
-	testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
-	testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
-	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
-
-	// 追従カメラ
-	followCamera_ = std::make_unique<FollowCamera>(player_.get());
-	followCamera_->Init();
-	player_->SetCamera(followCamera_->GetCamera());
-	for (TestWall* wall : testWall_) {
-		wall->SetCamera(followCamera_->GetCamera());
-	}
-
-	// 床
-	floor_ = std::make_unique<Object3d>();
-	floor_->Init();
-	floor_->SetModel("box.obj");
-	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
-	floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
-
-	// ポストエフェクト
-	postProcess_ = std::make_unique <PostProcess>();
-	postProcess_->Init();
-	postProcess_->SetCamera(followCamera_->GetCamera());
-
 	// モデルのロード
 	LoadModels();
+
 	// オーディオのロード
 	LoadAudio();
 
 	// 必要なデータの初期化
 	InitializeData();
-
-
-	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
-	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage1", objects_, colliders_);
 }
 
 // シーン更新関数
@@ -88,6 +51,11 @@ void GameScene::Update() {
 	if (time == 100) {
 		objects_[0]->SetLerpSpeed(0.01f);
 		objects_[0]->GlitchVerticesLerp(0.3f);
+		objects_[0]->SetColor({ 0.0f, 0.0f, 1.0f, 0.2f });
+
+		objects_[1]->SetLerpSpeed(0.01f);
+		objects_[1]->GlitchVerticesLerp(0.3f);
+		objects_[1]->SetColor({ 0.0f, 0.0f, 1.0f, 0.2f });
 	}
 	if (time == 150) {
 		time = 0;
@@ -150,6 +118,9 @@ void GameScene::Update() {
 	collisionManager_->CheckAllCollisions();
 	if (input->TriggerKey(DIK_R)) {
 		for (auto& obj : objectList_) {
+			obj->ResetVerticesToOriginal();
+		}
+		for (auto& obj : objects_) {
 			obj->ResetVerticesToOriginal();
 		}
 		this->SetSceneNo(CLEARSCENE);
@@ -242,6 +213,8 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData() {
 	camera = std::make_unique<Camera>();
+
+	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage1", objects_, colliders_);
 
 	const std::array<const char*, 4> modelNames = { "world.obj", "start.obj", "Demohole2.obj", "Demohole.obj" };
 	objectList_.clear();
