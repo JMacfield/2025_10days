@@ -15,7 +15,7 @@ float4 main(VSOutput input) : SV_TARGET
     float scanlineWave = sin((input.texcoord.y * density) + (time * speed));
     
     // この数値を小さくすると線が太くなります (例: 2.0f)
-    float scanline = pow(abs(scanlineWave), 100.0f);
+    float scanline = pow(abs(scanlineWave), 10.0f);
     
     color.rgb *= 1.0f - (scanline * intensity);
     

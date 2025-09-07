@@ -87,7 +87,7 @@ int GameManager::Run() {
 	// シーンのチェック
 	prevSceneNo_ = currentSceneNo_;
 	currentSceneNo_ = IScene::GetSceneNo();
-	currentSceneNo_ = 1;
+	currentSceneNo_ = TITLESCENE;
 	//post->Init();
 	sceneArr_[currentSceneNo_]->Init();
 

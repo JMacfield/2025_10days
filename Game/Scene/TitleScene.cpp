@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "PostProcess.h"
 #include "TextureManager.h"
+#include "ModelManager.h"
 #include <dinput.h>
 
 TitleScene::TitleScene() {}
@@ -69,6 +70,7 @@ void TitleScene::LoadTextures() {
 
 void TitleScene::LoadModels() {
     // モデルの読み込み処理
+    ModelManager::GetInstance()->LoadModel("Resources/box/", "box.obj");
 }
 
 void TitleScene::LoadAudio() {
