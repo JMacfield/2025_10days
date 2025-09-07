@@ -55,4 +55,6 @@ private: // Private variables
     Input* input_ = nullptr;
     std::unique_ptr<Camera> camera_ = nullptr;
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
+
+    std::unique_ptr<Sprite> sprite_ = nullptr;
 };
