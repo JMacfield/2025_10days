@@ -15,7 +15,7 @@ void Scanline::Init()
 
     // パラメータの初期値を設定
     cbufferData_->intensity = 1.0f;
-    cbufferData_->density = 30000.0f;
+    cbufferData_->density = 1500.0f;
     cbufferData_->speed = 1.0f;
     cbufferData_->time = 0.0f;
 

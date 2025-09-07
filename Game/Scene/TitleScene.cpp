@@ -37,10 +37,13 @@ void TitleScene::Update() {
     camera_->Update();
 
     floor_->Update();
+
+    titleSprite_->Update();
 }
 
 void TitleScene::Draw() {
     // ここにタイトルロゴなどの描画処理を記述します
+    titleSprite_->Draw(titleSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
     floor_->Draw(floorTex_, camera_.get());
 }
 
@@ -87,4 +90,10 @@ void TitleScene::InitializeData() {
     postProcess_ = new PostProcess();
     postProcess_->Init();
     postProcess_->SetCamera(camera_.get());
+
+    titleSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/title/title.png");
+
+    titleSprite_ = std::make_unique<Sprite>();
+    titleSprite_->Init({ 0.0f,0.0f }, { 880.0f,420.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/title.png");
+    titleSprite_->SetPosition({ 0.0f,0.0f });
 }

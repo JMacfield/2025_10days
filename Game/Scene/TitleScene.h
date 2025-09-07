@@ -62,5 +62,6 @@ private: // Private variables
     std::unique_ptr<Object3d> floor_;
     uint32_t floorTex_;
 
-    std::unique_ptr<Sprite> sprite_ = nullptr;
+    std::unique_ptr<Sprite> titleSprite_ = nullptr;
+    uint32_t titleSpriteHandle_;
 };

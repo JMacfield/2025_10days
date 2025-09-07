@@ -49,7 +49,7 @@ int GameManager::Run() {
 	//DirectXCommon::D3DResourceLeakChecker leakCheck;
 
 	WinAPI* sWinAPI = WinAPI::GetInstance();
-	sWinAPI->Initialize(L"NeonShift");
+	sWinAPI->Initialize(L"WorldsShift");
 
 	DirectXCommon* sDirctX = DirectXCommon::GetInstance();
 	sDirctX->Initialize();
