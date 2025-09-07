@@ -5,6 +5,8 @@
 using namespace MathFuncs;
 
 Anim::Anim() {
+	// ゲームタイマーのインスタンス取得
+	gameTimer_ = GameTimer::GetInstance();
 	isStart_ = false;
 	animId_ = 0;
 }
@@ -54,7 +56,7 @@ void Anim::Update() {
 							*targetPtr = (int)Lerps::Lerp((float)std::get<int>(it->start), (float)std::get<int>(it->end), it->t);
 						}
 						}, (*it).target);
-					if (it->isTimeScale) { it->currentFrame++; }
+					if (it->isTimeScale) { it->currentFrame += gameTimer_->GetTimeScale(); }
 					else { it->currentFrame++; }
 				}
 			}

@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "Input.h"
 #include "../PlayerConfig.h"
+#include "../Components/GameTimer.h"
 #include <algorithm>
 
 using namespace PlayerConfig::Input::GamePad;
@@ -16,7 +17,7 @@ void MoveSystem::Update() {
 	InputUpdate();
 
 	// 速度代入
-	vel_ = maxMoveVel;
+	vel_ = maxMoveVel * GameTimer::GetInstance()->GetTimeScale();
 }
 
 void MoveSystem::DebugGui() {
@@ -46,5 +47,5 @@ void MoveSystem::InputUpdate() {
 		rot_.x -= (float)ApplyDeadzone(joyState.Gamepad.sThumbRY) / SHRT_MAX * sensitivity.x;
 	}
 
-	rot_.x = std::clamp<float>(rot_.x, -2.0f, 2.0f);
+	rot_.x = std::clamp<float>(rot_.x, -1.5f, 1.5f);
 }

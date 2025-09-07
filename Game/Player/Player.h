@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Object3D.h"
 #include "Collider.h"
+#include "Components/GameTimer.h"
 #include "Systems/MoveSystem.h"
 #include "Systems/JumpSystem.h"
 #include "PlayerConfig.h"
@@ -174,6 +175,9 @@ private:// Engine system
 private:// 外部から受け取るアドレス
 	// カメラ
 	Camera* pCamera_;
+
+	// ゲームタイマー
+	GameTimer* gameTimer_;
 
 private:// Private variable
 	// 体のオブジェクト

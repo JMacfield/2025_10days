@@ -127,10 +127,9 @@ void GameScene::Update() {
 	ImGui::Begin("GameWindow");
 	// 自機
 	player_->DebugGui();
-	// テスト壁
-	//testWall_->DebugGui();
 	// 追従カメラ
 	followCamera_->DebugGui();
+	GameTimer::GetInstance()->Update();
 	ImGui::End();
 #endif // DEBUG
 
