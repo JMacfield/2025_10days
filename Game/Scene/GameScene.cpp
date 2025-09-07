@@ -164,10 +164,10 @@ void GameScene::Draw() {
 
 	for (int i = 0; i < objects_.size(); i++) {
 		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
-			objects_[i]->Draw(damageWallTex_, followCamera_->GetCamera());
+			objects_[i]->Draw(followCamera_->GetCamera());
 		}
 		else {
-			objects_[i]->Draw(floorTex_, followCamera_->GetCamera());
+			objects_[i]->Draw(followCamera_->GetCamera());
 		}
 	}
 
@@ -176,7 +176,7 @@ void GameScene::Draw() {
 		//wall->Draw();
 	}
 	// 床
-	floor_->Draw(floorTex_, followCamera_->GetCamera());
+	floor_->Draw(followCamera_->GetCamera());
 	/*TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
 	HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());*/
 	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
@@ -250,6 +250,17 @@ void GameScene::InitializeData() {
 		obj->SetModel(name);
 		objectList_.emplace_back(std::move(obj));
 	}
+
+	for (int i = 0; i < objects_.size(); i++) {
+		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
+			objects_[i]->SetTexture(damageWallTex_);
+		}
+		else {
+			objects_[i]->SetTexture(floorTex_);
+		}
+	}
+	
+
 	// 自機
 	player_ = std::make_unique<Player>();
 	// テスト壁
@@ -275,6 +286,7 @@ void GameScene::InitializeData() {
 	floor_ = std::make_unique<Object3d>();
 	floor_->Init();
 	floor_->SetModel("box.obj");
+	floor_->SetTexture(floorTex_);
 	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
 	floor_->worldTransform_.translation_ = { 0.0f,-50.0f,0.0f };
 

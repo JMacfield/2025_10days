@@ -330,6 +330,7 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		//newObject3d->SetTexture();
 		newObject3d->SetTransform(objectData.transform);
 		// 配列に追加
 		objects.push_back(newObject3d);

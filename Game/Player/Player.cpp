@@ -40,7 +40,7 @@ Player::Player() {
 
 void Player::Init() {
 	currentDimension_ = DimensionType::kNow;
-
+	body_->SetTexture(Textures::body.num);
 	body_->worldTransform_.translation_ = { -9.1f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
@@ -123,7 +123,7 @@ void Player::Update() {
 
 void Player::Draw() {
 	// 体
-	body_->Draw(Textures::body.num, pCamera_);
+	body_->Draw(pCamera_);
 }
 
 void Player::Release() {

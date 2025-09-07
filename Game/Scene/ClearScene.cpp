@@ -81,10 +81,10 @@ void ClearScene::Update() {
 void ClearScene::Draw() {
 	// 描画処理
 	if (TENQ) {
-		TENQ->Draw(textureHandles[TENQ_TEXTURE], camera.get());
+		TENQ->Draw(camera.get());
 	}
 	if (HoleObject_) {
-		HoleObject_->Draw(textureHandles[NORMAL_HOLE], camera.get());
+		HoleObject_->Draw(camera.get());
 	}
 
 }
@@ -156,12 +156,19 @@ void ClearScene::InitializeData() {
 	HoleObject3_->Init();
 	postProcess_->Init();
 	postProcess_->SetCamera(camera.get());
-	TENQ->SetModel("world.obj");
 	TENQ->SetisLight(false);
 	TENQ->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
+
+	TENQ->SetModel("world.obj");
 	HoleObject_->SetModel("start.obj");
 	HoleObject2_->SetModel("Demohole2.obj");
 	HoleObject3_->SetModel("Demohole.obj");
+
+	TENQ->SetTexture(textureHandles[TENQ_TEXTURE]);
+	HoleObject_->SetTexture(textureHandles[NORMAL_HOLE]);
+	HoleObject2_->SetTexture(textureHandles[NORMAL_HOLE]);
+	HoleObject3_->SetTexture(textureHandles[NORMAL_HOLE]);
+
 	HoleObject_->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
 	HoleObject3_->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
 	camera->transform_.translate = { -0.191f,-41.0f,-466.0f };

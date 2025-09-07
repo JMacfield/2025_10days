@@ -97,7 +97,7 @@ void Object3d::Update()
 	}
 }
 
-void Object3d::Draw(uint32_t texture, Camera* camera)
+void Object3d::Draw(Camera* camera)
 {
 	DirectXCommon* directXCommon = DirectXCommon::GetInstance();
 	if (animationModel_) {
@@ -130,21 +130,19 @@ void Object3d::Draw(uint32_t texture, Camera* camera)
 	if (animationModel_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		animationModel_->Draw(texture, { { 1.0f,1.0f,1.0f,1.0f },false
-			}, { { 1.0f,1.0,1.0,1.0f } ,{ 0.0f,-1.0f,0.0f },0.5f }, mapTexture_);
+		animationModel_->Draw(texture_, { color_.x, color_.y, color_.z, color_.w }, { { 1.0f,1.0,1.0,1.0f },{ 0.0f,-1.0f,0.0f },0.5f }, mapTexture_);
 	}
 	else if (model_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		model_->Draw(texture, { {Materialquaternion_.x,Materialquaternion_.y,Materialquaternion_.z,Materialquaternion_.w},isLight },
+		model_->Draw(texture_, { color_.x, color_.y, color_.z, color_.w, isLight },
 			{ { DirectionalLightquaternion_.x,DirectionalLightquaternion_.y,DirectionalLightquaternion_.z,DirectionalLightquaternion_.w },
 			{ lightDirection_.x,lightDirection_.y,lightDirection_.z},ambientLightIntensity_ }, mapTexture_);
 	}
 	else if (skybox_) {
 		wvpData->WVP = worldViewProjectionMatrix;
 		wvpData->World = worldTransform_.matWorld_;
-		skybox_->Draw(texture, { { 1.0f,1.0f,1.0f,1.0f },false
-			}, { { 1.0f,1.0,1.0,1.0f } ,{ 0.0f,-1.0f,0.0f },0.5f });
+		skybox_->Draw(texture_, { color_.x, color_.y, color_.z, color_.w }, { { 1.0f,1.0,1.0,1.0f },{ 0.0f,-1.0f,0.0f },0.5f });
 	}
 }
 

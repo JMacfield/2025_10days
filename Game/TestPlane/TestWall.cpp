@@ -29,7 +29,7 @@ TestWall::TestWall() {
 }
 
 void TestWall::Init() {
-
+	body_->SetTexture(texHandle_);
 }
 
 void TestWall::Update() {
@@ -39,7 +39,7 @@ void TestWall::Update() {
 
 void TestWall::Draw() {
 	// 体
-	body_->Draw(texHandle_, pCamera_);
+	body_->Draw(pCamera_);
 }
 
 void TestWall::Release() {

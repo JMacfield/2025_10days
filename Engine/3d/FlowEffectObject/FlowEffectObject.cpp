@@ -89,7 +89,7 @@ void FlowEffectObject::SpawnObject() {
 void FlowEffectObject::Draw(uint32_t texture, Camera* camera) {
     int i = 0;
     for (auto& obj : objects_) {
-        obj.obj->Draw(texture, camera);
+        obj.obj->Draw(camera);
 #ifdef _DEBUG
         std::string label = "DebugFlowModel" + std::to_string(i++);
         obj.obj->ModelDebug(label.c_str()); // ← インデックスでユニークに

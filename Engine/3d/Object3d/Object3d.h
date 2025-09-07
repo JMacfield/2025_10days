@@ -80,7 +80,13 @@ public:
     /// </summary>
     /// <param name="texture">使用するテクスチャのハンドル</param>
     /// <param name="camera">カメラオブジェクトへのポインタ</param>
-    void Draw(uint32_t texture, Camera* camera);
+    void Draw(Camera* camera);
+    // RGBA色変更
+    void SetColor(const Vector4& color) { color_ = color; }
+    Vector4 GetColor() const { return color_; }
+    // テクスチャハンドルSetter
+    void SetTexture(uint32_t texHandle) { texture_ = texHandle; }
+    uint32_t GetTexture() const { return texture_; }
 
     /// <summary>
     /// リソースを解放する
@@ -216,7 +222,10 @@ private:
     float lerpT_ = 0.0f;                      // ラープ係数
     float lerpSpeed_ = 0.002f;
     private:
-        bool lerpToGlitch_ = false; // true: 元→ランダム, false: ランダム→元
+    bool lerpToGlitch_ = false; // true: 元→ランダム, false: ランダム→元
+
+    Vector4 color_ = { 1.0f, 1.0f, 1.0f, 1.0f }; // デフォルト白
+    uint32_t texture_ = 0; // デフォルトテクスチャ
     /*カメラ用*/
     Microsoft::WRL::ComPtr<ID3D12Resource> cameraForGPUResource_;
     CameraForGPU* cameraForGPUData_;
