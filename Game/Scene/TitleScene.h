@@ -4,12 +4,14 @@
 #include "Camera.h"
 #include "Object3d.h"
 #include "Model.h"
+#include "PostProcess.h"
+#include "Input.h"
 #include <memory>
 
 // クラスの前方宣言
-class Input;
-class Camera;
-class PostProcess;
+//class Input;
+//class Camera;
+//class PostProcess;
 
 class TitleScene : public IScene {
 public:
@@ -54,7 +56,11 @@ private: // Private methods
 private: // Private variables
     Input* input_ = nullptr;
     std::unique_ptr<Camera> camera_ = nullptr;
-    std::unique_ptr<PostProcess> postProcess_ = nullptr;
+    PostProcess* postProcess_ = nullptr;
+
+    // 床(仮)
+    std::unique_ptr<Object3d> floor_;
+    uint32_t floorTex_;
 
     std::unique_ptr<Sprite> sprite_ = nullptr;
 };

@@ -10,12 +10,21 @@ TitleScene::TitleScene() {}
 TitleScene::~TitleScene() {}
 
 void TitleScene::Init() {
+    sceneNo = TITLESCENE;
+
+
+
     LoadTextures();
     LoadModels();
     LoadAudio();
     InitializeData();
 
-   
+    // 床
+    floor_ = std::make_unique<Object3d>();
+    floor_->Init();
+    floor_->SetModel("box.obj");
+    floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
+    floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
 }
 
 void TitleScene::Update() {
@@ -23,10 +32,15 @@ void TitleScene::Update() {
     if (input_->TriggerKey(DIK_SPACE) || input_->TriggerKey(DIK_RETURN)) {
         IScene::SetSceneNo(GAMESCENE);
     }
+
+    camera_->Update();
+
+    floor_->Update();
 }
 
 void TitleScene::Draw() {
     // ここにタイトルロゴなどの描画処理を記述します
+    floor_->Draw(floorTex_, camera_.get());
 }
 
 void TitleScene::PostDraw() {
@@ -38,7 +52,7 @@ void TitleScene::Release() {
     // newしたインスタンスなどの解放処理
     camera_.reset();
     camera_ = nullptr;
-    postProcess_.reset();
+    delete postProcess_;
     postProcess_ = nullptr;
 }
 
@@ -50,6 +64,7 @@ int TitleScene::GameClose() {
 
 void TitleScene::LoadTextures() {
     // テクスチャの読み込み処理
+    floorTex_ = TextureManager::StoreTexture("Resources/white.png");
 }
 
 void TitleScene::LoadModels() {
@@ -67,7 +82,7 @@ void TitleScene::InitializeData() {
     camera_ = std::make_unique<Camera>();
     camera_->Initialize();
 
-    postProcess_ = std::make_unique<PostProcess>();
+    postProcess_ = new PostProcess();
     postProcess_->Init();
     postProcess_->SetCamera(camera_.get());
 }

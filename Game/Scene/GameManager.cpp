@@ -87,6 +87,7 @@ int GameManager::Run() {
 	// シーンのチェック
 	prevSceneNo_ = currentSceneNo_;
 	currentSceneNo_ = IScene::GetSceneNo();
+	currentSceneNo_ = 1;
 	//post->Init();
 	sceneArr_[currentSceneNo_]->Init();
 
@@ -213,6 +214,9 @@ int GameManager::Run() {
 			sceneArr_[prevSceneNo_] = nullptr;
 
 			switch (prevSceneNo_) {
+			case TITLESCENE:
+				sceneArr_[TITLESCENE] = new TitleScene();
+				break;
 			case GAMESCENE:
 				sceneArr_[GAMESCENE] = new GameScene();
 				break;
@@ -221,6 +225,9 @@ int GameManager::Run() {
 				break;
 			case STAGESELECTSCENE:
 				sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+				break;
+			case OVERSCENE:
+				sceneArr_[OVERSCENE] = new OverScene();
 				break;
 			}
 

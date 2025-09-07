@@ -18,6 +18,8 @@ GameScene::~GameScene() {}
 
 // 初期化関数
 void GameScene::Init() {
+	sceneNo = GAMESCENE;
+
 	//// カメラの初期化
 	input = Input::GetInstance();
 
@@ -138,6 +140,7 @@ void GameScene::Update() {
 			obj->ResetVerticesToOriginal();
 		}
 		this->SetSceneNo(CLEARSCENE);
+		this->SetSceneNo(TITLESCENE);
 		return;
 	}
 }
@@ -235,39 +238,39 @@ void GameScene::InitializeData() {
 		obj->SetModel(name);
 		objectList_.emplace_back(std::move(obj));
 	}
-	// 自機
-	player_ = std::make_unique<Player>();
-	// テスト壁
-	for (int i = 0; i < 5; i++) {
-		TestWall* wall = new TestWall();
-		wall->Init();
-		testWall_.push_back(wall);
-	}
-	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
-	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
-	testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
-	testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
-	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
+	//// 自機
+	//player_ = std::make_unique<Player>();
+	//// テスト壁
+	//for (int i = 0; i < 5; i++) {
+	//	TestWall* wall = new TestWall();
+	//	wall->Init();
+	//	testWall_.push_back(wall);
+	//}
+	//testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
+	//testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
+	//testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
+	//testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
+	//testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
 
-	// 追従カメラ
-	followCamera_ = std::make_unique<FollowCamera>(player_.get());
-	followCamera_->Init();
-	player_->SetCamera(followCamera_->GetCamera());
-	for (TestWall* wall : testWall_) {
-		wall->SetCamera(followCamera_->GetCamera());
-	}
-	// 床
-	floor_ = std::make_unique<Object3d>();
-	floor_->Init();
-	floor_->SetModel("box.obj");
-	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
-	floor_->worldTransform_.translation_ = { 0.0f,-50.0f,0.0f };
+	//// 追従カメラ
+	//followCamera_ = std::make_unique<FollowCamera>(player_.get());
+	//followCamera_->Init();
+	//player_->SetCamera(followCamera_->GetCamera());
+	//for (TestWall* wall : testWall_) {
+	//	wall->SetCamera(followCamera_->GetCamera());
+	//}
+	//// 床
+	//floor_ = std::make_unique<Object3d>();
+	//floor_->Init();
+	//floor_->SetModel("box.obj");
+	//floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
+	//floor_->worldTransform_.translation_ = { 0.0f,-50.0f,0.0f };
 
-	// ポストエフェクト
-	postProcess_ = std::make_unique <PostProcess>();
-	postProcess_->Init();
-	postProcess_->SetCamera(followCamera_->GetCamera());
-	camera->Initialize();
+	//// ポストエフェクト
+	//postProcess_ = std::make_unique <PostProcess>();
+	//postProcess_->Init();
+	//postProcess_->SetCamera(followCamera_->GetCamera());
+	//camera->Initialize();
 	for (auto& obj : objectList_) {
 		obj->Init();
 	}

@@ -11,12 +11,11 @@
 #include <DirectXMath.h>
 
 ClearScene::ClearScene() {}
-ClearScene::~ClearScene() {
-	int a;
-	a = 1;
-}
+ClearScene::~ClearScene() {}
 
 void ClearScene::Init() {
+	sceneNo = CLEARSCENE;
+
 	// 初期化処理
 	input = Input::GetInstance();
 
