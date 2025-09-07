@@ -85,11 +85,11 @@ void GameScene::Update() {
 	
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 
-	if (time == 50) {
-		objects_[0]->SetLerpSpeed(0.02f);
-		objects_[0]->GlitchVerticesLerp(0.8f);
-	}
 	if (time == 100) {
+		objects_[0]->SetLerpSpeed(0.01f);
+		objects_[0]->GlitchVerticesLerp(0.5f);
+	}
+	if (time == 200) {
 		objects_[0]->StartLerpToOriginalVertices();
 		time = 0;
 	}
