@@ -1,19 +1,19 @@
 #pragma once
 #include "IPostEffectState.h"
 #include "PSOProperty.h"
-#include "Timer.h" // Add this include
+#include "Timer.h"
 
 /**
 * @file Glitch.h
 * @brief Glitch effect
 */
 
-// Constant buffer struct for the shader
+// This struct must exactly match the cbuffer in the shader
 struct GlitchInfo {
-    float intensity;  // Strength of the glitch
-    float time;       // Time (for animation)
-    float block_size; // Size of the screen division blocks
-    float speed;      // Speed of the distortion change
+    float intensity;
+    float time;
+    float blockSize;  // Changed from block_size
+    float noiseSpeed; // Changed from speed
 };
 
 class PostProcess;
@@ -37,5 +37,5 @@ public:
 private:
     Microsoft::WRL::ComPtr<ID3D12Resource> cbufferResource_;
     GlitchInfo* cbufferData_ = nullptr;
-    Timer timer_; // Add a private Timer instance
+    Timer timer_;
 };

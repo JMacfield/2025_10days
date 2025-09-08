@@ -11,12 +11,13 @@ void Glitch::Init()
     cbufferResource_ = Mesh::CreateBufferResource(DirectXCommon::GetInstance()->GetDevice(), sizeof(GlitchInfo));
     cbufferResource_->Map(0, nullptr, reinterpret_cast<void**>(&cbufferData_));
 
+    // Use the updated variable names
     cbufferData_->intensity = 0.02f;
     cbufferData_->time = 0.0f;
-    cbufferData_->block_size = 8.0f;
-    cbufferData_->speed = 10.0f;
+    cbufferData_->blockSize = 8.0f;
+    cbufferData_->noiseSpeed = 10.0f;
 
-    timer_.start(); // Start the internal timer
+    timer_.start();
 }
 
 PSOProperty Glitch::CreatePipelineStateObject()
@@ -65,7 +66,6 @@ void Glitch::CommandRootParameter(PostProcess* postProcess)
 {
     DirectXCommon* sDirectXCommon = DirectXCommon::GetInstance();
 
-    // 修正点: double型をfloat型へ明示的にキャストする
     cbufferData_->time = static_cast<float>(timer_.elapsedSeconds());
 
     sDirectXCommon->GetCommandList()->SetGraphicsRootDescriptorTable(0, SRVManager::GetInstance()->GetGPUDescriptorHandle(sDirectXCommon->GetRenderIndex()));
@@ -75,8 +75,6 @@ void Glitch::CommandRootParameter(PostProcess* postProcess)
     sDirectXCommon->GetCommandList()->SetGraphicsRootConstantBufferView(3, cbufferResource_->GetGPUVirtualAddress());
 }
 
-// (The rest of the functions remain the same)
-// ...
 std::vector<D3D12_DESCRIPTOR_RANGE> Glitch::CreateDescriptorRange() {
     std::vector<D3D12_DESCRIPTOR_RANGE> descriptorRange(3);
     descriptorRange[0] = { D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0, 0, D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND };

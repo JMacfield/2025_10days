@@ -9,6 +9,8 @@ OverScene::OverScene() {}
 OverScene::~OverScene() {}
 
 void OverScene::Init() {
+    sceneNo = OVERSCENE;
+
     LoadTextures();
     LoadModels();
     LoadAudio();
@@ -20,14 +22,18 @@ void OverScene::Update() {
     if (input_->TriggerKey(DIK_SPACE) || input_->TriggerKey(DIK_RETURN)) {
         IScene::SetSceneNo(TITLESCENE);
     }
+
+    overSprite_->Update();
 }
 
 void OverScene::Draw() {
     // 「Game Over」などの描画処理を記述します
+    overSprite_->Draw(overSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
 }
 
 void OverScene::PostDraw() {
     // ポストエフェクトの描画処理
+    postProcess_->Draw();
 }
 
 void OverScene::Release() {
@@ -63,4 +69,9 @@ void OverScene::InitializeData() {
 
     postProcess_ = std::make_unique<PostProcess>();
     postProcess_->Init();
+
+    overSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/gameover/gameover.png");
+    overSprite_ = std::make_unique<Sprite>();
+    overSprite_->Init({ 0.0f,0.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/gameover/gameover.png");
+    overSprite_->SetTextureSize({ 1280.0f,720.0f });
 }

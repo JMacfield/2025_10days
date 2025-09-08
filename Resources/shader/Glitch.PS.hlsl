@@ -8,10 +8,10 @@
 // This constant buffer must match the GlitchInfo struct in Glitch.h
 cbuffer GlitchParams : register(b0)
 {
-    float intensity;  // Overall strength of the glitch
-    float time;       // Time (for animation)
-    float blockSize;  // Size of the screen division blocks
-    float noiseSpeed; // Speed of the distortion change
+    float intensity;
+    float time;
+    float blockSize;
+    float noiseSpeed;
 };
 
 // A simple function to generate a pseudo-random number

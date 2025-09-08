@@ -8,11 +8,6 @@
 #include "Input.h"
 #include <memory>
 
-// クラスの前方宣言
-//class Input;
-//class Camera;
-//class PostProcess;
-
 class TitleScene : public IScene {
 public:
     TitleScene();
@@ -56,12 +51,13 @@ private: // Private methods
 private: // Private variables
     Input* input_ = nullptr;
     std::unique_ptr<Camera> camera_ = nullptr;
-    PostProcess* postProcess_ = nullptr;
+    std::unique_ptr<PostProcess> postProcess_;
 
-    // 床(仮)
-    std::unique_ptr<Object3d> floor_;
-    uint32_t floorTex_;
-
+    // タイトルスプライト
     std::unique_ptr<Sprite> titleSprite_ = nullptr;
     uint32_t titleSpriteHandle_;
+
+    // スタート画像
+    std::unique_ptr<Sprite> showStart_ = nullptr;
+    uint32_t showStartHandle_;
 };

@@ -1,11 +1,11 @@
-﻿#pragma once
-#include "IScene.h"
+﻿#include "IScene.h"
+#include "Sprite.h"
+#include "Camera.h"
+#include "Object3d.h"
+#include "Model.h"
+#include "PostProcess.h"
+#include "Input.h"
 #include <memory>
-
-// クラスの前方宣言
-class Input;
-class Camera;
-class PostProcess;
 
 class OverScene : public IScene {
 public:
@@ -51,4 +51,7 @@ private: // Private variables
     Input* input_ = nullptr;
     std::unique_ptr<Camera> camera_ = nullptr;
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
+
+    std::unique_ptr<Sprite> overSprite_ = nullptr;
+    uint32_t overSpriteHandle_;
 };

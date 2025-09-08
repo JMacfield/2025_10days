@@ -20,31 +20,25 @@ void TitleScene::Init() {
     LoadAudio();
     InitializeData();
 
-    // 床
-    floor_ = std::make_unique<Object3d>();
-    floor_->Init();
-    floor_->SetModel("box.obj");
-    floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
-    floor_->worldTransform_.translation_ = { 0.0f,-1.0f,0.0f };
+   
 }
 
 void TitleScene::Update() {
     // 何かキーが押されたらステージ選択シーンに移動します
     if (input_->TriggerKey(DIK_SPACE) || input_->TriggerKey(DIK_RETURN)) {
-        IScene::SetSceneNo(GAMESCENE);
+        IScene::SetSceneNo(CLEARSCENE);
     }
 
     camera_->Update();
 
-    floor_->Update();
-
     titleSprite_->Update();
+    showStart_->Update();
 }
 
 void TitleScene::Draw() {
     // ここにタイトルロゴなどの描画処理を記述します
     titleSprite_->Draw(titleSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
-    floor_->Draw(floorTex_, camera_.get());
+    showStart_->Draw(showStartHandle_, { 1.0f,1.0f,1.0f,1.0f });
 }
 
 void TitleScene::PostDraw() {
@@ -56,10 +50,6 @@ void TitleScene::Release() {
     // newしたインスタンスなどの解放処理
     camera_.reset();
     camera_ = nullptr;
-    delete postProcess_;
-    postProcess_ = nullptr;
-    floor_->Release();
-    floor_ = nullptr;
 }
 
 int TitleScene::GameClose() {
@@ -70,7 +60,7 @@ int TitleScene::GameClose() {
 
 void TitleScene::LoadTextures() {
     // テクスチャの読み込み処理
-    floorTex_ = TextureManager::StoreTexture("Resources/white.png");
+   
 }
 
 void TitleScene::LoadModels() {
@@ -89,13 +79,17 @@ void TitleScene::InitializeData() {
     camera_ = std::make_unique<Camera>();
     camera_->Initialize();
 
-    postProcess_ = new PostProcess();
+    postProcess_ = std::make_unique <PostProcess>();
     postProcess_->Init();
     postProcess_->SetCamera(camera_.get());
 
     titleSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/title/title.png");
-
     titleSprite_ = std::make_unique<Sprite>();
-    titleSprite_->Init({ 300.0f,300.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/title.png");
-    //titleSprite_->SetPosition({ 0.0f,0.0f });
+    titleSprite_->Init({ 0.0f,0.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/title.png");
+    titleSprite_->SetTextureSize({ 1280.0f,720.0f });
+
+    showStartHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/title/showstart.png");
+    showStart_ = std::make_unique<Sprite>();
+    showStart_->Init({ 390.0f,300.0f }, { 500.0f,350.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/showstart.png");
+    showStart_->SetTextureSize({ 300.0f,150.0f });
 }
