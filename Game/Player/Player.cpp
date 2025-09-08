@@ -43,7 +43,7 @@ Player::Player() {
 void Player::Init() {
 	currentDimension_ = DimensionType::kNow;
 
-	body_->worldTransform_.translation_ = { -4.0f, 0.0f, 0.0f };
+	body_->worldTransform_.translation_ = { 0.0f, 0.0f, 0.0f };
 	body_->worldTransform_.rotation_ = { 0,0,0 };
 	body_->worldTransform_.scale_ = { 1,1,1 };
 	body_->Update();
