@@ -58,6 +58,8 @@ void TitleScene::Release() {
     camera_ = nullptr;
     delete postProcess_;
     postProcess_ = nullptr;
+    floor_->Release();
+    floor_ = nullptr;
 }
 
 int TitleScene::GameClose() {
@@ -94,6 +96,6 @@ void TitleScene::InitializeData() {
     titleSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/title/title.png");
 
     titleSprite_ = std::make_unique<Sprite>();
-    titleSprite_->Init({ 0.0f,0.0f }, { 880.0f,420.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/title.png");
-    titleSprite_->SetPosition({ 0.0f,0.0f });
+    titleSprite_->Init({ 300.0f,300.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/title.png");
+    //titleSprite_->SetPosition({ 0.0f,0.0f });
 }
