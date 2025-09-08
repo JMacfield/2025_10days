@@ -26,7 +26,7 @@ void TitleScene::Init() {
 void TitleScene::Update() {
     // 何かキーが押されたらステージ選択シーンに移動します
     if (input_->TriggerKey(DIK_SPACE) || input_->TriggerKey(DIK_RETURN)) {
-        IScene::SetSceneNo(CLEARSCENE);
+        IScene::SetSceneNo(GAMESCENE);
     }
 
     camera_->Update();
