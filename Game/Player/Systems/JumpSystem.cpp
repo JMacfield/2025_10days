@@ -27,11 +27,11 @@ void JumpSystem::Update() {
 	// 入力処理
 	InputUpdate();
 
-	// ジャンプ時の速度減衰
-	if (isActive_) {
-		vel_.x = Lerps::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
-		vel_.z = Lerps::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
-	}
+	//// ジャンプ時の速度減衰
+	//if (isActive_) {
+	//	vel_.x = Lerps::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
+	//	vel_.z = Lerps::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
+	//}
 
 	// 着地したら初期化
 	if (player_->GetIsLanding()) {
