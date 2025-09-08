@@ -98,6 +98,11 @@ public:// Accessor method
 	/// <returns></returns>
 	float GetAcceleration() { return acceleration; }
 	/// <summary>
+	/// 次元を切り替えた瞬間を取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetTriggerSwitchDimension() { return switchDimension_; }
+	/// <summary>
 	/// 空中に浮いた瞬間を取得
 	/// </summary>
 	/// <returns></returns>
@@ -207,6 +212,8 @@ private:// Private variable
 	DimensionType currentDimension_;
 	DimensionType preDimension_;
 
+	// 次元を切り替えた瞬間
+	bool switchDimension_;
 	// 空中にいるか
 	bool isAir_ = true;
 	bool isPreAir_ = false;

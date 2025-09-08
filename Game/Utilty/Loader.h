@@ -31,9 +31,18 @@ public:
         /// </summary>
         std::string filename;
         /// <summary>
+        /// テクスチャのファイル名。
+        /// </summary>
+        std::string textureName;
+        /// <summary>
         /// オブジェクトの変換情報（位置、回転、スケール）。
         /// </summary>
         Transform transform;
+
+        /// <summary>
+        /// 障害物の種類
+        /// </summary>
+        std::string wallType;
 
         /// <summary>
         /// 当たり判定の中心座標
@@ -74,7 +83,7 @@ public:
     /// <param name="fileName">読み込むJSONファイル名（拡張子なし）。</param>
     /// <param name="objects">生成したオブジェクトを格納するベクター。</param>
     /// <param name="camera">カメラオブジェクトへのポインタ。</param>
-    static void LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, Camera* camera);
+    static void LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType,Camera* camera);
 
     /// <summary>
     /// JSONファイルを読み込み、オブジェクトを初期化する関数（カメラ設定なし）。
@@ -82,11 +91,11 @@ public:
     /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ。</param>
     /// <param name="fileName">読み込むJSONファイル名（拡張子なし）。</param>
     /// <param name="objects">生成したオブジェクトを格納するベクター。</param>
-    static void LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders);
+    static void LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType);
 
-    static void LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, Camera* camera);
-    static void LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders);
-    static void LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders);
+    static void LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera);
+    static void LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType);
+    static void LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType);
 
     /// <summary>
     /// JSONファイルを読み込み、番号付きのオブジェクトを初期化する関数。
@@ -94,7 +103,7 @@ public:
     /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ。</param>
     /// <param name="fileName">読み込むJSONファイル名（拡張子なし）。</param>
     /// <param name="objects">生成したオブジェクトを格納するベクター。</param>
-    static void LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders);
+    static void LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType);
 
     /// <summary>
     /// JSONファイルを読み込み、テキストオブジェクトを初期化する関数。
@@ -102,6 +111,6 @@ public:
     /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ。</param>
     /// <param name="fileName">読み込むJSONファイル名（拡張子なし）。</param>
     /// <param name="objects">生成したオブジェクトを格納するベクター。</param>
-    static void LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders);
+    static void LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType);
     static float Lerp(const float& a, const float& b, float t);
 };

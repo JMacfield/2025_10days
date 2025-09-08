@@ -16,7 +16,7 @@ float Loader::Lerp(const float& a, const float& b, float t) {
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
 /// <param name="camera">カメラオブジェクトへのポインタ</param>
-void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, Camera* camera)
+void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -67,6 +67,14 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 			// ファイル名を取得
 			if (object.contains("file_name")) {
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -180,6 +188,9 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
 
@@ -189,7 +200,7 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders)
+void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -240,6 +251,14 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			// ファイル名を取得
 			if (object.contains("file_name")) {
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -351,10 +370,13 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
 
-void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, Camera* camera)
+void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -409,8 +431,17 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 			levelData->objects.emplace_back(LevelData::ObjectData{});
 			LevelData::ObjectData& objectData = levelData->objects.back();
 
+			// ファイル名を取得
 			if (object.contains("file_name")) {
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -522,9 +553,12 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
-void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders)
+void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -579,8 +613,17 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 			levelData->objects.emplace_back(LevelData::ObjectData{});
 			LevelData::ObjectData& objectData = levelData->objects.back();
 
+			// ファイル名を取得
 			if (object.contains("file_name")) {
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -660,9 +703,12 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
-void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders) {
+void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -716,8 +762,17 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 			levelData->objects.emplace_back(LevelData::ObjectData{});
 			LevelData::ObjectData& objectData = levelData->objects.back();
 
+			// ファイル名を取得
 			if (object.contains("file_name")) {
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -797,6 +852,9 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
 
@@ -806,7 +864,7 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders) {
+void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -853,9 +911,17 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 			// 追加したオブジェクトデータへの参照を取得
 			LevelData::ObjectData& objectData = levelData->objects.back();
 
+			// ファイル名を取得
 			if (object.contains("file_name")) {
-				// ファイル名を取得
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -961,6 +1027,9 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }
 
@@ -970,7 +1039,7 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders) {
+void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -1017,9 +1086,17 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 			// 追加したオブジェクトデータへの参照を取得
 			LevelData::ObjectData& objectData = levelData->objects.back();
 
+			// ファイル名を取得
 			if (object.contains("file_name")) {
-				// ファイル名を取得
 				objectData.filename = object["file_name"].get<std::string>();
+			}
+			// テクスチャの名前
+			if (object.contains("textureName")) {
+				objectData.textureName = object["textureName"].get<std::string>();
+			}
+			// 障害物の種類
+			if (object.contains("wallType")) {
+				objectData.wallType = object["wallType"].get<std::string>();
 			}
 
 			// トランスフォームのパラメータを読み込む
@@ -1129,5 +1206,8 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 
 			colliders.push_back(collider);
 		}
+
+		// 障害物タイプ
+		wallType.push_back(objectData.wallType);
 	}
 }

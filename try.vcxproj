@@ -210,6 +210,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Player\Components\Shake.cpp" />
     <ClCompile Include="Game\Scene\StageSelectScene.cpp" />
     <ClCompile Include="Game\Obstacles\Obstacle.cpp" />
+    <ClCompile Include="Game\Obstacles\ObstacleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player\Components\GameTimer.h" />
@@ -316,6 +317,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Player\Components\Shake.h" />
     <ClInclude Include="Game\Scene\StageSelectScene.h" />
     <ClInclude Include="Game\Obstacles\Obstacle.h" />
+    <ClInclude Include="Game\Obstacles\ObstacleManager.h" />
     <ClInclude Include="test.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

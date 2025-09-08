@@ -57,6 +57,7 @@ void Player::Init() {
 	isLanding_ = false;
 	isAlive_ = true;
 	isClear_ = false;
+	switchDimension_ = false;
 
 	vel_ = { 0.0f,0.0f,0.0f };
 	rot_ = { 0.0f,0.0f,0.0f };
@@ -67,12 +68,14 @@ void Player::Init() {
 void Player::Update() {
 	isPreAlive_ = isAlive_;
 	preDimension_ = currentDimension_;
+	switchDimension_ = false;
 	if (!isAlive_) { return; }
 
 	isPreAir_ = isAir_;
 
 	// 過去現在の切り替え
 	if (input_->TriggerKey(PlayerConfig::Input::Keyboard::switching)) {
+		switchDimension_ = true;
 		if (currentDimension_ == DimensionType::kNow) {
 			currentDimension_ = DimensionType::kPast;
 		}
@@ -82,6 +85,7 @@ void Player::Update() {
 	}
 	else if (input_->GetJoystickState(joyState)) {
 		if (PlayerConfig::Input::GamePad::GamePadTrigger(joyState, preJoyState, XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+			switchDimension_ = true;
 			if (currentDimension_ == DimensionType::kNow) {
 				currentDimension_ = DimensionType::kPast;
 			}

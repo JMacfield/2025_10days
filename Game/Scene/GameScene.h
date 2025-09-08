@@ -25,6 +25,7 @@
 #include "../Player/Player.h"
 #include "../Camera/FollowCamera.h"
 #include "../Collision/CollisionManager.h"
+#include "../Obstacles/ObstacleManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -110,6 +111,8 @@ private:// Private variable
     //Loader* loader_;
     std::vector<Object3d*> objects_;
     std::vector<Collider*> colliders_;
+    std::vector<std::string> wallTypes_;
+    std::unique_ptr<ObstacleManager> obstacleManager_;
 
     // 入力
     Input* input_;
@@ -131,4 +134,5 @@ private:// Private variable
     // 床のテクスチャ
     uint32_t floorTex_;
     uint32_t damageWallTex_;
+    uint32_t greenWallTex_;
 };

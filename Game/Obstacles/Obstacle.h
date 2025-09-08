@@ -2,10 +2,11 @@
 #include "Object3D.h"
 #include "Collider.h"
 
+class Player;
 class Obstacle {
 public:// Public variable
 	// コンストラクタ
-	Obstacle(Object3d* obj);
+	Obstacle(Object3d* obj, Player* player);
 	// デストラクタ
 	~Obstacle() = default;
 
@@ -62,6 +63,8 @@ public:// Accessor method
 private:// 外部から受け取るアドレス
 	// カメラ
 	Camera* pCamera_;
+	// 自機
+	Player* player_;
 
 private:// Private variable
 	// 体のオブジェクト

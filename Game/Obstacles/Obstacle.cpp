@@ -1,14 +1,16 @@
 #include "Obstacle.h"
 #include "../Player/PlayerConfig.h"
+#include "../Player/Player.h"
 #include "ModelManager.h"
 #include "../Utilty/LoaderConfig.h"
 
 using namespace LoaderConfig;
 using namespace PlayerConfig::FileNames;
 
-Obstacle::Obstacle(Object3d* obj) {
+Obstacle::Obstacle(Object3d* obj, Player* player) {
 	// 体の実体生成
 	body_ = obj;
+	player_ = player;
 }
 
 void Obstacle::Init() {
@@ -27,7 +29,17 @@ void Obstacle::Update() {
 
 void Obstacle::Draw() {
 	// 体
-	//body_->Draw(pCamera_);
+	// 直る
+	if (ObstacleType::fix == currentDimension_) {
+		body_->Draw(5, pCamera_);
+	}
+	// 壊す
+	else if (ObstacleType::broken == currentDimension_) {
+		body_->Draw(4, pCamera_);
+	}
+	else {
+		body_->Draw(3, pCamera_);
+	}
 }
 
 void Obstacle::DebugGui() {
@@ -41,13 +53,16 @@ void Obstacle::DebugGui() {
 void Obstacle::SwitchDimension() {
 	if (ObstacleType::abs == currentDimension_) { return; }
 
-	// 壊す
-	if (ObstacleType::fix == currentDimension_) { 
-		currentDimension_ = ObstacleType::broken;
-	}
-	// 直る
-	else if(ObstacleType::broken == currentDimension_) {
-		currentDimension_ = ObstacleType::fix;
+	// 障害物の状態を切り替える
+	if (player_->GetTriggerSwitchDimension()) {
+		// 壊す
+		if (ObstacleType::fix == currentDimension_) {
+			currentDimension_ = ObstacleType::broken;
+		}
+		// 直る
+		else if (ObstacleType::broken == currentDimension_) {
+			currentDimension_ = ObstacleType::fix;
+		}
 	}
 
 	// 直る演出

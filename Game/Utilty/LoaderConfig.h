@@ -21,7 +21,7 @@ namespace LoaderConfig {
 		// 壊れている
 		inline std::string broken = "BROKEN";
 		// 直った
-		inline std::string fix = "FIX";
+		inline std::string fix = "FIXED";
 		// 変わらない
 		inline std::string abs = "ABS";
 	}
