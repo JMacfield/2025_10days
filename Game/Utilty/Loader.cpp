@@ -296,9 +296,10 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -478,9 +479,10 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -662,9 +664,10 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -812,9 +815,10 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -965,9 +969,10 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -1143,9 +1148,10 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize.x = (float)transform["scaling"][0];
-				objectData.colliderSize.y = (float)transform["scaling"][2];
-				objectData.colliderSize.z = (float)transform["scaling"][1];
+				objectData.colliderSize = size;
+				//objectData.colliderSize.x = (float)transform["scaling"][0];
+				//objectData.colliderSize.y = (float)transform["scaling"][2];
+				//objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];

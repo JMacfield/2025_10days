@@ -1,0 +1,42 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "translation": [
+                    -0.28999999165534973,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.699999988079071,
+                    3.0,
+                    1.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.699999988079071,
+                    3.0,
+                    1.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "WALL"
+        }
+    ]
+}

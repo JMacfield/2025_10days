@@ -20,7 +20,7 @@ Player::Player() {
 	body_ = std::make_unique<Object3d>();
 	body_->Init();
 	body_->SetModel(Models::body.name);
-	body_->worldTransform_.translation_ = { -4.1f, 0.0f, 0.0f };
+	body_->worldTransform_.translation_ = { 0.0f, 0.0f, 0.0f };
 
 	// colliderの設定
 	collider_ = std::make_unique<Collider>();
