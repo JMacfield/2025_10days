@@ -1,12 +1,12 @@
 #pragma once
 #include "Object3D.h"
-#include "Collider.h"
 
+class Collider;
 class Player;
 class Obstacle {
 public:// Public variable
 	// コンストラクタ
-	Obstacle(Object3d* obj, Player* player);
+	Obstacle(Object3d* obj, Player* player,Collider* collider);
 	// デストラクタ
 	~Obstacle() = default;
 
@@ -65,6 +65,8 @@ private:// 外部から受け取るアドレス
 	Camera* pCamera_;
 	// 自機
 	Player* player_;
+	// 当たり判定
+	Collider* collider_;
 
 private:// Private variable
 	// 体のオブジェクト

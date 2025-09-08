@@ -1,8 +1,8 @@
 #pragma once
 #include "Obstacle.h"
 #include "../Camera/FollowCamera.h"
-#include "../Collision/Collider.h"
 
+class Collider;
 class Player;
 class ObstacleManager {
 public:

@@ -109,7 +109,9 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -172,13 +174,13 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -294,7 +296,9 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -354,13 +358,13 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -474,7 +478,9 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -537,13 +543,13 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -656,7 +662,9 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -687,13 +695,13 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -804,7 +812,9 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -836,13 +846,13 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -955,7 +965,9 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -1011,13 +1023,13 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
@@ -1131,7 +1143,9 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 					(float)colliderData["size"][2],
 					(float)colliderData["size"][1]
 				};
-				objectData.colliderSize = size;
+				objectData.colliderSize.x = (float)transform["scaling"][0];
+				objectData.colliderSize.y = (float)transform["scaling"][2];
+				objectData.colliderSize.z = (float)transform["scaling"][1];
 
 				// 当たり判定のマスク
 				objectData.maskType = colliderData["type"];
@@ -1190,13 +1204,13 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			// 壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::wall) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeObstacles);
 				collider->SetCollisionMask(~kCollisionAttributeObstacles);
 			}
 			// 攻撃壁
-			if (objectData.maskType == LoaderConfig::Collider::Mask::attack) {
+			if (objectData.maskType == LoaderConfig::Collision::Mask::attack) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);

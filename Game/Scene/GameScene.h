@@ -109,9 +109,9 @@ private:// Private variable
 
     // Blenderの配置情報を読み取るローダー
     //Loader* loader_;
-    std::vector<Object3d*> objects_;
+   /* std::vector<Object3d*> objects_;
     std::vector<Collider*> colliders_;
-    std::vector<std::string> wallTypes_;
+    std::vector<std::string> wallTypes_;*/
     std::unique_ptr<ObstacleManager> obstacleManager_;
 
     // 入力

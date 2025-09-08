@@ -175,12 +175,12 @@ void GameScene::PostDraw() {
 
 // リソース解放関数
 void GameScene::Release() {
-	for (Object3d* obj : objects_) {
-		delete obj;
-	}
-	for (Collider* collider : colliders_) {
-		delete collider;
-	}
+	//for (Object3d* obj : objects_) {
+	//	delete obj;
+	//}
+	//for (Collider* collider : colliders_) {
+	//	delete collider;
+	//}
 	for (TestWall* wall : testWall_) {
 		delete wall;
 	}

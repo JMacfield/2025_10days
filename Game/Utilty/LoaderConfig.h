@@ -7,7 +7,7 @@
 /// </summary>
 namespace LoaderConfig {
 	// 当たり判定
-	namespace Collider {
+	namespace Collision {
 		namespace Mask {
 			// 壁
 			inline std::string wall = "WALL";
