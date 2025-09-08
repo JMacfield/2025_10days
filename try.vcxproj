@@ -127,6 +127,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
+    <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
     <ClCompile Include="Game\Player\PlayerConfig.cpp" />
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\ChromaticAberration.cpp" />
