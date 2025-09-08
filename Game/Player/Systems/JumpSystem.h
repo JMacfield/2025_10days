@@ -54,10 +54,7 @@ public:// Accessor method
 
 private:
 	// 初速
-	Vector3 firstVel = {0.8f,0.5f,0.0f};
-
-	// 重力加速度
-	//float acceleration_ = 0.05f;
+	Vector3 firstVel = {0.4f,0.25f,0.0f};
 
 	// 空中でジャンプできる回数
 	int maxAirJump = 1;

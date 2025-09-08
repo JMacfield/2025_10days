@@ -51,7 +51,7 @@ public:// Accessor method
 #pragma endregion
 
 public:// 調整項目
-	Vector3 maxMoveVel = { 0.0f,0.0f, 0.05f };
+	Vector3 maxMoveVel = { 0.0f,0.0f, 0.1f };
 
 	// ゲームパッドのカメラ感度
 	Vector2 sensitivity = { 0.1f, 0.1f };

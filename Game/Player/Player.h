@@ -171,10 +171,10 @@ private:// 定数
 	// 着地時の体の角度
 	Vector3 landingRot = { 0.0f, 0.0f, 0.3f };
 	// 自機が壁に着地したときの座標の補間量
-	float landingOffsetX = 0.01f;
+	float landingOffsetX = 0.2f;
 
 	// 重力加速度
-	float acceleration = 0.05f;
+	float acceleration = 0.025f;
 
 private:// Engine system
 	// 入力
