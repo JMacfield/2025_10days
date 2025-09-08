@@ -33,12 +33,6 @@ void GameScene::Init() {
 	// 必要なデータの初期化
 	InitializeData();
 
-	// 障害物の管理クラス
-	obstacleManager_ = std::make_unique<ObstacleManager>(followCamera_->GetCamera(), player_.get());
-	obstacleManager_->Init();
-
-	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
-	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage2", objects_, colliders_, wallTypes_);
 }
 
 // シーン更新関数
@@ -47,9 +41,6 @@ void GameScene::Update() {
 	//	obj->Update();
 	//}
 	obstacleManager_->Update();
-
-	time++;
-
 	for (auto& obj : objectList_) {
 		obj->Update();
 	}
@@ -58,51 +49,15 @@ void GameScene::Update() {
 
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 
-	if (time == 1) {
-		objects_[1]->SetLerpSpeed(0.01f);
-		objects_[1]->GlitchVerticesLerp(0.3f);
 
-		objects_[22]->SetLerpSpeed(0.01f);
-		objects_[22]->GlitchVerticesLerp(0.3f);
-
-		objects_[23]->SetLerpSpeed(0.01f);
-		objects_[23]->GlitchVerticesLerp(0.3f);
-		objects_[23]->StartLerpToOriginalVertices();
-	}
-	if (time == 100) {
-		objects_[1]->AlphaPingPong10Start(0.01f, 0.6f);
-		objects_[22]->AlphaPingPong10Start(0.01f, 0.6f);
-		objects_[23]->AlphaPingPong01Start(0.01f, 0.6f);
-	}
-	if (time == 200) {
-		time = 0;
-	}
-
-	if (input->TriggerKey(DIK_C)) {
-		for (Object3d* obj : objects_) {
-			obj->GlitchVerticesLerp(0.8f);
-		}
-		objectList_[TENQ]->GlitchVerticesLerp(0.08f);
-		objectList_[HOLE1]->GlitchVerticesLerp(1.0f);
-		objectList_[HOLE2]->GlitchVerticesLerp(5.0f);
-		objectList_[HOLE3]->GlitchVerticesLerp(5.0f);
-	}
-	if (input->TriggerKey(DIK_V)) {
-		for (auto& obj : objectList_) {
-			obj->StartLerpToOriginalVertices();
-		}
-		for (Object3d* obj : objects_) {
-			obj->StartLerpToOriginalVertices();
-		}
-	}
 	// テスト壁
-	for (TestWall* wall : testWall_) {
+	/*for (TestWall* wall : testWall_) {
 		wall->Update();
-	}
+	}*/
 	// 追従カメラ
 	followCamera_->Update();
 	// 床
-	floor_->Update();
+	//floor_->Update();
 	// 自機
 	player_->Update();
 
@@ -136,9 +91,9 @@ void GameScene::Update() {
 		for (auto& obj : objectList_) {
 			obj->ResetVerticesToOriginal();
 		}
-		for (auto& obj : objects_) {
+		/*for (auto& obj : objects_) {
 			obj->ResetVerticesToOriginal();
-		}
+		}*/
 		this->SetSceneNo(CLEARSCENE);
 		return;
 	}
@@ -149,14 +104,6 @@ void GameScene::Draw() {
 	// 自機
 	player_->Draw();
 
-	//for (int i = 0; i < objects_.size(); i++) {
-	//	if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
-	//		objects_[i]->Draw(damageWallTex_, followCamera_->GetCamera());
-	//	}
-	//	else {
-	//		objects_[i]->Draw(floorTex_, followCamera_->GetCamera());
-	//	}
-	//}
 	obstacleManager_->Draw();
 
 	// テスト壁
@@ -164,11 +111,7 @@ void GameScene::Draw() {
 		//wall->Draw();
 	}
 	// 床
-	floor_->Draw(followCamera_->GetCamera());
-	/*TENQ->Draw(textureHandles[TENQ_TEXTURE], followCamera_->GetCamera());
-	HoleObject_->Draw(textureHandles[NORMAL_HOLE], followCamera_->GetCamera());*/
-	/*HoleObject2_->Draw(textureHandles[NORMAL_HOLE], camera);
-	HoleObject3_->Draw(textureHandles[NORMAL_HOLE], camera);*/
+	//floor_->Draw(followCamera_->GetCamera());
 }
 
 // ポストエフェクト描画関数
@@ -184,9 +127,9 @@ void GameScene::Release() {
 	//for (Collider* collider : colliders_) {
 	//	delete collider;
 	//}
-	for (TestWall* wall : testWall_) {
+	/*for (TestWall* wall : testWall_) {
 		delete wall;
-	}
+	}*/
 
 	collisionManager_->ClearColliderList();
 }
@@ -203,7 +146,7 @@ int GameScene::GameClose()
 // テクスチャのロード
 void GameScene::LoadTextures()
 {
-	floorTex_ = TextureManager::StoreTexture("Resources/white.png");
+	floorTex_ = TextureManager::StoreTexture("Resources/game/white.png");
 	damageWallTex_ = TextureManager::StoreTexture("Resources/red.png");
 	greenWallTex_ = TextureManager::StoreTexture("Resources/green.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
@@ -231,9 +174,6 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData() {
 	camera = std::make_unique<Camera>();
-
-	Loader::LoadJsonFile2("Resources/game/Json", "DemoStage1", objects_, colliders_);
-
 	const std::array<const char*, 4> modelNames = { "world.obj", "start.obj", "Demohole2.obj", "Demohole.obj" };
 	objectList_.clear();
 	for (const auto& name : modelNames) {
@@ -242,31 +182,32 @@ void GameScene::InitializeData() {
 		objectList_.emplace_back(std::move(obj));
 	}
 
-	for (int i = 0; i < objects_.size(); i++) {
+	/*for (int i = 0; i < objects_.size(); i++) {
 		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
 			objects_[i]->SetTexture(damageWallTex_);
 		}
 		else {
 			objects_[i]->SetTexture(floorTex_);
 		}
-	}
+	}*/
 
 
 	// 自機
 	player_ = std::make_unique<Player>();
-	// テスト壁
-	for (int i = 0; i < 5; i++) {
-		TestWall* wall = new TestWall();
-		wall->Init();
-		testWall_.push_back(wall);
-	}
-	testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
-	testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
-	testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
-	testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
-	testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
 
-	// 追従カメラ
+	// テスト壁
+	//for (int i = 0; i < 5; i++) {
+	//	TestWall* wall = new TestWall();
+	//	wall->Init();
+	//	testWall_.push_back(wall);
+	//}
+	//testWall_[0]->SetTranslation(Vector3{ -4.5f,0.0f,0.0f });
+	//testWall_[1]->SetTranslation(Vector3{ 4.5f,0.0f,4.0f });
+	//testWall_[2]->SetTranslation(Vector3{ -2.5f,0.0f,8.0f });
+	//testWall_[3]->SetTranslation(Vector3{ 6.5f,0.0f,12.0f });
+	//testWall_[4]->SetTranslation(Vector3{ -4.5f,0.0f,16.0f });
+
+	//// 追従カメラ
 	followCamera_ = std::make_unique<FollowCamera>(player_.get());
 	followCamera_->Init();
 	player_->SetCamera(followCamera_->GetCamera());
@@ -274,25 +215,22 @@ void GameScene::InitializeData() {
 		wall->SetCamera(followCamera_->GetCamera());
 	}
 	// 床
-	floor_ = std::make_unique<Object3d>();
+	/*floor_ = std::make_unique<Object3d>();
 	floor_->Init();
 	floor_->SetModel("box.obj");
 	floor_->SetTexture(floorTex_);
 	floor_->worldTransform_.scale_ = { 10.0f,0.1f,100.0f };
-	floor_->worldTransform_.translation_ = { 0.0f,-50.0f,0.0f };
+	floor_->worldTransform_.translation_ = { 0.0f,-50.0f,0.0f };*/
 
 	// ポストエフェクト
 	postProcess_ = std::make_unique <PostProcess>();
 	postProcess_->Init();
 	postProcess_->SetCamera(followCamera_->GetCamera());
 	camera->Initialize();
-	for (auto& obj : objectList_) {
-		obj->Init();
-	}
-	objectList_[TENQ]->SetisLight(false);
-	objectList_[TENQ]->worldTransform_.scale_ = { -300.0f, 300.0f, 300.0f };
-	objectList_[HOLE1]->worldTransform_.scale_ = { 5.0f,5.0f,5.0f };
-	objectList_[HOLE3]->worldTransform_.scale_ = { 0.5f,0.5f,0.5f };
+
+	// 障害物の管理クラス
+	obstacleManager_ = std::make_unique<ObstacleManager>(followCamera_->GetCamera(), player_.get());
+	obstacleManager_->Init();
 }
 
 // ゲームパッド入力処理

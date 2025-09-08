@@ -69,6 +69,7 @@ private:// 外部から受け取るアドレス
 	Collider* collider_;
 
 private:// Private variable
+	int time = 0;
 	// 体のオブジェクト
 	Object3d* body_;
 

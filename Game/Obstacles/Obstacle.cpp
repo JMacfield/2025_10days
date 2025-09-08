@@ -16,10 +16,17 @@ Obstacle::Obstacle(Object3d* obj, Player* player, Collider* collider) {
 }
 
 void Obstacle::Init() {
-
+	if (ObstacleType::broken == currentDimension_) {
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->GlitchVertices(0.3f);
+	}
+	if (ObstacleType::fix == currentDimension_) {
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+	}
 }
 
 void Obstacle::Update() {
+	time++;
 	// 過去現在の切り替え
 	SwitchDimension();
 
@@ -33,14 +40,14 @@ void Obstacle::Draw() {
 	// 体
 	// 直る
 	if (ObstacleType::fix == currentDimension_) {
-		body_->Draw(5, pCamera_);
+		body_->Draw(pCamera_);
 	}
 	// 壊す
 	else if (ObstacleType::broken == currentDimension_) {
-		body_->Draw(4, pCamera_);
+		body_->Draw(pCamera_);
 	}
 	else {
-		body_->Draw(3, pCamera_);
+		body_->Draw(pCamera_);
 	}
 }
 
@@ -60,35 +67,41 @@ void Obstacle::SwitchDimension() {
 		// 壊す
 		if (ObstacleType::fix == currentDimension_) {
 			currentDimension_ = ObstacleType::broken;
+			// 壊れる演出
+			BrokenEffect();
 			collider_->SetIsActive(false);
 		}
 		// 直る
 		else if (ObstacleType::broken == currentDimension_) {
 			currentDimension_ = ObstacleType::fix;
+			// 直る演出
+			FixEffect();
 			collider_->SetIsActive(true);
 		}
 	}
 
-	// 直る演出
-	FixEffect();
-	// 壊れる演出
-	BrokenEffect();
+
 }
 
 void Obstacle::FixEffect() {
 	if (ObstacleType::fix != currentDimension_) { return; }
-
 	// 切り替わった瞬間
 	if (ObstacleType::fix != preDimension_) {
-
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->SetLerpSpeed(0.01f);
+		body_->GlitchVerticesLerp(0.3f);
+		body_->ResetVerticesToOriginal();
+		body_->StartLerpToOriginalVertices();
 	}
 }
 
 void Obstacle::BrokenEffect() {
 	if (ObstacleType::broken != currentDimension_) { return; }
-
 	// 切り替わった瞬間
 	if (ObstacleType::broken != preDimension_) {
-
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->SetLerpSpeed(0.01f);
+		body_->GlitchVerticesLerp(0.3f);
+		body_->ResetVerticesToOriginal();
 	}
 }

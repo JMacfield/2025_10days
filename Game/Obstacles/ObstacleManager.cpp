@@ -10,9 +10,9 @@ ObstacleManager::ObstacleManager(Camera* camera, Player* player) {
 
 	for (int i = 0; i < objects_.size(); i++) {
 		Obstacle* obstacle = new Obstacle(objects_[i], player_, colliders_[i]);
-		obstacle->Init();
 		obstacle->SetCamera(camera_);
 		obstacle->SetDimension(wallTypes_[i]);
+		obstacle->Init();
 		obstacles_.push_back(obstacle);
 	}
 }

@@ -93,10 +93,6 @@ public:// Private methods
 
 private:// Private variable
 
-	int time = 0;
-    float alpha = 0.0f;
-    bool isIncreasing = true;
-
     std::vector<std::unique_ptr<Object3d>> objectList_;
     enum ObjectIndex {
         TENQ, 

@@ -381,7 +381,6 @@ void Object3d::GlitchVerticesLerp(float intensity)
 		vertex.position.y += dist(gen);
 		vertex.position.z += dist(gen);
 	}
-
 	isLerping_ = true;
 	lerpT_ = 0.0f;
 	lerpToGlitch_ = true; // 元→ランダム
