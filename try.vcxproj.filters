@@ -324,9 +324,9 @@
     <ClCompile Include="Game\Scene\OverScene.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
-    <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
     <ClCompile Include="Game\Obstacles\Obstacle.cpp" />
     <ClCompile Include="Game\Obstacles\ObstacleManager.cpp" />
+    <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -616,8 +616,6 @@
     <ClInclude Include="Game\Obstacles\ObstacleManager.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Scene\OverScene.h" />
-    <ClInclude Include="Engine\2d\PostEffect\Effect\Scanline.h" />
-    <ClInclude Include="Engine\2d\PostEffect\Effect\Glitch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">
