@@ -7,10 +7,10 @@
 #include "Input.h"
 #include <memory>
 
-class ClearScene : public IScene {
+class OverScene : public IScene {
 public:
-    ClearScene();
-    ~ClearScene() override;
+    OverScene();
+    ~OverScene() override;
 
 #pragma region Override methods
     // 初期化
@@ -52,6 +52,6 @@ private: // Private variables
     std::unique_ptr<Camera> camera_ = nullptr;
     std::unique_ptr<PostProcess> postProcess_ = nullptr;
 
-    std::unique_ptr<Sprite> clearSprite_ = nullptr;
-    uint32_t clearSpriteHandle_;
+    std::unique_ptr<Sprite> overSprite_ = nullptr;
+    uint32_t overSpriteHandle_;
 };

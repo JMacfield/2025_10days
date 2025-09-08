@@ -1,4 +1,5 @@
-﻿#include "IScene.h"
+﻿#pragma once
+#include "IScene.h"
 #include "Sprite.h"
 #include "Camera.h"
 #include "Object3d.h"
@@ -7,10 +8,10 @@
 #include "Input.h"
 #include <memory>
 
-class ClearScene : public IScene {
+class TitleScene : public IScene {
 public:
-    ClearScene();
-    ~ClearScene() override;
+    TitleScene();
+    ~TitleScene() override;
 
 #pragma region Override methods
     // 初期化
@@ -50,8 +51,13 @@ private: // Private methods
 private: // Private variables
     Input* input_ = nullptr;
     std::unique_ptr<Camera> camera_ = nullptr;
-    std::unique_ptr<PostProcess> postProcess_ = nullptr;
+    std::unique_ptr<PostProcess> postProcess_;
 
-    std::unique_ptr<Sprite> clearSprite_ = nullptr;
-    uint32_t clearSpriteHandle_;
+    // タイトルスプライト
+    std::unique_ptr<Sprite> titleSprite_ = nullptr;
+    uint32_t titleSpriteHandle_;
+
+    // スタート画像
+    std::unique_ptr<Sprite> showStart_ = nullptr;
+    uint32_t showStartHandle_;
 };

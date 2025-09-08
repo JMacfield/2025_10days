@@ -18,6 +18,8 @@ GameScene::~GameScene() {}
 
 // 初期化関数
 void GameScene::Init() {
+	sceneNo = GAMESCENE;
+
 	//// カメラの初期化
 	input = Input::GetInstance();
 
@@ -95,6 +97,7 @@ void GameScene::Update() {
 			obj->ResetVerticesToOriginal();
 		}*/
 		this->SetSceneNo(CLEARSCENE);
+		this->SetSceneNo(TITLESCENE);
 		return;
 	}
 }

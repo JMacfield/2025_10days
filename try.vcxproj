@@ -124,7 +124,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
+    <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
+    <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
     <ClCompile Include="Game\Player\PlayerConfig.cpp" />
     <ClCompile Include="Game\Scene\ClearScene.cpp" />
@@ -148,6 +149,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Interface\Heap\SRVManager.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Fog.cpp" />
     <ClCompile Include="Engine\3d\FlowEffectObject\FlowEffectObject.cpp" />
+    <ClCompile Include="Game\Scene\OverScene.cpp" />
+    <ClCompile Include="Game\Scene\TitleScene.cpp" />
     <ClCompile Include="Game\Camera\FollowCamera.cpp" />
     <ClCompile Include="Game\Utilty\Lerp.cpp" />
     <ClCompile Include="Game\Utilty\Loader.cpp" />
@@ -245,6 +248,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Camera\FollowCamera.h" />
     <ClInclude Include="Game\Player\PlayerConfig.h" />
     <ClInclude Include="Game\Player\Systems\ISystem.h" />
+    <ClInclude Include="Game\Scene\OverScene.h" />
+    <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Utilty\Lerp.h" />
     <ClInclude Include="Game\Utilty\Loader.h" />
     <ClInclude Include="Engine\Interface\Mesh.h" />

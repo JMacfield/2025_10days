@@ -34,9 +34,11 @@
 
 GameManager::GameManager() {
 	// 各シーンの登録
+	sceneArr_[TITLESCENE] = new TitleScene();
 	sceneArr_[GAMESCENE] = new GameScene();
 	sceneArr_[CLEARSCENE] = new ClearScene();
 	sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+	sceneArr_[OVERSCENE] = new OverScene();
 }
 GameManager::~GameManager() {
 }
@@ -47,7 +49,7 @@ int GameManager::Run() {
 	//DirectXCommon::D3DResourceLeakChecker leakCheck;
 
 	WinAPI* sWinAPI = WinAPI::GetInstance();
-	sWinAPI->Initialize(L"NeonShift");
+	sWinAPI->Initialize(L"WorldsShift");
 
 	DirectXCommon* sDirctX = DirectXCommon::GetInstance();
 	sDirctX->Initialize();
@@ -85,6 +87,7 @@ int GameManager::Run() {
 	// シーンのチェック
 	prevSceneNo_ = currentSceneNo_;
 	currentSceneNo_ = IScene::GetSceneNo();
+	currentSceneNo_ = TITLESCENE;
 	//post->Init();
 	sceneArr_[currentSceneNo_]->Init();
 
@@ -180,6 +183,14 @@ int GameManager::Run() {
 					IPostEffectState::SetEffectNo(kHSVFilter);
 					currentStatus = "HSV effect applied";
 				}
+				if (ImGui::MenuItem("Scanline")) {
+					IPostEffectState::SetEffectNo(kScanLine);
+					currentStatus = "scanline applied";
+				}
+				if (ImGui::MenuItem("Glitch")) {
+					IPostEffectState::SetEffectNo(kGlitch);
+					currentStatus = "glitch applied";
+				}
 
 				ImGui::EndMenu();
 			}
@@ -203,6 +214,9 @@ int GameManager::Run() {
 			sceneArr_[prevSceneNo_] = nullptr;
 
 			switch (prevSceneNo_) {
+			case TITLESCENE:
+				sceneArr_[TITLESCENE] = new TitleScene();
+				break;
 			case GAMESCENE:
 				sceneArr_[GAMESCENE] = new GameScene();
 				break;
@@ -211,6 +225,9 @@ int GameManager::Run() {
 				break;
 			case STAGESELECTSCENE:
 				sceneArr_[STAGESELECTSCENE] = new StageSelectScene();
+				break;
+			case OVERSCENE:
+				sceneArr_[OVERSCENE] = new OverScene();
 				break;
 			}
 

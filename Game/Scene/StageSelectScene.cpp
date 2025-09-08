@@ -5,6 +5,7 @@ StageSelectScene::~StageSelectScene() {}
 
 void StageSelectScene::Init() {
     // 初期化処理
+    sceneNo = STAGESELECTSCENE;
 }
 void StageSelectScene::Update() {
     // 更新処理
