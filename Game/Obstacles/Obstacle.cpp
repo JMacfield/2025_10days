@@ -60,12 +60,10 @@ void Obstacle::SwitchDimension() {
 		// 壊す
 		if (ObstacleType::fix == currentDimension_) {
 			currentDimension_ = ObstacleType::broken;
-			collider_->SetIsActive(false);
 		}
 		// 直る
 		else if (ObstacleType::broken == currentDimension_) {
 			currentDimension_ = ObstacleType::fix;
-			collider_->SetIsActive(true);
 		}
 	}
 
@@ -82,6 +80,8 @@ void Obstacle::FixEffect() {
 	if (ObstacleType::fix != preDimension_) {
 
 	}
+
+	collider_->SetIsActive(true);
 }
 
 void Obstacle::BrokenEffect() {
@@ -91,4 +91,6 @@ void Obstacle::BrokenEffect() {
 	if (ObstacleType::broken != preDimension_) {
 
 	}
+
+	collider_->SetIsActive(false);
 }
