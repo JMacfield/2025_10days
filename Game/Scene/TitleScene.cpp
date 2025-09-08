@@ -30,41 +30,11 @@ void TitleScene::Update() {
     if (input_->TriggerKey(DIK_SPACE) || input_->TriggerKey(DIK_RETURN)) {
         IScene::SetSceneNo(GAMESCENE);
     }
-
-    if(time == 200) {
-        title_->SetEasingType(GetRandomEasingType());
-        title_->GlitchVerticesLerp(1.3f);
-    }
-    if(time == 400) {
-        TENQ->SetEasingType(GetRandomEasingType());
-        TENQ->GlitchVerticesLerp(0.3f);
-    }
-    if(time == 600) {
-        title_->SetEasingType(GetRandomEasingType());
-        title_->SetTexture(textureHandles[TITLE_TEXTURE]);
-        title_->StartLerpToOriginalVertices();
-    }
-    if(time == 800) {
-        TENQ->SetEasingType(GetRandomEasingType());
-        TENQ->StartLerpToOriginalVertices();
-    }
-    if( time == 1000) {
-        title_->SetEasingType(GetRandomEasingType());
-        title_->GlitchVerticesLerp(1.3f);
-	}
-    if (time == 1200) {
-        TENQ->SetEasingType(GetRandomEasingType());
-        TENQ->GlitchVerticesLerp(0.3f);
-    }
-    if (time == 1400) {
-        title_->SetEasingType(GetRandomEasingType());
-        title_->SetTexture(textureHandles[TITLE_TEXTURE2]);
-        title_->StartLerpToOriginalVertices();
-    }
-    if (time == 1600) {
-        TENQ->SetEasingType(GetRandomEasingType());
-        TENQ->StartLerpToOriginalVertices();
-		time = 0;
+    // イベント処理
+    for (const auto& e : events) {
+        if (time == e.triggerTime) {
+            e.action();
+        }
     }
     TENQ->Update();
     TENQ->ModelDebug("TENQ");
@@ -106,6 +76,7 @@ void TitleScene::LoadTextures() {
     // テクスチャの読み込み処理
     textureHandles[TITLE_TEXTURE] = TextureManager::StoreTexture("Resources/10days/title.png");
     textureHandles[TITLE_TEXTURE2] = TextureManager::StoreTexture("Resources/10days/title2.png");
+    textureHandles[TITLE_TEXTURE3] = TextureManager::StoreTexture("Resources/10days/title3.png");
     textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
 }
 

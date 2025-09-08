@@ -55,6 +55,25 @@ private: // Private variables
     std::unique_ptr<PostProcess> postProcess_;
     std::unique_ptr<Object3d> title_ = nullptr;
     std::unique_ptr<Object3d> TENQ = nullptr;
+    struct TitleEvent {
+        int triggerTime;
+        Object3d* target;
+        std::function<void()> action;
+    };
+    std::vector<TitleEvent> events = {
+    {200,  title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
+    {400,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
+    {600,  title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE3]); title_->StartLerpToOriginalVertices(); }},
+    {800,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
+    {1000, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
+    {1200, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
+    {1400, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE2]); title_->StartLerpToOriginalVertices(); }},
+    {1600,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
+    {1800, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
+    {2000, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
+    {2200, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE]); title_->StartLerpToOriginalVertices(); }},
+    {2400, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); time = 0; }},
+    };
     enum ObjectIndex {
         TITLE,
         TENQ_OJECT,
@@ -63,6 +82,7 @@ private: // Private variables
     enum TextureID {
         TITLE_TEXTURE,
         TITLE_TEXTURE2,
+        TITLE_TEXTURE3,
         TENQ_TEXTURE,
         TEXTURE_COUNT
     };
