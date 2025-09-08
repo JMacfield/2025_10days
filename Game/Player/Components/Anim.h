@@ -1,9 +1,11 @@
 #pragma once
 #include "mathFunction.h"
+#include "GameTimer.h"
 #include <list>
 #include <assert.h>
 #include <functional>
 #include <variant>
+#include "GameTimer.h"
 
 class Anim {
 public: // 構造体
@@ -97,6 +99,10 @@ public: // Public method
 	/// <param name="easeFunc">使用するイージング関数</param>
 	void AnimDataOverride(int index, std::variant<Vector4*, Vector3*, Vector2*, float*, int*> target, std::variant<Vector4, Vector3, Vector2, float, int> start, std::variant<Vector4, Vector3, Vector2, float, int> end, float endFrame, std::function<float(float)> easeFunc, bool isTimeScale = true);
 #pragma endregion
+
+private:// Engine system
+	// ゲームタイマー
+	GameTimer* gameTimer_;
 
 private: // Private variable
 	std::list<AnimData> animData_;

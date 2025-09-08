@@ -27,11 +27,11 @@ void JumpSystem::Update() {
 	// 入力処理
 	InputUpdate();
 
-	//// ジャンプ時の速度減衰
-	//if (isActive_) {
-	//	vel_.x = Lerps::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f);
-	//	vel_.z = Lerps::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f);
-	//}
+	// ジャンプ時の速度減衰
+	if (isActive_) {
+		//vel_.x = Lerps::ExponentialInterpolate(vel_.x, jumpDirX_ * firstVel.x / 10.0f * 2.0f, 0.1f * GameTimer::GetInstance()->GetTimeScale());
+		//vel_.z = Lerps::ExponentialInterpolate(vel_.z, firstVel.z / 10.0f * 2.0f, 0.1f * GameTimer::GetInstance()->GetTimeScale());
+	}
 
 	// 着地したら初期化
 	if (player_->GetIsLanding()) {
@@ -83,13 +83,13 @@ void JumpSystem::JumpSideUpdate() {
 	if (player_->GetCurrentWallSide() == WallSide::kLeft) {
 		jumpDirX_ = 1.0f;
 		Vector3 vel = firstVel;
-		vel_ += vel;
+		vel_ += vel * GameTimer::GetInstance()->GetTimeScale();
 	}
 	// 左に向かって飛ぶ
 	else if (player_->GetCurrentWallSide() == WallSide::kRight) {
 		jumpDirX_ = -1.0f;
 		Vector3 vel = firstVel;
 		vel.x *= jumpDirX_;
-		vel_ += vel;
+		vel_ += vel * GameTimer::GetInstance()->GetTimeScale();
 	}
 }

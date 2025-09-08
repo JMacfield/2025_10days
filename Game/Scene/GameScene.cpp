@@ -32,15 +32,24 @@ void GameScene::Init() {
 
 	// 必要なデータの初期化
 	InitializeData();
+
+	// 障害物の管理クラス
+	obstacleManager_ = std::make_unique<ObstacleManager>(followCamera_->GetCamera(), player_.get());
+	obstacleManager_->Init();
+
+	//Loader::LoadJsonFile2("Resources/game/Json", "Test", objects_, colliders_);
+	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage2", objects_, colliders_, wallTypes_);
 }
 
 // シーン更新関数
 void GameScene::Update() {
+	//for (Object3d* obj : objects_) {
+	//	obj->Update();
+	//}
+	obstacleManager_->Update();
+
 	time++;
 
-	for (Object3d* obj : objects_) {
-		obj->Update();
-	}
 	for (auto& obj : objectList_) {
 		obj->Update();
 	}
@@ -103,6 +112,7 @@ void GameScene::Update() {
 	player_->DebugGui();
 	// 追従カメラ
 	followCamera_->DebugGui();
+	GameTimer::GetInstance()->Update();
 	ImGui::End();
 	camera->CameraDebug();
 	if (objectList_[TENQ]) objectList_[TENQ]->EasingDebugUI("TENQ");
@@ -139,9 +149,15 @@ void GameScene::Draw() {
 	// 自機
 	player_->Draw();
 
-	for (int i = 0; i < objects_.size(); i++) {
-		objects_[i]->Draw(followCamera_->GetCamera());
-	}
+	//for (int i = 0; i < objects_.size(); i++) {
+	//	if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
+	//		objects_[i]->Draw(damageWallTex_, followCamera_->GetCamera());
+	//	}
+	//	else {
+	//		objects_[i]->Draw(floorTex_, followCamera_->GetCamera());
+	//	}
+	//}
+	obstacleManager_->Draw();
 
 	// テスト壁
 	for (TestWall* wall : testWall_) {
@@ -162,12 +178,12 @@ void GameScene::PostDraw() {
 
 // リソース解放関数
 void GameScene::Release() {
-	for (Object3d* obj : objects_) {
-		delete obj;
-	}
-	for (Collider* collider : colliders_) {
-		delete collider;
-	}
+	//for (Object3d* obj : objects_) {
+	//	delete obj;
+	//}
+	//for (Collider* collider : colliders_) {
+	//	delete collider;
+	//}
 	for (TestWall* wall : testWall_) {
 		delete wall;
 	}
@@ -189,6 +205,7 @@ void GameScene::LoadTextures()
 {
 	floorTex_ = TextureManager::StoreTexture("Resources/white.png");
 	damageWallTex_ = TextureManager::StoreTexture("Resources/red.png");
+	greenWallTex_ = TextureManager::StoreTexture("Resources/green.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");

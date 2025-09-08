@@ -8,6 +8,8 @@ using namespace PlayerConfig::FileNames;
 Player::Player() {
 	// 入力の実体を取得
 	input_ = Input::GetInstance();
+	// ゲームタイマーのインスタンス取得
+	gameTimer_ = GameTimer::GetInstance();
 
 	// テクスチャ読み込み
 	LoadTextures();
@@ -54,22 +56,26 @@ void Player::Init() {
 	// 着地したか
 	isLanding_ = false;
 	isAlive_ = true;
+	isClear_ = false;
+	switchDimension_ = false;
 
 	vel_ = { 0.0f,0.0f,0.0f };
 	rot_ = { 0.0f,0.0f,0.0f };
 
 	currentWallSide_ = WallSide::kNone;
-
-	//EndJump();
 }
 
 void Player::Update() {
+	isPreAlive_ = isAlive_;
+	preDimension_ = currentDimension_;
+	switchDimension_ = false;
 	if (!isAlive_) { return; }
 
 	isPreAir_ = isAir_;
 
 	// 過去現在の切り替え
 	if (input_->TriggerKey(PlayerConfig::Input::Keyboard::switching)) {
+		switchDimension_ = true;
 		if (currentDimension_ == DimensionType::kNow) {
 			currentDimension_ = DimensionType::kPast;
 		}
@@ -79,6 +85,7 @@ void Player::Update() {
 	}
 	else if (input_->GetJoystickState(joyState)) {
 		if (PlayerConfig::Input::GamePad::GamePadTrigger(joyState, preJoyState, XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+			switchDimension_ = true;
 			if (currentDimension_ == DimensionType::kNow) {
 				currentDimension_ = DimensionType::kPast;
 			}
@@ -115,7 +122,7 @@ void Player::Update() {
 	}
 
 	if (isAir_ && !isLanding_) {
-		vel_.y -= acceleration;
+		vel_.y -= acceleration * GameTimer::GetInstance()->GetTimeScale();
 	}
 
 	preJoyState = joyState;
@@ -194,6 +201,9 @@ void Player::OnCollision(Collider* collider) {
 	if (collider->GetCollisionAttribute() == kCollisionAttributeEnemy) {
 		isAlive_ = false;
 	}
+	else if (collider->GetCollisionAttribute() == kCollisionAttributeClear) {
+		isClear_ = true;
+	}
 	// 壁の場合
 	else if (collider->GetCollisionAttribute() == kCollisionAttributeObstacles) {
 		// 着地の判定
@@ -222,6 +232,9 @@ void Player::CheckLanding(Collider* collider) {
 			//float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - landingOffsetX;
 			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x - collider->GetOBB().m_fLength.x - landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
+
+			// ジャンプ状態を解除
+			jumpSystem_->Init();
 		}
 	}
 	// 壁が右側にある
@@ -238,28 +251,29 @@ void Player::CheckLanding(Collider* collider) {
 			//float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + landingOffsetX;
 			float posX = MathFuncs::GetWorldPosition(collider->worldTransform.matWorld_).x + collider->GetOBB().m_fLength.x + landingOffsetX;
 			body_->worldTransform_.translation_.x = posX;
+
+			// ジャンプ状態を解除
+			jumpSystem_->Init();
 		}
 	}
 
-	// ジャンプ状態を解除
-	jumpSystem_->Init();
 }
 
 void Player::LandingRotate() {
 	// 空中にいるとき
 	if (isAir_) {
-		rot_ = Lerps::ExponentialInterpolate(rot_, Vector3{ 0,0,0 }, 0.05f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, Vector3{ 0,0,0 }, 0.05f * GameTimer::GetInstance()->GetTimeScale());
 	}
 	// 壁が右側にある
 	else if (currentWallSide_ == WallSide::kLeft) {
 		Vector3 goalRot = landingRot;
 		goalRot.z *= -1;
-		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f * GameTimer::GetInstance()->GetTimeScale());
 	}
 	// 壁が左側にある
 	else if (currentWallSide_ == WallSide::kRight) {
 		Vector3 goalRot = landingRot;
-		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f);
+		rot_ = Lerps::ExponentialInterpolate(rot_, goalRot, 0.1f * GameTimer::GetInstance()->GetTimeScale());
 	}
 }
 

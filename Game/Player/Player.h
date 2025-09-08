@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Object3D.h"
 #include "Collider.h"
+#include "Components/GameTimer.h"
 #include "Systems/MoveSystem.h"
 #include "Systems/JumpSystem.h"
 #include "PlayerConfig.h"
@@ -97,10 +98,10 @@ public:// Accessor method
 	/// <returns></returns>
 	float GetAcceleration() { return acceleration; }
 	/// <summary>
-	/// 空中にいるかを取得
+	/// 次元を切り替えた瞬間を取得
 	/// </summary>
 	/// <returns></returns>
-	bool GetIsAir() { return isAir_; }
+	bool GetTriggerSwitchDimension() { return switchDimension_; }
 	/// <summary>
 	/// 空中に浮いた瞬間を取得
 	/// </summary>
@@ -111,6 +112,11 @@ public:// Accessor method
 		}
 		return false;
 	}
+	/// <summary>
+	/// 空中にいるかを取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsAir() { return isAir_; }
 	/// <summary>
 	/// 着地した瞬間を取得
 	/// </summary>
@@ -127,10 +133,25 @@ public:// Accessor method
 	/// <returns></returns>
 	bool GetIsLanding() { return isLanding_; }
 	/// <summary>
-	/// 線蔵しているかを取得
+	/// 死亡した瞬間を取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetTriggerDead() {
+		if (!isAlive_ && isPreAlive_) {
+			return true;
+		}
+		return false;
+	}
+	/// <summary>
+	/// 生存しているかを取得
 	/// </summary>
 	/// <returns></returns>
 	bool GetIsAlive() { return isAlive_; }
+	/// <summary>
+	/// クリアラインに到達したかを取得
+	/// </summary>
+	/// <returns></returns>
+	bool GetIsClear(){return isClear_;}
 #pragma endregion
 
 #pragma region Setter
@@ -165,6 +186,9 @@ private:// 外部から受け取るアドレス
 	// カメラ
 	Camera* pCamera_;
 
+	// ゲームタイマー
+	GameTimer* gameTimer_;
+
 private:// Private variable
 	// 体のオブジェクト
 	std::unique_ptr<Object3d> body_;
@@ -186,13 +210,19 @@ private:// Private variable
 
 	// 今の次元(過去か現在か)
 	DimensionType currentDimension_;
+	DimensionType preDimension_;
 
+	// 次元を切り替えた瞬間
+	bool switchDimension_;
 	// 空中にいるか
 	bool isAir_ = true;
 	bool isPreAir_ = false;
 	// 着地したか
 	bool isLanding_ = false;
-
+	// 生きているか
 	bool isAlive_ = true;
+	bool isPreAlive_;
+	// クリアしたか
+	bool isClear_;
 };
 

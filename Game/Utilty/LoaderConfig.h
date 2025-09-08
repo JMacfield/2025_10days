@@ -7,7 +7,7 @@
 /// </summary>
 namespace LoaderConfig {
 	// 当たり判定
-	namespace Collider {
+	namespace Collision {
 		namespace Mask {
 			// 壁
 			inline std::string wall = "WALL";
@@ -15,5 +15,14 @@ namespace LoaderConfig {
 			// 攻撃
 			inline std::string attack = "ATTACK";
 		}
+	}
+	// オブジェクトのタイプ
+	namespace ObstacleType {
+		// 壊れている
+		inline std::string broken = "BROKEN";
+		// 直った
+		inline std::string fix = "FIXED";
+		// 変わらない
+		inline std::string abs = "ABS";
 	}
 }
