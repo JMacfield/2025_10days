@@ -23,6 +23,7 @@ void Obstacle::Init() {
 	if (ObstacleType::fix == currentDimension_) {
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
 	}
+	preDimension_ = currentDimension_;
 }
 
 void Obstacle::Update() {
@@ -69,14 +70,14 @@ void Obstacle::SwitchDimension() {
 			currentDimension_ = ObstacleType::broken;
 			// 壊れる演出
 			BrokenEffect();
-			collider_->SetIsActive(false);
+		
 		}
 		// 直る
 		else if (ObstacleType::broken == currentDimension_) {
 			currentDimension_ = ObstacleType::fix;
 			// 直る演出
 			FixEffect();
-			collider_->SetIsActive(true);
+		
 		}
 	}
 
@@ -93,6 +94,8 @@ void Obstacle::FixEffect() {
 		body_->ResetVerticesToOriginal();
 		body_->StartLerpToOriginalVertices();
 	}
+
+	collider_->SetIsActive(true);
 }
 
 void Obstacle::BrokenEffect() {
@@ -104,4 +107,6 @@ void Obstacle::BrokenEffect() {
 		body_->GlitchVerticesLerp(0.3f);
 		body_->ResetVerticesToOriginal();
 	}
+
+	collider_->SetIsActive(false);
 }

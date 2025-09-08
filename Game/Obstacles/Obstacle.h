@@ -3,6 +3,9 @@
 
 class Collider;
 class Player;
+/// <summary>
+/// 障害物クラス
+/// </summary>
 class Obstacle {
 public:// Public variable
 	// コンストラクタ
