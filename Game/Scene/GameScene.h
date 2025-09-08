@@ -95,10 +95,10 @@ private:// Private variable
 
     std::vector<std::unique_ptr<Object3d>> objectList_;
     enum ObjectIndex {
-        TENQ, 
-        HOLE1, 
-        HOLE2, 
-        HOLE3 
+        TENQ,
+        HOLE1,
+        HOLE2,
+        HOLE3
     };
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
@@ -107,7 +107,7 @@ private:// Private variable
     Input* input = nullptr;
     enum TextureID {
         NORMAL_HOLE,
-		TENQ_TEXTURE,
+        TENQ_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;

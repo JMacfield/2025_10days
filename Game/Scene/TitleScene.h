@@ -50,8 +50,23 @@ private: // Private methods
 
 private: // Private variables
     Input* input_ = nullptr;
+    int time = 0;
     std::unique_ptr<Camera> camera_ = nullptr;
     std::unique_ptr<PostProcess> postProcess_;
+    std::unique_ptr<Object3d> title_ = nullptr;
+    std::unique_ptr<Object3d> TENQ = nullptr;
+    enum ObjectIndex {
+        TITLE,
+        TENQ_OJECT,
+        OJECT_COUNT
+    };
+    enum TextureID {
+        TITLE_TEXTURE,
+        TITLE_TEXTURE2,
+        TENQ_TEXTURE,
+        TEXTURE_COUNT
+    };
+    std::array<uint32_t, TEXTURE_COUNT> textureHandles;
 
     // タイトルスプライト
     std::unique_ptr<Sprite> titleSprite_ = nullptr;
