@@ -37,6 +37,7 @@ void GameScene::Init() {
 // シーン更新関数
 void GameScene::Update() {
 	time++;
+
 	for (Object3d* obj : objects_) {
 		obj->Update();
 	}
@@ -48,16 +49,23 @@ void GameScene::Update() {
 
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 
-	if (time == 100) {
-		objects_[0]->SetLerpSpeed(0.01f);
-		objects_[0]->GlitchVerticesLerp(0.3f);
-		objects_[0]->SetColor({ 0.0f, 0.0f, 1.0f, 0.2f });
-
+	if (time == 1) {
 		objects_[1]->SetLerpSpeed(0.01f);
 		objects_[1]->GlitchVerticesLerp(0.3f);
-		objects_[1]->SetColor({ 0.0f, 0.0f, 1.0f, 0.2f });
+
+		objects_[22]->SetLerpSpeed(0.01f);
+		objects_[22]->GlitchVerticesLerp(0.3f);
+
+		objects_[23]->SetLerpSpeed(0.01f);
+		objects_[23]->GlitchVerticesLerp(0.3f);
+		objects_[23]->StartLerpToOriginalVertices();
 	}
-	if (time == 150) {
+	if (time == 100) {
+		objects_[1]->AlphaPingPong10Start(0.01f, 0.6f);
+		objects_[22]->AlphaPingPong10Start(0.01f, 0.6f);
+		objects_[23]->AlphaPingPong01Start(0.01f, 0.6f);
+	}
+	if (time == 200) {
 		time = 0;
 	}
 

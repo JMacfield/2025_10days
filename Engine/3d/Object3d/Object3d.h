@@ -168,6 +168,11 @@ public:
     void StartLerpToOriginalVertices();
     // 頂点をoriginalVertices_で初期化
     void ResetVerticesToOriginal();
+
+    void AlphaPingPong01Start(float speed, float minAlpha);
+    void AlphaPingPong10Start(float speed, float minAlpha);
+    void AlphaPingPong01(float t, float minAlpha);
+    void AlphaPingPong10(float t, float minAlpha);
 public: // Getter
     /// <summary>
     /// ワールド変換を取得する
@@ -226,6 +231,12 @@ private:
     float lerpSpeed_ = 0.002f;
     private:
     bool lerpToGlitch_ = false; // true: 元→ランダム, false: ランダム→元
+
+    bool isAlphaPingPongActive01 = false;
+    bool isAlphaPingPongActive10 = false;
+    float alphaPingPongT_ = 0.0f;
+    float alphaPingPongSpeed_ = 0.01f;
+	float minAlpha_ = 0.0f; // 最小アルファ値
 
     Vector4 color_ = { 1.0f, 1.0f, 1.0f, 1.0f }; // デフォルト白
     uint32_t texture_ = 0; // デフォルトテクスチャ

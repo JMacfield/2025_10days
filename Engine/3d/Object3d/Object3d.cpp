@@ -88,12 +88,32 @@ void Object3d::Update()
 			lerpT_ = 1.0f;
 			isLerping_ = false;
 		}
+		// 透明度のラープ方向による変化
 		if (lerpToGlitch_) {
+			color_.w = 1.0f - lerpT_;
 			LerpToGlitchedVertices(lerpT_);
 		}
 		else {
+			color_.w = lerpT_;
 			LerpToOriginalVertices(lerpT_);
 		}
+		// 毎フレーム色を反映
+		SetColor(color_);
+	}
+
+	// AlphaPingPong01自動進行
+	if (isAlphaPingPongActive01) {
+		alphaPingPongT_ += alphaPingPongSpeed_;
+		alphaPingPongT_ = fmod(alphaPingPongT_, 1.0f);
+		AlphaPingPong01(alphaPingPongT_, minAlpha_);
+
+	}
+
+	// AlphaPingPong10自動進行
+	if (isAlphaPingPongActive10) {
+		alphaPingPongT_ += alphaPingPongSpeed_;
+		alphaPingPongT_ = fmod(alphaPingPongT_, 1.0f);
+		AlphaPingPong10(alphaPingPongT_, minAlpha_);
 	}
 }
 
@@ -412,6 +432,34 @@ void Object3d::ResetVerticesToOriginal() {
 	auto& vertices = model_->GetModelData().vertices;
 	vertices = originalVertices_;
 	model_->UpdateVertexBuffer();
+}
+
+void Object3d::AlphaPingPong01Start(float speed, float minAlpha) {
+	isAlphaPingPongActive01 = true;
+	alphaPingPongT_ = 0.5f;
+	alphaPingPongSpeed_ = speed;
+	minAlpha_ = minAlpha;
+}
+
+void Object3d::AlphaPingPong10Start(float speed, float minAlpha) {
+	isAlphaPingPongActive10 = true;
+	alphaPingPongT_ = 0.5f;
+	alphaPingPongSpeed_ = speed;
+	minAlpha_ = minAlpha;
+}
+
+// 1→minAlpha→1 の三角波
+void Object3d::AlphaPingPong01(float t, float minAlpha) {
+	float pingpong = std::abs(2.0f * t - 1.0f); // 0→1→0
+	color_.w = 1.0f - (1.0f - minAlpha) * pingpong;
+	SetColor(color_);
+}
+
+// 0→minAlpha→0 の三角波
+void Object3d::AlphaPingPong10(float t, float minAlpha) {
+	float pingpong = 1.0f - std::abs(2.0f * t - 1.0f); // 0→1→0 を反転
+	color_.w = minAlpha - (1.0f - minAlpha) * pingpong;
+	SetColor(color_);
 }
 
 void Object3d::LightDebug(const char* name)
