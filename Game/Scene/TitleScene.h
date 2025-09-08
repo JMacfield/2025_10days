@@ -68,7 +68,7 @@ private: // Private variables
     {1000, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
     {1200, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
     {1400, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE2]); title_->StartLerpToOriginalVertices(); }},
-    {1600,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
+    {1600,  TENQ.get(),  [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
     {1800, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
     {2000, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
     {2200, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE]); title_->StartLerpToOriginalVertices(); }},
