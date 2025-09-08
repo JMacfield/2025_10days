@@ -31,30 +31,38 @@ void TitleScene::Update() {
         IScene::SetSceneNo(GAMESCENE);
     }
 
-    if(time == 100) {
+    if(time == 200) {
+        title_->SetEasingType(GetRandomEasingType());
         title_->GlitchVerticesLerp(1.3f);
     }
-    if(time == 200) {
+    if(time == 400) {
+        TENQ->SetEasingType(GetRandomEasingType());
         TENQ->GlitchVerticesLerp(0.3f);
     }
-    if(time == 300) {
+    if(time == 600) {
+        title_->SetEasingType(GetRandomEasingType());
         title_->SetTexture(textureHandles[TITLE_TEXTURE]);
         title_->StartLerpToOriginalVertices();
     }
-    if(time == 400) {
+    if(time == 800) {
+        TENQ->SetEasingType(GetRandomEasingType());
         TENQ->StartLerpToOriginalVertices();
     }
-    if( time == 500) {
+    if( time == 1000) {
+        title_->SetEasingType(GetRandomEasingType());
         title_->GlitchVerticesLerp(1.3f);
 	}
-    if (time == 600) {
+    if (time == 1200) {
+        TENQ->SetEasingType(GetRandomEasingType());
         TENQ->GlitchVerticesLerp(0.3f);
     }
-    if (time == 700) {
+    if (time == 1400) {
+        title_->SetEasingType(GetRandomEasingType());
         title_->SetTexture(textureHandles[TITLE_TEXTURE2]);
         title_->StartLerpToOriginalVertices();
     }
-    if (time == 800) {
+    if (time == 1600) {
+        TENQ->SetEasingType(GetRandomEasingType());
         TENQ->StartLerpToOriginalVertices();
 		time = 0;
     }
@@ -127,8 +135,8 @@ void TitleScene::InitializeData() {
 	TENQ->SetTransform({ { -300.0f,300.0f,300.0f },{ 0.0f,0.0f,0.0f },{ 0.0f,-170.0f,-70.0f } });
 	TENQ->SetModel("world.obj");
 	TENQ->SetTexture(textureHandles[TENQ_TEXTURE]);
-	TENQ->SetLerpSpeed(0.01f);
-    title_->SetLerpSpeed(0.01f);
+	TENQ->SetLerpSpeed(0.005f);
+    title_->SetLerpSpeed(0.005f);
 
     // カメラやポストプロセスの初期化
     camera_ = std::make_unique<Camera>();

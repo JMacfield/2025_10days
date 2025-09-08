@@ -21,6 +21,7 @@
 #include <PSOAnimationModel.h>
 #include "Skybox.h"
 #include <Quaternion.h>
+#include <random>
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxcompiler.lib")
@@ -57,7 +58,12 @@ enum class EasingType {
 };
 extern EasingType easingType_;
 
-
+inline EasingType GetRandomEasingType() {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(0, static_cast<int>(EasingType::Count) - 1);
+    return static_cast<EasingType>(dist(gen));
+}
 /**
 * @file Object3d.h
 * @brief 3Dオブジェクトを管理するクラス
@@ -205,7 +211,7 @@ public: // Setter
     /// </summary> 
     /// <param name="lerpSpeed">ラープ速度</param> 
     void SetLerpSpeed(float lerpSpeed) { lerpSpeed_ = lerpSpeed; }
-
+    void SetEasingType(EasingType type);
 private:
     EasingType easingType_ = EasingType::EaseInSine;
     Object3dCommon* objectCommon_ = nullptr;

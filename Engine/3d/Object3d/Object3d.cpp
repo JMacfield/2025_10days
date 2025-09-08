@@ -461,6 +461,11 @@ void Object3d::AlphaPingPong10(float t, float minAlpha) {
 	SetColor(color_);
 }
 
+void Object3d::SetEasingType(EasingType type)
+{
+	easingType_ = type;
+}
+
 void Object3d::LightDebug(const char* name)
 {
 #ifdef _DEBUG
