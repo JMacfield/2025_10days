@@ -25,6 +25,17 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	void Reset();
+
+private:// Private method
+	/// <summary>
+	/// 自機と一定距離にいないときは当たり判定を消す
+	/// </summary>
+	void CheckCollision();
+
 public:// Accessor method
 #pragma region Getter
 
@@ -33,6 +44,10 @@ public:// Accessor method
 #pragma region Setter
 
 #pragma endregion
+
+private:// 調整項目
+	// 当たり判定をとる距離
+	float collisionRange = 10.0f;
 
 private:// 外部から受け取る変数
 	std::vector<Object3d*> objects_;

@@ -1,6 +1,10 @@
 #include "ObstacleManager.h"
 #include "Loader.h"
 #include "Collider.h"
+#include "../Player/Player.h"
+#include "../Player/Components/Math/MathFuncs.h"
+
+using namespace MathFuncs;
 
 ObstacleManager::ObstacleManager(Camera* camera, Player* player) {
 	camera_ = camera;
@@ -47,7 +51,17 @@ ObstacleManager::~ObstacleManager() {
 }
 
 void ObstacleManager::Init() {
-
+	for (Obstacle* obs : obstacles_) {
+		delete obs;
+	}
+	obstacles_.clear();
+	for (int i = 0; i < objects_.size(); i++) {
+		Obstacle* obstacle = new Obstacle(objects_[i], player_, colliders_[i]);
+		obstacle->SetCamera(camera_);
+		obstacle->SetDimension(wallTypes_[i]);
+		obstacle->Init();
+		obstacles_.push_back(obstacle);
+	}
 }
 
 void ObstacleManager::Update() {
@@ -59,5 +73,24 @@ void ObstacleManager::Update() {
 void ObstacleManager::Draw() {
 	for (Obstacle* obs : obstacles_) {
 		obs->Draw();
+	}
+}
+
+void ObstacleManager::Reset() {
+
+}
+
+void ObstacleManager::CheckCollision() {
+	for (Collider* collider : colliders_) {
+		// 障害物と自機の距離
+		float p2o = Length(collider->GetWorldPosition() - GetWorldPosition(player_->GetWorldTransform()->matWorld_));
+		if (p2o >= collisionRange) {
+			if (collider->GetIsActive()) {
+				collider->SetIsActive(false);
+			}
+		}
+		else {
+			collider->SetIsActive(true);
+		}
 	}
 }

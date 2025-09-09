@@ -352,13 +352,13 @@ void Object3d::GlitchVertices(float intensity)
 	// 乱数生成器
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dist(-intensity, intensity);
+	dist_ = std::uniform_real_distribution<float>(-intensity, intensity);
 
 	glitchedVertices_ = originalVertices_; // 初期位置から生成
 	for (auto& vertex : glitchedVertices_) {
-		vertex.position.x += dist(gen);
-		vertex.position.y += dist(gen);
-		vertex.position.z += dist(gen);
+		vertex.position.x += dist_(gen);
+		vertex.position.y += dist_(gen);
+		vertex.position.z += dist_(gen);
 	}
 
 	// ここで一度ランダム位置を表示したい場合は
@@ -373,13 +373,13 @@ void Object3d::GlitchVerticesLerp(float intensity)
 
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dist(-intensity, intensity);
+	dist_ = std::uniform_real_distribution<float>(-intensity, intensity);
 
 	glitchedVertices_ = originalVertices_;
 	for (auto& vertex : glitchedVertices_) {
-		vertex.position.x += dist(gen);
-		vertex.position.y += dist(gen);
-		vertex.position.z += dist(gen);
+		vertex.position.x += dist_(gen);
+		vertex.position.y += dist_(gen);
+		vertex.position.z += dist_(gen);
 	}
 	isLerping_ = true;
 	lerpT_ = 0.0f;

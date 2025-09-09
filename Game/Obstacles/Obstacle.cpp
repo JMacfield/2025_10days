@@ -1,11 +1,13 @@
 #include "Obstacle.h"
 #include "../Player/PlayerConfig.h"
 #include "../Player/Player.h"
+#include "../Player/Components/Math/MathFuncs.h"
 #include "Collider.h"
 #include "ModelManager.h"
 #include "../Utilty/LoaderConfig.h"
 
 using namespace LoaderConfig;
+using namespace MathFuncs;
 using namespace PlayerConfig::FileNames;
 
 Obstacle::Obstacle(Object3d* obj, Player* player, Collider* collider) {
@@ -29,9 +31,17 @@ void Obstacle::Init() {
 }
 
 void Obstacle::Update() {
-	time++;
 	// 過去現在の切り替え
 	SwitchDimension();
+
+	// 障害物と自機の距離
+	float p2o = Length(GetWorldPosition(player_->GetWorldTransform()->matWorld_) - GetWorldPosition(collider_->worldTransform.matWorld_));
+	if (p2o >= collisionRange) {
+		collider_->SetIsActive(false);
+	}
+	else if (ObstacleType::broken != currentDimension_) {
+		collider_->SetIsActive(true);
+	}
 
 	// 体
 	body_->Update();
@@ -72,27 +82,33 @@ void Obstacle::SwitchDimension() {
 			currentDimension_ = ObstacleType::broken;
 			// 壊れる演出
 			BrokenEffect();
-		
 		}
 		// 直る
 		else if (ObstacleType::broken == currentDimension_) {
 			currentDimension_ = ObstacleType::fix;
 			// 直る演出
 			FixEffect();
-		
 		}
 	}
-
-
 }
 
 void Obstacle::FixEffect() {
 	if (ObstacleType::fix != currentDimension_) { return; }
 	// 切り替わった瞬間
 	if (ObstacleType::fix != preDimension_) {
+		// 障害物と自機の距離
+		float p2o = Length(GetWorldPosition(player_->GetWorldTransform()->matWorld_) - GetWorldPosition(body_->worldTransform_.matWorld_));
+		float lerpSpeed;
+		if (p2o <= switchDimensionEffectRange) {
+			lerpSpeed = 0.01f;
+			body_->GlitchVerticesLerp(0.3f);
+		}
+		else {
+			lerpSpeed = 1.0f;
+		}
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
-		body_->SetLerpSpeed(0.01f);
-		body_->GlitchVerticesLerp(0.3f);
+		body_->SetLerpSpeed(lerpSpeed);
+
 		body_->ResetVerticesToOriginal();
 		body_->StartLerpToOriginalVertices();
 	}
@@ -104,8 +120,17 @@ void Obstacle::BrokenEffect() {
 	if (ObstacleType::broken != currentDimension_) { return; }
 	// 切り替わった瞬間
 	if (ObstacleType::broken != preDimension_) {
+		// 障害物と自機の距離
+		float p2o = Length(GetWorldPosition(player_->GetWorldTransform()->matWorld_) - GetWorldPosition(body_->worldTransform_.matWorld_));
+		float lerpSpeed;
+		if (p2o <= switchDimensionEffectRange) {
+			lerpSpeed = 0.01f;
+		}
+		else {
+			lerpSpeed = 1.0f;
+		}
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
-		body_->SetLerpSpeed(0.01f);
+		body_->SetLerpSpeed(lerpSpeed);
 		body_->GlitchVerticesLerp(0.3f);
 		body_->ResetVerticesToOriginal();
 	}

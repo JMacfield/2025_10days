@@ -25,4 +25,13 @@ namespace LoaderConfig {
 		// 変わらない
 		inline std::string abs = "ABS";
 	}
+
+	namespace FilePath {
+		namespace Texture {
+			inline std::string filePath = "Resources/game/";
+		}
+		namespace Model {
+			inline std::string filePath = "Resources/game/";
+		}
+	}
 }

@@ -63,6 +63,13 @@ public:// Accessor method
 	/// <param name="dimension"></param>
 	void SetDimension(const std::string& dimension) { currentDimension_ = dimension; }
 
+private:// 調整項目
+	// 次元を切り替えた時の演出を出す範囲
+	float switchDimensionEffectRange = 50.0f;
+
+	// 当たり判定をとる距離
+	float collisionRange = 10.0f;
+
 private:// 外部から受け取るアドレス
 	// カメラ
 	Camera* pCamera_;

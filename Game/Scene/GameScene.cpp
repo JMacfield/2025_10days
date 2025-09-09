@@ -89,6 +89,7 @@ void GameScene::Update() {
 
 	// 衝突判定
 	collisionManager_->CheckAllCollisions();
+
 	if (input->TriggerKey(DIK_R)) {
 		for (auto& obj : objectList_) {
 			obj->ResetVerticesToOriginal();

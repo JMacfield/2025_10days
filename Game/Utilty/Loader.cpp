@@ -163,6 +163,8 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		// 配列に追加
 		objects.push_back(newObject3d);
@@ -354,9 +356,8 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
-		std::string name = "Resources/game/" + objectData.textureName + ".png";
-		uint32_t textureHandle = TextureManager::GetInstance()->StoreTexture(name);
-		newObject3d->SetTexture(textureHandle);
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		// 配列に追加
 		objects.push_back(newObject3d);
@@ -544,6 +545,8 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		objects.push_back(newObject3d);
 
@@ -697,6 +700,8 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		objects.push_back(newObject3d);
 
@@ -849,6 +854,8 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		objects.push_back(newObject3d);
 
@@ -1026,6 +1033,8 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		// 配列に追加
 		objects.push_back(newObject3d);
@@ -1208,6 +1217,8 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 		Object3d* newObject3d = new Object3d();
 		newObject3d->Init();
 		newObject3d->SetModel(objectData.filename + ".obj");
+		uint32_t texHandle = TextureManager::GetInstance()->StoreTexture(LoaderConfig::FilePath::Texture::filePath + objectData.textureName + ".png");
+		newObject3d->SetTexture(texHandle);
 		newObject3d->SetTransform(objectData.transform);
 		// 配列に追加
 		objects.push_back(newObject3d);

@@ -264,4 +264,5 @@ private:
     Quaternion Materialquaternion_ = { 1.0f,1.0f,1.0f,1.0f };
     Quaternion DirectionalLightquaternion_ = { 1.0f,1.0,1.0,1.0f };
     
+    std::uniform_real_distribution<float> dist_;
 };
