@@ -81,12 +81,10 @@ void Obstacle::FixEffect() {
 		float lerpSpeed;
 		if (p2o <= switchDimensionEffectRange) {
 			lerpSpeed = 0.01f;
-			body_->GlitchVerticesLerp(0.3f);
 		}
 		else {
 			lerpSpeed = 1.0f;
 		}
-		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		body_->SetLerpSpeed(lerpSpeed);
 
 		body_->ResetVerticesToOriginal();
@@ -109,7 +107,6 @@ void Obstacle::BrokenEffect() {
 		else {
 			lerpSpeed = 1.0f;
 		}
-		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		body_->SetLerpSpeed(lerpSpeed);
 		body_->GlitchVerticesLerp(0.3f);
 		body_->ResetVerticesToOriginal();
