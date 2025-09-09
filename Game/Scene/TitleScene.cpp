@@ -77,6 +77,9 @@ void TitleScene::LoadTextures() {
     textureHandles[TITLE_TEXTURE] = TextureManager::StoreTexture("Resources/10days/title.png");
     textureHandles[TITLE_TEXTURE2] = TextureManager::StoreTexture("Resources/10days/title2.png");
     textureHandles[TITLE_TEXTURE3] = TextureManager::StoreTexture("Resources/10days/title3.png");
+    textureHandles[TITLE_TEXTURE4] = TextureManager::StoreTexture("Resources/10days/title4.png");
+    textureHandles[TITLE_TEXTURE5] = TextureManager::StoreTexture("Resources/10days/title5.png");
+    textureHandles[TITLE_TEXTURE6] = TextureManager::StoreTexture("Resources/10days/title6.png");
     textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
 }
 

@@ -63,15 +63,15 @@ private: // Private variables
     std::vector<TitleEvent> events = {
     {200,  title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
     {400,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
-    {600,  title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE3]); title_->StartLerpToOriginalVertices(); }},
+    {600,  title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(GetRandomTextureHandle()); title_->StartLerpToOriginalVertices(); }},
     {800,  TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
     {1000, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
     {1200, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
-    {1400, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE2]); title_->StartLerpToOriginalVertices(); }},
+    {1400, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(GetRandomTextureHandle()); title_->StartLerpToOriginalVertices(); }},
     {1600,  TENQ.get(),  [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); }},
     {1800, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->GlitchVerticesLerp(1.3f); }},
     {2000, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->GlitchVerticesLerp(0.3f); }},
-    {2200, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(textureHandles[TITLE_TEXTURE]); title_->StartLerpToOriginalVertices(); }},
+    {2200, title_.get(), [this] { title_->SetEasingType(GetRandomEasingType()); title_->SetTexture(GetRandomTextureHandle()); title_->StartLerpToOriginalVertices(); }},
     {2400, TENQ.get(),   [this] { TENQ->SetEasingType(GetRandomEasingType()); TENQ->StartLerpToOriginalVertices(); time = 0; }},
     };
     enum ObjectIndex {
@@ -83,9 +83,16 @@ private: // Private variables
         TITLE_TEXTURE,
         TITLE_TEXTURE2,
         TITLE_TEXTURE3,
+        TITLE_TEXTURE4,
+        TITLE_TEXTURE5,
+        TITLE_TEXTURE6,
         TENQ_TEXTURE,
         TEXTURE_COUNT
     };
+    uint32_t GetRandomTextureHandle() const {
+        int idx = rand() % (TEXTURE_COUNT - 1);
+        return textureHandles[idx];
+    }
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
 
     // タイトルスプライト
