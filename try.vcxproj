@@ -124,8 +124,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Obstacles\Beam.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Glitch.cpp" />
     <ClCompile Include="Engine\2d\PostEffect\Effect\Scanline.cpp" />
+    <ClCompile Include="Game\Obstacles\IObstacle.cpp" />
     <ClCompile Include="Game\Player\Components\Anim.cpp" />
     <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
     <ClCompile Include="Game\Player\PlayerConfig.cpp" />
@@ -217,6 +219,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Obstacles\ObstacleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Obstacles\Beam.h" />
+    <ClInclude Include="Game\Obstacles\IObstacle.h" />
     <ClInclude Include="Game\Player\Components\GameTimer.h" />
     <ClInclude Include="Game\Player\Components\Anim.h" />
     <ClInclude Include="Game\Scene\ClearScene.h" />

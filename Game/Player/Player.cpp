@@ -121,6 +121,10 @@ void Player::Update() {
 		isLanding_ = false;
 	}
 
+	if (GetWorldPosition(body_->worldTransform_.matWorld_).y <= deadHeight) {
+		isAlive_ = false;
+	}
+
 	if (isAir_ && !isLanding_) {
 		vel_.y -= acceleration * GameTimer::GetInstance()->GetTimeScale();
 	}
@@ -168,6 +172,7 @@ void Player::DebugGui() {
 		ImGui::Checkbox("IsAir", &isAir_);
 		ImGui::Checkbox("IsLanding", &isLanding_);
 		ImGui::Checkbox("IsAlive", &isAlive_);
+		ImGui::Checkbox("IsClear", &isClear_);
 
 		if (ImGui::Button("Stop")) {
 			vel_ = { 0.0f,0.0f,0.0f };
@@ -198,7 +203,8 @@ void Player::CreateSystems() {
 
 void Player::OnCollision(Collider* collider) {
 	// 攻撃に当たったら死亡
-	if (collider->GetCollisionAttribute() == kCollisionAttributeEnemy) {
+	if ((collider->GetCollisionAttribute() == kCollisionAttributeEnemy) || 
+		(collider->GetCollisionAttribute() == kCollisionAttributeBeam)) {
 		isAlive_ = false;
 	}
 	else if (collider->GetCollisionAttribute() == kCollisionAttributeClear) {

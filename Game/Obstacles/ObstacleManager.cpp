@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "../Player/Player.h"
 #include "../Player/Components/Math/MathFuncs.h"
+#include "Obstacle.h"
+#include "Beam.h"
 
 using namespace MathFuncs;
 
@@ -14,11 +16,20 @@ ObstacleManager::ObstacleManager(Camera* camera, Player* player) {
 	Loader::LoadJsonFile2("Resources/game/Json", "TestBlender", objects_, colliders_, wallTypes_);
 
 	for (int i = 0; i < objects_.size(); i++) {
-		Obstacle* obstacle = new Obstacle(objects_[i], player_, colliders_[i]);
-		obstacle->SetCamera(camera_);
-		obstacle->SetDimension(wallTypes_[i]);
-		obstacle->Init();
-		obstacles_.push_back(obstacle);
+		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeBeam) {
+			Beam* beam = new Beam(objects_[i], player_, colliders_[i]);
+			beam->SetCamera(camera_);
+			beam->SetDimension(wallTypes_[i]);
+			beam->Init();
+			obstacles_.push_back(beam);
+		}
+		else {
+			Obstacle* obstacle = new Obstacle(objects_[i], player_, colliders_[i]);
+			obstacle->SetCamera(camera_);
+			obstacle->SetDimension(wallTypes_[i]);
+			obstacle->Init();
+			obstacles_.push_back(obstacle);
+		}
 	}
 }
 
@@ -45,33 +56,25 @@ ObstacleManager::~ObstacleManager() {
 	for (Object3d* obj : objects_) {
 		delete obj;
 	}
-	for (Obstacle* obs : obstacles_) {
+	for (IObstacle* obs : obstacles_) {
 		delete obs;
 	}
 }
 
 void ObstacleManager::Init() {
-	for (Obstacle* obs : obstacles_) {
-		delete obs;
-	}
-	obstacles_.clear();
-	for (int i = 0; i < objects_.size(); i++) {
-		Obstacle* obstacle = new Obstacle(objects_[i], player_, colliders_[i]);
-		obstacle->SetCamera(camera_);
-		obstacle->SetDimension(wallTypes_[i]);
-		obstacle->Init();
-		obstacles_.push_back(obstacle);
-	}
+
 }
 
 void ObstacleManager::Update() {
-	for (Obstacle* obs : obstacles_) {
+	for (IObstacle* obs : obstacles_) {
+		if (obs->GetCollider()->GetCollisionAttribute() == kCollisionAttributeClear) { continue; }
 		obs->Update();
 	}
 }
 
 void ObstacleManager::Draw() {
-	for (Obstacle* obs : obstacles_) {
+	for (IObstacle* obs : obstacles_) {
+		if (obs->GetCollider()->GetCollisionAttribute() == kCollisionAttributeClear) { continue; }
 		obs->Draw();
 	}
 }

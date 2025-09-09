@@ -327,6 +327,8 @@
     <ClCompile Include="Game\Obstacles\Obstacle.cpp" />
     <ClCompile Include="Game\Obstacles\ObstacleManager.cpp" />
     <ClCompile Include="Game\Player\Components\GameTimer.cpp" />
+    <ClCompile Include="Game\Obstacles\IObstacle.cpp" />
+    <ClCompile Include="Game\Obstacles\Beam.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Interface\DirectXCommon.h">
@@ -616,6 +618,8 @@
     <ClInclude Include="Game\Obstacles\ObstacleManager.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="Game\Scene\OverScene.h" />
+    <ClInclude Include="Game\Obstacles\IObstacle.h" />
+    <ClInclude Include="Game\Obstacles\Beam.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui\imgui.ini">

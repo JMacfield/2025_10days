@@ -1,5 +1,5 @@
 #pragma once
-#include "Obstacle.h"
+#include "IObstacle.h"
 #include "../Camera/FollowCamera.h"
 
 class Collider;
@@ -57,5 +57,5 @@ private:// 外部から受け取る変数
 	Player* player_;
 
 private:
-	std::vector<Obstacle*> obstacles_;
+	std::vector<IObstacle*> obstacles_;
 };

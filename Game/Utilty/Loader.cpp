@@ -187,7 +187,18 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
 			}
-
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
+			}
 			collider->SetIsActive(true);
 
 			colliders.push_back(collider);
@@ -365,9 +376,13 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 		// 当たり判定をペアレント
 		if (objectData.isCollision) {
 			Collider* collider = new Collider();
-			collider->worldTransform.parent_ = &newObject3d->worldTransform_;
+			//collider->worldTransform.parent_ = &newObject3d->worldTransform_;
+			collider->worldTransform.translation_ = newObject3d->worldTransform_.translation_;
+			collider->worldTransform.rotation_ = newObject3d->worldTransform_.rotation_;
+			collider->worldTransform.scale_ = newObject3d->worldTransform_.scale_;
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
+			collider->worldTransform.UpdateMatrix();
 			// 壁
 			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
@@ -380,9 +395,20 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
 			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
+			}
 
 			collider->SetIsActive(true);
-
 			colliders.push_back(collider);
 		}
 
@@ -568,6 +594,18 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
 			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
+			}
 
 			collider->SetIsActive(true);
 
@@ -723,6 +761,18 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
 			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
+			}
 
 			collider->SetIsActive(true);
 
@@ -876,6 +926,18 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
+			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
 
 			collider->SetIsActive(true);
@@ -1056,6 +1118,18 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
+			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
 
 			collider->SetIsActive(true);
@@ -1240,6 +1314,18 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 				collider->SetCollisionPrimitive(kCollisionOBB);
 				collider->SetCollisionAttribute(kCollisionAttributeEnemy);
 				collider->SetCollisionMask(~kCollisionAttributeEnemy);
+			}
+			// ビーム
+			if (objectData.maskType == LoaderConfig::Collision::Mask::beam) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeBeam);
+				collider->SetCollisionMask(~kCollisionAttributeBeam);
+			}
+			// クリア判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::clear) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeClear);
+				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
 
 			collider->SetIsActive(true);

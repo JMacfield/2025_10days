@@ -39,9 +39,15 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
-	//for (Object3d* obj : objects_) {
-	//	obj->Update();
-	//}
+	if (!player_->GetIsAlive()) {
+		this->SetSceneNo(OVERSCENE);
+		return;
+	}
+	else if (player_->GetIsClear()) {
+		this->SetSceneNo(CLEARSCENE);
+		return;
+	}
+
 	obstacleManager_->Update();
 	for (auto& obj : objectList_) {
 		obj->Update();
@@ -51,11 +57,6 @@ void GameScene::Update() {
 
 	objectList_[TENQ]->worldTransform_.rotation_.y += 0.0005f;	// TENQ回転
 
-
-	// テスト壁
-	/*for (TestWall* wall : testWall_) {
-		wall->Update();
-	}*/
 	// 追従カメラ
 	followCamera_->Update();
 	// 床

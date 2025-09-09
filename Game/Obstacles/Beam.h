@@ -7,12 +7,12 @@ class Player;
 /// <summary>
 /// 障害物クラス
 /// </summary>
-class Obstacle : public IObstacle {
+class Beam : public IObstacle {
 public:// Public variable
 	// コンストラクタ
-	Obstacle(Object3d* obj, Player* player,Collider* collider);
+	Beam(Object3d* obj, Player* player, Collider* collider);
 	// デストラクタ
-	~Obstacle() override = default;
+	~Beam() override = default;
 
 	/// <summary>
 	/// 初期化

@@ -11,9 +11,12 @@ namespace LoaderConfig {
 		namespace Mask {
 			// 壁
 			inline std::string wall = "WALL";
-
 			// 攻撃
 			inline std::string attack = "ATTACK";
+			// ビーム
+			inline std::string beam = "BEAM";
+			// クリア
+			inline std::string clear = "CLEAR";
 		}
 	}
 	// オブジェクトのタイプ
