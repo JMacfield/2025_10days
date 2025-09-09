@@ -134,7 +134,7 @@ void Player::Update() {
 
 void Player::Draw() {
 	// 体
-	body_->Draw(pCamera_);
+	//body_->Draw(pCamera_);
 }
 
 void Player::Release() {
