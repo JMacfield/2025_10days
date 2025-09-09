@@ -157,6 +157,13 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 		}
 	}
 
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
+
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
 		// 3Dオブジェクトを生成
@@ -360,6 +367,13 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			// カメラ設定は行わない
 		}
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
 
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
@@ -566,6 +580,13 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 		// LIGHTオブジェクトなど他の種別に対応する場合、ここに追加
 	}
 
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
+
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
 		Object3d* newObject3d = new Object3d();
@@ -733,6 +754,13 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 		// LIGHTオブジェクトなど他の種別に対応する場合、ここに追加
 	}
 
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
+
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
 		Object3d* newObject3d = new Object3d();
@@ -897,6 +925,13 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 
 		// LIGHTオブジェクトなど他の種別に対応する場合、ここに追加
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
 
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
@@ -1088,6 +1123,13 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 			objectData.transform.scale.z = (float)transform["scaling"][1];
 		}
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
 
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
@@ -1284,6 +1326,13 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 			objectData.transform.scale.z = (float)transform["scaling"][1];
 		}
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(levelData->objects.begin(), levelData->objects.end(),
+		[](const LevelData::ObjectData& lhs, const LevelData::ObjectData& rhs) {
+			return lhs.transform.translate.z > rhs.transform.translate.z;
+		}
+	);
 
 	// オブジェクトを生成し、配置する
 	for (auto& objectData : levelData->objects) {
