@@ -4,7 +4,7 @@
 * @brief IPostEffectState
 */
 // タイトルシーンで初期化
-int IPostEffectState::effectNo_ = kOutlineBlue;
+int IPostEffectState::effectNo_ = kChromaticAberration;
 
 // 仮想デストラクタの定義
 // 純粋仮想関数化していないので、ここで定義できる
