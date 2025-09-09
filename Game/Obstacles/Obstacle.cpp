@@ -19,14 +19,17 @@ Obstacle::Obstacle(Object3d* obj, Player* player, Collider* collider) {
 
 void Obstacle::Init() {
 	if (ObstacleType::broken == currentDimension_) {
+		body_->SetLerpSpeed(0.01f);
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		body_->GlitchVertices(0.3f);
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
+		body_->SetLerpSpeed(0.01f);
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		collider_->SetIsActive(true);
 	}
+
 	preDimension_ = currentDimension_;
 }
 
