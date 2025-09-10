@@ -18,6 +18,9 @@ private:
 	// どのステージを呼び出すかを管理する変数
 	int currentSceneNo_ = 0;
 	int prevSceneNo_ = 0;
+
+	//uint32_t bgmHandle_ = Audio::GetInstance()->SoundLoadWave("Resources/sounds/se_jump.wav");
+
 public:
 	const char* currentStatus = "chromatic aberration";
 	GameManager();

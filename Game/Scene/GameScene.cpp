@@ -39,6 +39,13 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
+	if (input->TriggerButton(XINPUT_GAMEPAD_LEFT_SHOULDER) || input->TriggerKey(DIK_RETURN)) {
+		//Audio::GetInstance()->SoundPlayWave(switchSE, false, 1.0f);
+	}
+	if (input->TriggerButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) || input->TriggerKey(DIK_SPACE)) {
+		//Audio::GetInstance()->SoundPlayWave(jumpSE, false, 1.0f);
+	}
+
 	/*if (!player_->GetIsAlive()) {
 		this->SetSceneNo(OVERSCENE);
 		return;
@@ -198,6 +205,8 @@ void GameScene::LoadModels()
 void GameScene::LoadAudio()
 {
 	//audioHandle[BGM] = Audio::SoundLoadWave("Resources/game/Audio/BGM.wav");
+	//jumpSE = Audio::GetInstance()->SoundLoadWave("Resources/sounds/se_jump.wav");
+	//switchSE = Audio::GetInstance()->SoundLoadWave("Resources/sounds/se_switch.wav");
 }
 
 // 初期化データのセットアップ

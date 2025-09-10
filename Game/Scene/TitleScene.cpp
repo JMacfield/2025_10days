@@ -20,7 +20,7 @@ void TitleScene::Init() {
     LoadAudio();
     InitializeData();
 
-   
+    Audio::GetInstance()->SoundPlayWave(bgmHandle_, true, 0.5f);
 }
 
 void TitleScene::Update() {
@@ -100,6 +100,7 @@ void TitleScene::LoadModels() {
 
 void TitleScene::LoadAudio() {
     // 音源の読み込み処理
+    bgmHandle_ = Audio::GetInstance()->SoundLoadWave("Resources/sounds/game_bgm.wav");
 }
 
 void TitleScene::InitializeData() {
