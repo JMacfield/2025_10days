@@ -239,6 +239,8 @@ int GameManager::Run() {
 		///
 		sceneArr_[currentSceneNo_]->Update(); // シーンごとの更新処理
 
+		//Audio::GetInstance()->SoundPlayWave(bgmHandle_, true, 0.5f);
+
 		///
 		/// ↑更新処理ここまで
 		///

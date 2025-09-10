@@ -104,4 +104,6 @@ private: // Private variables
     uint32_t showStartHandle_;
 
     XINPUT_STATE joyState;
+
+    uint32_t bgmHandle_;
 };

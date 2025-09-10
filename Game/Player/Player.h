@@ -235,5 +235,8 @@ private:// Private variable
 	bool isPreAlive_;
 	// クリアしたか
 	bool isClear_;
+
+	uint32_t jumpSE;
+	uint32_t switchSE;
 };
 

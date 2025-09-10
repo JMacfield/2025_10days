@@ -160,4 +160,7 @@ private:// Private variable
 
     std::unique_ptr<Sprite> showContinue_ = nullptr;
     uint32_t showContinueHandle_;
+
+    uint32_t jumpSE;
+    uint32_t switchSE;
 };

@@ -20,7 +20,7 @@ void TitleScene::Init() {
     LoadAudio();
     InitializeData();
 
-   
+    Audio::GetInstance()->SoundPlayWave(bgmHandle_, true, 0.5f);
 }
 
 void TitleScene::Update() {
@@ -37,9 +37,9 @@ void TitleScene::Update() {
         }
     }
     TENQ->Update();
-    TENQ->ModelDebug("TENQ");
+    //TENQ->ModelDebug("TENQ");
     title_->Update();
-	title_->ModelDebug("title");
+	//title_->ModelDebug("title");
     camera_->Update();
 
     titleSprite_->Update();
@@ -100,6 +100,7 @@ void TitleScene::LoadModels() {
 
 void TitleScene::LoadAudio() {
     // 音源の読み込み処理
+    bgmHandle_ = Audio::GetInstance()->SoundLoadWave("Resources/sounds/game_bgm.wav");
 }
 
 void TitleScene::InitializeData() {

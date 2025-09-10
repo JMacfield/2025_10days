@@ -38,6 +38,9 @@ Player::Player() {
 	currentWallSide_ = WallSide::kNone;
 	// 今の次元
 	currentDimension_ = DimensionType::kNow;
+
+	jumpSE = Audio::GetInstance()->SoundLoadWave("Resources/sounds/se_jump.wav");
+	switchSE = Audio::GetInstance()->SoundLoadWave("Resources/sounds/se_switch.wav");
 }
 
 void Player::Init() {
@@ -63,6 +66,8 @@ void Player::Init() {
 	rot_ = { 0.0f,0.0f,0.0f };
 
 	currentWallSide_ = WallSide::kNone;
+
+
 }
 
 void Player::Update() {
@@ -76,6 +81,7 @@ void Player::Update() {
 	// 過去現在の切り替え
 	if (input_->TriggerKey(PlayerConfig::Input::Keyboard::switching)) {
 		switchDimension_ = true;
+		Audio::GetInstance()->SoundPlayWave(switchSE, false, 1.0f);
 		if (currentDimension_ == DimensionType::kNow) {
 			currentDimension_ = DimensionType::kPast;
 		}
@@ -85,6 +91,7 @@ void Player::Update() {
 	}
 	else if (input_->GetJoystickState(joyState)) {
 		if (PlayerConfig::Input::GamePad::GamePadTrigger(joyState, preJoyState, XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+			Audio::GetInstance()->SoundPlayWave(switchSE, false, 1.0f);
 			switchDimension_ = true;
 			if (currentDimension_ == DimensionType::kNow) {
 				currentDimension_ = DimensionType::kPast;
@@ -299,6 +306,7 @@ void Player::StartJump() {
 	// 着地したか
 	isLanding_ = false;
 	vel_ = { 0.0f,0.0f,0.0f };
+	Audio::GetInstance()->SoundPlayWave(jumpSE, false, 1.0f);
 }
 
 void Player::EndJump() {
