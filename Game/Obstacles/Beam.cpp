@@ -19,7 +19,7 @@ Beam::Beam(Object3d* obj, Player* player, Collider* collider) {
 	orizinalScale_ = body_->worldTransform_.scale_;
 
 	orizinalTex_ = body_->GetTexture();
-	brokenTex_ = TextureManager::GetInstance()->StoreTexture("Resources/red.png");
+	fixedTex_ = TextureManager::GetInstance()->StoreTexture("Resources/red.png");
 }
 
 void Beam::Init() {
@@ -29,13 +29,13 @@ void Beam::Init() {
 		body_->worldTransform_.scale_.x = 0.1f;
 		body_->worldTransform_.scale_.y = 0.1f;
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
-		body_->SetTexture(brokenTex_);
+		body_->SetTexture(orizinalTex_);
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
 		body_->worldTransform_.scale_ = orizinalScale_;
-		body_->AlphaPingPong10Start(0.01f, 0.6f);
-		body_->SetTexture(orizinalTex_);
+		body_->AlphaPingPong10Start(0.6f, 1.0f);
+		body_->SetTexture(fixedTex_);
 		collider_->SetIsActive(true);
 	}
 
@@ -83,7 +83,8 @@ void Beam::FixEffect() {
 
 	}
 	body_->worldTransform_.scale_ = orizinalScale_;
-	body_->SetTexture(orizinalTex_);
+	body_->SetTexture(fixedTex_);
+	body_->AlphaPingPong10Start(0.01f, 0.6f);
 
 	collider_->SetIsActive(true);
 }
@@ -96,7 +97,8 @@ void Beam::BrokenEffect() {
 	}
 	body_->worldTransform_.scale_.x = 0.1f;
 	body_->worldTransform_.scale_.y = 0.1f;
-	body_->SetTexture(brokenTex_);
+	body_->SetTexture(orizinalTex_);
+	body_->AlphaPingPong10Start(0.6f, 1.0f);
 
 	collider_->SetIsActive(false);
 }

@@ -47,5 +47,5 @@ private:// Private variable
 	Vector3 orizinalScale_;
 
 	uint32_t orizinalTex_;
-	uint32_t brokenTex_;
+	uint32_t fixedTex_;
 };

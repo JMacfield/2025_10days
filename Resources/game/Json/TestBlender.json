@@ -2317,7 +2317,7 @@
             },
             "file_name": "box",
             "collider": {
-                "type": "WALL",
+                "type": "CHECKPOINT",
                 "center": [
                     0.0,
                     0.0,
@@ -2576,7 +2576,7 @@
             },
             "file_name": "box",
             "collider": {
-                "type": "WALL",
+                "type": "CHECKPOINT",
                 "center": [
                     0.0,
                     0.0,
@@ -2613,7 +2613,7 @@
             },
             "file_name": "box",
             "collider": {
-                "type": "WALL",
+                "type": "CHECKPOINT",
                 "center": [
                     0.0,
                     0.0,
@@ -2650,7 +2650,7 @@
             },
             "file_name": "box",
             "collider": {
-                "type": "WALL",
+                "type": "CHECKPOINT",
                 "center": [
                     0.0,
                     0.0,
@@ -4994,7 +4994,7 @@
                 ]
             },
             "textureName": "white",
-            "wallType": "BROKEN"
+            "wallType": "ABS"
         },
         {
             "type": "MESH",

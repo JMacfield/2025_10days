@@ -72,16 +72,16 @@ private:// 調整項目
 	float deadShakeFrame = 15.0f;
 
 	// 初期視野角
-	float defaultFov = 0.8f;
+	float defaultFov = 1.0f;
 	// 空中にいるときの視野角
-	float airFov = 0.9f;
+	float airFov = 1.1f;
 	// 着地時の視野角
-	float landingFov = 0.75f;
+	float landingFov = 0.85f;
 	// 死亡時の視野角
 	float deadFov = 0.5f;
 
 	// 回転の補間レート
-	float rotateRate = 0.3f;
+	float rotateRate = 0.6f;
 
 private:// Engine system
 	// 入力

@@ -176,7 +176,9 @@ public:
     void ResetVerticesToOriginal();
 
     void AlphaPingPong01Start(float speed, float minAlpha);
+    void AlphaPingPong01End();
     void AlphaPingPong10Start(float speed, float minAlpha);
+    void AlphaPingPong10End();
     void AlphaPingPong01(float t, float minAlpha);
     void AlphaPingPong10(float t, float minAlpha);
 public: // Getter
