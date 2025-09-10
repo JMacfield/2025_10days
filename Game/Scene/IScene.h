@@ -17,6 +17,7 @@ protected:
 	static int AllStageTime[5][5];//[ステージ数 +1][5固定]
 	static int menucount;
 	static bool menuposition;
+	static bool isbgmloop;
 public:
 	// 継承先で実装される関数
 	/// 抽象クラスなので純粋仮想関数とする

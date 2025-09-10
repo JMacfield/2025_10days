@@ -19,8 +19,10 @@ void TitleScene::Init() {
     LoadModels();
     LoadAudio();
     InitializeData();
-
-    Audio::GetInstance()->SoundPlayWave(bgmHandle_, true, 0.5f);
+    if (isbgmloop == false) {
+        Audio::GetInstance()->SoundPlayWave(bgmHandle_, true, 0.5f);
+        isbgmloop = true;
+    }
 }
 
 void TitleScene::Update() {

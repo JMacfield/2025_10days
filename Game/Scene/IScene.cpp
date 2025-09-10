@@ -12,6 +12,7 @@ int IScene::AllStageTime[5][5] =
  {0,0,0,0,0} };
 int IScene::menucount = 1;
 bool IScene::menuposition = false;
+bool IScene::isbgmloop = false;
 // 仮想デストラクタの定義
 // 純粋仮想関数化していないので、ここで定義できる
 //IScene::~IScene() {}
