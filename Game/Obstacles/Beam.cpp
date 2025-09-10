@@ -18,12 +18,15 @@ Beam::Beam(Object3d* obj, Player* player, Collider* collider) {
 }
 
 void Beam::Init() {
+	currentDimension_ = orizinalDimension_;
+
 	if (ObstacleType::broken == currentDimension_) {
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
 		collider_->SetIsActive(true);
 	}
+
 	preDimension_ = currentDimension_;
 }
 

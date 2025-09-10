@@ -207,6 +207,16 @@ void Player::OnCollision(Collider* collider) {
 		(collider->GetCollisionAttribute() == kCollisionAttributeBeam)) {
 		isAlive_ = false;
 	}
+	// チェックポイント更新
+	else if (collider->GetCollisionAttribute() == kCollisionAttributeCheckPoint) {
+		// 着地の判定
+		CheckLanding(collider);
+
+		resetPos_ = GetWorldPosition(body_->worldTransform_.matWorld_);
+		resetPos_.y = GetWorldPosition(collider->worldTransform.matWorld_).y;
+		resetPos_.z = GetWorldPosition(collider->worldTransform.matWorld_).z;
+		resetWallSide_ = currentWallSide_;
+	}
 	else if (collider->GetCollisionAttribute() == kCollisionAttributeClear) {
 		isClear_ = true;
 	}
@@ -308,4 +318,25 @@ void Player::EndJump() {
 	// 着地したか
 	isLanding_ = true;
 	vel_ = { 0.0f,0.0f,0.0f };
+}
+
+void Player::Reset() {
+	moveSystem_->Init();
+	jumpSystem_->Init();
+
+	// 空中にいるか
+	isAir_ = true;
+	// 着地したか
+	isLanding_ = false;
+	isAlive_ = true;
+	isClear_ = false;
+	switchDimension_ = false;
+
+	vel_ = { 0.0f,0.0f,0.0f };
+	rot_ = { 0.0f,0.0f,0.0f };
+
+	currentWallSide_ = WallSide::kNone;
+	
+	body_->worldTransform_.translation_ = resetPos_;
+	body_->Update();
 }

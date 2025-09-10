@@ -18,6 +18,8 @@ Obstacle::Obstacle(Object3d* obj, Player* player, Collider* collider) {
 }
 
 void Obstacle::Init() {
+	currentDimension_ = orizinalDimension_;
+
 	if (ObstacleType::broken == currentDimension_) {
 		body_->SetLerpSpeed(0.01f);
 		body_->AlphaPingPong10Start(0.01f, 0.6f);

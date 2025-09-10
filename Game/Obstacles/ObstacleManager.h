@@ -51,6 +51,7 @@ private:// 調整項目
 
 private:// 外部から受け取る変数
 	std::vector<Object3d*> objects_;
+	std::vector<Collider*> checkPoints_;
 	std::vector<Collider*> colliders_;
 	std::vector<std::string> wallTypes_;
 	Camera* camera_;

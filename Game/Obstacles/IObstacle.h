@@ -58,7 +58,10 @@ public:// Accessor method
 	/// 次元の設定
 	/// </summary>
 	/// <param name="dimension"></param>
-	void SetDimension(const std::string& dimension) { currentDimension_ = dimension; }
+	void SetDimension(const std::string& dimension) { 
+		currentDimension_ = dimension;
+		orizinalDimension_ = dimension;
+	}
 
 protected:// 調整項目
 	// 次元を切り替えた時の演出を出す範囲
@@ -82,4 +85,5 @@ protected:// Private variable
 	// 障害物の状態
 	std::string currentDimension_;
 	std::string preDimension_;
+	std::string orizinalDimension_;
 };

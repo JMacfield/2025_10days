@@ -17,6 +17,8 @@ namespace LoaderConfig {
 			inline std::string beam = "BEAM";
 			// クリア
 			inline std::string clear = "CLEAR";
+			// チェックポイント
+			inline std::string checkPoint = "CHECKPOINT";
 		}
 	}
 	// オブジェクトのタイプ

@@ -16,7 +16,7 @@ float Loader::Lerp(const float& a, const float& b, float t) {
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
 /// <param name="camera">カメラオブジェクトへのポインタ</param>
-void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
+void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -206,6 +206,14 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
+
 			collider->SetIsActive(true);
 
 			colliders.push_back(collider);
@@ -214,6 +222,13 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
 
 /// <summary>
@@ -222,7 +237,7 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
+void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -397,6 +412,7 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 			collider->SetOBBCenterPos(objectData.colliderCenterPos);
 			collider->SetOBBLength(objectData.colliderSize);
 			collider->worldTransform.UpdateMatrix();
+			collider->SetIsActive(true);
 			// 壁
 			if (objectData.maskType == LoaderConfig::Collision::Mask::wall) {
 				collider->SetCollisionPrimitive(kCollisionOBB);
@@ -421,17 +437,30 @@ void Loader::LoadJsonFile2(const std::string kDefaultBaseDirectory, const std::s
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
-			collider->SetIsActive(true);
 			colliders.push_back(collider);
 		}
 
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
 
-void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
+void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType, Camera* camera)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -627,6 +656,13 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
 			collider->SetIsActive(true);
 
@@ -636,8 +672,15 @@ void Loader::LoadAllConeJsonFile(const std::string kDefaultBaseDirectory, const 
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
-void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
+void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType)
 {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
@@ -801,6 +844,13 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
 			collider->SetIsActive(true);
 
@@ -810,8 +860,15 @@ void Loader::LoadAllStarJsonFile(const std::string kDefaultBaseDirectory, const 
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
-void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
+void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, const std::string sceneType, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -974,6 +1031,13 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
 			collider->SetIsActive(true);
 
@@ -983,6 +1047,13 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
 
 /// <summary>
@@ -991,7 +1062,7 @@ void Loader::LoadAllItemJsonFile(const std::string kDefaultBaseDirectory, const 
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
+void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -1173,6 +1244,13 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
 			collider->SetIsActive(true);
 
@@ -1182,6 +1260,13 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }
 
 /// <summary>
@@ -1190,7 +1275,7 @@ void Loader::LoadJsonFileNumber(const std::string kDefaultBaseDirectory, const s
 /// <param name="kDefaultBaseDirectory">デフォルトのベースディレクトリ</param>
 /// <param name="fileName">読み込むJSONファイル名（拡張子なし）</param>
 /// <param name="objects">生成したオブジェクトを格納するベクター</param>
-void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
+void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std::string fileName, std::vector<Object3d*>& objects,std::vector<Collider*>& checkPoints, std::vector<Collider*>& colliders, std::vector<std::string>& wallType) {
 	// フルパスを生成
 	const std::string fullpath = kDefaultBaseDirectory + "/" + fileName + ".json";
 
@@ -1376,6 +1461,13 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 				collider->SetCollisionAttribute(kCollisionAttributeClear);
 				collider->SetCollisionMask(~kCollisionAttributeClear);
 			}
+			// チェックポイント判定
+			if (objectData.maskType == LoaderConfig::Collision::Mask::checkPoint) {
+				collider->SetCollisionPrimitive(kCollisionOBB);
+				collider->SetCollisionAttribute(kCollisionAttributeCheckPoint);
+				collider->SetCollisionMask(~kCollisionAttributeCheckPoint);
+				checkPoints.push_back(collider);
+			}
 
 			collider->SetIsActive(true);
 
@@ -1385,4 +1477,11 @@ void Loader::LoadJsonFileText(const std::string kDefaultBaseDirectory, const std
 		// 障害物タイプ
 		wallType.push_back(objectData.wallType);
 	}
+
+	// translate.z の値が大きい順にソート
+	std::sort(checkPoints.begin(), checkPoints.end(),
+		[](Collider* lhs, Collider* rhs) {
+			return lhs->GetWorldPosition().z > rhs->GetWorldPosition().z;
+		}
+	);
 }

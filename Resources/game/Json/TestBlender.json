@@ -3740,43 +3740,6 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.128",
-            "transform": {
-                "translation": [
-                    13.0,
-                    161.8848419189453,
-                    0.8799999952316284
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    1.5707964897155762
-                ],
-                "scaling": [
-                    0.5,
-                    6.0,
-                    4.0
-                ]
-            },
-            "file_name": "box",
-            "collider": {
-                "type": "ATTACK",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    0.5,
-                    6.0,
-                    4.0
-                ]
-            },
-            "textureName": "white",
-            "wallType": "FIXED"
-        },
-        {
-            "type": "MESH",
             "name": "Cube.129",
             "transform": {
                 "translation": [

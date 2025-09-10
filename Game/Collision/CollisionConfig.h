@@ -13,11 +13,13 @@ inline const uint32_t kCollisionAttributeObstacles = 0b01 << 2;
 inline const uint32_t kCollisionAttributeBeam = 0b01 << 3;
 // クリア陣営
 inline const uint32_t kCollisionAttributeClear = 0b01 << 4;
+// チェックポイント陣営
+inline const uint32_t kCollisionAttributeCheckPoint = 0b01 << 5;
 
 /// 当たり判定の形状
 // OBB
-inline const uint32_t kCollisionOBB = 0b01 << 5;
-inline const uint32_t kCollisionNone = 0b01 << 6;
+inline const uint32_t kCollisionOBB = 0b01 << 6;
+inline const uint32_t kCollisionNone = 0b01 << 7;
 
 // 立方体
 struct cAABB {

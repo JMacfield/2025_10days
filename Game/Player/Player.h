@@ -71,6 +71,11 @@ public:// Accessor method
 	/// </summary>
 	void EndJump();
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	void Reset();
+
 #pragma region Getter
 	/// <summary>
 	/// 当たり判定を取得
@@ -210,6 +215,9 @@ private:// Private variable
 	Vector3 vel_;
 	// 角度
 	Vector3 rot_;
+
+	Vector3 resetPos_;
+	WallSide resetWallSide_;
 
 	// 今の次元(過去か現在か)
 	DimensionType currentDimension_;

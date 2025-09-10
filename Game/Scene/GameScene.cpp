@@ -40,7 +40,8 @@ void GameScene::Init() {
 // シーン更新関数
 void GameScene::Update() {
 	if (!player_->GetIsAlive()) {
-		this->SetSceneNo(OVERSCENE);
+		player_->Reset();
+		obstacleManager_->Init();
 		return;
 	}
 	else if (player_->GetIsClear()) {
