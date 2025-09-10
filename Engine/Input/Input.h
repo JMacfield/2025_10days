@@ -81,6 +81,20 @@ public:
     /// <returns>状態の取得に成功した場合はtrue、失敗した場合はfalse</returns>
     bool GetJoystickState(XINPUT_STATE& state);
 
+    /// <summary>
+    /// 指定したコントローラーのボタンが押されているかをチェックする
+    /// </summary>
+    /// <param name="button">チェックするボタンのコード (XINPUT_GAMEPAD_*) </param>
+    /// <returns>ボタンが押されていればtrue、そうでなければfalse</returns>
+    bool PushButton(WORD button);
+
+    /// <summary>
+    /// 指定したコントローラーのボタンが押された瞬間を検出する
+    /// </summary>
+    /// <param name="button">チェックするボタンのコード (XINPUT_GAMEPAD_*) </param>
+    /// <returns>ボタンが新たに押された場合はtrue、そうでなければfalse</returns>
+    bool TriggerButton(WORD button);
+
     // namespace省略のためのエイリアス
     template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -104,6 +118,16 @@ private:
     /// 前フレームのキーの押下状態を格納する配列
     /// </summary>
     BYTE preKeys[256];
+
+    /// <summary>
+    /// 現在のコントローラの状態
+    /// </summary>
+    XINPUT_STATE state_{};
+
+    /// <summary>
+    /// 前フレームのコントローラの状態
+    /// </summary>
+    XINPUT_STATE preState_{};
 
     inline static std::unique_ptr<Input> instance_;
 };

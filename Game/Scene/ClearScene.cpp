@@ -32,11 +32,21 @@ void ClearScene::Update() {
     camera_->Update();
 
     clearSprite_->Update();
+    uiSprite_->Update();
+
+    if (!Input::GetInstance()->GetJoystickState(joyState)) {
+        return;
+    }
+
+    if (input_->GetInstance()->TriggerButton(XINPUT_GAMEPAD_A) || input_->GetInstance()->TriggerKey(DIK_SPACE)) {
+        IScene::SetSceneNo(TITLESCENE);
+    }
 }
 
 void ClearScene::Draw() {
     // ここにタイトルロゴなどの描画処理を記述します
     clearSprite_->Draw(clearSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
+    uiSprite_->Draw(uiSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
 }
 
 void ClearScene::PostDraw() {
@@ -85,4 +95,9 @@ void ClearScene::InitializeData() {
     clearSprite_ = std::make_unique<Sprite>();
     clearSprite_->Init({ 0.0f,0.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/gameclear/gameclear.png");
     clearSprite_->SetTextureSize({ 1280.0f,720.0f });
+
+    uiSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/gameclear/ui_clear.png");
+    uiSprite_ = std::make_unique<Sprite>();
+    uiSprite_->Init({ 390.0f,300.0f }, { 500.0f,350.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/gameclear/ui_clear.png");
+    uiSprite_->SetTextureSize({ 300.0f,150.0f });
 }

@@ -33,6 +33,8 @@
 /// </summary>
 class GameScene : public IScene {
 public:// Public methods
+    void ShowDeathUI();
+
     // コンストラクタ
     GameScene();
     // デストラクタ
@@ -140,4 +142,21 @@ private:// Private variable
     uint32_t floorTex_;
     uint32_t damageWallTex_;
     uint32_t greenWallTex_;
+
+    // 操作UI用
+    enum UITexture {
+        UI_TEXTURE,
+        UI_TEXTURE2,
+        UI_TEXTURE3,
+        UI_TEXTURE_COUNT
+    };
+
+    std::array<uint32_t, UI_TEXTURE_COUNT> uiTextureHandles_;
+    std::array<std::unique_ptr<Sprite>, UI_TEXTURE_COUNT> uiSprite_;
+
+    std::unique_ptr<Sprite> overSprite_ = nullptr;
+    uint32_t overSpriteHandle_;
+
+    std::unique_ptr<Sprite> showContinue_ = nullptr;
+    uint32_t showContinueHandle_;
 };

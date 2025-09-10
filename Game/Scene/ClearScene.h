@@ -54,4 +54,9 @@ private: // Private variables
 
     std::unique_ptr<Sprite> clearSprite_ = nullptr;
     uint32_t clearSpriteHandle_;
+
+    XINPUT_STATE joyState;
+
+    std::unique_ptr<Sprite> uiSprite_ = nullptr;
+    uint32_t uiSpriteHandle_;
 };

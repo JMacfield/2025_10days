@@ -57,6 +57,14 @@ void Input::Update() {
 	keyboard->Acquire();
 
 	keyboard->GetDeviceState(sizeof(keys), keys);
+
+	memcpy(&preState_, &state_, sizeof(XINPUT_STATE));
+
+	DWORD dwResult = XInputGetState(0, &state_);
+
+	if (dwResult != ERROR_SUCCESS) {
+		ZeroMemory(&state_, sizeof(XINPUT_STATE));
+	}
 }
 
 bool Input::PushKey(BYTE keyNumber)
@@ -92,4 +100,21 @@ Input* Input::GetInstance() {
 		instance_ = std::make_unique<Input>();
 	}
 	return instance_.get();
+}
+
+bool Input::PushButton(WORD button)
+{
+	if (state_.Gamepad.wButtons & button) {
+		return true;
+	}
+	return false;
+}
+
+bool Input::TriggerButton(WORD button)
+{
+	// 現在押されていて、かつ前回は押されていないか
+	if ((state_.Gamepad.wButtons & button) && !(preState_.Gamepad.wButtons & button)) {
+		return true;
+	}
+	return false;
 }
