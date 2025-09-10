@@ -54,4 +54,6 @@ private: // Private variables
 
     std::unique_ptr<Sprite> overSprite_ = nullptr;
     uint32_t overSpriteHandle_;
+
+    XINPUT_STATE joyState;
 };

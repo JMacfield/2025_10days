@@ -24,6 +24,14 @@ void OverScene::Update() {
     }
 
     overSprite_->Update();
+
+    if (!Input::GetInstance()->GetJoystickState(joyState)) {
+        return;
+    }
+
+    if (input_->GetInstance()->TriggerButton(XINPUT_GAMEPAD_A)) {
+        IScene::SetSceneNo(TITLESCENE);
+    }
 }
 
 void OverScene::Draw() {

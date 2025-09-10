@@ -39,15 +39,20 @@ void GameScene::Init() {
 
 // シーン更新関数
 void GameScene::Update() {
-	if (!player_->GetIsAlive()) {
-		player_->Reset();
-		obstacleManager_->Init();
+	/*if (!player_->GetIsAlive()) {
+		this->SetSceneNo(OVERSCENE);
 		return;
 	}
 	else if (player_->GetIsClear()) {
 		this->SetSceneNo(CLEARSCENE);
 		return;
+	}*/
+
+	if (input->TriggerKey(DIK_Z)) {
+		this->SetSceneNo(CLEARSCENE);
 	}
+
+	ShowDeathUI();
 
 	obstacleManager_->Update();
 	for (auto& obj : objectList_) {
@@ -64,6 +69,13 @@ void GameScene::Update() {
 	//floor_->Update();
 	// 自機
 	player_->Update();
+
+	uiSprite_[UI_TEXTURE]->Update();
+	uiSprite_[UI_TEXTURE2]->Update();
+	uiSprite_[UI_TEXTURE3]->Update();
+
+	overSprite_->Update();
+	showContinue_->Update();
 
 #ifdef _DEBUG
 	ImGui::Begin("GameWindow");
@@ -97,6 +109,11 @@ void GameScene::Update() {
 
 // 描画関数
 void GameScene::Draw() {
+	if (!player_->GetIsAlive()) {
+		overSprite_->Draw(overSpriteHandle_, { 1.0f,1.0f,1.0f,1.0f });
+		showContinue_->Draw(showContinueHandle_, { 1.0f,1.0f,1.0f,1.0f });
+	}
+
 	// 自機
 	player_->Draw();
 
@@ -111,6 +128,10 @@ void GameScene::Draw() {
 	}
 	// 床
 	//floor_->Draw(followCamera_->GetCamera());
+
+	uiSprite_[UI_TEXTURE]->Draw(uiTextureHandles_[UI_TEXTURE], { 1.0f,1.0f,1.0f,1.0f });
+	uiSprite_[UI_TEXTURE2]->Draw(uiTextureHandles_[UI_TEXTURE2], { 1.0f,1.0f,1.0f,1.0f });
+	uiSprite_[UI_TEXTURE3]->Draw(uiTextureHandles_[UI_TEXTURE3], { 1.0f,1.0f,1.0f,1.0f });
 }
 
 // ポストエフェクト描画関数
@@ -151,6 +172,14 @@ void GameScene::LoadTextures()
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/game/Rule.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
+
+	uiTextureHandles_[UI_TEXTURE] = TextureManager::GetInstance()->StoreTexture("Resources/ui/ui_jump.png");
+	uiTextureHandles_[UI_TEXTURE2] = TextureManager::GetInstance()->StoreTexture("Resources/ui/ui_switch.png");
+	uiTextureHandles_[UI_TEXTURE3] = TextureManager::GetInstance()->StoreTexture("Resources/ui/ui_camera.png");
+
+	overSpriteHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/gameover/gameover.png");
+
+	showContinueHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/gameover/ui_continue.png");
 }
 
 // モデルのロード
@@ -235,6 +264,26 @@ void GameScene::InitializeData() {
 	// 障害物の管理クラス
 	obstacleManager_ = std::make_unique<ObstacleManager>(followCamera_->GetCamera(), player_.get());
 	obstacleManager_->Init();
+
+	uiSprite_[UI_TEXTURE] = std::make_unique<Sprite>();
+	uiSprite_[UI_TEXTURE2] = std::make_unique<Sprite>();
+	uiSprite_[UI_TEXTURE3] = std::make_unique<Sprite>();
+
+	uiSprite_[UI_TEXTURE]->Init({ 980.0f,620.0f }, { 300.0f,100.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/ui/ui_jump.png");
+	uiSprite_[UI_TEXTURE2]->Init({ 980.0f,565.0f }, { 300.0f,100.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/ui/ui_switch.png");
+	uiSprite_[UI_TEXTURE3]->Init({ 980.0f,515.0f }, { 300.0f,100.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/ui/ui_camera.png");
+
+	uiSprite_[UI_TEXTURE]->SetTextureSize({ 300.0f,150.0f });
+	uiSprite_[UI_TEXTURE2]->SetTextureSize({ 300.0f,150.0f });
+	uiSprite_[UI_TEXTURE3]->SetTextureSize({ 300.0f,150.0f });
+
+	overSprite_ = std::make_unique<Sprite>();
+	overSprite_->Init({ 0.0f,0.0f }, { 1280.0f,720.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/gameover/gameover.png");
+	overSprite_->SetTextureSize({ 1280.0f,720.0f });
+
+	showContinue_ = std::make_unique<Sprite>();
+	showContinue_->Init({ 390.0f,370.0f }, { 500.0f,350.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/gameover/ui_continue.png");
+	showContinue_->SetTextureSize({ 300.0f,150.0f });
 }
 
 // ゲームパッド入力処理
@@ -255,4 +304,21 @@ void GameScene::DrawObjects() {
 
 void GameScene::Remake() {
 
+}
+
+void GameScene::ShowDeathUI() {
+	if (!player_->GetIsAlive()) {
+		if (input->TriggerButton(XINPUT_GAMEPAD_A) || input->TriggerKey(DIK_SPACE)) {
+			// ここにリセット処理
+
+			//
+		}
+		if (input->TriggerButton(XINPUT_GAMEPAD_B)|| input->TriggerKey(DIK_RETURN)) {
+			this->SetSceneNo(TITLESCENE);
+		}
+	}
+	else if (player_->GetIsClear()) {
+		this->SetSceneNo(CLEARSCENE);
+		return;
+	}
 }

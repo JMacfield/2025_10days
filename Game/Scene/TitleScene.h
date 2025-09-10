@@ -102,4 +102,6 @@ private: // Private variables
     // スタート画像
     std::unique_ptr<Sprite> showStart_ = nullptr;
     uint32_t showStartHandle_;
+
+    XINPUT_STATE joyState;
 };

@@ -44,6 +44,14 @@ void TitleScene::Update() {
 
     titleSprite_->Update();
     showStart_->Update();
+
+    if (!Input::GetInstance()->GetJoystickState(joyState)) {
+        return;
+    }
+
+    if (input_->GetInstance()->TriggerButton(XINPUT_GAMEPAD_A)) {
+        IScene::SetSceneNo(GAMESCENE);
+    }
 }
 
 void TitleScene::Draw() {
