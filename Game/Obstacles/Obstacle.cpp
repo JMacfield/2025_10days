@@ -21,16 +21,21 @@ void Obstacle::Init() {
 	currentDimension_ = orizinalDimension_;
 
 	if (ObstacleType::broken == currentDimension_) {
-		body_->SetLerpSpeed(0.01f);
+		body_->SetLerpSpeed(1.0f);
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		body_->GlitchVertices(0.3f);
+		body_->GlitchVerticesLerp(0.3f);
+		body_->ResetVerticesToOriginal();
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
-		body_->SetLerpSpeed(0.01f);
+		body_->SetLerpSpeed(1.0f);
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->ResetVerticesToOriginal();
+		body_->StartLerpToOriginalVertices();
 		collider_->SetIsActive(true);
 	}
+	body_->Update();
 
 	preDimension_ = currentDimension_;
 }

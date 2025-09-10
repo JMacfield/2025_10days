@@ -440,11 +440,27 @@ void Object3d::AlphaPingPong01Start(float speed, float minAlpha) {
 	minAlpha_ = minAlpha;
 }
 
+void Object3d::AlphaPingPong01End() {
+	isAlphaPingPongActive01 = false;
+	lerpToGlitch_ = false;
+	alphaPingPongT_ = 0.0f;
+	alphaPingPongSpeed_ = 0.0f;
+	minAlpha_ = 0.0f;
+}
+
 void Object3d::AlphaPingPong10Start(float speed, float minAlpha) {
 	isAlphaPingPongActive10 = true;
 	alphaPingPongT_ = 0.5f;
 	alphaPingPongSpeed_ = speed;
 	minAlpha_ = minAlpha;
+}
+
+void Object3d::AlphaPingPong10End() {
+	isAlphaPingPongActive10 = false;
+	lerpToGlitch_ = false;
+	alphaPingPongT_ = 0.0f;
+	alphaPingPongSpeed_ = 0.0f;
+	minAlpha_ = 0.0f;
 }
 
 // 1→minAlpha→1 の三角波

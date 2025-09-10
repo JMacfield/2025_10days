@@ -25,7 +25,7 @@ Player::Player() {
 	// colliderの設定
 	collider_ = std::make_unique<Collider>();
 	collider_->worldTransform.parent_ = &body_->worldTransform_;
-	collider_->SetOBBLength(Vector3{ 0.5f, 0.5f,0.5f });
+	collider_->SetOBBLength(Vector3{ 0.6f, 0.5f,0.5f });
 	collider_->SetCollisionPrimitive(kCollisionOBB);
 	collider_->SetCollisionAttribute(kCollisionAttributePlayer);
 	collider_->SetCollisionMask(~kCollisionAttributePlayer);
