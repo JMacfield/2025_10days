@@ -20,6 +20,7 @@ GameScene::~GameScene() {}
 void GameScene::Init() {
 	sceneNo = GAMESCENE;
 
+
 	//// カメラの初期化
 	input = Input::GetInstance();
 

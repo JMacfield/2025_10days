@@ -37,9 +37,9 @@ void TitleScene::Update() {
         }
     }
     TENQ->Update();
-    TENQ->ModelDebug("TENQ");
+    //TENQ->ModelDebug("TENQ");
     title_->Update();
-	title_->ModelDebug("title");
+	//title_->ModelDebug("title");
     camera_->Update();
 
     titleSprite_->Update();
