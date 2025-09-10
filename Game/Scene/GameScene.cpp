@@ -310,7 +310,8 @@ void GameScene::ShowDeathUI() {
 	if (!player_->GetIsAlive()) {
 		if (input->TriggerButton(XINPUT_GAMEPAD_A) || input->TriggerKey(DIK_SPACE)) {
 			// ここにリセット処理
-
+			player_->Reset();
+			obstacleManager_->Init();
 			//
 		}
 		if (input->TriggerButton(XINPUT_GAMEPAD_B)|| input->TriggerKey(DIK_RETURN)) {
