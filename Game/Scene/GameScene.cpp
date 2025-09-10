@@ -79,9 +79,7 @@ void GameScene::Update() {
 	// 自機
 	player_->Update();
 	
-	if (input->TriggerKey(DIK_RETURN)){
-		ismapswitch = !ismapswitch;
-	}
+
 	if (ismapswitch == true) {
 		objectList_[MAP]->worldTransform_.rotation_.z = 3.14159265398972f;
 	}
