@@ -15,15 +15,27 @@ Beam::Beam(Object3d* obj, Player* player, Collider* collider) {
 	body_ = obj;
 	player_ = player;
 	collider_ = collider;
+
+	orizinalScale_ = body_->worldTransform_.scale_;
+
+	orizinalTex_ = body_->GetTexture();
+	brokenTex_ = TextureManager::GetInstance()->StoreTexture("Resources/red.png");
 }
 
 void Beam::Init() {
 	currentDimension_ = orizinalDimension_;
 
 	if (ObstacleType::broken == currentDimension_) {
+		body_->worldTransform_.scale_.x = 0.1f;
+		body_->worldTransform_.scale_.y = 0.1f;
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->SetTexture(brokenTex_);
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
+		body_->worldTransform_.scale_ = orizinalScale_;
+		body_->AlphaPingPong10Start(0.01f, 0.6f);
+		body_->SetTexture(orizinalTex_);
 		collider_->SetIsActive(true);
 	}
 
@@ -51,9 +63,9 @@ void Beam::Update() {
 
 void Beam::Draw() {
 	// 壊れてないときのみ描画
-	if (ObstacleType::broken != currentDimension_) {
+	//if (ObstacleType::broken != currentDimension_) {
 		body_->Draw(pCamera_);
-	}
+	//}
 }
 
 void Beam::DebugGui() {
@@ -70,6 +82,8 @@ void Beam::FixEffect() {
 	if (ObstacleType::fix != preDimension_) {
 
 	}
+	body_->worldTransform_.scale_ = orizinalScale_;
+	body_->SetTexture(orizinalTex_);
 
 	collider_->SetIsActive(true);
 }
@@ -78,8 +92,11 @@ void Beam::BrokenEffect() {
 	if (ObstacleType::broken != currentDimension_) { return; }
 	// 切り替わった瞬間
 	if (ObstacleType::broken != preDimension_) {
-
+		
 	}
+	body_->worldTransform_.scale_.x = 0.1f;
+	body_->worldTransform_.scale_.y = 0.1f;
+	body_->SetTexture(brokenTex_);
 
 	collider_->SetIsActive(false);
 }

@@ -43,4 +43,9 @@ private:// Private method
 	void BrokenEffect() override;
 
 private:// Private variable
+	// 
+	Vector3 orizinalScale_;
+
+	uint32_t orizinalTex_;
+	uint32_t brokenTex_;
 };
