@@ -48,9 +48,9 @@ void GameScene::Update() {
 		return;
 	}*/
 
-	if (input->TriggerKey(DIK_Z)) {
+	/*if (input->TriggerKey(DIK_Z)) {
 		this->SetSceneNo(CLEARSCENE);
-	}
+	}*/
 
 	ShowDeathUI();
 

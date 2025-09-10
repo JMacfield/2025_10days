@@ -135,6 +135,6 @@ void TitleScene::InitializeData() {
 
     showStartHandle_ = TextureManager::GetInstance()->StoreTexture("Resources/title/showstart.png");
     showStart_ = std::make_unique<Sprite>();
-    showStart_->Init({ 390.0f,300.0f }, { 500.0f,350.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/showstart.png");
+    showStart_->Init({ 390.0f,300.0f }, { 500.0f,380.0f }, { 0.5f,0.5f }, { 1.0f,1.0f,1.0f,1.0f }, "Resources/title/showstart.png");
     showStart_->SetTextureSize({ 300.0f,150.0f });
 }
