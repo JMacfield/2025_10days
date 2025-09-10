@@ -13,7 +13,7 @@ ObstacleManager::ObstacleManager(Camera* camera, Player* player) {
 	player_ = player;
 
 	//Loader::LoadJsonFile2("Resources/game/Json", "DemoStage1", objects_, colliders_, wallTypes_);
-	Loader::LoadJsonFile2("Resources/game/Json", "TestBlender", objects_, colliders_, wallTypes_);
+	Loader::LoadJsonFile2("Resources/game/Json", "TestBlender1", objects_, colliders_, wallTypes_);
 
 	for (int i = 0; i < objects_.size(); i++) {
 		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeBeam) {

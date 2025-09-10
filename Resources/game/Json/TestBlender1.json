@@ -1,0 +1,5259 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    147.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    141.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.003",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    135.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.004",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    111.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.006",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    117.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.008",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    75.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.009",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    69.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.012",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    87.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.013",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    81.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.014",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    93.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.016",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    51.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.017",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    45.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.019",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    39.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.021",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    33.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.026",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    33.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.028",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    39.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.032",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    99.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.034",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    81.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.036",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    63.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.037",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    57.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.038",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    69.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.039",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    75.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.040",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    123.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.042",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    105.88484191894531,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.044",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    135.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.045",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    129.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.046",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    141.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.047",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    147.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.002",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    159.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.005",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    153.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.007",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    153.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.010",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    159.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.011",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    171.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.015",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    165.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.033",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    177.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.035",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    183.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.041",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    165.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.048",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    195.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.049",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    189.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.050",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    207.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.051",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    201.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.052",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    201.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.053",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    207.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.054",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    189.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.055",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    195.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.056",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    219.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.057",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    213.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.058",
+            "transform": {
+                "translation": [
+                    5.0,
+                    231.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.059",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    225.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.060",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    225.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.061",
+            "transform": {
+                "translation": [
+                    15.0,
+                    231.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.062",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    213.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.063",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    219.8848419189453,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.064",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    267.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.065",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    261.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.066",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    279.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.068",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    273.885009765625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.069",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    279.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.070",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    261.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.072",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    243.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.073",
+            "transform": {
+                "translation": [
+                    15.0,
+                    237.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.074",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    255.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.075",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    249.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.076",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    249.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.077",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    255.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.078",
+            "transform": {
+                "translation": [
+                    5.0,
+                    237.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.079",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    243.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.083",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    297.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.085",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    303.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.086",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    285.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.087",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    303.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.090",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    327.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.091",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    321.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.094",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    309.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.095",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    315.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.096",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    363.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.097",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    357.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.098",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    375.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.099",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    369.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.104",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    339.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.105",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    333.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.108",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    345.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.109",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    351.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.112",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    387.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.113",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    381.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.114",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    399.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.120",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    411.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.121",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    405.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.122",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    423.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.123",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    417.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.124",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    417.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.125",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    423.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.127",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    411.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.128",
+            "transform": {
+                "translation": [
+                    13.0,
+                    177.8848419189453,
+                    0.8799999952316284
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    6.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "ATTACK",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    6.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.129",
+            "transform": {
+                "translation": [
+                    9.600000381469727,
+                    210.79434204101562,
+                    4.068682670593262
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.130",
+            "transform": {
+                "translation": [
+                    9.600000381469727,
+                    210.79434204101562,
+                    2.0686826705932617
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.131",
+            "transform": {
+                "translation": [
+                    9.600000381469727,
+                    210.79434204101562,
+                    0.06868267059326172
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.132",
+            "transform": {
+                "translation": [
+                    9.600000381469727,
+                    210.79434204101562,
+                    -1.9313173294067383
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    9.5,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.136",
+            "transform": {
+                "translation": [
+                    10.0,
+                    273.885009765625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.137",
+            "transform": {
+                "translation": [
+                    10.0,
+                    279.885009765625,
+                    3.8570313453674316
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.071",
+            "transform": {
+                "translation": [
+                    10.0,
+                    309.885009765625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.082",
+            "transform": {
+                "translation": [
+                    10.0,
+                    285.885009765625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.067",
+            "transform": {
+                "translation": [
+                    10.0,
+                    351.885009765625,
+                    -11.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.080",
+            "transform": {
+                "translation": [
+                    10.0,
+                    363.885009765625,
+                    -11.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.084",
+            "transform": {
+                "translation": [
+                    10.0,
+                    375.885009765625,
+                    -11.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.088",
+            "transform": {
+                "translation": [
+                    10.0,
+                    387.885009765625,
+                    -11.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.089",
+            "transform": {
+                "translation": [
+                    10.0,
+                    399.885009765625,
+                    -11.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.092",
+            "transform": {
+                "translation": [
+                    10.0,
+                    357.885009765625,
+                    -8.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.093",
+            "transform": {
+                "translation": [
+                    10.0,
+                    357.885009765625,
+                    -10.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.110",
+            "transform": {
+                "translation": [
+                    10.0,
+                    357.885009765625,
+                    -12.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.100",
+            "transform": {
+                "translation": [
+                    10.0,
+                    369.885009765625,
+                    -12.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.101",
+            "transform": {
+                "translation": [
+                    10.0,
+                    369.885009765625,
+                    -10.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.102",
+            "transform": {
+                "translation": [
+                    10.0,
+                    369.885009765625,
+                    -8.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.103",
+            "transform": {
+                "translation": [
+                    10.0,
+                    381.885009765625,
+                    -8.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.106",
+            "transform": {
+                "translation": [
+                    10.0,
+                    381.885009765625,
+                    -10.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.107",
+            "transform": {
+                "translation": [
+                    10.0,
+                    381.885009765625,
+                    -12.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.111",
+            "transform": {
+                "translation": [
+                    10.0,
+                    393.885009765625,
+                    -12.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.115",
+            "transform": {
+                "translation": [
+                    10.0,
+                    393.885009765625,
+                    -10.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.119",
+            "transform": {
+                "translation": [
+                    10.0,
+                    393.885009765625,
+                    -8.142999649047852
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.116",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    393.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.117",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    327.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.118",
+            "transform": {
+                "translation": [
+                    10.0,
+                    297.885009765625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.126",
+            "transform": {
+                "translation": [
+                    10.0,
+                    279.885009765625,
+                    1.8570313453674316
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.138",
+            "transform": {
+                "translation": [
+                    10.0,
+                    279.885009765625,
+                    -0.14296865463256836
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.081",
+            "transform": {
+                "translation": [
+                    10.0,
+                    303.885009765625,
+                    -0.14296865463256836
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.139",
+            "transform": {
+                "translation": [
+                    10.0,
+                    303.885009765625,
+                    3.8570313453674316
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.140",
+            "transform": {
+                "translation": [
+                    10.0,
+                    303.885009765625,
+                    1.8570313453674316
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "BEAM",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    0.5
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.141",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    291.88482666015625,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "BROKEN"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.142",
+            "transform": {
+                "translation": [
+                    10.0,
+                    417.88482666015625,
+                    -11.142969131469727
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    1.5707964897155762
+                ],
+                "scaling": [
+                    1.0,
+                    50.0,
+                    50.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "CLEAR",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    50.0,
+                    50.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.030",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    21.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.031",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    27.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.043",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    3.8848419189453125,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.133",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    -2.1151580810546875,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.134",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    9.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.135",
+            "transform": {
+                "translation": [
+                    19.600000381469727,
+                    15.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.149",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    15.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.150",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    9.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.151",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    -2.1151580810546875,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.152",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    3.8848419189453125,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.153",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    27.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.154",
+            "transform": {
+                "translation": [
+                    -0.40000003576278687,
+                    21.884841918945312,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    3.0,
+                    4.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "ABS"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.143",
+            "transform": {
+                "translation": [
+                    10.13530158996582,
+                    30.0,
+                    0.8570312261581421
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -1.5707964897155762
+                ],
+                "scaling": [
+                    0.5,
+                    10.0,
+                    10.0
+                ]
+            },
+            "file_name": "box",
+            "collider": {
+                "type": "WALL",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    0.5,
+                    10.0,
+                    10.0
+                ]
+            },
+            "textureName": "white",
+            "wallType": "FIXED"
+        }
+    ]
+}
