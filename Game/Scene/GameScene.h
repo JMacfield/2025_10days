@@ -96,9 +96,7 @@ private:// Private variable
     std::vector<std::unique_ptr<Object3d>> objectList_;
     enum ObjectIndex {
         TENQ,
-        HOLE1,
-        HOLE2,
-        HOLE3
+        RULE
     };
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数

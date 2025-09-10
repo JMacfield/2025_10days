@@ -75,17 +75,7 @@ void GameScene::Update() {
 	ImGui::End();
 	camera->CameraDebug();
 	if (objectList_[TENQ]) objectList_[TENQ]->EasingDebugUI("TENQ");
-	if (objectList_[HOLE1]) objectList_[HOLE1]->EasingDebugUI("HoleObject1");
-	if (objectList_[HOLE2]) objectList_[HOLE2]->EasingDebugUI("HoleObject2");
-	if (objectList_[HOLE3]) objectList_[HOLE3]->EasingDebugUI("HoleObject3");
-	objectList_[TENQ]->LightDebug("TENQlight");
-	objectList_[HOLE1]->LightDebug("light");
-	objectList_[HOLE2]->LightDebug("light2");
-	objectList_[HOLE3]->LightDebug("light3");
-	objectList_[TENQ]->ModelDebug("TENQmodel");
-	objectList_[HOLE1]->ModelDebug("model");
-	objectList_[HOLE2]->ModelDebug("model2");
-	objectList_[HOLE3]->ModelDebug("model3");
+	if (objectList_[RULE]) objectList_[RULE]->EasingDebugUI("Rule");
 
 #endif // DEBUG
 
@@ -115,6 +105,9 @@ void GameScene::Draw() {
 	// テスト壁
 	for (TestWall* wall : testWall_) {
 		//wall->Draw();
+	}
+	for (auto& obj : objectList_) {
+		obj->Draw(followCamera_->GetCamera());
 	}
 	// 床
 	//floor_->Draw(followCamera_->GetCamera());
@@ -156,7 +149,7 @@ void GameScene::LoadTextures()
 	damageWallTex_ = TextureManager::StoreTexture("Resources/red.png");
 	greenWallTex_ = TextureManager::StoreTexture("Resources/green.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
-	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/10days/white.png");
+	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/game/Rule.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
 }
 
@@ -169,6 +162,7 @@ void GameScene::LoadModels()
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "Demohole.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "world.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "start.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/game/", "Rule.obj");
 }
 
 // オーディオのロード
@@ -180,14 +174,18 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData() {
 	camera = std::make_unique<Camera>();
-	const std::array<const char*, 4> modelNames = { "world.obj", "start.obj", "Demohole2.obj", "Demohole.obj" };
+	const std::array<const char*, 2> modelNames = { "world.obj", "Rule.obj"};
 	objectList_.clear();
 	for (const auto& name : modelNames) {
 		auto obj = std::make_unique<Object3d>();
+		obj->Init();
+		obj->SetisLight(false);
 		obj->SetModel(name);
 		objectList_.emplace_back(std::move(obj));
 	}
 
+	objectList_[TENQ]->SetTexture(textureHandles[TENQ_TEXTURE]);
+	objectList_[RULE]->SetTexture(textureHandles[NORMAL_HOLE]);
 	/*for (int i = 0; i < objects_.size(); i++) {
 		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
 			objects_[i]->SetTexture(damageWallTex_);

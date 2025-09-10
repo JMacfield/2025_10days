@@ -53,7 +53,7 @@ void Obstacle::Update() {
 
 	preDimension_ = currentDimension_;
 }
-
+					   
 void Obstacle::Draw() {
 	// 体
 	// 直る
