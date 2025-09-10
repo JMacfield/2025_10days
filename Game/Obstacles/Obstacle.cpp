@@ -15,6 +15,10 @@ Obstacle::Obstacle(Object3d* obj, Player* player, Collider* collider) {
 	body_ = obj;
 	player_ = player;
 	collider_ = collider;
+
+	orizinalTex_ = body_->GetTexture();
+	brokenTex_ = TextureManager::GetInstance()->StoreTexture("Resources/red.png");
+	fixedTex_ = TextureManager::GetInstance()->StoreTexture("Resources/green.png");
 }
 
 void Obstacle::Init() {
@@ -26,6 +30,7 @@ void Obstacle::Init() {
 		body_->GlitchVertices(0.3f);
 		body_->GlitchVerticesLerp(0.3f);
 		body_->ResetVerticesToOriginal();
+		body_->SetTexture(brokenTex_);
 		collider_->SetIsActive(false);
 	}
 	if (ObstacleType::fix == currentDimension_) {
@@ -33,6 +38,7 @@ void Obstacle::Init() {
 		body_->AlphaPingPong10Start(0.01f, 0.6f);
 		body_->ResetVerticesToOriginal();
 		body_->StartLerpToOriginalVertices();
+		body_->SetTexture(fixedTex_);
 		collider_->SetIsActive(true);
 	}
 	body_->Update();
@@ -96,9 +102,9 @@ void Obstacle::FixEffect() {
 			lerpSpeed = 1.0f;
 		}
 		body_->SetLerpSpeed(lerpSpeed);
-
 		body_->ResetVerticesToOriginal();
 		body_->StartLerpToOriginalVertices();
+		body_->SetTexture(fixedTex_);
 	}
 
 	collider_->SetIsActive(true);
@@ -120,6 +126,7 @@ void Obstacle::BrokenEffect() {
 		body_->SetLerpSpeed(lerpSpeed);
 		body_->GlitchVerticesLerp(0.3f);
 		body_->ResetVerticesToOriginal();
+		body_->SetTexture(brokenTex_);
 	}
 
 	collider_->SetIsActive(false);
