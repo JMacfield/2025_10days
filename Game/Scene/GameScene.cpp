@@ -41,6 +41,7 @@ void GameScene::Init() {
 // シーン更新関数
 void GameScene::Update() {
 	if (input->TriggerButton(XINPUT_GAMEPAD_LEFT_SHOULDER) || input->TriggerKey(DIK_RETURN)) {
+		ismapswitch = !ismapswitch;
 		//Audio::GetInstance()->SoundPlayWave(switchSE, false, 1.0f);
 	}
 	if (input->TriggerButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) || input->TriggerKey(DIK_SPACE)) {
