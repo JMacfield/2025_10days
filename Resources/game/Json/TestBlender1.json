@@ -3370,43 +3370,6 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.128",
-            "transform": {
-                "translation": [
-                    13.0,
-                    262.25677490234375,
-                    0.8799999952316284
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    1.5707964897155762
-                ],
-                "scaling": [
-                    0.5,
-                    6.0,
-                    4.0
-                ]
-            },
-            "file_name": "box",
-            "collider": {
-                "type": "ATTACK",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    0.5,
-                    6.0,
-                    4.0
-                ]
-            },
-            "textureName": "white",
-            "wallType": "FIXED"
-        },
-        {
-            "type": "MESH",
             "name": "Cube.129",
             "transform": {
                 "translation": [
@@ -6512,27 +6475,6 @@
             },
             "textureName": "white",
             "wallType": "ABS"
-        },
-        {
-            "type": "FONT",
-            "name": "テキスト.001",
-            "transform": {
-                "translation": [
-                    10.0,
-                    79.37849426269531,
-                    3.492340087890625
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            }
         }
     ]
 }

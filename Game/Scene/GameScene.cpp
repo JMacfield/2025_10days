@@ -69,6 +69,16 @@ void GameScene::Update() {
 	//floor_->Update();
 	// 自機
 	player_->Update();
+	
+	if (input->TriggerKey(DIK_RETURN)){
+		ismapswitch = !ismapswitch;
+	}
+	if (ismapswitch == true) {
+		objectList_[MAP]->worldTransform_.rotation_.z = 3.14159265398972f;
+	}
+	if (ismapswitch == false) {
+		objectList_[MAP]->worldTransform_.rotation_.z = 0.0f;
+	}
 
 	uiSprite_[UI_TEXTURE]->Update();
 	uiSprite_[UI_TEXTURE2]->Update();
@@ -86,8 +96,9 @@ void GameScene::Update() {
 	GameTimer::GetInstance()->Update();
 	ImGui::End();
 	camera->CameraDebug();
-	if (objectList_[TENQ]) objectList_[TENQ]->EasingDebugUI("TENQ");
-	if (objectList_[RULE]) objectList_[RULE]->EasingDebugUI("Rule");
+	if (objectList_[TENQ]) objectList_[TENQ]->ModelDebug("TENQ");
+	if (objectList_[RULE]) objectList_[RULE]->ModelDebug("Rule");
+	if (objectList_[MAP]) objectList_[MAP]->ModelDebug("MAP");
 
 #endif // DEBUG
 
@@ -171,6 +182,7 @@ void GameScene::LoadTextures()
 	greenWallTex_ = TextureManager::StoreTexture("Resources/green.png");
 	//textureHandles[WHITE] = TextureManager::StoreTexture("Resources/white.png");
 	textureHandles[NORMAL_HOLE] = TextureManager::StoreTexture("Resources/game/Rule.png");
+	textureHandles[MAP_TEXTURE] = TextureManager::StoreTexture("Resources/game/map.png");
 	textureHandles[TENQ_TEXTURE] = TextureManager::StoreTexture("Resources/10days/world.png");
 
 	uiTextureHandles_[UI_TEXTURE] = TextureManager::GetInstance()->StoreTexture("Resources/ui/ui_jump.png");
@@ -192,6 +204,7 @@ void GameScene::LoadModels()
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "world.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/10days/", "start.obj");
 	ModelManager::GetInstance()->LoadModel("Resources/game/", "Rule.obj");
+	ModelManager::GetInstance()->LoadModel("Resources/game/", "map.obj");
 }
 
 // オーディオのロード
@@ -203,7 +216,7 @@ void GameScene::LoadAudio()
 // 初期化データのセットアップ
 void GameScene::InitializeData() {
 	camera = std::make_unique<Camera>();
-	const std::array<const char*, 2> modelNames = { "world.obj", "Rule.obj"};
+	const std::array<const char*, 3> modelNames = { "world.obj", "Rule.obj", "map.obj"};
 	objectList_.clear();
 	for (const auto& name : modelNames) {
 		auto obj = std::make_unique<Object3d>();
@@ -215,6 +228,7 @@ void GameScene::InitializeData() {
 
 	objectList_[TENQ]->SetTexture(textureHandles[TENQ_TEXTURE]);
 	objectList_[RULE]->SetTexture(textureHandles[NORMAL_HOLE]);
+	objectList_[MAP]->SetTexture(textureHandles[MAP_TEXTURE]);
 	/*for (int i = 0; i < objects_.size(); i++) {
 		if (colliders_[i]->GetCollisionAttribute() == kCollisionAttributeEnemy) {
 			objects_[i]->SetTexture(damageWallTex_);

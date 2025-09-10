@@ -98,7 +98,8 @@ private:// Private variable
     std::vector<std::unique_ptr<Object3d>> objectList_;
     enum ObjectIndex {
         TENQ,
-        RULE
+        RULE,
+        MAP
     };
     bool isLerping_ = false;
     float lerpT = 0.0f; // 追加: ラープ係数
@@ -108,6 +109,7 @@ private:// Private variable
     enum TextureID {
         NORMAL_HOLE,
         TENQ_TEXTURE,
+		MAP_TEXTURE,
         TEXTURE_COUNT // テクスチャの総数
     };
     std::array<uint32_t, TEXTURE_COUNT> textureHandles;
@@ -149,6 +151,7 @@ private:// Private variable
         UI_TEXTURE_COUNT
     };
 
+    bool ismapswitch = false;
     std::array<uint32_t, UI_TEXTURE_COUNT> uiTextureHandles_;
     std::array<std::unique_ptr<Sprite>, UI_TEXTURE_COUNT> uiSprite_;
 
